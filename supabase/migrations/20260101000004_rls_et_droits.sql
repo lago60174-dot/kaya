@@ -61,22 +61,3 @@ create policy ecriture_modif on clients for update to authenticated
   using (organisation_id = app_org_id() and app_role() = 'proprietaire') with check (organisation_id = app_org_id() and app_role() = 'proprietaire');
 create policy ecriture_ajout on depenses for insert to authenticated
   with check (app_acces_boutique(boutique_id) and organisation_id = app_org_id() and auteur_id = auth.uid());
-
--- Fonctions : fermées par défaut, ouvertes seulement aux utilisateurs connectés quand c'est voulu.
-do $$
-declare f record;
-begin
-  for f in select p.oid::regprocedure as sig from pg_proc p join pg_namespace n on n.oid = p.pronamespace
-           where n.nspname = 'public' and p.prokind = 'f' loop
-    execute format('revoke execute on function %s from public, anon, authenticated', f.sig);
-  end loop;
-end $$;
-
-grant execute on function app_org_id(), app_role(), app_acces_boutique(uuid),
-  creer_organisation(text, text),
-  creer_vente(uuid, uuid, jsonb, jsonb, uuid, bigint, boolean),
-  annuler_vente(uuid, text),
-  enregistrer_remboursement(uuid, bigint, text),
-  enregistrer_mouvement_stock(uuid, uuid, text, numeric, uuid, text, bigint),
-  calculer_caisse(uuid, date), cloturer_caisse(uuid, date, bigint), valider_cloture(uuid)
-to authenticated;

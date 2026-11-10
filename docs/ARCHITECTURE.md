@@ -26,6 +26,14 @@ Caisse : depenses, clotures_caisse. Numérotation : compteurs_recus. Traçabilit
 | `enregistrer_mouvement_stock`                             | proprio               | entrée, perte, inventaire, correction (unités de vente converties)                                             |
 | `calculer_caisse` / `cloturer_caisse` / `valider_cloture` | tous / tous / proprio | espèces attendues, écart, alerte, validation                                                                   |
 
+## Plans, abonnements, affiliation
+
+`plans` (fonctionnalités et limites en JSON, `visible_public`) → `organisations.plan_code`. `abonnements` (essai, actif, en_retard, suspendu, annule) → `factures_abonnement` → `commissions` (une seule par facture) → `versements_affilies`. `parrainages` fixe l'affilié au premier contact. `evenements_paiement` journalise les webhooks (idempotence). Rôles de plateforme : `administrateurs_plateforme`, `affilies`.
+
+## Authentification
+
+Visiteur → `proxy.ts` (session, redirection) → page ou action → `exigerRole(zone)` (profil chargé via la RLS : rôle, organisation, plan) → fonctions SQL (rôle, plan, lecture seule) → RLS. Détail des zones : `lib/permissions.ts`.
+
 ## Sécurité
 
 RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au rôle `authenticated` seulement quand voulu. Voir `tests/db/rls.test.ts`.

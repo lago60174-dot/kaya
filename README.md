@@ -8,6 +8,8 @@ Gestion de stock, ventes, crédits et caisse pour quincailleries camerounaises. 
 npm install
 cp .env.example .env.local   # renseigner les clés Supabase (étape 2)
 npm run dev                  # http://localhost:3000
+npm run preview              # test sur le runtime Cloudflare Workers (secrets dans .dev.vars)
+npm run deploy               # déploiement Cloudflare
 ```
 
 ## Commandes

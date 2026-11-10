@@ -88,6 +88,10 @@ export async function preparer(db: PGlite) {
       "select creer_organisation('Org B', 'Boutique B') as r",
     )
   )[0].r;
+  await db.query(
+    "update organisations set plan_code = 'business' where id = $1",
+    [a.organisation_id],
+  );
   const boutique2 = (
     await db.query<{ id: string }>(
       "insert into boutiques (organisation_id, nom) values ($1, 'Boutique A2') returning id",

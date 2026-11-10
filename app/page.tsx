@@ -1,4 +1,4 @@
-import { formatFcfa } from "@/lib/format";
+import Link from "next/link";
 
 export default function Accueil() {
   return (
@@ -8,17 +8,18 @@ export default function Accueil() {
         Votre quincaillerie sous contrôle : stock, ventes, crédits et caisse,
         depuis votre téléphone.
       </p>
-      <div className="border-border bg-brand-soft rounded-lg border p-4">
-        <p className="text-muted text-sm">Ventes du jour</p>
-        <p className="text-2xl font-semibold">{formatFcfa(1250000)}</p>
-      </div>
-      <a
-        role="button"
+      <Link
+        href="/inscription"
+        className="bg-brand-strong flex min-h-11 items-center justify-center rounded-lg px-4 text-base font-semibold text-white"
+      >
+        Essayer gratuitement
+      </Link>
+      <Link
         href="/connexion"
-        className="bg-brand-strong flex items-center justify-center rounded-lg px-4 text-base font-semibold text-white"
+        className="border-border flex min-h-11 items-center justify-center rounded-lg border px-4 text-base font-semibold"
       >
         Se connecter
-      </a>
+      </Link>
     </main>
   );
 }

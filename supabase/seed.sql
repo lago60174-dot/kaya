@@ -1,5 +1,5 @@
 -- Kaya : données de démonstration (quincaillerie fictive). Prix fictifs et modifiables.
--- Comptes : proprietaire@kaya.demo et vendeur@kaya.demo, mot de passe Demo1234!
+-- Comptes (mot de passe Demo1234!) : proprietaire@, vendeur@, admin@ et affilie@kaya.demo (code DEMO20)
 -- Réinitialiser : npm run demo:reset
 
 create temp table seed_produits as select * from (values
@@ -39,6 +39,8 @@ do $seed$
 declare
   v_patron uuid := '11111111-1111-4111-8111-111111111111';
   v_vendeur uuid := '22222222-2222-4222-8222-222222222222';
+  v_admin uuid := '33333333-3333-4333-8333-333333333333';
+  v_affilie uuid := '44444444-4444-4444-8444-444444444444';
   r jsonb; v_org uuid; v_b uuid; v_cat uuid; v_p uuid; rec record; u text;
   v_prods uuid[]; v_clients uuid[]; n int; i int; a int; b int; v_lignes jsonb; v_pay jsonb; v_client uuid; v_remise bigint;
   v_unite uuid; v_cr record; j int;
@@ -48,14 +50,21 @@ begin
   select id, '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', email,
     extensions.crypt('Demo1234!', extensions.gen_salt('bf')), now(), '{"provider":"email","providers":["email"]}', '{}',
     '', '', '', '', now(), now()
-  from (values (v_patron, 'proprietaire@kaya.demo'), (v_vendeur, 'vendeur@kaya.demo')) as x(id, email);
+  from (values (v_patron, 'proprietaire@kaya.demo'), (v_vendeur, 'vendeur@kaya.demo'),
+    (v_admin, 'admin@kaya.demo'), (v_affilie, 'affilie@kaya.demo')) as x(id, email);
   insert into auth.identities (user_id, identity_data, provider, provider_id, last_sign_in_at, created_at, updated_at)
   select id, jsonb_build_object('sub', id::text, 'email', email), 'email', id::text, now(), now(), now()
-  from auth.users where id in (v_patron, v_vendeur);
+  from auth.users where id in (v_patron, v_vendeur, v_admin, v_affilie);
+  insert into administrateurs_plateforme (utilisateur_id) values (v_admin);
+  insert into affilies (utilisateur_id, nom, email, code, telephone, mode_versement, actif, valide_le)
+  values (v_affilie, 'Partenaire démo', 'affilie@kaya.demo', 'DEMO20', '+237699999999', 'mtn', true, now());
 
   perform set_config('request.jwt.claim.sub', v_patron::text, true);
   r := creer_organisation('Quincaillerie Démo', 'Quincaillerie du Centre');
   v_org := (r->>'organisation_id')::uuid; v_b := (r->>'boutique_id')::uuid;
+  -- La démo montre toutes les fonctions : plan Business (un plan masqué reste attribuable par l'administrateur).
+  update organisations set plan_code = 'business' where id = v_org;
+  update abonnements set plan_code = 'business' where organisation_id = v_org;
   update boutiques set adresse = 'Marché Mfoundi, Yaoundé', telephone = '699000000',
     mention_legale = 'Merci de votre confiance. Marchandise vendue, ni reprise ni échangée.' where id = v_b;
   update membres set nom = 'Patron démo' where utilisateur_id = v_patron;

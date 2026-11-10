@@ -7,6 +7,7 @@ const schemaPublic = z.object({
 
 const schemaServeur = schemaPublic.extend({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
+  TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
 });
 
 /** Variables lisibles côté navigateur. */

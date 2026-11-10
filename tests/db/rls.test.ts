@@ -41,21 +41,11 @@ describe("isolation entre organisations", () => {
   ])(
     "le propriétaire de l'organisation B ne voit rien de A dans %s",
     async (t) => {
-      expect(await n(U.patronA, t)).toBeGreaterThan(0);
+      const sql = `select 1 from ${t} where organisation_id = $1`;
       expect(
-        await n(
-          U.patronB,
-          t === "boutiques" || t === "parametres_boutique"
-            ? "(select 1 where false) x"
-            : t,
-        ),
-      ).toBe(
-        t === "boutiques" || t === "parametres_boutique"
-          ? 0
-          : t === "journal_activite"
-            ? 1
-            : 0,
-      );
+        (await lignes(db, U.patronA, sql, [f.orgA])).length,
+      ).toBeGreaterThan(0);
+      expect(await lignes(db, U.patronB, sql, [f.orgA])).toHaveLength(0);
     },
   );
 

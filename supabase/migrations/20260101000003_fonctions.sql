@@ -29,26 +29,6 @@ begin
   return format('%s-%s-%s', v_prefixe, v_annee, lpad(v_n::text, 6, '0'));
 end $$;
 
-create function creer_organisation(p_nom text, p_nom_boutique text) returns jsonb
-language plpgsql security definer set search_path = public as $$
-declare v_org uuid; v_boutique uuid;
-begin
-  if auth.uid() is null then raise exception 'Vous devez être connecté.'; end if;
-  if exists (select 1 from membres where utilisateur_id = auth.uid()) then
-    raise exception 'Ce compte appartient déjà à une boutique.';
-  end if;
-  if length(trim(coalesce(p_nom, ''))) = 0 or length(trim(coalesce(p_nom_boutique, ''))) = 0 then
-    raise exception 'Le nom de l''entreprise et de la boutique est obligatoire.';
-  end if;
-  insert into organisations (nom) values (trim(p_nom)) returning id into v_org;
-  insert into boutiques (organisation_id, nom) values (v_org, trim(p_nom_boutique)) returning id into v_boutique;
-  insert into parametres_boutique (boutique_id, organisation_id) values (v_boutique, v_org);
-  insert into membres (utilisateur_id, organisation_id, role, boutiques_autorisees)
-  values (auth.uid(), v_org, 'proprietaire', array[v_boutique]);
-  perform ecrire_journal(v_org, v_boutique, 'organisation_creee', 'organisation', v_org::text, '{}');
-  return jsonb_build_object('organisation_id', v_org, 'boutique_id', v_boutique);
-end $$;
-
 -- Vente. Lignes : [{produit_id, unite_id, quantite, remise_ligne?}]. Paiements : [{mode, montant?}]
 -- (un seul montant peut être omis = reste à payer). Ce qui n'est pas payé devient un crédit.
 create function creer_vente(
@@ -63,6 +43,7 @@ declare
   v_brut_ligne bigint; v_base numeric; v_stock numeric; v_ligne uuid; v_numero text;
 begin
   m := exiger_acces(p_boutique);
+  perform verifier_ecriture(m.organisation_id);
   if p_forcer and m.role <> 'proprietaire' then
     raise exception 'Seul le propriétaire peut forcer cette opération.';
   end if;
@@ -206,6 +187,7 @@ begin
   select * into v from ventes where id = p_vente for update;
   if not found then raise exception 'Vente introuvable.'; end if;
   m := exiger_acces(v.boutique_id);
+  perform verifier_ecriture(m.organisation_id);
   if m.role <> 'proprietaire' then raise exception 'Seul le propriétaire peut annuler une vente.'; end if;
   if length(trim(coalesce(p_motif, ''))) = 0 then raise exception 'Un motif est obligatoire pour annuler une vente.'; end if;
   if v.statut <> 'valide' then raise exception 'Cette vente est déjà annulée.'; end if;
@@ -233,6 +215,7 @@ begin
   select * into c from creances where id = p_creance for update;
   if not found then raise exception 'Crédit introuvable.'; end if;
   m := exiger_acces(c.boutique_id);
+  perform verifier_ecriture(m.organisation_id);
   if p_mode not in ('especes', 'mtn_momo', 'orange_money') then raise exception 'Mode de paiement invalide.'; end if;
   if c.statut <> 'ouverte' then raise exception 'Ce crédit n''est plus à rembourser.'; end if;
   if p_montant is null or p_montant <= 0 then raise exception 'Le montant doit être supérieur à zéro.'; end if;
@@ -259,6 +242,7 @@ declare
   m membres; v_param parametres_boutique; v_facteur numeric := 1; v_base numeric; v_stock numeric; v_delta numeric;
 begin
   m := exiger_acces(p_boutique);
+  perform verifier_ecriture(m.organisation_id);
   if m.role <> 'proprietaire' then raise exception 'Seul le propriétaire peut modifier le stock.'; end if;
   if p_type not in ('entree', 'perte', 'inventaire', 'correction') then raise exception 'Type de mouvement invalide.'; end if;
   if not exists (select 1 from produits where id = p_produit and organisation_id = m.organisation_id) then
@@ -333,6 +317,7 @@ language plpgsql security definer set search_path = public as $$
 declare m membres; v_caisse jsonb; v_attendu bigint; v_ecart bigint; v_tol bigint; v_id uuid;
 begin
   m := exiger_acces(p_boutique);
+  perform verifier_ecriture(m.organisation_id);
   if p_especes_comptees is null or p_especes_comptees < 0 then raise exception 'Montant compté invalide.'; end if;
   if exists (select 1 from clotures_caisse where boutique_id = p_boutique and date = p_date) then
     raise exception 'La caisse de cette date est déjà clôturée.';
@@ -355,6 +340,7 @@ begin
   select * into c from clotures_caisse where id = p_cloture for update;
   if not found then raise exception 'Clôture introuvable.'; end if;
   m := exiger_acces(c.boutique_id);
+  perform verifier_ecriture(m.organisation_id);
   if m.role <> 'proprietaire' then raise exception 'Seul le propriétaire peut valider la caisse.'; end if;
   if c.validee_le is not null then raise exception 'Cette caisse est déjà validée.'; end if;
   update clotures_caisse set validee_par = auth.uid(), validee_le = now() where id = p_cloture;

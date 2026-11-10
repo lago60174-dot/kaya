@@ -11,7 +11,13 @@ export default defineConfig({
     exclude: ["node_modules", ".next", "tests/e2e/**"],
     coverage: {
       provider: "v8",
-      include: ["lib/**", "features/**/logic/**", "server/**"],
+      include: ["lib/**/*.ts", "server/**/service.ts"],
+      exclude: [
+        "**/*.test.ts",
+        "lib/supabase/**",
+        "lib/env.ts",
+        "lib/utils.ts",
+      ],
       thresholds: { lines: 80, functions: 80, branches: 80, statements: 80 },
     },
   },

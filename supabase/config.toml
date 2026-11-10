@@ -6,3 +6,16 @@ major_version = 17
 [db.seed]
 enabled = true
 sql_paths = ["./seed.sql"]
+
+[auth]
+site_url = "http://127.0.0.1:3000"
+# Les comptes ne se créent que par les actions serveur (Turnstile + clé service_role) : l'inscription directe par l'API est fermée.
+enable_signup = false
+minimum_password_length = 8
+password_requirements = "letters_digits"
+
+[auth.email]
+enable_confirmations = false
+
+[auth.rate_limit]
+sign_in_sign_ups = 30

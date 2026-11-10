@@ -13,10 +13,10 @@ beforeAll(async () => {
 });
 
 describe("jeu de démonstration", () => {
-  it("contient 30 produits, 8 clients, 2 comptes et 20 ventes valides", async () => {
+  it("contient 30 produits, 8 clients, 4 comptes et 20 ventes valides", async () => {
     expect(await un("select count(*) from produits")).toBe(30);
     expect(await un("select count(*) from clients")).toBe(8);
-    expect(await un("select count(*) from auth.users")).toBe(2);
+    expect(await un("select count(*) from auth.users")).toBe(4);
     expect(
       await un("select count(*) from ventes where statut = 'valide'"),
     ).toBe(20);
