@@ -12,6 +12,8 @@ npm run dev                  # http://localhost:3000
 
 ## Commandes
 
-`npm run lint` · `npm run typecheck` · `npm test` · `npm run test:coverage` · `npm run build`
+`npm run lint` · `npm run typecheck` · `npm test` (inclut les tests SQL) · `npm run test:coverage` · `npm run build`
+
+Base de données : `supabase start` puis `npm run demo:reset` (migrations + données de démonstration). Comptes : `proprietaire@kaya.demo` et `vendeur@kaya.demo`, mot de passe `Demo1234!`.
 
 Voir `docs/DECISIONS.md` et `docs/ARCHITECTURE.md`.
