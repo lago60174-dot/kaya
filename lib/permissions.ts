@@ -14,7 +14,7 @@ const PUBLIC_EXACT = [
   "/confidentialite",
   "/conditions",
 ];
-const PUBLIC_PREFIXES = ["/a/", "/r/", "/api/webhooks/"];
+const PUBLIC_PREFIXES = ["/a/", "/r/", "/img/", "/api/webhooks/"];
 const PROPRIETAIRE_PREFIXES = [
   "/patron",
   "/parametres",
@@ -36,6 +36,8 @@ export function zonePourChemin(chemin: string): Zone {
   if (startsWithSegment(chemin, "/mot-de-passe")) return "connecte";
   if (startsWithSegment(chemin, "/admin")) return "admin";
   if (startsWithSegment(chemin, "/affilie")) return "affilie";
+  if (/^\/stock\/(nouveau|[^/]+\/modifier)$/.test(chemin))
+    return "proprietaire";
   if (PROPRIETAIRE_PREFIXES.some((p) => startsWithSegment(chemin, p)))
     return "proprietaire";
   return "boutique";

@@ -2,20 +2,30 @@ import type { ComponentProps } from "react";
 
 interface Props extends ComponentProps<"input"> {
   nom: string;
+  /** Identifiant HTML, quand plusieurs formulaires de la page ont un champ du même nom. */
+  idChamp?: string;
   libelle: string;
   erreur?: string;
   aide?: string;
 }
 
-export function Champ({ nom, libelle, erreur, aide, ...reste }: Props) {
-  const idAide = `${nom}-aide`;
+export function Champ({
+  nom,
+  idChamp,
+  libelle,
+  erreur,
+  aide,
+  ...reste
+}: Props) {
+  const id = idChamp ?? nom;
+  const idAide = `${id}-aide`;
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={nom} className="text-sm font-medium">
+      <label htmlFor={id} className="text-sm font-medium">
         {libelle}
       </label>
       <input
-        id={nom}
+        id={id}
         name={nom}
         aria-invalid={erreur ? true : undefined}
         aria-describedby={erreur || aide ? idAide : undefined}

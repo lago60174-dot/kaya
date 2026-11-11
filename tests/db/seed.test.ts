@@ -13,13 +13,31 @@ beforeAll(async () => {
 });
 
 describe("jeu de démonstration", () => {
-  it("contient 30 produits, 8 clients, 4 comptes et 20 ventes valides", async () => {
-    expect(await un("select count(*) from produits")).toBe(30);
+  it("contient 34 produits, 8 clients, 4 comptes et 20 ventes valides", async () => {
+    expect(await un("select count(*) from produits")).toBe(34);
     expect(await un("select count(*) from clients")).toBe(8);
     expect(await un("select count(*) from auth.users")).toBe(4);
     expect(
       await un("select count(*) from ventes where statut = 'valide'"),
     ).toBe(20);
+  });
+  it("gère plusieurs marques pour un même article, et plusieurs conditionnements", async () => {
+    expect(
+      await un(
+        "select count(*) from produits where nom = 'Ciment CPJ 42,5' and marque_id is not null",
+      ),
+    ).toBe(2);
+    expect(await un("select count(distinct marque_id) from produits")).toBe(4);
+    expect(
+      await un(
+        "select count(*) from produits where nom_affiche = 'Ciment CPJ 42,5 · CIMAF'",
+      ),
+    ).toBe(1);
+    expect(
+      await un(
+        "select max(n) from (select count(*) n from produit_unites group by produit_id) t",
+      ),
+    ).toBeGreaterThanOrEqual(3);
   });
   it("a 3 clients avec un crédit en cours et des paiements variés", async () => {
     expect(

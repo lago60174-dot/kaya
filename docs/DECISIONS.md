@@ -49,3 +49,16 @@
 - **Turnstile** : vérification serveur, refusée en production si la clé secrète manque (échec fermé).
 - **Déconnexion automatique** après 2 h d'inactivité (`lib/auth/inactivite.ts`).
 - **Limites connues** : le chargement du profil (`server/auth/profil.ts`) et les actions Supabase ne sont pas couverts par des tests automatiques ici (pas de Supabase local) ; ils le seront par les tests de bout en bout de l'étape 12. L'espace administrateur et l'espace affilié (pages) arrivent aux étapes 19 et 20 : les rôles et les gardes existent déjà.
+
+## Étape 4 : produits et stock
+
+- **Migrations non encore déployées** : j'ai donc modifié la migration 3 (le reçu garde le nom affiché avec la marque) au lieu d'en ajouter une. **À partir du premier déploiement, plus aucune migration existante ne sera modifiée.**
+- **Multi-marque** : une marque est une table (`marques`) ; chaque marque d'un même article est un **produit distinct** (« Ciment CPJ 42,5 · Dangote » et « … · CIMAF »), avec son stock, ses prix et ses alertes. Raison : le stock et le prix diffèrent réellement d'une marque à l'autre, et le vendeur choisit une marque précise. Le nom affiché (`nom_affiche`) et la recherche (`nom_recherche`, sans accents, marque comprise) sont tenus à jour par déclencheur, y compris quand on renomme une marque. Deux produits ne peuvent pas avoir le même nom et la même marque.
+- **Multi-conditionnement** : un produit a autant d'unités de vente que nécessaire, chacune avec son facteur vers l'unité de base (ciment gris : sac de 50 kg ; ciment blanc ou colle : sac de 25 kg, de 5 kg ; peinture : pot, seau de 4 pots). Le stock reste compté en unité de base, ce qui évite les erreurs d'arrondi (1 kg sur 50 kg = 0,02 sac). Le formulaire propose les conditionnements courants selon l'unité de base (`lib/stock/unites.ts`).
+- **« Même produit, autre marque »** : copie les unités, l'unité de base et le prix d'achat d'un produit pour en créer un autre sans tout ressaisir (la photo, le stock et la marque ne sont pas copiés).
+- **Limite assumée** : un conditionnement non divisible (un sac de 5 kg qu'on ne peut pas ouvrir) partage quand même le stock en kg avec les autres conditionnements du même produit. Si un client a besoin de stocks séparés par conditionnement, on créera un produit distinct.
+- **Fiche produit atomique** (`enregistrer_produit`) : produit, prix d'achat et unités dans une seule transaction. Une unité retirée est archivée (les ventes y font référence). L'unité de base ne peut plus changer dès qu'il existe un mouvement de stock.
+- **Liste paginée par curseur** (`lister_produits`) : 30 par page, stock de la boutique inclus, jamais de prix d'achat. Recherche sans accents ni casse, filtres catégorie, marque et stock bas.
+- **Photos** : voir `docs/R2.md`. Compression dans le navigateur, envoi par URL signée de 5 minutes, contrôle du fichier après envoi.
+- **Prix d'achat et marge** : visibles du propriétaire seulement (table séparée, RLS).
+- **Non fait ici** : e2e du parcours photo (étape 12) ; la compression réelle dans le navigateur (canvas) n'est pas testable en Node, seule sa logique l'est (algorithme de qualité, dimensions, empreinte).

@@ -11,7 +11,12 @@ export default defineConfig({
     exclude: ["node_modules", ".next", "tests/e2e/**"],
     coverage: {
       provider: "v8",
-      include: ["lib/**/*.ts", "server/**/service.ts"],
+      include: [
+        "lib/**/*.ts",
+        "server/**/service.ts",
+        "server/images/*.ts",
+        "server/erreurs.ts",
+      ],
       exclude: [
         "**/*.test.ts",
         "lib/supabase/**",

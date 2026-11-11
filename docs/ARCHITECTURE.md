@@ -34,6 +34,10 @@ Caisse : depenses, clotures_caisse. Numérotation : compteurs_recus. Traçabilit
 
 Visiteur → `proxy.ts` (session, redirection) → page ou action → `exigerRole(zone)` (profil chargé via la RLS : rôle, organisation, plan) → fonctions SQL (rôle, plan, lecture seule) → RLS. Détail des zones : `lib/permissions.ts`.
 
+## Produits, marques et stock
+
+`categories`, `marques` → `produits` (nom, marque, unité de base, seuil, clés d'images) → `produit_unites` (conditionnements : facteur + prix) et `produit_couts` (prix d'achat, propriétaire seul). Un produit = un article d'une marque. Stock : `mouvements_stock` (registre) → `stock_courant` par boutique. Fonctions : `enregistrer_produit`, `archiver_produit`, `lister_produits`, `enregistrer_mouvement_stock`. Photos : R2 (`docs/R2.md`).
+
 ## Sécurité
 
 RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au rôle `authenticated` seulement quand voulu. Voir `tests/db/rls.test.ts`.

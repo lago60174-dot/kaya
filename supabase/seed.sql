@@ -2,38 +2,43 @@
 -- Comptes (mot de passe Demo1234!) : proprietaire@, vendeur@, admin@ et affilie@kaya.demo (code DEMO20)
 -- Réinitialiser : npm run demo:reset
 
+-- Marques et conditionnements illustratifs (modifiables). Un même article existe en plusieurs marques, chacune avec son stock.
 create temp table seed_produits as select * from (values
-  ('Ciment CPJ 42,5 (sac 50 kg)', 'Ciment et fer', 'kg', 95, 500, 3000, 'sac:50:5500|kg:1:130'),
-  ('Fer à béton 8 mm', 'Ciment et fer', 'barre', 2800, 30, 200, 'barre:1:3500'),
-  ('Fer à béton 10 mm', 'Ciment et fer', 'barre', 4300, 30, 200, 'barre:1:5200'),
-  ('Fer à béton 12 mm', 'Ciment et fer', 'barre', 6200, 30, 200, 'barre:1:7400'),
-  ('Tôle ondulée 3 m', 'Tôles', 'pièce', 4500, 20, 150, 'pièce:1:5500'),
-  ('Tôle bac alu 3 m', 'Tôles', 'pièce', 7500, 20, 150, 'pièce:1:9000'),
-  ('Clous 2 pouces', 'Quincaillerie', 'kg', 900, 10, 400, 'kg:1:1200|boîte:25:27000'),
-  ('Clous 3 pouces', 'Quincaillerie', 'kg', 900, 10, 400, 'kg:1:1200|boîte:25:27000'),
-  ('Clous 4 pouces', 'Quincaillerie', 'kg', 900, 10, 400, 'kg:1:1200|boîte:25:27000'),
-  ('Câble électrique 1,5 mm', 'Électricité', 'mètre', 250, 100, 2000, 'mètre:1:330|rouleau:100:30000'),
-  ('Câble électrique 2,5 mm', 'Électricité', 'mètre', 350, 100, 2000, 'mètre:1:450|rouleau:100:42000'),
-  ('Câble électrique 4 mm', 'Électricité', 'mètre', 550, 100, 2000, 'mètre:1:700|rouleau:100:66000'),
-  ('Peinture murale blanche 5 L', 'Peinture', 'pot', 6500, 10, 300, 'pot:1:8500|seau:4:32000'),
-  ('Peinture à huile 1 L', 'Peinture', 'pot', 3500, 10, 300, 'pot:1:4500'),
-  ('Peinture émail rouge 1 L', 'Peinture', 'pot', 4000, 10, 300, 'pot:1:5200'),
-  ('Tuyau PVC 32 mm', 'Plomberie', 'barre', 2500, 15, 200, 'barre:1:3200'),
-  ('Tuyau PVC 50 mm', 'Plomberie', 'barre', 4200, 15, 200, 'barre:1:5200'),
-  ('Tuyau PVC 110 mm', 'Plomberie', 'barre', 9000, 15, 200, 'barre:1:11000'),
-  ('Colle PVC', 'Plomberie', 'pot', 1800, 6, 100, 'pot:1:2500'),
-  ('Cadenas 40 mm', 'Quincaillerie', 'pièce', 1500, 10, 100, 'pièce:1:2200'),
-  ('Cadenas 60 mm', 'Quincaillerie', 'pièce', 2800, 5, 100, 'pièce:1:3800'),
-  ('Ampoule LED 9 W', 'Électricité', 'pièce', 600, 30, 500, 'pièce:1:900|boîte:10:8500'),
-  ('Ampoule LED 15 W', 'Électricité', 'pièce', 900, 30, 500, 'pièce:1:1300|boîte:12:12000'),
-  ('Cuvette plastique', 'Quincaillerie', 'pièce', 900, 15, 200, 'pièce:1:1500'),
-  ('Serrure de porte à clé', 'Quincaillerie', 'pièce', 3500, 8, 100, 'pièce:1:5000'),
-  ('Serrure de porte intérieure', 'Quincaillerie', 'pièce', 5000, 8, 100, 'pièce:1:7000'),
-  ('Brouette', 'Quincaillerie', 'pièce', 25000, 3, 20, 'pièce:1:32000'),
-  ('Marteau', 'Quincaillerie', 'pièce', 2000, 5, 60, 'pièce:1:3000'),
-  ('Interrupteur simple', 'Électricité', 'pièce', 700, 20, 200, 'pièce:1:1200'),
-  ('Disjoncteur 16 A', 'Électricité', 'pièce', 2500, 10, 100, 'pièce:1:3800')
-) as t(nom, cat, base, achat, seuil, stock, unites);
+  ('Ciment CPJ 42,5', 'Dangote', 'Ciment et fer', 'kg', 95, 500, 3000, 'sac de 50 kg:50:5500|kg:1:130'),
+  ('Ciment CPJ 42,5', 'CIMAF', 'Ciment et fer', 'kg', 98, 500, 2500, 'sac de 50 kg:50:5600|kg:1:135'),
+  ('Ciment blanc', 'CIMAF', 'Ciment et fer', 'kg', 340, 100, 600, 'sac de 25 kg:25:9500|sac de 5 kg:5:2000|kg:1:420'),
+  ('Ciment colle carrelage', null, 'Ciment et fer', 'kg', 200, 100, 800, 'sac de 25 kg:25:6000|sac de 5 kg:5:1500|kg:1:300'),
+  ('Fer à béton 8 mm', null, 'Ciment et fer', 'barre', 2800, 30, 200, 'barre:1:3500'),
+  ('Fer à béton 10 mm', null, 'Ciment et fer', 'barre', 4300, 30, 200, 'barre:1:5200'),
+  ('Fer à béton 12 mm', null, 'Ciment et fer', 'barre', 6200, 30, 200, 'barre:1:7400'),
+  ('Tôle ondulée 3 m', null, 'Tôles', 'pièce', 4500, 20, 150, 'pièce:1:5500'),
+  ('Tôle bac alu 3 m', null, 'Tôles', 'pièce', 7500, 20, 150, 'pièce:1:9000'),
+  ('Clous 2 pouces', null, 'Quincaillerie', 'kg', 900, 10, 400, 'kg:1:1200|boîte de 25 kg:25:27000'),
+  ('Clous 3 pouces', null, 'Quincaillerie', 'kg', 900, 10, 400, 'kg:1:1200|boîte de 25 kg:25:27000'),
+  ('Clous 4 pouces', null, 'Quincaillerie', 'kg', 900, 10, 400, 'kg:1:1200|boîte de 25 kg:25:27000'),
+  ('Câble électrique 1,5 mm', null, 'Électricité', 'mètre', 250, 100, 2000, 'mètre:1:330|rouleau de 100 m:100:30000'),
+  ('Câble électrique 2,5 mm', null, 'Électricité', 'mètre', 350, 100, 2000, 'mètre:1:450|rouleau de 100 m:100:42000'),
+  ('Câble électrique 4 mm', null, 'Électricité', 'mètre', 550, 100, 2000, 'mètre:1:700|rouleau de 100 m:100:66000'),
+  ('Peinture murale blanche 5 L', 'Colorex', 'Peinture', 'pot', 6500, 10, 300, 'pot:1:8500|seau de 20 L:4:32000'),
+  ('Peinture murale blanche 5 L', 'Soleil', 'Peinture', 'pot', 6200, 10, 300, 'pot:1:8000|seau de 20 L:4:30000'),
+  ('Peinture à huile 1 L', null, 'Peinture', 'pot', 3500, 10, 300, 'pot:1:4500'),
+  ('Peinture émail rouge 1 L', null, 'Peinture', 'pot', 4000, 10, 300, 'pot:1:5200'),
+  ('Tuyau PVC 32 mm', null, 'Plomberie', 'barre', 2500, 15, 200, 'barre:1:3200'),
+  ('Tuyau PVC 50 mm', null, 'Plomberie', 'barre', 4200, 15, 200, 'barre:1:5200'),
+  ('Tuyau PVC 110 mm', null, 'Plomberie', 'barre', 9000, 15, 200, 'barre:1:11000'),
+  ('Colle PVC', null, 'Plomberie', 'pot', 1800, 6, 100, 'pot:1:2500'),
+  ('Cadenas 40 mm', null, 'Quincaillerie', 'pièce', 1500, 10, 100, 'pièce:1:2200'),
+  ('Cadenas 60 mm', null, 'Quincaillerie', 'pièce', 2800, 5, 100, 'pièce:1:3800'),
+  ('Ampoule LED 9 W', null, 'Électricité', 'pièce', 600, 30, 500, 'pièce:1:900|boîte de 10:10:8500'),
+  ('Ampoule LED 15 W', null, 'Électricité', 'pièce', 900, 30, 500, 'pièce:1:1300|boîte de 12:12:12000'),
+  ('Cuvette plastique', null, 'Quincaillerie', 'pièce', 900, 15, 200, 'pièce:1:1500'),
+  ('Serrure de porte à clé', null, 'Quincaillerie', 'pièce', 3500, 8, 100, 'pièce:1:5000'),
+  ('Serrure de porte intérieure', null, 'Quincaillerie', 'pièce', 5000, 8, 100, 'pièce:1:7000'),
+  ('Brouette', null, 'Quincaillerie', 'pièce', 25000, 3, 20, 'pièce:1:32000'),
+  ('Marteau', null, 'Quincaillerie', 'pièce', 2000, 5, 60, 'pièce:1:3000'),
+  ('Interrupteur simple', null, 'Électricité', 'pièce', 700, 20, 200, 'pièce:1:1200'),
+  ('Disjoncteur 16 A', null, 'Électricité', 'pièce', 2500, 10, 100, 'pièce:1:3800')
+) as t(nom, marque, cat, base, achat, seuil, stock, unites);
 
 do $seed$
 declare
@@ -43,7 +48,7 @@ declare
   v_affilie uuid := '44444444-4444-4444-8444-444444444444';
   r jsonb; v_org uuid; v_b uuid; v_cat uuid; v_p uuid; rec record; u text;
   v_prods uuid[]; v_clients uuid[]; n int; i int; a int; b int; v_lignes jsonb; v_pay jsonb; v_client uuid; v_remise bigint;
-  v_unite uuid; v_cr record; j int;
+  v_unite uuid; v_cr record; j int; v_marque uuid;
 begin
   insert into auth.users (id, instance_id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data,
     raw_user_meta_data, confirmation_token, recovery_token, email_change_token_new, email_change, created_at, updated_at)
@@ -76,8 +81,15 @@ begin
     if v_cat is null then
       insert into categories (organisation_id, nom) values (v_org, rec.cat) returning id into v_cat;
     end if;
-    insert into produits (organisation_id, categorie_id, nom, unite_base, seuil_alerte)
-    values (v_org, v_cat, rec.nom, rec.base, rec.seuil) returning id into v_p;
+    v_marque := null;
+    if rec.marque is not null then
+      select id into v_marque from marques where organisation_id = v_org and nom = rec.marque;
+      if v_marque is null then
+        insert into marques (organisation_id, nom) values (v_org, rec.marque) returning id into v_marque;
+      end if;
+    end if;
+    insert into produits (organisation_id, categorie_id, marque_id, nom, unite_base, seuil_alerte)
+    values (v_org, v_cat, v_marque, rec.nom, rec.base, rec.seuil) returning id into v_p;
     insert into produit_couts (produit_id, organisation_id, prix_achat) values (v_p, v_org, rec.achat);
     foreach u in array string_to_array(rec.unites, '|') loop
       insert into produit_unites (organisation_id, produit_id, nom, facteur, prix_vente)
@@ -92,7 +104,7 @@ begin
     ('Paul Essomba', '699444444'), ('Marie Fotso', '677555555'), ('Samuel Ateba', '655666666'),
     ('Chantal Nkolo', '699777777'), ('Boubakari Issa', '677888888')) as c(nom, tel);
   select array_agg(id order by nom) into v_clients from clients where organisation_id = v_org;
-  select array_agg(id order by nom) into v_prods from produits where organisation_id = v_org;
+  select array_agg(id order by nom_recherche) into v_prods from produits where organisation_id = v_org;
   n := array_length(v_prods, 1);
 
   for i in 1..20 loop

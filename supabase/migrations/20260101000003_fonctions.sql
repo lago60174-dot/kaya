@@ -126,7 +126,7 @@ begin
 
   for r in
     select l.produit_id, l.unite_id, l.quantite, coalesce(l.remise_ligne, 0) as remise_ligne,
-           u.nom as nom_unite, u.facteur, u.prix_vente, p.nom as nom_produit, coalesce(c.prix_achat, 0) as prix_achat
+           u.nom as nom_unite, u.facteur, u.prix_vente, p.nom_affiche as nom_produit, coalesce(c.prix_achat, 0) as prix_achat
     from jsonb_to_recordset(p_lignes) as l(produit_id uuid, unite_id uuid, quantite numeric, remise_ligne bigint)
     join produit_unites u on u.id = l.unite_id
     join produits p on p.id = l.produit_id

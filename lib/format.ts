@@ -17,3 +17,12 @@ export function formatQuantite(quantite: number): string {
   const arrondi = Math.round(quantite * 1000) / 1000;
   return arrondi.toString().replace(".", ",");
 }
+
+/** "10/11/2026 14:30" en heure de Douala. */
+export function formatDateHeure(date: string | Date): string {
+  return new Intl.DateTimeFormat("fr-FR", {
+    dateStyle: "short",
+    timeStyle: "short",
+    timeZone: "Africa/Douala",
+  }).format(typeof date === "string" ? new Date(date) : date);
+}

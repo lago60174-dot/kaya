@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatFcfa, formatQuantite } from "./format";
+import { formatDateHeure, formatFcfa, formatQuantite } from "./format";
 
 describe("formatFcfa", () => {
   it("sépare les milliers par des espaces", () => {
@@ -23,5 +23,11 @@ describe("formatQuantite", () => {
   });
   it("limite à 3 décimales", () => {
     expect(formatQuantite(1 / 3)).toBe("0,333");
+  });
+});
+
+describe("formatDateHeure", () => {
+  it("affiche l'heure de Douala (UTC+1)", () => {
+    expect(formatDateHeure("2026-11-10T13:30:00Z")).toBe("10/11/2026 14:30");
   });
 });
