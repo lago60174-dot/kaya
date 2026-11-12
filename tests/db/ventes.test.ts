@@ -351,7 +351,10 @@ describe("annulation, crédits et caisse", () => {
         [f.orgA, f.boutiqueA, U.vendeurA],
       ),
     );
-    const jour = new Date().toISOString().slice(0, 10);
+    // La caisse compte les journées en heure de Douala (UTC+1), pas en UTC.
+    const jour = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Africa/Douala",
+    }).format(new Date());
     const c = (
       await lignes<{ r: Record<string, number> }>(
         db,

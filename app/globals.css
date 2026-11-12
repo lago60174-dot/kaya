@@ -48,3 +48,21 @@ select {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Impression : seul le reçu sort sur le papier. Ticket 58 mm, A4 et imprimantes Bluetooth : voir l'étape Impression. */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .recu-imprimable,
+  .recu-imprimable * {
+    visibility: visible;
+  }
+  .recu-imprimable {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    max-width: none;
+    border: 0;
+  }
+}

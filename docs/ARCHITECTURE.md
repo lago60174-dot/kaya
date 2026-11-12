@@ -38,6 +38,10 @@ Visiteur → `proxy.ts` (session, redirection) → page ou action → `exigerRol
 
 `categories`, `marques` → `produits` (nom, marque, unité de base, seuil, clés d'images) → `produit_unites` (conditionnements : facteur + prix) et `produit_couts` (prix d'achat, propriétaire seul). Un produit = un article d'une marque. Stock : `mouvements_stock` (registre) → `stock_courant` par boutique. Fonctions : `enregistrer_produit`, `archiver_produit`, `lister_produits`, `enregistrer_mouvement_stock`. Photos : R2 (`docs/R2.md`).
 
+## Vente
+
+Navigateur : panier et aperçu (`lib/ventes`) → `validerVenteAction` (rôle, validation Zod) → `creer_vente` (transaction : droits, plan, prix, remise, stock, crédit, lignes, paiements, créance, numéro, journal) → reçu relu par `lireRecu` → partage WhatsApp du vendeur. Un crédit crée une `creance` ; une annulation (propriétaire) crée un `avoir`.
+
 ## Sécurité
 
 RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au rôle `authenticated` seulement quand voulu. Voir `tests/db/rls.test.ts`.

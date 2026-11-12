@@ -62,3 +62,18 @@
 - **Photos** : voir `docs/R2.md`. Compression dans le navigateur, envoi par URL signée de 5 minutes, contrôle du fichier après envoi.
 - **Prix d'achat et marge** : visibles du propriétaire seulement (table séparée, RLS).
 - **Non fait ici** : e2e du parcours photo (étape 12) ; la compression réelle dans le navigateur (canvas) n'est pas testable en Node, seule sa logique l'est (algorithme de qualité, dimensions, empreinte).
+
+## Étape 5 : vente
+
+- **Le serveur recalcule tout** : le navigateur n'envoie que des identifiants, des quantités, des modes de paiement et des montants de paiement. Prix, remises, total, numéro de reçu et stock sont calculés par `creer_vente`. L'aperçu du panier (`lib/ventes/panier.ts`) est un confort d'affichage : son arrondi est **vérifié contre PostgreSQL** (`tests/db/coherence.test.ts`, 135 combinaisons, y compris les .5).
+- **Arithmétique exacte** : prix d'une ligne = quantité en millièmes x prix, en entiers (BigInt), arrondi au FCFA le plus proche comme `round()` en base. Aucun flottant dans les montants.
+- **Idempotence liée au contenu** : la clé de la vente est tirée au sort une fois par contenu de panier. Un double clic ou un nouvel essai après coupure réutilise la même clé (jamais de doublon) ; si le vendeur modifie le panier entre deux essais, une nouvelle clé est créée, pour qu'une vente déjà enregistrée ne remplace pas silencieusement le nouveau contenu.
+- **Paiements** : sans crédit, le dernier mode prend le reste ; avec crédit, ce qui n'est pas payé devient la dette du client (client obligatoire). Paiement mixte = plusieurs lignes. Le propriétaire seul peut dépasser le plafond de crédit.
+- **Remise** : le vendeur voit son seuil et un message avant de valider ; la base applique la même règle (le seuil affiché n'est qu'une aide).
+- **Marques** : chaque marque est un produit distinct dans la recherche (« Ciment CPJ 42,5 · Dangote » / « · CIMAF »), avec une pastille par unité (« + sac de 50 kg · 5 500 FCFA »). Un tap = une ligne ; un second tap sur la même unité = quantité + 1. La marque figure sur le reçu.
+- **Écran de succès = reçu relu en base** (`/vente/recu/[id]`), pas une copie de l'écran : le vendeur voit exactement ce qui a été enregistré, et peut le rouvrir.
+- **Partage WhatsApp** : lien `wa.me` vers le numéro du client depuis le téléphone du vendeur (aucun appel à Zernio). Le message résume le reçu, sans marge ni prix d'achat. Le lien vers la page publique du reçu et le PDF viennent à l'étape 6 : je n'ai pas mis de lien qui mènerait à une page inexistante.
+- **Impression** : bouton `window.print()` affiché seulement si le plan autorise l'impression (Pro, Business), avec un style qui n'imprime que le reçu. Ticket 58 mm, A4 et RawBT : étape 13.
+- **Client rapide** : le vendeur crée un client (nom, téléphone facultatif) sans quitter la vente ; il ne fixe jamais de plafond de crédit (la RLS l'interdit).
+- **Limites connues** : le panier n'est pas conservé si la page est rechargée (mode hors ligne et brouillons : étape 11). La rapidité « 3 articles en moins de 10 secondes » et le parcours complet seront mesurés par les tests de bout en bout (étape 12). La concurrence réelle (deux vendeurs, dernier article) reste testée en séquence ici.
+- **Piège corrigé** : un test de caisse comptait la journée en UTC alors que la base la compte en heure de Douala ; il échouait entre 23 h et minuit UTC. Les tests utilisent désormais le fuseau de Douala.
