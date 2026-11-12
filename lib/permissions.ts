@@ -107,6 +107,7 @@ interface DefinitionMenu extends EntreeMenu {
 
 const MENU: DefinitionMenu[] = [
   { href: "/vente", libelle: "Vente", roles: ["proprietaire", "vendeur"] },
+  { href: "/recus", libelle: "Reçus", roles: ["proprietaire", "vendeur"] },
   { href: "/stock", libelle: "Stock", roles: ["proprietaire", "vendeur"] },
   { href: "/clients", libelle: "Clients", roles: ["proprietaire", "vendeur"] },
   { href: "/caisse", libelle: "Caisse", roles: ["proprietaire", "vendeur"] },

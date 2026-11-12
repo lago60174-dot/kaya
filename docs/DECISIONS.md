@@ -77,3 +77,19 @@
 - **Client rapide** : le vendeur crée un client (nom, téléphone facultatif) sans quitter la vente ; il ne fixe jamais de plafond de crédit (la RLS l'interdit).
 - **Limites connues** : le panier n'est pas conservé si la page est rechargée (mode hors ligne et brouillons : étape 11). La rapidité « 3 articles en moins de 10 secondes » et le parcours complet seront mesurés par les tests de bout en bout (étape 12). La concurrence réelle (deux vendeurs, dernier article) reste testée en séquence ici.
 - **Piège corrigé** : un test de caisse comptait la journée en UTC alors que la base la compte en heure de Douala ; il échouait entre 23 h et minuit UTC. Les tests utilisent désormais le fuseau de Douala.
+
+## Étape 6 : historique des reçus, annulation, page publique, PDF
+
+- **Historique** (`lister_recus`) : liste paginée par curseur (date + id), 30 par page, du plus récent au plus ancien. Recherche par numéro (même partiel), nom du client (sans accents), téléphone ou montant exact ; filtres statut, vendeur (propriétaire seulement), dates en jours de Douala. Exécutée avec les droits de l'appelant : la RLS limite aux boutiques autorisées. **Défaut trouvé par les tests et corrigé** : la recherche « % » renvoyait tous les reçus (un téléphone vide correspondait à un motif vide). La recherche par téléphone ne s'applique plus qu'aux saisies purement numériques d'au moins 3 chiffres.
+- **Immutabilité** : aucun écran, aucune fonction et aucun droit ne permet de modifier ou supprimer un reçu ; les déclencheurs SQL arrêtent même la clé service_role (testé). Les corrections passent par un avoir.
+- **Annulation** : réservée au propriétaire, motif obligatoire, confirmation avant envoi. Le reçu reste dans la liste et sur la page, marqué ANNULÉ, avec le numéro de l'avoir et le motif (visibles dans l'application, pas sur la page publique).
+- **Ordre des lignes** : `vente_lignes.ordre` garde l'ordre du panier (les lignes sont traitées par produit pour verrouiller le stock dans un ordre fixe). Cela a modifié la migration 3 : toujours possible car rien n'est déployé.
+- **Page publique `/r/[jeton]`** : jeton de 64 caractères hexadécimaux (256 bits, non devinable), lecture seule par la fonction `recu_public` (anon peut l'appeler, mais aucune table). Contenu : boutique, lignes, remise, total, paiements, reste à payer, nom du client. **Jamais** : marge, prix d'achat, téléphone du client, identifiants internes, motif d'annulation (testé). Pas d'indexation (`noindex`). Mise en cache d'une minute (`use cache`) : un lien partagé peut être ouvert souvent, et une annulation doit apparaître vite.
+- **PDF** (`pdf-lib`, 100 % JavaScript donc compatible Workers) : une page de 300 pt de large, aussi haute que nécessaire, lisible sur téléphone. Police standard : les caractères qu'elle ne sait pas écrire sont remplacés (jamais de plantage). Le test relit le texte du PDF généré.
+- **Partage WhatsApp par le vendeur** : sur Android, le PDF part comme fichier via le menu de partage ; sinon lien `wa.me` (numéro du client si connu) avec le résumé et le lien public. Le PDF est préchargé pour que le geste reste immédiat. Aucun appel à Zernio.
+- **Reçu en cache pour les liens** : `NEXT_PUBLIC_APP_URL` fixe l'adresse des liens partagés (sinon déduite de la requête).
+- **Limites connues** :
+  - **Logo** : non fait. Rien ne stocke encore le logo d'une boutique ; il viendra avec l'écran des paramètres de la boutique (étape 11), converti en PNG (pdf-lib ne lit pas le WebP).
+  - **Test réel du partage** : le partage de fichier est une API du navigateur : la logique est écrite mais seul un vrai téléphone Android la prouve (étape 12).
+  - **PDF sur Workers** : le build Cloudflare passe, mais le PDF n'a pas été exécuté dans `workerd` ici : à vérifier avec `npm run preview` avant le déploiement.
+  - **Cache persistant** : le cache de la page publique est en mémoire par instance. Un cache partagé (R2) est prévu à l'étape 21.

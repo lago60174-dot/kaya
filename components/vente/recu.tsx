@@ -1,9 +1,9 @@
 import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
 import { libelleMode } from "@/lib/ventes/paiements";
-import type { RecuDetail } from "@/server/ventes/lecture";
+import type { RecuAffichable } from "@/lib/ventes/recu";
 
 /** Reçu lisible sur téléphone. La classe `recu-imprimable` est la seule partie imprimée (voir globals.css). */
-export function Recu({ recu }: { recu: RecuDetail }) {
+export function Recu({ recu }: { recu: RecuAffichable }) {
   return (
     <article
       className="recu-imprimable border-border flex max-w-md flex-col gap-3 rounded-lg border bg-white p-4"
@@ -69,6 +69,12 @@ export function Recu({ recu }: { recu: RecuDetail }) {
           </div>
         )}
       </dl>
+      {recu.annule && recu.avoir && (
+        <p className="bg-brand-soft rounded p-2 text-sm">
+          Avoir {recu.avoir.numero} · {formatDateHeure(recu.avoir.date)}
+          <span className="text-muted block">Motif : {recu.avoir.motif}</span>
+        </p>
+      )}
       {recu.boutique.mentionLegale && (
         <p className="text-muted text-center text-xs">
           {recu.boutique.mentionLegale}

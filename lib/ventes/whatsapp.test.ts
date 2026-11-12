@@ -57,6 +57,12 @@ describe("messageRecu", () => {
     expect(sans).not.toContain("Reste à payer");
     expect(sans).toContain("ANNULÉ");
   });
+  it("ajoute le lien du reçu quand il est fourni", () => {
+    expect(messageRecu({ ...recu, lien: "https://kaya.cm/r/abc" })).toContain(
+      "Voir le reçu : https://kaya.cm/r/abc",
+    );
+    expect(m).not.toContain("Voir le reçu");
+  });
   it("ne contient aucune donnée sensible", () => {
     expect(m).not.toMatch(/marge|prix d'achat|coût/i);
   });

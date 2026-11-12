@@ -144,6 +144,7 @@ describe("menuPour : pas de bouton verrouillé", () => {
   it("le vendeur ne voit que les écrans de vente", () => {
     expect(libelles("vendeur", true)).toEqual([
       "Vente",
+      "Reçus",
       "Stock",
       "Clients",
       "Caisse",

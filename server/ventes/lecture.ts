@@ -1,36 +1,15 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { cacheLife } from "next/cache";
+import { supabasePublic } from "@/lib/supabase/public";
+import type { FiltresRecus } from "@/lib/ventes/historique";
+import {
+  recuPublicDepuisJson,
+  type RecuAffichable,
+  type RecuDetail,
+} from "@/lib/ventes/recu";
 
-export interface RecuDetail {
-  id: string;
-  numeroRecu: string;
-  jetonPublic: string;
-  date: string;
-  annule: boolean;
-  sousTotal: number;
-  remise: number;
-  total: number;
-  boutique: {
-    nom: string;
-    adresse: string | null;
-    telephone: string | null;
-    mentionLegale: string | null;
-  };
-  client: { nom: string; telephone: string | null } | null;
-  lignes: {
-    nom: string;
-    unite: string;
-    quantite: number;
-    prixUnitaire: number;
-    remiseLigne: number;
-    total: number;
-  }[];
-  paiements: { mode: string; montant: number }[];
-  /** Reste dû par le client sur cette vente aujourd'hui. */
-  credit: number;
-}
-
-/** Reçu complet pour l'écran et le partage. Aucune donnée de coût : la RLS ne les donne pas ici et on ne les demande pas. */
+/** Reçu complet pour l'écran, le PDF et le partage. Aucune donnée de coût : on ne la demande pas (et la RLS la cache au vendeur). */
 export async function lireRecu(
   supabase: SupabaseClient,
   venteId: string,
@@ -43,23 +22,30 @@ export async function lireRecu(
     .eq("id", venteId)
     .maybeSingle();
   if (!v) return null;
-  const [lignes, paiements, creance] = await Promise.all([
+  const [lignes, paiements, creance, avoir] = await Promise.all([
     supabase
       .from("vente_lignes")
       .select(
         "nom_produit, nom_unite, quantite, prix_unitaire, remise_ligne, total_ligne",
       )
       .eq("vente_id", venteId)
-      .order("cree_le"),
+      .order("ordre")
+      .order("id"),
     supabase
       .from("paiements")
       .select("mode, montant")
       .eq("vente_id", venteId)
       .eq("type", "vente")
-      .order("date"),
+      .order("date")
+      .order("id"),
     supabase
       .from("creances")
       .select("solde, statut")
+      .eq("vente_id", venteId)
+      .maybeSingle(),
+    supabase
+      .from("avoirs")
+      .select("numero, motif, date")
       .eq("vente_id", venteId)
       .maybeSingle(),
   ]);
@@ -75,8 +61,8 @@ export async function lireRecu(
   } | null;
   return {
     id: v.id,
-    numeroRecu: v.numero_recu,
     jetonPublic: v.jeton_public,
+    numeroRecu: v.numero_recu,
     date: v.date,
     annule: v.statut === "annulee",
     sousTotal: Number(v.sous_total),
@@ -105,5 +91,73 @@ export async function lireRecu(
       creance.data && creance.data.statut === "ouverte"
         ? Number(creance.data.solde)
         : 0,
+    avoir: avoir.data
+      ? {
+          numero: avoir.data.numero,
+          motif: avoir.data.motif,
+          date: avoir.data.date,
+        }
+      : null,
   };
+}
+
+export interface LigneRecu {
+  id: string;
+  numero_recu: string;
+  date: string;
+  statut: "valide" | "annulee";
+  total: number;
+  vendeur_id: string;
+  client_nom: string | null;
+  vendeur_nom: string | null;
+  credit: number;
+}
+
+export interface PageRecus {
+  recus: LigneRecu[];
+  suivant: { date: string; id: string } | null;
+}
+
+export async function listerRecus(
+  supabase: SupabaseClient,
+  boutiqueId: string,
+  f: FiltresRecus,
+): Promise<PageRecus> {
+  const { data, error } = await supabase.rpc("lister_recus", {
+    p_boutique: boutiqueId,
+    p_recherche: f.recherche ?? null,
+    p_statut: f.statut ?? null,
+    p_vendeur: f.vendeur ?? null,
+    p_du: f.du ?? null,
+    p_au: f.au ?? null,
+    p_limite: 30,
+    p_apres_date: f.apresDate ?? null,
+    p_apres_id: f.apresId ?? null,
+  });
+  if (error || !data) return { recus: [], suivant: null };
+  const page = data as PageRecus;
+  return {
+    suivant: page.suivant,
+    recus: page.recus.map((r) => ({
+      ...r,
+      total: Number(r.total),
+      credit: Number(r.credit),
+    })),
+  };
+}
+
+/**
+ * Reçu public par jeton, mis en cache une minute : un lien partagé sur WhatsApp peut être ouvert des dizaines de fois.
+ * Court exprès : une annulation ou un remboursement de crédit doit apparaître vite.
+ */
+export async function lireRecuPublic(
+  jeton: string,
+): Promise<RecuAffichable | null> {
+  "use cache";
+  cacheLife({ stale: 30, revalidate: 60, expire: 600 });
+  if (!/^[0-9a-f]{64}$/.test(jeton)) return null;
+  const { data } = await supabasePublic().rpc("recu_public", {
+    p_jeton: jeton,
+  });
+  return data ? recuPublicDepuisJson(data) : null;
 }

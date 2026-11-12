@@ -127,3 +127,33 @@ export async function creerClientRapideAction(
   if (error || !data) return { ok: false, erreur: messageErreurBase(error) };
   return { ok: true, client: data };
 }
+
+export interface EtatAnnulation {
+  erreur?: string;
+  succes?: string;
+}
+
+/** Annule une vente par un avoir (propriétaire uniquement, motif obligatoire). Le reçu d'origine reste visible, marqué ANNULÉ. */
+export async function annulerVenteAction(
+  _e: EtatAnnulation,
+  formData: FormData,
+): Promise<EtatAnnulation> {
+  await exigerRole("proprietaire");
+  const venteId = String(formData.get("venteId") ?? "");
+  const motif = String(formData.get("motif") ?? "").trim();
+  if (!/^[0-9a-f-]{36}$/i.test(venteId))
+    return { erreur: "Vente introuvable." };
+  if (!motif) return { erreur: "Indiquez le motif de l'annulation." };
+  if (motif.length > 200)
+    return { erreur: "Ce motif est trop long (200 caractères maximum)." };
+  const { data, error } = await (
+    await supabaseServeur()
+  ).rpc("annuler_vente", { p_vente: venteId, p_motif: motif });
+  if (error) return { erreur: messageErreurBase(error) };
+  revalidatePath(`/vente/recu/${venteId}`);
+  revalidatePath("/recus");
+  revalidatePath("/stock");
+  return {
+    succes: `Vente annulée. Avoir ${data?.avoir ?? ""} créé, stock remis.`,
+  };
+}

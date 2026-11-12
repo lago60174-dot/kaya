@@ -149,8 +149,11 @@ begin
         jsonb_build_object('produit', r.nom_produit, 'stock_avant', v_stock, 'vendu', v_base), true);
     end if;
 
-    insert into vente_lignes (organisation_id, vente_id, produit_id, unite_id, nom_produit, nom_unite, quantite, facteur, prix_unitaire, remise_ligne, total_ligne)
-    values (m.organisation_id, v_vente.id, r.produit_id, r.unite_id, r.nom_produit, r.nom_unite, r.quantite, r.facteur, r.prix_vente, r.remise_ligne, v_brut_ligne - r.remise_ligne)
+    insert into vente_lignes (organisation_id, vente_id, produit_id, unite_id, nom_produit, nom_unite, quantite, facteur, prix_unitaire, remise_ligne, total_ligne, ordre)
+    values (m.organisation_id, v_vente.id, r.produit_id, r.unite_id, r.nom_produit, r.nom_unite, r.quantite, r.facteur, r.prix_vente, r.remise_ligne, v_brut_ligne - r.remise_ligne,
+            -- position dans le panier (les lignes sont traitées par produit pour verrouiller le stock dans un ordre fixe)
+            coalesce((select t.i::int from jsonb_array_elements(p_lignes) with ordinality t(e, i)
+                       where t.e->>'produit_id' = r.produit_id::text and t.e->>'unite_id' = r.unite_id::text order by t.i limit 1), 0))
     returning id into v_ligne;
     insert into vente_lignes_couts (vente_ligne_id, organisation_id, cout_total)
     values (v_ligne, m.organisation_id, round(v_base * r.prix_achat));

@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import { ActionsRecu } from "@/components/vente/actions-recu";
+import { AnnulerVente } from "@/components/vente/annuler-vente";
 import { Recu } from "@/components/vente/recu";
 import { peutUtiliser } from "@/lib/plans";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { lienWhatsApp, messageRecu } from "@/lib/ventes/whatsapp";
 import { exigerRole } from "@/server/auth/session";
+import { origine } from "@/server/origine";
 import { lireRecu } from "@/server/ventes/lecture";
 
 export const metadata = { title: "Reçu · Kaya" };
@@ -36,6 +38,7 @@ export default async function PageRecu({
     total: recu.total,
     paiements: recu.paiements,
     credit: recu.credit,
+    lien: `${await origine()}/r/${recu.jetonPublic}`,
   });
 
   return (
@@ -51,10 +54,16 @@ export default async function PageRecu({
       <Recu recu={recu} />
       <ActionsRecu
         lienWhatsApp={lienWhatsApp(recu.client?.telephone, message)}
+        message={message}
+        pdfUrl={`/vente/recu/${recu.id}/pdf`}
+        nomFichier={`Recu-${recu.numeroRecu}.pdf`}
         peutImprimer={Boolean(
           profil.plan && peutUtiliser(profil.plan, "impression"),
         )}
       />
+      {profil.role === "proprietaire" && !recu.annule && (
+        <AnnulerVente venteId={recu.id} numero={recu.numeroRecu} />
+      )}
     </div>
   );
 }

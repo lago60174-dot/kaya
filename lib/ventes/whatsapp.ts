@@ -29,6 +29,8 @@ export interface RecuPourMessage {
   total: number;
   paiements: { mode: string; montant: number }[];
   credit: number;
+  /** Lien vers la page publique du reçu. */
+  lien?: string;
 }
 
 /** Résumé du reçu pour WhatsApp (court, sans donnée sensible : ni prix d'achat ni marge). */
@@ -51,6 +53,7 @@ export function messageRecu(r: RecuPourMessage): string {
         ]
       : []),
     ...(r.credit > 0 ? [`Reste à payer : ${formatFcfa(r.credit)}`] : []),
+    ...(r.lien ? ["", `Voir le reçu : ${r.lien}`] : []),
     "",
     "Merci de votre confiance !",
   ].join("\n");

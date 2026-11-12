@@ -42,6 +42,10 @@ Visiteur → `proxy.ts` (session, redirection) → page ou action → `exigerRol
 
 Navigateur : panier et aperçu (`lib/ventes`) → `validerVenteAction` (rôle, validation Zod) → `creer_vente` (transaction : droits, plan, prix, remise, stock, crédit, lignes, paiements, créance, numéro, journal) → reçu relu par `lireRecu` → partage WhatsApp du vendeur. Un crédit crée une `creance` ; une annulation (propriétaire) crée un `avoir`.
 
+## Reçus
+
+Historique : `lister_recus` (curseur, filtres, RLS). Détail : `lireRecu` (vente, lignes, paiements, créance, avoir). Public : `recu_public(jeton)` → `/r/[jeton]` et `/r/[jeton]/pdf`. PDF : `lib/ventes/pdf.ts`. Annulation : `annuler_vente` (avoir, stock, créance). Partage : Web Share API (PDF) ou `wa.me`.
+
 ## Sécurité
 
 RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au rôle `authenticated` seulement quand voulu. Voir `tests/db/rls.test.ts`.
