@@ -1,8 +1,17 @@
 export const LIMITES_IMAGE = {
   photo: { largeur: 800, octets: 100 * 1024 },
   vignette: { largeur: 200, octets: 15 * 1024 },
+  /** Logo de la boutique : PNG (le PDF ne lit pas le WebP), plus petit qu'une photo, il se répète sur chaque reçu. */
+  logo: { largeur: 300, octets: 40 * 1024 },
 } as const;
 export type TypeImage = keyof typeof LIMITES_IMAGE;
+
+/** Format de stockage de chaque type d'image. */
+export const MIME_IMAGE: Record<TypeImage, "image/webp" | "image/png"> = {
+  photo: "image/webp",
+  vignette: "image/webp",
+  logo: "image/png",
+};
 
 /** Photo brute acceptée avant compression (un téléphone récent dépasse souvent 4 Mo). */
 export const TAILLE_MAX_ORIGINE = 25 * 1024 * 1024;

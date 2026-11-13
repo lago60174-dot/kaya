@@ -49,16 +49,25 @@ select {
   }
 }
 
-/* Impression : seul le reçu sort sur le papier. Ticket 58 mm, A4 et imprimantes Bluetooth : voir l'étape Impression. */
+/*
+ * Impression : seul le reçu sort sur le papier.
+ * - Boutons « Imprimer » : `data-impression` choisit le ticket 58 mm ou la facture A4 (components/impression/impression.css).
+ * - Ctrl+P sans bouton : le reçu affiché sort tel quel.
+ */
 @media print {
+  html,
+  body {
+    margin: 0;
+    background: #fff;
+  }
   body * {
     visibility: hidden;
   }
-  .recu-imprimable,
-  .recu-imprimable * {
+  body:not([data-impression]) .recu-imprimable,
+  body:not([data-impression]) .recu-imprimable * {
     visibility: visible;
   }
-  .recu-imprimable {
+  body:not([data-impression]) .recu-imprimable {
     position: absolute;
     inset: 0 auto auto 0;
     width: 100%;

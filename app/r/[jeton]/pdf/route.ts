@@ -1,3 +1,4 @@
+import { lireLogoPdf } from "@/server/images/logo";
 import { genererRecuPdf } from "@/lib/ventes/pdf";
 import { lireRecuPublic } from "@/server/ventes/lecture";
 
@@ -8,7 +9,9 @@ export async function GET(
 ) {
   const recu = await lireRecuPublic((await params).jeton);
   if (!recu) return new Response("Introuvable", { status: 404 });
-  const pdf = await genererRecuPdf(recu);
+  const pdf = await genererRecuPdf(recu, {
+    logo: await lireLogoPdf(recu.boutique.logoCle),
+  });
   return new Response(
     new Blob([pdf as BlobPart], { type: "application/pdf" }),
     {

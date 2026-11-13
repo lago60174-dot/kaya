@@ -1,5 +1,6 @@
 import { decisionGarde } from "@/lib/permissions";
 import { supabaseServeur } from "@/lib/supabase/server";
+import { lireLogoPdf } from "@/server/images/logo";
 import { genererRecuPdf } from "@/lib/ventes/pdf";
 import { lireSession } from "@/server/auth/session";
 import { lireRecu } from "@/server/ventes/lecture";
@@ -16,7 +17,9 @@ export async function GET(
     return new Response("Introuvable", { status: 404 });
   const recu = await lireRecu(await supabaseServeur(), id);
   if (!recu) return new Response("Introuvable", { status: 404 });
-  const pdf = await genererRecuPdf(recu);
+  const pdf = await genererRecuPdf(recu, {
+    logo: await lireLogoPdf(recu.boutique.logoCle),
+  });
   return new Response(
     new Blob([pdf as BlobPart], { type: "application/pdf" }),
     {

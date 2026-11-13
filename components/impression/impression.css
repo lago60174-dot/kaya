@@ -1,0 +1,204 @@
+/*
+ * Documents d'impression. Cachés à l'écran ; `data-impression` (posé par lib/print/navigateur.ts)
+ * choisit le ticket 58 mm ou la facture A4. Sans cet attribut (Ctrl+P), le reçu affiché sort tel quel.
+ */
+.recu-ticket,
+.recu-a4 {
+  display: none;
+  color: #000;
+  background: #fff;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  body[data-impression="ticket"] .recu-ticket,
+  body[data-impression="a4"] .recu-a4 {
+    display: block;
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+  }
+  /* Le rouleau fait 58 mm : on fixe la largeur, même si le pilote annonce un papier plus large. */
+  body[data-impression="ticket"] .recu-ticket {
+    width: 58mm;
+    box-sizing: border-box;
+    padding: 2mm 3mm 6mm;
+  }
+  body[data-impression="ticket"] .recu-ticket,
+  body[data-impression="ticket"] .recu-ticket *,
+  body[data-impression="a4"] .recu-a4,
+  body[data-impression="a4"] .recu-a4 * {
+    visibility: visible;
+  }
+}
+
+/* ---------- Ticket 58 mm (zone utile ~ 52 mm) ---------- */
+.recu-ticket {
+  font-size: 9pt;
+  line-height: 1.25;
+}
+.recu-ticket .t-centre {
+  text-align: center;
+}
+.recu-ticket .t-nom {
+  font-size: 11pt;
+  font-weight: 700;
+}
+.recu-ticket .t-logo {
+  display: block;
+  max-width: 36mm;
+  max-height: 14mm;
+  margin: 0 auto 1mm;
+  object-fit: contain;
+}
+.recu-ticket hr {
+  border: 0;
+  border-top: 1px dashed #000;
+  margin: 1.5mm 0;
+}
+.recu-ticket .t-ligne {
+  display: flex;
+  justify-content: space-between;
+  gap: 2mm;
+  break-inside: avoid;
+}
+.recu-ticket .t-ligne > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.recu-ticket .t-ligne > span:last-child {
+  flex: none;
+  white-space: nowrap;
+}
+.recu-ticket .t-detail {
+  padding-left: 2mm;
+  font-size: 8pt;
+}
+.recu-ticket .gras,
+.recu-ticket .niveau-majeur,
+.recu-ticket .niveau-fort {
+  font-weight: 700;
+}
+.recu-ticket .niveau-majeur {
+  font-size: 11pt;
+}
+.recu-ticket .t-annule {
+  margin: 1mm 0;
+  padding: 1mm;
+  border: 2px solid #000;
+  text-align: center;
+  font-size: 12pt;
+  font-weight: 700;
+}
+.recu-ticket .t-mention {
+  margin-top: 2mm;
+  font-size: 7.5pt;
+  text-align: center;
+}
+
+/* ---------- Facture A4 ---------- */
+.recu-a4 {
+  font-size: 10.5pt;
+  line-height: 1.35;
+}
+.recu-a4 .a-entete {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10mm;
+  padding-bottom: 5mm;
+  border-bottom: 2px solid #000;
+}
+.recu-a4 .a-logo {
+  max-width: 45mm;
+  max-height: 22mm;
+  object-fit: contain;
+  margin-bottom: 2mm;
+}
+.recu-a4 .a-boutique {
+  font-size: 16pt;
+  font-weight: 700;
+}
+.recu-a4 .a-titre {
+  text-align: right;
+}
+.recu-a4 .a-titre h1 {
+  margin: 0;
+  font-size: 20pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.recu-a4 .a-annule {
+  display: inline-block;
+  margin-top: 2mm;
+  padding: 1mm 4mm;
+  border: 3px solid #b91c1c;
+  color: #b91c1c;
+  font-size: 16pt;
+  font-weight: 700;
+}
+.recu-a4 .a-client {
+  margin: 6mm 0;
+}
+.recu-a4 table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.recu-a4 th {
+  padding: 2mm;
+  border-bottom: 1.5px solid #000;
+  text-align: left;
+  font-size: 9.5pt;
+  text-transform: uppercase;
+}
+.recu-a4 td {
+  padding: 2mm;
+  border-bottom: 1px solid #ccc;
+  vertical-align: top;
+}
+.recu-a4 tr {
+  break-inside: avoid;
+}
+.recu-a4 .a-droite {
+  text-align: right;
+  white-space: nowrap;
+}
+.recu-a4 .a-totaux {
+  width: 85mm;
+  margin: 5mm 0 0 auto;
+  break-inside: avoid;
+}
+.recu-a4 .a-totaux div {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  padding: 1mm 0;
+}
+.recu-a4 .niveau-majeur {
+  margin-top: 1mm;
+  border-top: 2px solid #000;
+  font-size: 14pt;
+  font-weight: 700;
+}
+.recu-a4 .niveau-fort {
+  font-weight: 700;
+}
+.recu-a4 .niveau-discret {
+  color: #444;
+}
+.recu-a4 .a-pied {
+  margin-top: 12mm;
+  padding-top: 3mm;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 9pt;
+  color: #444;
+}

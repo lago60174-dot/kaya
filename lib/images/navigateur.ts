@@ -3,6 +3,7 @@ import {
   dimensionsCibles,
   empreinteHex,
   LIMITES_IMAGE,
+  MIME_IMAGE,
   verifierFichierImage,
   type TypeImage,
 } from "./compression";
@@ -74,11 +75,44 @@ export async function envoyerImage(
   const envoi = await fetch(reponse.url, {
     method: "PUT",
     body: blob,
-    headers: { "Content-Type": "image/webp" },
+    headers: { "Content-Type": MIME_IMAGE[type] },
   });
   if (!envoi.ok)
     throw new Error(
       "L'envoi de la photo a échoué. Vérifiez votre connexion et réessayez.",
     );
   return reponse.cle;
+}
+
+/**
+ * Logo : réduit à 300 px de large et encodé en PNG (le PDF ne lit pas le WebP), en gardant la transparence.
+ * Le PNG n'a pas de réglage de qualité : on réduit la taille par paliers jusqu'à passer sous la limite.
+ */
+export async function compresserLogo(fichier: File): Promise<Blob> {
+  const verification = verifierFichierImage(fichier);
+  if (!verification.ok) throw new Error(verification.message);
+  const { largeur: maxLargeur, octets } = LIMITES_IMAGE.logo;
+  const bitmap = await createImageBitmap(fichier);
+  try {
+    for (const echelle of [1, 0.75, 0.55, 0.4, 0.28]) {
+      const { largeur, hauteur } = dimensionsCibles(
+        bitmap.width,
+        bitmap.height,
+        Math.round(maxLargeur * echelle),
+      );
+      const canvas = document.createElement("canvas");
+      canvas.width = largeur;
+      canvas.height = hauteur;
+      canvas.getContext("2d")?.drawImage(bitmap, 0, 0, largeur, hauteur);
+      const blob = await new Promise<Blob | null>((ok) =>
+        canvas.toBlob(ok, "image/png"),
+      );
+      if (blob && blob.type === "image/png" && blob.size <= octets) return blob;
+    }
+  } finally {
+    bitmap.close();
+  }
+  throw new Error(
+    "Ce logo est trop détaillé pour être allégé. Essayez une image plus simple.",
+  );
 }

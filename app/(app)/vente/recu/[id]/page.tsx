@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
+import { DocumentsImprimables } from "@/components/impression/documents";
 import { ActionsRecu } from "@/components/vente/actions-recu";
 import { AnnulerVente } from "@/components/vente/annuler-vente";
 import { Recu } from "@/components/vente/recu";
 import { peutUtiliser } from "@/lib/plans";
+import { documentDepuisVente } from "@/lib/print/document";
+import { urlImage } from "@/server/images/cles";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { lienWhatsApp, messageRecu } from "@/lib/ventes/whatsapp";
 import { exigerRole } from "@/server/auth/session";
@@ -41,6 +44,10 @@ export default async function PageRecu({
     lien: `${await origine()}/r/${recu.jetonPublic}`,
   });
 
+  const peutImprimer = Boolean(
+    profil.plan && peutUtiliser(profil.plan, "impression"),
+  );
+
   return (
     <div className="flex flex-col gap-4">
       {succes === "1" && (
@@ -52,14 +59,23 @@ export default async function PageRecu({
         </p>
       )}
       <Recu recu={recu} />
+      {peutImprimer && (
+        <DocumentsImprimables
+          doc={documentDepuisVente(recu)}
+          logoUrl={
+            recu.boutique.logoCle ? urlImage(recu.boutique.logoCle) : null
+          }
+        />
+      )}
       <ActionsRecu
         lienWhatsApp={lienWhatsApp(recu.client?.telephone, message)}
         message={message}
         pdfUrl={`/vente/recu/${recu.id}/pdf`}
         nomFichier={`Recu-${recu.numeroRecu}.pdf`}
-        peutImprimer={Boolean(
-          profil.plan && peutUtiliser(profil.plan, "impression"),
-        )}
+        numero={recu.numeroRecu}
+        escposUrl={`/vente/recu/${recu.id}/escpos`}
+        peutImprimer={peutImprimer}
+        suite={{ href: "/vente", libelle: "Nouvelle vente" }}
       />
       {profil.role === "proprietaire" && !recu.annule && (
         <AnnulerVente venteId={recu.id} numero={recu.numeroRecu} />

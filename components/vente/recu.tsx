@@ -1,4 +1,5 @@
 import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
+import { urlImage } from "@/server/images/cles";
 import { libelleMode } from "@/lib/ventes/paiements";
 import type { RecuAffichable } from "@/lib/ventes/recu";
 
@@ -10,6 +11,15 @@ export function Recu({ recu }: { recu: RecuAffichable }) {
       aria-label={`Reçu ${recu.numeroRecu}`}
     >
       <header className="flex flex-col gap-1 text-center">
+        {recu.boutique.logoCle && (
+          // Logo déjà réduit à l'envoi (PNG, 300 px) et servi avec un cache long.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={urlImage(recu.boutique.logoCle)}
+            alt=""
+            className="mx-auto max-h-16 max-w-40 object-contain"
+          />
+        )}
         <h2 className="text-lg font-bold">{recu.boutique.nom}</h2>
         {recu.boutique.adresse && (
           <p className="text-muted text-sm">{recu.boutique.adresse}</p>

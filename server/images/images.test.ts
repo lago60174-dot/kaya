@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { cleAppartient, construireCle, urlImage } from "./cles";
+import { cleAppartient, construireCle, typeDeCle, urlImage } from "./cles";
 import { DUREE_URL_SECONDES, signerEnvoi } from "./signature";
 import { verifierImageStockee, type BucketLu } from "./verification";
 
@@ -11,6 +11,20 @@ describe("clés R2", () => {
     expect(construireCle(ORG, HASH, "photo")).toBe(`${ORG}/${HASH}.webp`);
     expect(construireCle(ORG, HASH, "vignette")).toBe(`${ORG}/${HASH}-v.webp`);
     expect(urlImage(`${ORG}/${HASH}.webp`)).toBe(`/img/${ORG}/${HASH}.webp`);
+  });
+  it("range le logo en PNG et ne le confond ni avec une photo ni avec une vignette", () => {
+    const cle = construireCle(ORG, HASH, "logo");
+    expect(cle).toBe(`${ORG}/${HASH}-l.png`);
+    expect(typeDeCle(cle!)).toBe("logo");
+    expect(typeDeCle(`${ORG}/${HASH}-v.webp`)).toBe("vignette");
+    expect(typeDeCle(`${ORG}/${HASH}.webp`)).toBe("photo");
+    expect(typeDeCle(`${ORG}/${HASH}.png`)).toBeNull();
+    expect(cleAppartient(cle!, ORG, "logo")).toBe(true);
+    expect(cleAppartient(cle!, ORG, "photo")).toBe(false);
+    expect(cleAppartient(`${ORG}/${HASH}.webp`, ORG, "logo")).toBe(false);
+    expect(
+      cleAppartient(cle!, "22222222-2222-4222-8222-222222222222", "logo"),
+    ).toBe(false);
   });
   it("refuse une empreinte invalide (pas de chemin forgé)", () => {
     expect(construireCle(ORG, "../../etc/passwd", "photo")).toBeNull();
@@ -116,6 +130,26 @@ describe("verifierImageStockee", () => {
         )
       ).ok,
     ).toBe(true);
+  });
+  it("logo : accepte un vrai PNG, refuse et supprime du WebP ou un PNG de plus de 40 Ko", async () => {
+    const png = (taille = 3000) => {
+      const o = new Uint8Array(taille);
+      o.set([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+      return o;
+    };
+    expect(
+      await verifierImageStockee(bucketSimule(png()).bucket, "k", "logo"),
+    ).toEqual({ ok: true });
+    const faux = bucketSimule(webp());
+    expect((await verifierImageStockee(faux.bucket, "k", "logo")).ok).toBe(
+      false,
+    );
+    expect(faux.supprimer).toHaveBeenCalled();
+    const lourd = bucketSimule(png(41 * 1024));
+    expect((await verifierImageStockee(lourd.bucket, "k", "logo")).ok).toBe(
+      false,
+    );
+    expect(lourd.supprimer).toHaveBeenCalled();
   });
   it("signale un fichier jamais reçu", async () => {
     const { bucket } = bucketSimule(null);

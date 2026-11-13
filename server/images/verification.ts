@@ -1,5 +1,7 @@
 import { LIMITES_IMAGE, type TypeImage } from "@/lib/images/compression";
 
+const SIGNATURE_PNG = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
+
 /** Ce dont on a besoin du binding R2 (simulable dans les tests). */
 export interface BucketLu {
   head(cle: string): Promise<{ size: number } | null>;
@@ -13,7 +15,7 @@ export interface BucketLu {
 export type ResultatVerification =
   { ok: true } | { ok: false; message: string };
 
-/** Contrôle après envoi : le fichier existe, n'est pas trop lourd et est réellement du WebP. Sinon il est supprimé. */
+/** Contrôle après envoi : le fichier existe, n'est pas trop lourd et est réellement du WebP (ou du PNG pour un logo). Sinon il est supprimé. */
 export async function verifierImageStockee(
   bucket: BucketLu,
   cle: string,
@@ -32,7 +34,10 @@ export async function verifierImageStockee(
     const texte = (de: number, a: number) =>
       String.fromCharCode(...o.slice(de, a));
     valide =
-      o.length === 12 && texte(0, 4) === "RIFF" && texte(8, 12) === "WEBP";
+      o.length === 12 &&
+      (type === "logo"
+        ? SIGNATURE_PNG.every((b, i) => o[i] === b)
+        : texte(0, 4) === "RIFF" && texte(8, 12) === "WEBP");
   }
   if (!valide) {
     await bucket.delete(cle);

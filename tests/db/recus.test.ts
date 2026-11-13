@@ -239,6 +239,50 @@ describe("annulation et historique", () => {
   });
 });
 
+describe("logo de la boutique", () => {
+  const LOGO = () => `${f.orgA}/${"b".repeat(64)}-l.png`;
+  it("le propriétaire l'enregistre, il apparaît dans le reçu public", async () => {
+    await lignes(
+      db,
+      U.patronA,
+      "update boutiques set logo_cle = $1 where id = $2",
+      [LOGO(), f.boutiqueA],
+    );
+    const r = (await publique(ventes[2].jeton))!;
+    expect((r.boutique as { logo_cle: string }).logo_cle).toBe(LOGO());
+  });
+  it("le vendeur ne peut pas le changer", async () => {
+    await lignes(
+      db,
+      U.vendeurA,
+      "update boutiques set logo_cle = null where id = $1",
+      [f.boutiqueA],
+    );
+    const [{ logo_cle }] = await lignes<{ logo_cle: string | null }>(
+      db,
+      U.patronA,
+      "select logo_cle from boutiques where id = $1",
+      [f.boutiqueA],
+    );
+    expect(logo_cle).toBe(LOGO());
+  });
+  it("refuse une clé qui n'a pas la forme d'un logo (pas de chemin forgé)", async () => {
+    for (const mauvaise of [
+      "../../secret.png",
+      `${f.orgA}/${"b".repeat(64)}.webp`,
+      "x",
+    ])
+      await expect(
+        lignes(
+          db,
+          U.patronA,
+          "update boutiques set logo_cle = $1 where id = $2",
+          [mauvaise, f.boutiqueA],
+        ),
+      ).rejects.toThrow();
+  });
+});
+
 describe("recu_public", () => {
   it("donne le reçu à n'importe qui avec le bon jeton, sans connexion", async () => {
     const r = (await publique(ventes[2].jeton))!;
@@ -283,7 +327,14 @@ describe("recu_public", () => {
     ]);
   });
   it("ne contient ni marge, ni prix d'achat, ni téléphone, ni identifiants internes", async () => {
-    const texte = JSON.stringify(await publique(ventes[2].jeton));
+    // La clé du logo (dossier = organisation) est le seul identifiant exposé : indispensable pour afficher le logo,
+    // et un identifiant d'organisation ne donne aucun accès (RLS). On l'écarte pour contrôler tout le reste.
+    const brut = (await publique(ventes[2].jeton))!;
+    const boutique = brut.boutique as Record<string, unknown>;
+    const texte = JSON.stringify({
+      ...brut,
+      boutique: { ...boutique, logo_cle: null },
+    });
     expect(texte).not.toMatch(
       /cout|marge|prix_achat|699111111|organisation_id|vendeur_id|jeton|client_id/,
     );

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { BoutonsImpression } from "@/components/impression/boutons-impression";
 
 const bouton =
   "flex min-h-11 items-center justify-center rounded-lg border border-border px-4 text-base font-semibold";
@@ -13,20 +14,31 @@ interface Props {
   message: string;
   pdfUrl: string;
   nomFichier: string;
+  /** Numéro affiché dans les messages d'impression. */
+  numero: string;
+  /** Route du ticket ESC/POS. L'impression n'est proposée que si le plan l'autorise. */
+  escposUrl: string;
   peutImprimer: boolean;
+  /** Dernier bouton : « Nouvelle vente » ou « Retour au client ». */
+  suite: { href: string; libelle: string };
 }
 
 /**
  * Partage : sur Android, le PDF est envoyé comme fichier via le menu de partage (WhatsApp du vendeur) ;
  * sinon, un lien wa.me avec le résumé et le lien du reçu. Le PDF est préchargé pour que le geste reste immédiat.
+ * Impression (plans Pro et Business) : ticket 58 mm, facture A4, repli PDF (lib/print).
  * Rien ici ne bloque la vente : elle est déjà enregistrée.
+ * Sert aux reçus de vente et aux reçus de paiement de crédit.
  */
 export function ActionsRecu({
   lienWhatsApp,
   message,
   pdfUrl,
   nomFichier,
+  numero,
+  escposUrl,
   peutImprimer,
+  suite,
 }: Props) {
   const fichier = useRef<File | null>(null);
 
@@ -80,12 +92,17 @@ export function ActionsRecu({
         Ouvrir le PDF
       </a>
       {peutImprimer && (
-        <button type="button" onClick={() => window.print()} className={bouton}>
-          Imprimer
-        </button>
+        <BoutonsImpression
+          numero={numero}
+          escposUrl={escposUrl}
+          pdfUrl={pdfUrl}
+        />
       )}
-      <Link href="/vente" className={`${bouton} bg-brand-strong text-white`}>
-        Nouvelle vente
+      <Link
+        href={suite.href}
+        className={`${bouton} bg-brand-strong text-white`}
+      >
+        {suite.libelle}
       </Link>
     </div>
   );

@@ -40,6 +40,15 @@ describe("recuPublicDepuisJson", () => {
     expect(r.lignes[0]).toMatchObject({ quantite: 3, prixUnitaire: 1200 });
     expect(r.client).toEqual({ nom: "Jean Mbarga", telephone: null });
   });
+  it("reprend la clé du logo, absente pour une boutique sans logo", () => {
+    expect(recuPublicDepuisJson(json).boutique.logoCle).toBeNull();
+    const cle = `${"1".repeat(8)}-1111-4111-8111-${"1".repeat(12)}/${"a".repeat(64)}-l.png`;
+    const r = recuPublicDepuisJson({
+      ...json,
+      boutique: { ...json.boutique, logo_cle: cle },
+    });
+    expect(r.boutique.logoCle).toBe(cle);
+  });
   it("ne reporte aucun numéro de téléphone du client", () => {
     expect(JSON.stringify(recuPublicDepuisJson(json))).not.toMatch(/\d{9}/);
   });

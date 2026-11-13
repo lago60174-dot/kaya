@@ -46,6 +46,10 @@ Navigateur : panier et aperçu (`lib/ventes`) → `validerVenteAction` (rôle, v
 
 Historique : `lister_recus` (curseur, filtres, RLS). Détail : `lireRecu` (vente, lignes, paiements, créance, avoir). Public : `recu_public(jeton)` → `/r/[jeton]` et `/r/[jeton]/pdf`. PDF : `lib/ventes/pdf.ts`. Annulation : `annuler_vente` (avoir, stock, créance). Partage : Web Share API (PDF) ou `wa.me`.
 
+## Impression (section 10)
+
+`DocumentRecu` (vente ou paiement) → quatre rendus : PDF (`lib/ventes/pdf.ts`), ticket ESC/POS 32 colonnes (`lib/print/ticket.ts` + `escpos.ts`, servi par les routes `/escpos` gardées par le plan), ticket 58 mm et facture A4 du navigateur (`components/impression`). L'écran appelle uniquement `imprimerRecu` : RawBT (Android) → `window.print()` → PDF.
+
 ## Clients et crédits
 
 Un crédit crée une `creance` (par vente). `rembourser_client` : verrouille les créances du client, répartit le paiement sur les plus anciennes (une ligne `paiements` par vente, un seul `numero_recu`, une clé d'idempotence), met à jour les soldes, journalise. `lister_dettes` (qui me doit), `lister_clients` (curseur), fiche via la RLS. Rappels et reçus de paiement partagés par le WhatsApp du vendeur.
