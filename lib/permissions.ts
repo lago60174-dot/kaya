@@ -36,7 +36,10 @@ export function zonePourChemin(chemin: string): Zone {
   if (startsWithSegment(chemin, "/mot-de-passe")) return "connecte";
   if (startsWithSegment(chemin, "/admin")) return "admin";
   if (startsWithSegment(chemin, "/affilie")) return "affilie";
-  if (/^\/stock\/(nouveau|[^/]+\/modifier)$/.test(chemin))
+  if (
+    /^\/stock\/(nouveau|[^/]+\/modifier)$/.test(chemin) ||
+    /^\/clients\/[^/]+\/modifier$/.test(chemin)
+  )
     return "proprietaire";
   if (PROPRIETAIRE_PREFIXES.some((p) => startsWithSegment(chemin, p)))
     return "proprietaire";

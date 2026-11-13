@@ -93,3 +93,20 @@
   - **Test réel du partage** : le partage de fichier est une API du navigateur : la logique est écrite mais seul un vrai téléphone Android la prouve (étape 12).
   - **PDF sur Workers** : le build Cloudflare passe, mais le PDF n'a pas été exécuté dans `workerd` ici : à vérifier avec `npm run preview` avant le déploiement.
   - **Cache persistant** : le cache de la page publique est en mémoire par instance. Un cache partagé (R2) est prévu à l'étape 21.
+
+## Étape 7 : clients et crédits
+
+- **Un paiement, plusieurs dettes** : un client qui doit plusieurs ventes paie en une fois. `rembourser_client` répartit le paiement sur ses dettes **les plus anciennes d'abord** (départage par identifiant à date égale), avec **un seul reçu de paiement** (`P-année-n`) partagé par toutes les lignes. Le vendeur voit un aperçu avant de valider (« R-… : soldé », « il restera… »). L'aperçu TypeScript est **comparé à la base** par un test sur un cas réel : même répartition.
+- **Jamais deux fois** : chaque paiement porte une clé d'idempotence (index unique par vente soldée). Côté écran, la clé suit le contenu (montant + mode) : un double clic ou un nouvel essai après coupure réutilise la même clé, mais changer le montant en génère une nouvelle, pour qu'un paiement déjà enregistré ne remplace pas en silence le nouveau.
+- **Verrou avant calcul** : les dettes du client sont verrouillées avant de calculer ce qu'il doit, pour que deux paiements simultanés se suivent au lieu de se chevaucher. Tout est dans une transaction : un échec n'écrit rien, pas même le numéro de reçu (testé).
+- **Garde-fous** : montant > 0 et ≤ dette, client sans dette refusé, mode contrôlé, compte suspendu en lecture seule, client d'une autre organisation refusé. Les espèces entrent dans la caisse du jour, pas le Mobile Money (testé). Chaque paiement est journalisé.
+- **« Qui me doit de l'argent »** (`lister_dettes`) : un client par ligne, total des dettes et nombre de clients, tri par montant ou par ancienneté de la plus vieille dette, pagination. Au-delà de 30 jours, la dette est mise en évidence.
+- **Rappel WhatsApp** : message courtois, précis (montant, reçus concernés), qui propose des solutions (passer ou payer en Mobile Money). Un test garantit l'absence de ton menaçant (« retard », « impayé », « urgent »…). Il s'ouvre depuis le téléphone du vendeur : **aucun envoi automatique**, aucun appel à Zernio.
+- **Clients** : tout membre peut créer un client ; seul le propriétaire modifie, fixe un plafond de crédit (vide = plafond de la boutique) ou archive (la base le refuse aussi au vendeur). **Un client qui doit de l'argent ne peut pas être archivé** (déclencheur SQL). Recherche sans accents par nom ou téléphone, pagination par curseur.
+- **Reçu de paiement** : à l'écran, par WhatsApp (texte) et imprimable si le plan l'autorise. **Pas de PDF** pour ce reçu pour l'instant (celui des ventes existe) : à ajouter si un client le demande.
+- **Fiche client** : dette, plafond et crédit encore disponible, dettes en cours, derniers paiements (regroupés par reçu), 20 derniers achats (les annulés restent visibles).
+- **Limites connues** :
+  - **Paiement d'une vente précise** : l'écran paie toujours dans l'ordre d'ancienneté. La fonction `enregistrer_remboursement` (une vente à la fois) existe en base mais n'a pas d'écran.
+  - **Suivi des rappels** : l'application n'enregistre pas qui a été relancé et quand. À envisager avec les retours des premiers patrons.
+  - **Trop-perçu** : un paiement supérieur à la dette est refusé (pas d'avance ni d'avoir client).
+- **Piège évité** : PostgreSQL n'a pas de `min()` sur les identifiants uuid (erreur trouvée par les tests) ; et un test donnait des dettes à la même date, ce qui rendait l'ordre « plus ancienne d'abord » indéfini : les tests utilisent maintenant des dates distinctes.

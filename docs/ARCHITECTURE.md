@@ -46,6 +46,10 @@ Navigateur : panier et aperçu (`lib/ventes`) → `validerVenteAction` (rôle, v
 
 Historique : `lister_recus` (curseur, filtres, RLS). Détail : `lireRecu` (vente, lignes, paiements, créance, avoir). Public : `recu_public(jeton)` → `/r/[jeton]` et `/r/[jeton]/pdf`. PDF : `lib/ventes/pdf.ts`. Annulation : `annuler_vente` (avoir, stock, créance). Partage : Web Share API (PDF) ou `wa.me`.
 
+## Clients et crédits
+
+Un crédit crée une `creance` (par vente). `rembourser_client` : verrouille les créances du client, répartit le paiement sur les plus anciennes (une ligne `paiements` par vente, un seul `numero_recu`, une clé d'idempotence), met à jour les soldes, journalise. `lister_dettes` (qui me doit), `lister_clients` (curseur), fiche via la RLS. Rappels et reçus de paiement partagés par le WhatsApp du vendeur.
+
 ## Sécurité
 
 RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au rôle `authenticated` seulement quand voulu. Voir `tests/db/rls.test.ts`.
