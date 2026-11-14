@@ -69,16 +69,16 @@ export function Faq({
   lienWhatsApp: string | null;
 }) {
   return (
-    <section className="bg-white py-16 lg:py-24">
+    <section id="faq" className="bg-white py-12 lg:py-16">
       <div
         className={`${conteneur} grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]`}
       >
-        <h2 className="font-affiche max-w-[12ch] text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[0.92]">
+        <h2 className="text-3xl font-bold text-[var(--nuit)] sm:text-4xl">
           Vos questions.
         </h2>
         <div className="faq">
           {questions(plans, lienWhatsApp).map((q) => (
-            <details key={q.question} className="border-goudron border-t-2">
+            <details key={q.question} className="mb-3 rounded-2xl bg-[#fdeee3] px-5">
               <summary className="flex min-h-14 items-center justify-between gap-4 py-3 text-xl font-bold">
                 {q.question}
               </summary>

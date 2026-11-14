@@ -2,6 +2,8 @@
 
 .vitrine {
   --brand: #f25e25; /* orange du logo, propre à la vitrine */
+  --kaya: #f26a0f;
+  --nuit: #1c2236;
   font-family:
     var(--police-texte), system-ui, "Segoe UI", Roboto, Arial, sans-serif;
   font-size: 1.125rem;

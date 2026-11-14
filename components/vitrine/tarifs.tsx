@@ -15,9 +15,9 @@ export function Tarifs({
   lienWhatsApp: string | null;
 }) {
   return (
-    <section id="tarifs" className="bg-beton py-16 lg:py-24">
+    <section id="tarifs" className="bg-[#fffaf6] py-12 lg:py-16">
       <div className={conteneur}>
-        <h2 className="font-affiche max-w-[16ch] text-[clamp(2.75rem,6.5vw,4.75rem)] leading-[0.92]">
+        <h2 className="text-center text-3xl font-bold text-[var(--nuit)] sm:text-4xl">
           Un prix clair, payé par Mobile Money.
         </h2>
         {plans.length === 0 ? (
@@ -40,19 +40,19 @@ export function Tarifs({
         ) : (
           <div
             className={`mt-10 grid gap-8 ${
-              plans.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "max-w-lg"
+              plans.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "mx-auto max-w-lg"
             }`}
           >
             {plans.map((plan) => (
               <article
                 key={plan.code}
-                className="border-goudron flex flex-col gap-5 border-[3px] bg-white p-6 shadow-[0.5rem_0.5rem_0_var(--goudron)] sm:p-8"
+                className="flex flex-col gap-5 rounded-2xl border border-[#f3dcc3] bg-white p-6 shadow-[0_12px_34px_rgba(42,34,25,0.08)] sm:p-8"
               >
-                <h3 className="font-affiche text-4xl leading-none">
+                <h3 className="text-2xl font-bold">
                   {plan.nom}
                 </h3>
                 <p>
-                  <span className="font-affiche text-7xl leading-none">
+                  <span className="text-5xl font-bold text-[var(--kaya)]">
                     {formatFcfa(plan.prixMensuel)}
                   </span>{" "}
                   <span className="text-lg font-bold">par mois</span>
@@ -61,7 +61,7 @@ export function Tarifs({
                   Paiement par MTN Mobile Money ou Orange Money. Pas de
                   prélèvement automatique, pas d&apos;engagement.
                 </p>
-                <ul className="border-goudron/30 flex flex-col gap-2 border-t-2 pt-4">
+                <ul className="flex flex-col gap-2 border-t border-[#f3dcc3] pt-4">
                   <li>Stock, ventes, crédits clients et caisse</li>
                   <li>Reçus numérotés à partager sur WhatsApp</li>
                   <li>Suivi en direct depuis votre téléphone</li>

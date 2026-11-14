@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { AppelFinal } from "@/components/vitrine/appel-final";
 import { Faq } from "@/components/vitrine/faq";
-import { Hero } from "@/components/vitrine/hero";
 import {
-  AvantApres,
-  Etapes,
-  Fonctions,
-  Probleme,
-} from "@/components/vitrine/sections-contenu";
+  AppelFinal,
+  Application,
+  Hero,
+  Pourquoi,
+  Temoignages,
+} from "@/components/vitrine/accueil";
 import { Tarifs } from "@/components/vitrine/tarifs";
 import { donneesStructurees, jsonPourScript } from "@/lib/vitrine/offre";
 import { lienContact } from "@/lib/vitrine/site";
@@ -61,14 +60,13 @@ export default async function Accueil() {
           __html: jsonPourScript(donneesStructurees(plans, DESCRIPTION)),
         }}
       />
-      <Hero plan={plans[0]} lienWhatsApp={lienWhatsApp} />
-      <Probleme />
-      <AvantApres />
-      <Etapes />
-      <Fonctions />
+      <Hero plan={plans[0]} />
+      <Pourquoi />
+      <Application />
+      <Temoignages />
       <Tarifs plans={plans} lienWhatsApp={lienWhatsApp} />
       <Faq plans={plans} lienWhatsApp={lienWhatsApp} />
-      <AppelFinal lienWhatsApp={lienWhatsApp} />
+      <AppelFinal />
     </main>
   );
 }
