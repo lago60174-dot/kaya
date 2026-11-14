@@ -4,9 +4,56 @@ import {
   empreinteHex,
   LIMITES_IMAGE,
   MIME_IMAGE,
+  TAILLE_MAX_ORIGINE,
   verifierFichierImage,
   type TypeImage,
 } from "./compression";
+
+const MESSAGE_ILLISIBLE =
+  "Cette photo n'a pas pu être lue. Essayez une autre photo (JPEG ou PNG).";
+
+/** Les marques de fichiers HEIC/HEIF (photos de téléphone) : octets 4 à 12 = « ftyp » + marque. */
+async function estHeic(fichier: File): Promise<boolean> {
+  if (/\.(heic|heif)$/i.test(fichier.name) || /hei[cf]/i.test(fichier.type))
+    return true;
+  const tete = new Uint8Array(await fichier.slice(0, 12).arrayBuffer());
+  const texte = String.fromCharCode(...tete.slice(4, 12));
+  return /^ftyp(heic|heix|hevc|hevx|heim|heis|mif1|msf1)$/.test(texte);
+}
+
+/**
+ * Rend une photo lisible par le navigateur. Les photos HEIC (téléphones Android et iPhone) ne s'ouvrent pas partout :
+ * on les convertit en JPEG une seule fois, avant la compression. Le convertisseur ne se charge que dans ce cas.
+ */
+export async function rendreLisible(fichier: File): Promise<File> {
+  if (fichier.size > TAILLE_MAX_ORIGINE)
+    throw new Error("Cette photo est trop lourde (25 Mo maximum).");
+  try {
+    (await createImageBitmap(fichier)).close();
+    return fichier;
+  } catch {
+    if (!(await estHeic(fichier))) throw new Error(MESSAGE_ILLISIBLE);
+  }
+  try {
+    const { heicTo } = await import("heic-to/next");
+    const jpeg = await heicTo({ blob: fichier, type: "image/jpeg", quality: 0.9 });
+    return new File([jpeg], fichier.name.replace(/\.(heic|heif)$/i, "") + ".jpg", {
+      type: "image/jpeg",
+    });
+  } catch {
+    throw new Error(
+      "Cette photo HEIC n'a pas pu être convertie. Envoyez une autre photo, ou réglez l'appareil photo sur le format le plus compatible (JPEG).",
+    );
+  }
+}
+
+async function ouvrirImage(fichier: File): Promise<ImageBitmap> {
+  try {
+    return await createImageBitmap(fichier);
+  } catch {
+    throw new Error(MESSAGE_ILLISIBLE);
+  }
+}
 
 /** Redimensionne puis encode en WebP dans le navigateur, en réduisant jusqu'à passer sous la limite d'octets. */
 export async function compresserImage(
@@ -16,7 +63,7 @@ export async function compresserImage(
   const verification = verifierFichierImage(fichier);
   if (!verification.ok) throw new Error(verification.message);
   const { largeur: maxLargeur, octets } = LIMITES_IMAGE[type];
-  const bitmap = await createImageBitmap(fichier);
+  const bitmap = await ouvrirImage(fichier);
   try {
     for (const echelle of [1, 0.8, 0.6, 0.45]) {
       const { largeur, hauteur } = dimensionsCibles(
@@ -100,7 +147,7 @@ export async function compresserLogo(fichier: File): Promise<Blob> {
   const verification = verifierFichierImage(fichier);
   if (!verification.ok) throw new Error(verification.message);
   const { largeur: maxLargeur, octets } = LIMITES_IMAGE.logo;
-  const bitmap = await createImageBitmap(fichier);
+  const bitmap = await ouvrirImage(fichier);
   try {
     for (const echelle of [1, 0.75, 0.55, 0.4, 0.28]) {
       const { largeur, hauteur } = dimensionsCibles(

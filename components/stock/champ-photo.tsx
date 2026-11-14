@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { compresserImage, envoyerImage } from "@/lib/images/navigateur";
+import {
+  compresserImage,
+  envoyerImage,
+  rendreLisible,
+} from "@/lib/images/navigateur";
 import { demanderUrlEnvoiAction } from "@/server/stock/actions";
 
 interface Props {
@@ -21,9 +25,10 @@ export function ChampPhoto({ imageCle, vignetteCle }: Props) {
     setErreur(null);
     setEtat("envoi");
     try {
+      const source = await rendreLisible(fichier);
       const [photo, mini] = await Promise.all([
-        compresserImage(fichier, "photo"),
-        compresserImage(fichier, "vignette"),
+        compresserImage(source, "photo"),
+        compresserImage(source, "vignette"),
       ]);
       const [cleImage, cleVignette] = await Promise.all([
         envoyerImage(photo, "photo", demanderUrlEnvoiAction),
