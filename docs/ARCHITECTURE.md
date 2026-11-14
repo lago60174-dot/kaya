@@ -24,6 +24,9 @@ Caisse : depenses, clotures_caisse. Numérotation : compteurs_recus. Traçabilit
 | `annuler_vente`                                           | proprio               | avoir + retour en stock + créance annulée, motif obligatoire                                                   |
 | `enregistrer_remboursement`                               | proprio, vendeur      | paiement partiel ou total d'un crédit, reçu `P-année-n`                                                        |
 | `enregistrer_mouvement_stock`                             | proprio               | entrée, perte, inventaire, correction (unités de vente converties)                                             |
+| `tableau_de_bord`                                         | proprio               | tout l'écran d'accueil en un appel (ventes, caisse, dettes, stock bas, vendeurs, top produits)                 |
+| `lister_journal`                                          | proprio (RLS du plan) | journal paginé par curseur, filtres typés                                                                      |
+| `enregistrer_depense`                                     | proprio, vendeur      | dépense idempotente (salaire : proprio seul), journal                                                          |
 | `calculer_caisse` / `cloturer_caisse` / `valider_cloture` | tous / tous / proprio | espèces attendues, écart, alerte, validation                                                                   |
 
 ## Plans, abonnements, affiliation
@@ -53,3 +56,11 @@ Un crédit crée une `creance` (par vente). `rembourser_client` : verrouille les
 ## Sécurité
 
 RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au rôle `authenticated` seulement quand voulu. Voir `tests/db/rls.test.ts`.
+
+## Caisse et dépenses
+
+`/caisse?date=AAAA-MM-JJ` (jour de Douala, jamais futur) : `calculer_caisse` (résumé) + `depenses` du jour + `clotures_caisse`. Saisie : `enregistrer_depense` (clé d'idempotence). Clôture : `cloturer_caisse` (la base recalcule l'attendu, l'écart et l'alerte) puis `valider_cloture` par le propriétaire. Logique pure : `lib/caisse`.
+
+## Tableau de bord et journal
+
+`/patron` : `tableau_de_bord` + alertes récentes (`lister_journal`). `MiseAJourDirecte` (client) s'abonne à Realtime et appelle `router.refresh()` (regroupé, 800 ms) ; repli toutes les 30 s ; coupé quand l'onglet est caché. `/journal` : `lister_journal` (curseur validé), libellés dans `lib/journal`.

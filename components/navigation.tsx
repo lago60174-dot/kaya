@@ -15,8 +15,16 @@ export function Navigation({
       aria-label="Menu principal"
       className="border-border bg-background fixed inset-x-0 bottom-0 z-10 flex items-center gap-1 overflow-x-auto border-t px-2 md:static md:w-56 md:flex-col md:items-stretch md:gap-2 md:overflow-visible md:border-t-0 md:border-r md:px-4 md:py-6"
     >
-      <span className="text-brand-strong hidden text-2xl font-bold md:block">
-        Kaya
+      <span className="hidden items-center gap-2 md:flex">
+        {/* eslint-disable-next-line @next/next/no-img-element -- petit logo local déjà optimisé (WebP 96 px) */}
+        <img
+          src="/logo-kaya-96.webp"
+          alt=""
+          width={40}
+          height={40}
+          className="rounded-lg"
+        />
+        <span className="text-brand-strong text-2xl font-bold">Kaya</span>
       </span>
       {nom && <span className="text-muted hidden text-sm md:block">{nom}</span>}
       {menu.map((m) => (

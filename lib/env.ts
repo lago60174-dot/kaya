@@ -24,7 +24,13 @@ export function envPublic() {
 
 /** Variables serveur uniquement. Ne jamais importer depuis un composant client. */
 export function envServeur() {
-  return schemaServeur.parse(process.env);
+  // Accès littéraux : Next les remplace au build. Sur Cloudflare, les variables de build
+  // ne sont pas dans process.env au runtime, contrairement aux secrets du Worker.
+  return schemaServeur.parse({
+    ...process.env,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  });
 }
 
 /** Accès R2 (envoi par URL signée). Null tant que les secrets ne sont pas configurés. */

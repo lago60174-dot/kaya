@@ -1,17 +1,291 @@
+import Link from "next/link";
+import { MiseAJourDirecte } from "@/components/patron/mise-a-jour-directe";
+import { jourDouala } from "@/lib/caisse/caisse";
+import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
+import { decrire, libelleAction, lienEntite } from "@/lib/journal/journal";
+import { peutUtiliser } from "@/lib/plans";
+import { variationVsHier } from "@/lib/patron/direct";
+import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
+import {
+  lireAlertesRecentes,
+  lireTableauDeBord,
+  listerBoutiques,
+} from "@/server/patron/lecture";
 
 export const metadata = { title: "Tableau de bord · Kaya" };
 
-export default async function PagePatron() {
+const carte = "border-border flex flex-col gap-1 rounded-lg border p-3";
+
+export default async function PagePatron({
+  searchParams,
+}: {
+  searchParams: Promise<{ boutique?: string }>;
+}) {
   const profil = await exigerRole("proprietaire");
-  return (
-    <>
-      <h1 className="text-2xl font-bold">
-        Bonjour{profil.nom ? ` ${profil.nom}` : ""}
-      </h1>
-      <p className="text-muted mt-2">
-        Votre tableau de bord sera bientôt disponible.
+  const supabase = await supabaseServeur();
+  const boutiques = await listerBoutiques(supabase);
+  // Le sélecteur n'existe que pour un plan qui permet plusieurs boutiques (Business) et seulement s'il y en a plusieurs.
+  const multi =
+    profil.plan !== null &&
+    peutUtiliser(profil.plan, "multi_boutiques") &&
+    boutiques.length > 1;
+  const demandee = (await searchParams).boutique;
+  const boutique =
+    (multi ? boutiques.find((b) => b.id === demandee) : undefined) ??
+    boutiques.find((b) => b.id === profil.boutiqueIds[0]) ??
+    boutiques[0];
+  if (!boutique)
+    return <p>Aucune boutique n&apos;est associée à votre compte.</p>;
+
+  const complet = profil.plan
+    ? peutUtiliser(profil.plan, "journal_complet")
+    : false;
+  const [t, alertes] = await Promise.all([
+    lireTableauDeBord(supabase, boutique.id),
+    lireAlertesRecentes(supabase, boutique.id, complet),
+  ]);
+  if (!t)
+    return (
+      <p role="alert" className="text-danger">
+        Impossible de charger le tableau de bord. Vérifiez votre connexion et
+        rechargez la page.
       </p>
-    </>
+    );
+
+  const variation = variationVsHier(t.ventesTotal, t.ventesHier);
+  const maxVendu = Math.max(1, ...t.produitsVendus.map((p) => p.montant));
+
+  return (
+    <div className="flex max-w-3xl flex-col gap-6">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-2xl font-bold">
+          Bonjour{profil.nom ? ` ${profil.nom}` : ""}
+        </h1>
+        <p className="text-muted">{boutique.nom}</p>
+        {multi && (
+          <form method="get" className="flex items-center gap-2">
+            <label htmlFor="boutique" className="text-sm font-medium">
+              Boutique
+            </label>
+            <select
+              id="boutique"
+              name="boutique"
+              defaultValue={boutique.id}
+              className="border-border min-h-11 rounded-lg border bg-white px-3"
+            >
+              {boutiques.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.nom}
+                </option>
+              ))}
+            </select>
+            <button
+              type="submit"
+              className="border-border min-h-11 rounded-lg border px-4 text-sm font-medium"
+            >
+              Afficher
+            </button>
+          </form>
+        )}
+        <MiseAJourDirecte boutiqueId={boutique.id} />
+      </header>
+
+      {t.cloturesAValider > 0 && (
+        <Link
+          href="/caisse"
+          className="bg-brand-soft min-h-11 rounded-lg p-3 text-sm font-semibold"
+        >
+          {t.cloturesAValider} caisse{t.cloturesAValider > 1 ? "s" : ""} à
+          valider →
+        </Link>
+      )}
+
+      <section
+        aria-label="Chiffres du jour"
+        className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+      >
+        <div className={carte}>
+          <p className="text-muted text-sm">
+            Ventes du jour ({t.nbVentes} vente{t.nbVentes > 1 ? "s" : ""})
+          </p>
+          <p className="text-3xl font-bold">{formatFcfa(t.ventesTotal)}</p>
+          <p className="text-muted text-sm">
+            Hier : {formatFcfa(t.ventesHier)}
+            {variation !== null &&
+              ` (${variation > 0 ? "+" : ""}${variation} %)`}
+          </p>
+        </div>
+        <Link href="/caisse" className={carte}>
+          <p className="text-muted text-sm">Espèces attendues en caisse</p>
+          <p className="text-3xl font-bold">{formatFcfa(t.especesAttendues)}</p>
+          <p className="text-muted text-sm">
+            MTN {formatFcfa(t.mtnMomo)} · Orange {formatFcfa(t.orangeMoney)}
+          </p>
+        </Link>
+        <Link href="/clients/dettes" className={carte}>
+          <p className="text-muted text-sm">Ce que les clients vous doivent</p>
+          <p className="text-3xl font-bold">{formatFcfa(t.dettes.total)}</p>
+          <p className="text-muted text-sm">
+            {t.dettes.nbClients} client{t.dettes.nbClients > 1 ? "s" : ""}
+          </p>
+        </Link>
+        <Link href="/stock?bas=1" className={carte}>
+          <p className="text-muted text-sm">Produits en stock bas</p>
+          <p
+            className={`text-3xl font-bold ${t.stockBas.nombre > 0 ? "text-danger" : ""}`}
+          >
+            {t.stockBas.nombre}
+          </p>
+          <p className="text-muted text-sm">
+            Dépenses du jour : {formatFcfa(t.depensesTotal)}
+          </p>
+        </Link>
+      </section>
+
+      <section aria-label="Ventes par vendeur" className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold">Ventes par vendeur</h2>
+        {t.vendeurs.length === 0 ? (
+          <p className="text-muted">
+            Aucune vente pour le moment aujourd&apos;hui.
+          </p>
+        ) : (
+          <ul className="flex flex-col gap-2">
+            {t.vendeurs.map((v) => (
+              <li
+                key={v.vendeurId}
+                className="border-border flex items-baseline justify-between gap-3 rounded-lg border p-3 text-sm"
+              >
+                <span className="font-medium">
+                  {v.nom}{" "}
+                  <span className="text-muted font-normal">
+                    ({v.nbVentes} vente{v.nbVentes > 1 ? "s" : ""})
+                  </span>
+                </span>
+                <span className="font-semibold whitespace-nowrap">
+                  {formatFcfa(v.total)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section
+        aria-label="Produits les plus vendus"
+        className="flex flex-col gap-2"
+      >
+        <h2 className="text-lg font-semibold">
+          Produits les plus vendus (7 jours)
+        </h2>
+        {t.produitsVendus.length === 0 ? (
+          <p className="text-muted">Pas encore de vente cette semaine.</p>
+        ) : (
+          <ol className="flex flex-col gap-2">
+            {t.produitsVendus.map((p) => (
+              <li key={p.produitId} className="flex flex-col gap-1 text-sm">
+                <span className="flex items-baseline justify-between gap-3">
+                  <span className="font-medium">{p.nom}</span>
+                  <span className="whitespace-nowrap">
+                    {formatQuantite(p.quantiteBase)} {p.uniteBase} ·{" "}
+                    {formatFcfa(p.montant)}
+                  </span>
+                </span>
+                <span
+                  aria-hidden
+                  className="bg-brand-soft block h-2 rounded-full"
+                >
+                  <span
+                    className="bg-brand-strong block h-2 rounded-full"
+                    style={{
+                      width: `${Math.round((p.montant / maxVendu) * 100)}%`,
+                    }}
+                  />
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+
+      {t.stockBas.nombre > 0 && (
+        <section aria-label="Stock bas" className="flex flex-col gap-2">
+          <h2 className="text-lg font-semibold">À réapprovisionner</h2>
+          <ul className="flex flex-col gap-2">
+            {t.stockBas.produits.map((p) => (
+              <li key={p.produitId}>
+                <Link
+                  href={`/stock/${p.produitId}`}
+                  className="border-border flex min-h-11 items-baseline justify-between gap-3 rounded-lg border p-3 text-sm"
+                >
+                  <span className="font-medium">{p.nom}</span>
+                  <span className="text-danger font-semibold whitespace-nowrap">
+                    {formatQuantite(p.stock)} {p.uniteBase} (seuil{" "}
+                    {formatQuantite(p.seuil)})
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {t.stockBas.nombre > t.stockBas.produits.length && (
+            <Link
+              href="/stock?bas=1"
+              className="text-sm font-semibold underline"
+            >
+              Voir les {t.stockBas.nombre} produits
+            </Link>
+          )}
+        </section>
+      )}
+
+      <section aria-label="Alertes récentes" className="flex flex-col gap-2">
+        <h2 className="text-lg font-semibold">Alertes récentes</h2>
+        {alertes.length === 0 ? (
+          <p className="text-muted">Aucune alerte. Tout est calme.</p>
+        ) : (
+          <ul className="flex flex-col gap-2">
+            {alertes.map((a) => {
+              const lien = lienEntite(a.entite, a.entiteId, a.details);
+              const contenu = (
+                <>
+                  <span className="font-medium">{libelleAction(a.action)}</span>
+                  <br />
+                  {decrire(a.action, a.details)}
+                  <br />
+                  <span className="text-muted">
+                    {formatDateHeure(a.creeLe)}
+                  </span>
+                </>
+              );
+              return (
+                <li key={a.id}>
+                  {lien ? (
+                    <Link
+                      href={lien}
+                      className="border-danger block min-h-11 rounded-lg border p-3 text-sm"
+                    >
+                      {contenu}
+                    </Link>
+                  ) : (
+                    <p className="border-danger rounded-lg border p-3 text-sm">
+                      {contenu}
+                    </p>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        <Link
+          href="/journal?alertes=1"
+          className="text-sm font-semibold underline"
+        >
+          Voir toutes les alertes
+        </Link>
+      </section>
+      <p className="text-muted text-xs">
+        Journée du {jourDouala()} (heure de Douala).
+      </p>
+    </div>
   );
 }

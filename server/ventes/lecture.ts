@@ -1,6 +1,5 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { cacheLife } from "next/cache";
 import { supabasePublic } from "@/lib/supabase/public";
 import type { FiltresRecus } from "@/lib/ventes/historique";
 import {
@@ -153,8 +152,6 @@ export async function listerRecus(
 export async function lireRecuPublic(
   jeton: string,
 ): Promise<RecuAffichable | null> {
-  "use cache";
-  cacheLife({ stale: 30, revalidate: 60, expire: 600 });
   if (!/^[0-9a-f]{64}$/.test(jeton)) return null;
   const { data } = await supabasePublic().rpc("recu_public", {
     p_jeton: jeton,

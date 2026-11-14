@@ -1,6 +1,6 @@
 import type { PGlite } from "@electric-sql/pglite";
 import { beforeAll, describe, expect, it } from "vitest";
-import { cle, creerBase, en, lignes, preparer, U } from "./helpers";
+import { cle, creerBase, lignes, preparer, U } from "./helpers";
 
 type F = Awaited<ReturnType<typeof preparer>>;
 let db: PGlite;
@@ -345,11 +345,11 @@ describe("annulation, crédits et caisse", () => {
   });
 
   it("calcule la caisse : encaissements + remboursements - dépenses - avoirs, puis signale l'écart", async () => {
-    await en(db, U.vendeurA, () =>
-      db.query(
-        "insert into depenses (organisation_id, boutique_id, categorie, montant, auteur_id) values ($1, $2, 'transport', 1500, $3)",
-        [f.orgA, f.boutiqueA, U.vendeurA],
-      ),
+    await lignes(
+      db,
+      U.vendeurA,
+      "select enregistrer_depense($1, 'transport', 1500, 'especes', null, $2)",
+      [f.boutiqueA, cle()],
     );
     // La caisse compte les journées en heure de Douala (UTC+1), pas en UTC.
     const jour = new Intl.DateTimeFormat("en-CA", {
