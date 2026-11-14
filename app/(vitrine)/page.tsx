@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Accueil() {
-  const { plans, programme } = await chargerOffrePublique();
+  const { plans } = await chargerOffrePublique();
   const lienWhatsApp = lienContact();
   return (
     <main id="contenu">
@@ -61,11 +61,11 @@ export default async function Accueil() {
           __html: jsonPourScript(donneesStructurees(plans, DESCRIPTION)),
         }}
       />
-      <Hero plan={plans[0]} programme={programme} lienWhatsApp={lienWhatsApp} />
+      <Hero plan={plans[0]} lienWhatsApp={lienWhatsApp} />
       <Probleme />
+      <AvantApres />
       <Etapes />
       <Fonctions />
-      <AvantApres />
       <Tarifs plans={plans} lienWhatsApp={lienWhatsApp} />
       <Faq plans={plans} lienWhatsApp={lienWhatsApp} />
       <AppelFinal lienWhatsApp={lienWhatsApp} />

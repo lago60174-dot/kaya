@@ -59,7 +59,7 @@ export default async function Partenaire() {
       </section>
 
       {exemple && programme && (
-        <section className="bg-brand text-goudron">
+        <section className="bg-brand tole text-goudron">
           <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8 lg:py-20">
             <h2 className="font-affiche max-w-[18ch] text-[clamp(2.5rem,6vw,4.25rem)] leading-[0.92]">
               Un exemple avec un abonnement {plan.nom}.

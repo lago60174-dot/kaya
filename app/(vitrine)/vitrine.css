@@ -211,3 +211,62 @@
 .faq details[open] summary::after {
   content: "\2212";
 }
+
+/* Tôle ondulée : le toit de toutes les quincailleries, en fond discret des bandeaux orange. */
+.tole {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(27, 19, 12, 0.07) 0,
+    rgba(27, 19, 12, 0.07) 3px,
+    rgba(255, 255, 255, 0.08) 3px,
+    rgba(255, 255, 255, 0.08) 9px,
+    transparent 9px,
+    transparent 18px
+  );
+}
+html:has(.vitrine) {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.vitrine) {
+    scroll-behavior: auto;
+  }
+}
+
+/* Bouton WhatsApp : un anneau qui se déploie deux fois pour attirer l'œil, puis plus rien. */
+.wa-bouton::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 3px solid #25d366;
+  pointer-events: none;
+  animation: anneau 1.6s 3s 2 ease-out backwards;
+}
+.wa-bouton:hover {
+  transform: translate(-0.1rem, -0.1rem);
+  box-shadow: 0.4rem 0.4rem 0 var(--goudron);
+}
+.wa-bouton:active {
+  transform: translate(0.2rem, 0.2rem);
+  box-shadow: 0.1rem 0.1rem 0 var(--goudron);
+}
+@keyframes anneau {
+  from {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-bouton::after {
+    animation: none;
+    display: none;
+  }
+  .wa-bouton:hover,
+  .wa-bouton:active {
+    transform: none;
+  }
+}

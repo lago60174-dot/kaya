@@ -77,7 +77,7 @@ const ETAPES = [
 
 export function Etapes() {
   return (
-    <section className="bg-white py-16 lg:py-24">
+    <section className="bg-beton py-16 lg:py-24">
       <div className={conteneur}>
         <h2 className={titre}>Trois gestes, et votre boutique est suivie.</h2>
         <ol className="mt-12 grid gap-10 md:grid-cols-3">
@@ -91,7 +91,9 @@ export function Etapes() {
               </span>
               <h3 className="font-affiche text-4xl leading-none">{e.titre}</h3>
               <p className="text-terre">{e.texte}</p>
-              <p className="bg-beton mt-auto p-4 font-bold">{e.exemple}</p>
+              <p className="border-goudron mt-auto border-2 bg-white p-4 font-bold shadow-[0.35rem_0.35rem_0_var(--goudron)]">
+                {e.exemple}
+              </p>
             </li>
           ))}
         </ol>
@@ -100,62 +102,53 @@ export function Etapes() {
   );
 }
 
-const FONCTIONS = [
-  [
-    "Le stock se met à jour tout seul",
-    "Chaque vente retire les articles du stock. Une alerte vous prévient avant la rupture.",
-  ],
-  [
-    "Plusieurs unités pour un produit",
-    "Sac, kilo, barre, mètre, pièce : un seul produit, plusieurs façons de le vendre.",
-  ],
-  [
-    "Les crédits ne s'oublient plus",
-    "Vous voyez qui vous doit de l'argent et depuis quand. Un rappel poli part sur WhatsApp en un geste.",
-  ],
-  [
-    "Une caisse qui tombe juste",
-    "Kaya calcule les espèces attendues. Vous comptez, et l'écart s'affiche.",
-  ],
-  [
-    "Vos marges, pour vous seul",
-    "Vous voyez ce que chaque vente rapporte. Vos vendeurs ne voient jamais vos prix d'achat.",
-  ],
-  [
-    "Un reçu numéroté à chaque vente",
-    "Le reçu part en PDF sur WhatsApp. Une fois écrit, personne ne peut le modifier ni l'effacer.",
-  ],
-  [
-    "Votre boutique en direct",
-    "Ventes du jour, produits les plus vendus, stock bas, dettes : sur votre téléphone, en temps réel.",
-  ],
-  [
-    "Des vendeurs avec des droits limités",
-    "Votre vendeur vend. Il ne peut ni changer un prix, ni annuler une vente. Vous seul le pouvez.",
-  ],
-  [
-    "Un journal que personne n'efface",
-    "Les ventes, remises, annulations et clôtures de caisse sont notées, avec qui les a faites.",
-  ],
+const GROUPES = [
+  {
+    titre: "Mon stock",
+    items: [
+      ["Le stock se met à jour tout seul", "Chaque vente retire les articles du stock. Une alerte vous prévient avant la rupture."],
+      ["Plusieurs unités pour un produit", "Sac, kilo, barre, mètre, pièce : un seul produit, plusieurs façons de le vendre."],
+      ["Votre boutique en direct", "Ventes du jour, produits les plus vendus, stock bas, dettes : sur votre téléphone, en temps réel."],
+    ],
+  },
+  {
+    titre: "Mon argent",
+    items: [
+      ["Les crédits ne s'oublient plus", "Vous voyez qui vous doit de l'argent et depuis quand. Un rappel poli part sur WhatsApp en un geste."],
+      ["Une caisse qui tombe juste", "Kaya calcule les espèces attendues. Vous comptez, et l'écart s'affiche."],
+      ["Vos marges, pour vous seul", "Vous voyez ce que chaque vente rapporte. Vos vendeurs ne voient jamais vos prix d'achat."],
+    ],
+  },
+  {
+    titre: "Mes vendeurs",
+    items: [
+      ["Des droits limités", "Votre vendeur vend. Il ne peut ni changer un prix, ni annuler une vente. Vous seul le pouvez."],
+      ["Un reçu numéroté à chaque vente", "Le reçu part en PDF sur WhatsApp. Une fois écrit, personne ne peut le modifier ni l'effacer."],
+      ["Un journal que personne n'efface", "Les ventes, remises, annulations et clôtures de caisse sont notées, avec qui les a faites."],
+    ],
+  },
 ];
 
 export function Fonctions() {
   return (
-    <section className="bg-beton py-16 lg:py-24">
-      <div
-        className={`${conteneur} grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]`}
-      >
-        <h2 className={`${titre} lg:sticky lg:top-8 lg:self-start`}>
-          Tout ce qu&apos;il faut pour tenir la boutique.
-        </h2>
-        <dl>
-          {FONCTIONS.map(([terme, definition]) => (
-            <div key={terme} className="border-goudron/40 border-t-2 py-5">
-              <dt className="text-xl font-bold">{terme}</dt>
-              <dd className="text-terre mt-1 max-w-[60ch]">{definition}</dd>
+    <section className="bg-white py-16 lg:py-24">
+      <div className={conteneur}>
+        <h2 className={titre}>Tout ce qu&apos;il faut pour tenir la boutique.</h2>
+        <div className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
+          {GROUPES.map((g) => (
+            <div key={g.titre} className="border-brand border-t-[10px] pt-5">
+              <h3 className="font-affiche text-5xl leading-none">{g.titre}</h3>
+              <dl className="mt-6 flex flex-col gap-6">
+                {g.items.map(([terme, definition]) => (
+                  <div key={terme}>
+                    <dt className="text-xl font-bold">{terme}</dt>
+                    <dd className="text-terre mt-1">{definition}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   );

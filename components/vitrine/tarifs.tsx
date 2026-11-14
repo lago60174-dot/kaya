@@ -70,7 +70,7 @@ export function Tarifs({
                   ))}
                 </ul>
                 <Link href="/inscription" className={`${boutonOrange} mt-2`}>
-                  Essayer gratuitement
+                  Créer ma boutique
                 </Link>
               </article>
             ))}
