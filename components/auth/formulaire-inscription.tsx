@@ -2,7 +2,6 @@
 
 import { useActionState } from "react";
 import { inscrire, type EtatFormulaire } from "@/server/auth/actions";
-import { Turnstile } from "../turnstile";
 import { BoutonEnvoi } from "./bouton-envoi";
 import { Champ } from "./champ";
 
@@ -63,7 +62,6 @@ export function FormulaireInscription({
         autoCapitalize="characters"
         erreur={c?.codeParrainage}
       />
-      <Turnstile />
       {etat.erreur && (
         <p role="alert" className="text-danger text-sm">
           {etat.erreur}

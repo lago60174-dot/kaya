@@ -13,6 +13,14 @@ const PUBLIC_EXACT = [
   "/mentions-legales",
   "/confidentialite",
   "/conditions",
+  "/conditions-partenaires",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/opengraph-image",
+  "/icon.svg",
+  "/hors-ligne",
+  "/manifest.webmanifest",
+  "/sw.js",
 ];
 const PUBLIC_PREFIXES = ["/a/", "/r/", "/img/", "/api/webhooks/"];
 const PROPRIETAIRE_PREFIXES = [
@@ -109,25 +117,15 @@ interface DefinitionMenu extends EntreeMenu {
 }
 
 const MENU: DefinitionMenu[] = [
+  { href: "/patron", libelle: "Tableau de bord", roles: ["proprietaire"] },
   { href: "/vente", libelle: "Vente", roles: ["proprietaire", "vendeur"] },
-  { href: "/recus", libelle: "Reçus", roles: ["proprietaire", "vendeur"] },
   { href: "/stock", libelle: "Stock", roles: ["proprietaire", "vendeur"] },
   { href: "/clients", libelle: "Clients", roles: ["proprietaire", "vendeur"] },
   { href: "/caisse", libelle: "Caisse", roles: ["proprietaire", "vendeur"] },
-  { href: "/patron", libelle: "Tableau de bord", roles: ["proprietaire"] },
+  { href: "/recus", libelle: "Reçus", roles: ["proprietaire", "vendeur"] },
   { href: "/journal", libelle: "Journal", roles: ["proprietaire"] },
-  {
-    href: "/devis",
-    libelle: "Devis",
-    roles: ["proprietaire"],
-    fonction: "devis",
-  },
-  {
-    href: "/fournisseurs",
-    libelle: "Fournisseurs",
-    roles: ["proprietaire"],
-    fonction: "fournisseurs",
-  },
+  { href: "/devis", libelle: "Devis", roles: ["proprietaire"], fonction: "devis" },
+  { href: "/fournisseurs", libelle: "Fournisseurs", roles: ["proprietaire"], fonction: "fournisseurs" },
   { href: "/parametres", libelle: "Paramètres", roles: ["proprietaire"] },
 ];
 

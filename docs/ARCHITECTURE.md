@@ -4,7 +4,6 @@
 - `features/<domaine>/` stock, ventes, clients, caisse, patron
 - `lib/` utilitaires (format, env, supabase, impression) · `server/` actions et services
 - `supabase/migrations/` schéma, règles, fonctions, RLS · `supabase/seed.sql` démo
-- `tests/db/` tests SQL (ventes, caisse, RLS, seed) avec PostgreSQL en mémoire
 - Règle : la logique métier vit dans des fonctions pures testées, hors de React.
 
 ## Base de données

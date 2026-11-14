@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Banknote, Boxes, ShoppingBag, Users } from "lucide-react";
 import { MiseAJourDirecte } from "@/components/patron/mise-a-jour-directe";
 import { jourDouala } from "@/lib/caisse/caisse";
 import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
@@ -15,7 +16,7 @@ import {
 
 export const metadata = { title: "Tableau de bord · Kaya" };
 
-const carte = "border-border flex flex-col gap-1 rounded-lg border p-3";
+const carte = "kaya-kpi border-border flex flex-col gap-1 rounded-lg border p-3";
 
 export default async function PagePatron({
   searchParams,
@@ -57,8 +58,9 @@ export default async function PagePatron({
   const maxVendu = Math.max(1, ...t.produitsVendus.map((p) => p.montant));
 
   return (
-    <div className="flex max-w-3xl flex-col gap-6">
-      <header className="flex flex-col gap-2">
+    <div className="kaya-dashboard flex max-w-3xl flex-col gap-6">
+      <header className="kaya-dashboard-header flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">
           Bonjour{profil.nom ? ` ${profil.nom}` : ""}
         </h1>
@@ -89,6 +91,8 @@ export default async function PagePatron({
           </form>
         )}
         <MiseAJourDirecte boutiqueId={boutique.id} />
+        </div>
+        <div className="rounded-xl bg-white/80 px-4 py-3 text-sm font-semibold text-orange-700 shadow-sm">● Boutique active</div>
       </header>
 
       {t.cloturesAValider > 0 && (
@@ -103,9 +107,10 @@ export default async function PagePatron({
 
       <section
         aria-label="Chiffres du jour"
-        className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+        className="kaya-dashboard-kpis grid grid-cols-1 gap-3 sm:grid-cols-2"
       >
         <div className={carte}>
+          <span className="mb-2 grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600"><ShoppingBag size={20} /></span>
           <p className="text-muted text-sm">
             Ventes du jour ({t.nbVentes} vente{t.nbVentes > 1 ? "s" : ""})
           </p>
@@ -117,6 +122,7 @@ export default async function PagePatron({
           </p>
         </div>
         <Link href="/caisse" className={carte}>
+          <span className="mb-2 grid size-10 place-items-center rounded-xl bg-emerald-100 text-emerald-700"><Banknote size={20} /></span>
           <p className="text-muted text-sm">Espèces attendues en caisse</p>
           <p className="text-3xl font-bold">{formatFcfa(t.especesAttendues)}</p>
           <p className="text-muted text-sm">
@@ -124,6 +130,7 @@ export default async function PagePatron({
           </p>
         </Link>
         <Link href="/clients/dettes" className={carte}>
+          <span className="mb-2 grid size-10 place-items-center rounded-xl bg-blue-100 text-blue-700"><Users size={20} /></span>
           <p className="text-muted text-sm">Ce que les clients vous doivent</p>
           <p className="text-3xl font-bold">{formatFcfa(t.dettes.total)}</p>
           <p className="text-muted text-sm">
@@ -131,6 +138,7 @@ export default async function PagePatron({
           </p>
         </Link>
         <Link href="/stock?bas=1" className={carte}>
+          <span className="mb-2 grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-700"><Boxes size={20} /></span>
           <p className="text-muted text-sm">Produits en stock bas</p>
           <p
             className={`text-3xl font-bold ${t.stockBas.nombre > 0 ? "text-danger" : ""}`}
@@ -143,7 +151,7 @@ export default async function PagePatron({
         </Link>
       </section>
 
-      <section aria-label="Ventes par vendeur" className="flex flex-col gap-2">
+      <section aria-label="Ventes par vendeur" className="kaya-dashboard-panel flex flex-col gap-2">
         <h2 className="text-lg font-semibold">Ventes par vendeur</h2>
         {t.vendeurs.length === 0 ? (
           <p className="text-muted">
@@ -209,7 +217,7 @@ export default async function PagePatron({
       </section>
 
       {t.stockBas.nombre > 0 && (
-        <section aria-label="Stock bas" className="flex flex-col gap-2">
+        <section aria-label="Stock bas" className="kaya-dashboard-panel flex flex-col gap-2">
           <h2 className="text-lg font-semibold">À réapprovisionner</h2>
           <ul className="flex flex-col gap-2">
             {t.stockBas.produits.map((p) => (
@@ -238,7 +246,7 @@ export default async function PagePatron({
         </section>
       )}
 
-      <section aria-label="Alertes récentes" className="flex flex-col gap-2">
+      <section aria-label="Alertes récentes" className="kaya-alert flex flex-col gap-2 p-4">
         <h2 className="text-lg font-semibold">Alertes récentes</h2>
         {alertes.length === 0 ? (
           <p className="text-muted">Aucune alerte. Tout est calme.</p>

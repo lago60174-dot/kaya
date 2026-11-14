@@ -1,6 +1,6 @@
 # Décisions techniques
 
-- **Stack** : Next.js 16 (App Router), TypeScript strict, Tailwind, Supabase, Vitest, Playwright, déployé sur Cloudflare Workers avec OpenNext (`@opennextjs/cloudflare`, compatible Next >= 16.4.5). Le build Workers est vérifié (`npm run build:cf`).
+- **Stack** : Next.js 16 (App Router), TypeScript strict, Tailwind, Supabase, Vitest, Playwright, déployé sur Vercel (`npm run deploy`). Photos sur Cloudflare R2, lues et supprimées par l'API S3 (`server/images/s3.ts`, `aws4fetch`).
 - **Polices système** : pas de police web. Pages plus légères sur Android d'entrée de gamme et connexion lente.
 - **Couleurs** : orange `#F97316` pour les accents, `#C2410C` pour les boutons (texte blanc, contraste AA). Fond `#FFFBF5`, texte `#1F2937`.
 - **Versions figées** : aucune version avec `^` dans package.json. `@types/node` en 22 pour suivre Node 22 et rester compatible avec Vitest.
@@ -46,7 +46,6 @@
 - **Défense en profondeur** : proxy (redirection des visiteurs), garde dans les pages et les actions (`exigerRole`, `decisionGarde` testée), RLS et triggers. **Risque** : OpenNext classe le proxy Node.js comme expérimental sur Cloudflare. Le proxy ne protège rien à lui seul ; s'il pose problème en production, le retirer ne crée aucune faille (mais la session ne sera plus rafraîchie automatiquement : prévoir alors un rafraîchissement côté client).
 - **Cache Components (Next 16) : désactivé.** Sur Cloudflare Workers, `cacheComponents: true` fait planter chaque requête (« Worker's code had hung », Error 1101), même sur une page statique : reproduit en local avec `npm run preview`, et signalé en amont ([next.js#100122](https://github.com/vercel/next.js/issues/100122), correctif [opennextjs-cloudflare#1318](https://github.com/opennextjs/opennextjs-cloudflare/pull/1318) pas encore publié). Les `<Suspense>` autour de la lecture de session restent utiles pour le confort d'affichage. À réactiver quand le correctif sera publié et testé avec `npm run preview`.
 - **Parrainage** : `/a/CODE` pose un cookie de 30 jours (premier contact, jamais écrasé) ; le code saisi à l'inscription l'emporte. Auto-parrainage refusé (même compte, téléphone ou email) et signalé. Un code inconnu ou un affilié non validé n'empêche pas l'inscription.
-- **Turnstile** : vérification serveur, refusée en production si la clé secrète manque (échec fermé).
 - **Déconnexion automatique** après 2 h d'inactivité (`lib/auth/inactivite.ts`).
 - **Limites connues** : le chargement du profil (`server/auth/profil.ts`) et les actions Supabase ne sont pas couverts par des tests automatiques ici (pas de Supabase local) ; ils le seront par les tests de bout en bout de l'étape 12. L'espace administrateur et l'espace affilié (pages) arrivent aux étapes 19 et 20 : les rôles et les gardes existent déjà.
 
@@ -172,3 +171,17 @@ Trois archives livrées en parallèle ont été réunies. La section 10 partait 
 - **Numérotation des migrations** : rien n'étant déployé, la migration 9 (caisse) a été modifiée en place pour recevoir ces ajouts, et la migration du logo, qui portait aussi le numéro 9, est devenue la **migration 12**. Ordre final : 1 schéma, 2 règles, 3 fonctions, 4 RLS, 5 plateforme, 6 produits, 7 reçus, 8 clients, 9 caisse, 10 tableau de bord, 11 paramètres, 12 logo. **À partir du premier déploiement, plus aucune migration existante ne sera modifiée.**
 - **Logo et paramètres** : l'écriture directe sur `boutiques` n'existant plus depuis l'étape 9, le logo passe par `definir_logo_boutique` (migration 12). Sans cela, l'enregistrement du logo aurait échoué en silence.
 - **`DECISIONS.md`** : les sections de l'étape 9 (cache désactivé, caisse) et de la section 10 ont été conservées ; là où la section 10 mentionnait le « cache `use cache` retiré hors session », c'est désormais l'état réel du dépôt.
+
+## Migration Cloudflare vers Vercel
+
+- Retrait d'OpenNext, de wrangler et du binding R2 `IMAGES` ; accès R2 par l'API S3 (même bucket, aucune migration de photos). Retrait de la CI GitHub : les vérifications se lancent à la demande.
+- Les notes ci-dessus sur le proxy et Cache Components concernaient Cloudflare Workers et ne s'appliquent plus sur Vercel.
+- Le CORS du bucket reste à configurer pour l'adresse Vercel (`docs/R2.md`).
+
+## Vitrine (landing)
+
+- La page d'accueil `/` est la landing (`app/(vitrine)`), avec les pages `/partenaire`, `/mentions-legales`, `/confidentialite`, `/conditions` et `/conditions-partenaires`. Les tarifs viennent de la base (plans `visible_public`, gardés 60 s en mémoire) : aucun prix écrit dans l'interface.
+- Migration `20260101000013_vitrine.sql` : fonction `programme_partenaire_public` et table `demandes_partenaire` (renumérotée : le 09 était déjà pris par la caisse).
+- L'orange du logo (#f25e25) s'applique à la vitrine seulement (`.vitrine { --brand }`) ; l'application garde le sien.
+- Adaptation Vercel : mentions légales indiquent Vercel comme hébergeur ; la phrase sur Cloudflare Web Analytics est retirée (aucune mesure d'audience n'est installée).
+- **PWA** : `app/manifest.ts` (installable, raccourcis Vente / Stock / Caisse), `public/sw.js` (ne met en cache que les fichiers statiques et la page `/hors-ligne` ; jamais les pages ni les données, qui sont privées), `components/pwa/` (enregistrement en production seulement, invitation à installer : bouton Android/Chrome, consigne iPhone, masquée 14 jours après fermeture). Pas de mode hors ligne pour les ventes : étape 11.

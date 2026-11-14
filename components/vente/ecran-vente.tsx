@@ -106,7 +106,7 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
   const cle = () => crypto.randomUUID();
 
   return (
-    <div className="grid max-w-5xl gap-6 pb-28 lg:grid-cols-2">
+    <div className="kaya-sale grid max-w-5xl gap-6 pb-28 lg:grid-cols-2">
       <section aria-label="Produits" className="flex flex-col gap-3">
         <h1 className="text-2xl font-bold">Vente</h1>
         <input

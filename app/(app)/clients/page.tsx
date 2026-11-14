@@ -37,7 +37,7 @@ export default async function PageClients({
     : null;
 
   return (
-    <div className="flex max-w-2xl flex-col gap-4">
+    <div className="kaya-clients-page flex max-w-2xl flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-2xl font-bold">Clients</h1>
         <Link

@@ -9,6 +9,10 @@
   --brand: #f97316;
   --brand-strong: #c2410c; /* boutons : texte blanc, contraste AA */
   --brand-soft: #ffedd5;
+  /* Vitrine : mur peint, goudron, béton. */
+  --goudron: #1b130c;
+  --beton: #e9e5de;
+  --terre: #4a3f35;
   --danger: #b91c1c;
   --success: #15803d;
 }
@@ -21,6 +25,12 @@
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-brand-soft: var(--brand-soft);
+  --color-goudron: var(--goudron);
+  --color-beton: var(--beton);
+  --color-terre: var(--terre);
+  --font-affiche:
+    var(--police-affiche), "Arial Narrow", Impact, "Helvetica Neue", Arial,
+    sans-serif;
   --color-danger: var(--danger);
   --color-success: var(--success);
   --font-sans:
@@ -75,3 +85,137 @@ select {
     border: 0;
   }
 }
+
+/* Kaya UI refresh — orange signature, surfaces lumineuses et hiérarchie renforcée. */
+:root {
+  --background: #fff8f1;
+  --foreground: #172033;
+  --muted: #687386;
+  --border: #f0e3d8;
+  --brand: #ff7900;
+  --brand-strong: #e65f00;
+  --brand-soft: #fff0e2;
+  --danger: #d92d20;
+  --success: #16834a;
+  --kaya-navy: #17233d;
+  --kaya-orange: #ff7900;
+  --kaya-orange-deep: #ed6500;
+  --kaya-surface: #ffffff;
+  --kaya-shadow: 0 12px 34px rgba(42, 34, 25, .055);
+}
+
+body { background: #fff8f1; color: var(--kaya-navy); }
+.kaya-app-shell { min-height: 100vh; display: flex; background: #fff8f1; }
+.kaya-sidebar { position: sticky; top: 0; display: flex; flex: 0 0 258px; flex-direction: column; height: 100vh; padding: 24px 16px 18px; color: #fff; background: linear-gradient(180deg, #ff850d 0%, #f36b00 42%, #17233d 42%, #17233d 100%); box-shadow: 8px 0 28px rgba(35, 30, 25, .07); z-index: 20; }
+.kaya-brand-lockup { display: flex; align-items: center; gap: 11px; min-height: 68px; padding: 2px 8px 24px; color: #fff; text-decoration: none; }
+.kaya-brand-mark { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: rgba(255,255,255,.18); }
+.kaya-brand-mark img { width: 42px; height: 42px; object-fit: contain; border-radius: 10px; }
+.kaya-brand-copy { display: flex; flex-direction: column; line-height: 1.05; }
+.kaya-brand-copy strong { font-size: 29px; letter-spacing: -.8px; font-weight: 850; }
+.kaya-brand-copy small { margin-top: 6px; color: rgba(255,255,255,.86); font-size: 10px; font-weight: 600; letter-spacing: .15px; }
+.kaya-sidebar-caption { margin: 18px 10px 10px; color: rgba(255,255,255,.57); font-size: 10px; font-weight: 800; letter-spacing: 1.25px; }
+.kaya-sidebar-menu { display: flex; flex: 1; flex-direction: column; gap: 6px; overflow-y: auto; padding: 0 0 12px; }
+.kaya-nav-link { display: flex; align-items: center; gap: 12px; min-height: 47px; padding: 0 13px; border-radius: 13px; color: rgba(255,255,255,.78); font-size: 13px; font-weight: 650; text-decoration: none; transition: background .18s ease, color .18s ease, transform .18s ease; }
+.kaya-nav-link:hover { background: rgba(255,255,255,.12); color: #fff; transform: translateX(2px); }
+.kaya-nav-link.is-active { color: #fff; background: linear-gradient(100deg, #ff9a2f, #ff7900); box-shadow: 0 8px 20px rgba(255,121,0,.24); }
+.kaya-nav-chevron { margin-left: auto; opacity: .55; }
+.kaya-sidebar-bottom { border-top: 1px solid rgba(255,255,255,.13); padding-top: 15px; }
+.kaya-user-card { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 13px; background: rgba(255,255,255,.09); }
+.kaya-user-avatar { display: grid; flex: 0 0 36px; width: 36px; height: 36px; place-items: center; border-radius: 50%; color: #a83f00; background: #fff0df; font-weight: 850; }
+.kaya-user-meta { display: flex; min-width: 0; flex: 1; flex-direction: column; gap: 3px; }
+.kaya-user-meta strong { overflow: hidden; color: #fff; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.kaya-user-meta small { color: rgba(255,255,255,.65); font-size: 10px; }
+.kaya-logout { display: flex; align-items: center; gap: 9px; width: 100%; min-height: 42px; margin-top: 8px; padding: 0 11px; border: 0; border-radius: 10px; color: rgba(255,255,255,.72); background: transparent; font-size: 12px; font-weight: 600; cursor: pointer; }
+.kaya-logout:hover { color: #fff; background: rgba(255,255,255,.1); }
+.kaya-main { min-width: 0; flex: 1; padding: 30px clamp(20px, 3vw, 48px) 54px; }
+.kaya-main-inner { width: 100%; max-width: 1440px; margin: 0 auto; }
+.kaya-mobile-header, .kaya-mobile-nav { display: none; }
+
+/* Titres et contrôles cohérents dans toutes les pages métier. */
+.kaya-main h1 { color: #17233d; font-size: clamp(25px, 2.1vw, 34px); font-weight: 850; letter-spacing: -.9px; line-height: 1.12; }
+.kaya-main h2 { color: #17233d; font-weight: 780; letter-spacing: -.35px; }
+.kaya-main input:not([type="checkbox"]), .kaya-main select, .kaya-main textarea { border-color: #e9e2dc; border-radius: 12px; background: #fff; box-shadow: 0 2px 7px rgba(24,35,61,.025); }
+.kaya-main input:focus, .kaya-main select:focus, .kaya-main textarea:focus { border-color: #ff9b42; outline: 3px solid rgba(255,121,0,.13); }
+.kaya-main a { text-underline-offset: 3px; }
+.kaya-main a[class*="border-border"], .kaya-main li > a[class*="border"] { border-color: #eee3da; background: #fff; box-shadow: 0 4px 14px rgba(33, 29, 24, .035); transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.kaya-main li > a[class*="border"]:hover { border-color: #ffc58f; box-shadow: 0 8px 20px rgba(45,35,25,.07); transform: translateY(-1px); }
+.kaya-main button[class*="bg-brand-strong"], .kaya-main a[class*="bg-brand-strong"] { border: 0; border-radius: 12px; background: linear-gradient(110deg, #ff8b1a, #f36b00); box-shadow: 0 7px 16px rgba(238,102,0,.18); }
+.kaya-main button[class*="bg-brand-strong"]:hover, .kaya-main a[class*="bg-brand-strong"]:hover { background: linear-gradient(110deg, #f77b08, #df5900); }
+.kaya-main [class*="bg-brand-soft"] { background: #fff0e2; }
+.kaya-main [class*="text-brand-strong"] { color: #e65f00; }
+.kaya-main [class*="border-border"] { border-color: #eee3da; }
+.kaya-main [class*="text-muted"] { color: #738094; }
+.kaya-main section[aria-label] { border-radius: 18px; }
+.kaya-main .text-danger { color: #c92d24; }
+
+/* Tableau de bord propriétaire. */
+.kaya-dashboard { max-width: none !important; gap: 22px !important; }
+.kaya-dashboard-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 26px; border: 1px solid #f5e5d7; border-radius: 22px; background: linear-gradient(110deg, #fff 0%, #fff8f0 100%); box-shadow: var(--kaya-shadow); }
+.kaya-dashboard-header p { color: #738094; }
+.kaya-dashboard-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.kaya-kpi { position: relative; min-height: 145px; overflow: hidden; padding: 19px !important; border: 1px solid #f0e5dc; border-radius: 18px; background: #fff; box-shadow: var(--kaya-shadow); }
+.kaya-kpi::after { position: absolute; right: -23px; bottom: -34px; width: 105px; height: 105px; border-radius: 50%; background: rgba(255,121,0,.07); content: ""; }
+.kaya-kpi p:first-child { color: #758094; font-size: 12px; font-weight: 650; }
+.kaya-kpi p:nth-child(2) { margin-top: 9px; color: #17233d; font-size: clamp(21px, 2vw, 29px); font-weight: 850; letter-spacing: -.7px; }
+.kaya-dashboard-panel { padding: 20px; border: 1px solid #eee4dc; border-radius: 18px; background: #fff; box-shadow: var(--kaya-shadow); }
+.kaya-dashboard-columns { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 18px; }
+.kaya-main .kaya-alert { border: 1px solid #ffd5c9; border-radius: 15px; background: #fff3ef; }
+
+/* Écran de vente : catalogue et panier côte à côte, panier collant sur grand écran. */
+.kaya-sale { max-width: none !important; grid-template-columns: minmax(0, 1.35fr) minmax(340px, .8fr); align-items: start; gap: 20px !important; }
+.kaya-sale > section { min-width: 0; padding: 21px; border: 1px solid #eee3da; border-radius: 20px; background: #fff; box-shadow: var(--kaya-shadow); }
+.kaya-sale > section[aria-label="Panier"] { position: sticky; top: 22px; }
+.kaya-sale > section[aria-label="Produits"] > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.kaya-sale > section[aria-label="Produits"] > ul > li { min-width: 0; border: 1px solid #f0e5dc; border-radius: 15px; background: linear-gradient(180deg, #fff, #fffaf5); padding: 13px; }
+.kaya-sale > section[aria-label="Panier"] > ul > li { border: 1px solid #f0e5dc; border-radius: 13px; background: #fffdfa; padding: 12px; }
+.kaya-sale > div:last-child { left: 258px; border-color: #f0e1d5; background: rgba(255,255,255,.96); box-shadow: 0 -8px 28px rgba(35,28,20,.07); backdrop-filter: blur(12px); }
+
+@media (max-width: 1050px) {
+  .kaya-sidebar { flex-basis: 226px; }
+  .kaya-main { padding-right: 24px; padding-left: 24px; }
+  .kaya-dashboard-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kaya-sale { grid-template-columns: minmax(0, 1fr) minmax(300px, .85fr); }
+  .kaya-sale > div:last-child { left: 226px; }
+}
+@media (max-width: 760px) {
+  .kaya-app-shell { display: block; min-height: 100vh; padding-top: 64px; padding-bottom: 76px; }
+  .kaya-sidebar { display: none; }
+  .kaya-mobile-header { position: fixed; inset: 0 0 auto; z-index: 30; display: flex; height: 64px; align-items: center; justify-content: space-between; padding: 0 17px; color: #fff; background: linear-gradient(105deg, #ff8b16, #f26900); box-shadow: 0 4px 18px rgba(226,96,0,.2); }
+  .kaya-mobile-brand { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; }
+  .kaya-mobile-brand img { border-radius: 10px; }
+  .kaya-mobile-brand strong { font-size: 25px; font-weight: 850; letter-spacing: -.8px; }
+  .kaya-mobile-status { display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,.95); font-size: 11px; font-weight: 700; }
+  .kaya-mobile-status span { width: 7px; height: 7px; border-radius: 50%; background: #b7f3c9; box-shadow: 0 0 0 3px rgba(255,255,255,.15); }
+  .kaya-main { padding: 19px 14px 30px; }
+  .kaya-mobile-nav { position: fixed; inset: auto 0 0; z-index: 40; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 7px 5px max(7px, env(safe-area-inset-bottom)); border-top: 1px solid #f0e4da; background: rgba(255,255,255,.97); box-shadow: 0 -7px 25px rgba(30,28,25,.07); backdrop-filter: blur(14px); }
+  .kaya-nav-mobile-link { display: flex; min-width: 0; min-height: 55px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border-radius: 12px; color: #6c778b; font-size: 10px; font-weight: 700; text-decoration: none; }
+  .kaya-nav-mobile-link.is-active { color: #ed6900; background: #fff0e2; }
+  .kaya-nav-mobile-link span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .kaya-dashboard-header { padding: 18px; border-radius: 17px; }
+  .kaya-dashboard-kpis { gap: 10px; }
+  .kaya-kpi { min-height: 124px; padding: 14px !important; border-radius: 15px; }
+  .kaya-kpi p:nth-child(2) { font-size: 21px; }
+  .kaya-dashboard-columns { grid-template-columns: 1fr; }
+  .kaya-sale { display: flex !important; flex-direction: column; gap: 13px !important; padding-bottom: 110px; }
+  .kaya-sale > section { width: 100%; padding: 15px; border-radius: 16px; }
+  .kaya-sale > section[aria-label="Panier"] { position: static; }
+  .kaya-sale > section[aria-label="Produits"] > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kaya-sale > div:last-child { right: 0; bottom: 73px; left: 0; padding: 10px 14px; }
+}
+@media (max-width: 390px) {
+  .kaya-main { padding-right: 10px; padding-left: 10px; }
+  .kaya-dashboard-kpis { grid-template-columns: 1fr 1fr; }
+  .kaya-sale > section[aria-label="Produits"] > ul { grid-template-columns: 1fr; }
+}
+
+.kaya-main-inner > div[class*="max-w-"] { max-width: 1180px; }
+.kaya-stock-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px !important; }
+.kaya-stock-grid > li > a { min-height: 112px; padding: 15px !important; border-radius: 16px !important; }
+.kaya-stock-grid > li > a > img, .kaya-stock-grid > li > a > span:first-child { width: 58px; height: 58px; border-radius: 13px; }
+.kaya-cash-page > section[aria-label], .kaya-clients-page > section[aria-label] { padding: 18px; border: 1px solid #eee3da; background: #fff; box-shadow: var(--kaya-shadow); }
+.kaya-cash-page > section[aria-label="Résumé du jour"] { background: linear-gradient(120deg, #fff, #fff5eb); }
+.kaya-cash-page > section[aria-label="Espèces attendues"] { border: 1px solid #ffd9b7; background: #fff1e4; }
+.kaya-main form { max-width: 100%; }
+@media (max-width: 760px) { .kaya-stock-grid { grid-template-columns: 1fr; } }
+.kaya-sidebar { background: #17233d; }
+.kaya-brand-lockup { margin: -24px -16px 0; padding: 24px 24px 25px; background: linear-gradient(112deg, #ff8c1a, #f26900); border-radius: 0 0 22px 0; }

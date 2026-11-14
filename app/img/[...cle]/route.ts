@@ -17,7 +17,7 @@ export async function GET(
   return new Response(objet.body, {
     headers: {
       "Content-Type": MIME_IMAGE[type],
-      "Cache-Control": "public, max-age=31536000, immutable",
+      "Cache-Control": "public, max-age=31536000, s-maxage=31536000, immutable",
       ETag: objet.httpEtag,
       "X-Content-Type-Options": "nosniff",
     },

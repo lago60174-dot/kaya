@@ -1,35 +1,14 @@
 import "server-only";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
-import type { BucketLu } from "./verification";
+import { configR2 } from "@/lib/env";
+import { creerBucketS3, type BucketImages } from "./s3";
 
-export interface BucketImages extends BucketLu {
-  lire(cle: string): Promise<{ body: ReadableStream; httpEtag: string } | null>;
-}
+export type { BucketImages };
 
-interface BindingR2 extends BucketLu {
-  get(
-    cle: string,
-    options?: { range: { offset: number; length: number } },
-  ): Promise<{
-    arrayBuffer(): Promise<ArrayBuffer>;
-    body: ReadableStream;
-    httpEtag: string;
-  } | null>;
-}
-
-/** Binding R2 `IMAGES` (wrangler.jsonc). Null s'il n'est pas disponible (ex. test local sans R2). */
+/** Bucket R2 des images (variables R2_*). Null si elles ne sont pas configurées. */
 export function bucketImages(): BucketImages | null {
   try {
-    const binding = (
-      getCloudflareContext().env as unknown as { IMAGES?: BindingR2 }
-    ).IMAGES;
-    if (!binding) return null;
-    return {
-      head: (cle) => binding.head(cle),
-      get: (cle, options) => binding.get(cle, options),
-      delete: (cle) => binding.delete(cle),
-      lire: (cle) => binding.get(cle),
-    };
+    const config = configR2();
+    return config ? creerBucketS3(config) : null;
   } catch {
     return null;
   }

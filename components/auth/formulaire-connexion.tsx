@@ -2,7 +2,6 @@
 
 import { useActionState } from "react";
 import { connecter, type EtatFormulaire } from "@/server/auth/actions";
-import { Turnstile } from "../turnstile";
 import { BoutonEnvoi } from "./bouton-envoi";
 import { Champ } from "./champ";
 
@@ -29,7 +28,6 @@ export function FormulaireConnexion() {
         required
         erreur={etat.champs?.motDePasse}
       />
-      <Turnstile />
       {etat.erreur && (
         <p role="alert" className="text-danger text-sm">
           {etat.erreur}

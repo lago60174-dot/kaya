@@ -8,19 +8,11 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "format": "prettier --write .",
-    "prepare": "husky",
     "demo:reset": "supabase db reset",
     "types": "supabase gen types typescript --local > lib/database.types.ts",
-    "build:cf": "opennextjs-cloudflare build",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "vercel --prod"
   },
   "dependencies": {
-    "@opennextjs/cloudflare": "1.20.16",
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.119.0",
     "aws4fetch": "1.0.20",
@@ -36,22 +28,13 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "0.5.16",
     "@tailwindcss/turbopack": "4",
     "@types/node": "22.20.5",
     "@types/react": "19",
     "@types/react-dom": "19",
-    "@vitest/coverage-v8": "5.1.0",
     "eslint": "9",
     "eslint-config-next": "16.4.5",
-    "eslint-config-prettier": "10.1.8",
-    "husky": "9.1.7",
-    "lint-staged": "17.6.0",
-    "prettier": "3.9.10",
-    "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4",
-    "typescript": "5",
-    "vitest": "5.1.0",
-    "wrangler": "4.159.0"
+    "typescript": "5"
   }
 }

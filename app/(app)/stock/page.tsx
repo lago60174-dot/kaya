@@ -46,7 +46,7 @@ export default async function PageStock({
     : null;
 
   return (
-    <div className="flex max-w-2xl flex-col gap-4">
+    <div className="flex max-w-2xl flex-col gap-5">
       <div className="flex items-center justify-between gap-2">
         <h1 className="text-2xl font-bold">Stock</h1>
         {proprietaire && (
@@ -71,7 +71,7 @@ export default async function PageStock({
               : "Aucun produit pour le moment."}
         </p>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="kaya-stock-grid flex flex-col gap-2">
           {page.produits.map((l) => (
             <li key={l.id}>
               <Link

@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import type { z } from "zod";
 import { COOKIE_PARRAINAGE, normaliserCode } from "@/lib/auth/parrainage";
@@ -12,7 +12,6 @@ import {
 import { accueilPour } from "@/lib/permissions";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { supabaseServeur } from "@/lib/supabase/server";
-import { verifierTurnstile } from "@/lib/turnstile";
 import { chargerProfil } from "./profil";
 import { exigerRole } from "./session";
 
@@ -21,7 +20,6 @@ export interface EtatFormulaire {
   champs?: Record<string, string>;
 }
 
-const ERREUR_ROBOT = "La vérification anti-robot a échoué. Réessayez.";
 const ERREUR_GENERIQUE = "Une erreur est survenue. Réessayez dans un instant.";
 
 function champsEnErreur(erreur: z.ZodError): EtatFormulaire {
@@ -30,20 +28,10 @@ function champsEnErreur(erreur: z.ZodError): EtatFormulaire {
   return { erreur: "Vérifiez les champs en rouge.", champs };
 }
 
-async function robotVerifie(formData: FormData): Promise<boolean> {
-  const jeton = formData.get("cf-turnstile-response");
-  return verifierTurnstile(typeof jeton === "string" ? jeton : null, {
-    secret: process.env.TURNSTILE_SECRET_KEY,
-    ip: (await headers()).get("cf-connecting-ip") ?? undefined,
-    production: process.env.NODE_ENV === "production",
-  });
-}
-
 export async function inscrire(
   _etat: EtatFormulaire,
   formData: FormData,
 ): Promise<EtatFormulaire> {
-  if (!(await robotVerifie(formData))) return { erreur: ERREUR_ROBOT };
   const lu = inscriptionSchema.safeParse(Object.fromEntries(formData));
   if (!lu.success) return champsEnErreur(lu.error);
   const d = lu.data;
@@ -101,7 +89,6 @@ export async function connecter(
   _etat: EtatFormulaire,
   formData: FormData,
 ): Promise<EtatFormulaire> {
-  if (!(await robotVerifie(formData))) return { erreur: ERREUR_ROBOT };
   const lu = connexionSchema.safeParse(Object.fromEntries(formData));
   if (!lu.success) return champsEnErreur(lu.error);
 

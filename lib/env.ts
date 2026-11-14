@@ -7,7 +7,6 @@ const schemaPublic = z.object({
 
 const schemaServeur = schemaPublic.extend({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
-  TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
   R2_ACCOUNT_ID: z.string().min(1).optional(),
   R2_ACCESS_KEY_ID: z.string().min(1).optional(),
   R2_SECRET_ACCESS_KEY: z.string().min(1).optional(),
@@ -24,8 +23,7 @@ export function envPublic() {
 
 /** Variables serveur uniquement. Ne jamais importer depuis un composant client. */
 export function envServeur() {
-  // Accès littéraux : Next les remplace au build. Sur Cloudflare, les variables de build
-  // ne sont pas dans process.env au runtime, contrairement aux secrets du Worker.
+  // Accès littéraux : Next remplace les NEXT_PUBLIC_* au build.
   return schemaServeur.parse({
     ...process.env,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,

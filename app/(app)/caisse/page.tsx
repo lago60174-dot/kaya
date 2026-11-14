@@ -147,7 +147,7 @@ export default async function PageCaisse({
   const orange = r.orangeMoney - r.orangeMoneyRembourse;
 
   return (
-    <div className="flex max-w-xl flex-col gap-6">
+    <div className="kaya-cash-page flex max-w-xl flex-col gap-6">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">Caisse du jour</h1>
         <p className="text-muted">{jourLong(jour)}</p>
