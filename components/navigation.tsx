@@ -3,13 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Activity,
   Bell,
   BookText,
   Boxes,
   ChevronRight,
-  CircleHelp,
+  Ellipsis,
   ClipboardList,
   LayoutDashboard,
   LogOut,
@@ -40,8 +41,14 @@ const ordreMobile = ["/patron", "/vente", "/stock", "/clients", "/caisse"];
 
 export function Navigation({ menu, nom }: { menu: EntreeMenu[]; nom: string | null }) {
   const chemin = usePathname();
+  const [plusOuvert, setPlusOuvert] = useState(false);
+  // Referme le panneau « Plus » à chaque changement de page.
+  useEffect(() => setPlusOuvert(false), [chemin]);
   const estActif = (href: string) => chemin === href || (href !== "/" && chemin.startsWith(`${href}/`));
   const liensMobile = ordreMobile.map((href) => menu.find((m) => m.href === href)).filter((m): m is EntreeMenu => Boolean(m));
+
+  // Tout ce qui n'est pas dans la barre du bas passe dans « Plus » : plus aucun écran n'est inaccessible sur mobile.
+  const autresLiens = menu.filter((m) => !liensMobile.some((l) => l.href === m.href));
 
   const lien = (m: EntreeMenu, mobile = false) => {
     const Icone = icones[m.href] ?? BookText;
@@ -90,11 +97,35 @@ export function Navigation({ menu, nom }: { menu: EntreeMenu[]; nom: string | nu
         </Link>
         <div className="kaya-mobile-status"><span /> En ligne</div>
       </header>
+      {plusOuvert && (
+        <button
+          type="button"
+          aria-label="Fermer le menu"
+          className="kaya-more-backdrop"
+          onClick={() => setPlusOuvert(false)}
+        />
+      )}
+      {plusOuvert && (
+        <div id="menu-plus" role="dialog" aria-label="Autres pages" className="kaya-more-sheet">
+          {autresLiens.map((m) => lien(m, true))}
+          <form action={deconnecter}>
+            <button type="submit" className="kaya-nav-mobile-link kaya-more-logout">
+              <LogOut aria-hidden="true" size={19} /><span>Se déconnecter</span>
+            </button>
+          </form>
+        </div>
+      )}
       <nav aria-label="Navigation mobile" className="kaya-mobile-nav">
         {liensMobile.map((m) => lien(m, true))}
-        <Link href={menu.find((m) => m.href === "/parametres")?.href ?? "/recus"} className="kaya-nav-mobile-link kaya-nav-more">
-          <CircleHelp size={19} /><span>Plus</span>
-        </Link>
+        <button
+          type="button"
+          aria-expanded={plusOuvert}
+          aria-controls="menu-plus"
+          onClick={() => setPlusOuvert((o) => !o)}
+          className={`kaya-nav-mobile-link kaya-nav-more ${plusOuvert ? "is-active" : ""}`}
+        >
+          <Ellipsis aria-hidden="true" size={19} /><span>Plus</span>
+        </button>
       </nav>
     </>
   );

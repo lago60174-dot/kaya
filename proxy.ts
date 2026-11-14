@@ -7,7 +7,19 @@ import { zonePourChemin } from "@/lib/permissions";
  * Rafraîchit la session Supabase et renvoie les visiteurs non connectés vers /connexion.
  * Contrôle de premier niveau seulement : les rôles sont vérifiés dans les pages, les actions et la RLS.
  */
+// Pages publiques sans session : on évite l'appel à Supabase pour qu'elles restent servies par le CDN.
+const PAGES_SANS_SESSION = new Set([
+  "/",
+  "/partenaire",
+  "/mentions-legales",
+  "/confidentialite",
+  "/conditions",
+  "/conditions-partenaires",
+  "/hors-ligne",
+]);
+
 export async function proxy(request: NextRequest) {
+  if (PAGES_SANS_SESSION.has(request.nextUrl.pathname)) return NextResponse.next();
   const env = envPublic();
   let reponse = NextResponse.next({ request });
   const supabase = createServerClient(

@@ -13,8 +13,9 @@ import { donneesStructurees, jsonPourScript } from "@/lib/vitrine/offre";
 import { lienContact } from "@/lib/vitrine/site";
 import { chargerOffrePublique } from "@/server/vitrine/offre-publique";
 
-// Les plans viennent de la base : la page ne doit jamais être figée au moment du build.
-export const dynamic = "force-dynamic";
+// Page servie depuis le CDN et régénérée toutes les 60 s : les tarifs viennent de la base sans pénaliser chaque visite
+// (indispensable pour les connexions lentes). Un plan activé en administration apparaît en moins d'une minute.
+export const revalidate = 60;
 
 const TITRE =
   "Kaya : gestion de stock et de caisse pour quincaillerie au Cameroun";

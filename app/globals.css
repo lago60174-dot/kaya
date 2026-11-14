@@ -178,7 +178,7 @@ body { background: #fff8f1; color: var(--kaya-navy); }
   .kaya-sale > div:last-child { left: 226px; }
 }
 @media (max-width: 760px) {
-  .kaya-app-shell { display: block; min-height: 100vh; padding-top: 64px; padding-bottom: 76px; }
+  .kaya-app-shell { display: block; min-height: 100vh; padding-top: 64px; padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
   .kaya-sidebar { display: none; }
   .kaya-mobile-header { position: fixed; inset: 0 0 auto; z-index: 30; display: flex; height: 64px; align-items: center; justify-content: space-between; padding: 0 17px; color: #fff; background: linear-gradient(105deg, #ff8b16, #f26900); box-shadow: 0 4px 18px rgba(226,96,0,.2); }
   .kaya-mobile-brand { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; }
@@ -186,10 +186,15 @@ body { background: #fff8f1; color: var(--kaya-navy); }
   .kaya-mobile-brand strong { font-size: 25px; font-weight: 850; letter-spacing: -.8px; }
   .kaya-mobile-status { display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,.95); font-size: 11px; font-weight: 700; }
   .kaya-mobile-status span { width: 7px; height: 7px; border-radius: 50%; background: #b7f3c9; box-shadow: 0 0 0 3px rgba(255,255,255,.15); }
-  .kaya-main { padding: 19px 14px 30px; }
-  .kaya-mobile-nav { position: fixed; inset: auto 0 0; z-index: 40; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; padding: 7px 5px max(7px, env(safe-area-inset-bottom)); border-top: 1px solid #f0e4da; background: rgba(255,255,255,.97); box-shadow: 0 -7px 25px rgba(30,28,25,.07); backdrop-filter: blur(14px); }
+  .kaya-main { padding: 19px 14px 40px; }
+  .kaya-mobile-nav { position: fixed; inset: auto 0 0; z-index: 40; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; padding: 7px 5px max(7px, env(safe-area-inset-bottom)); border-top: 1px solid #f0e4da; background: rgba(255,255,255,.97); box-shadow: 0 -7px 25px rgba(30,28,25,.07); backdrop-filter: blur(14px); }
   .kaya-nav-mobile-link { display: flex; min-width: 0; min-height: 55px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border-radius: 12px; color: #6c778b; font-size: 10px; font-weight: 700; text-decoration: none; }
   .kaya-nav-mobile-link.is-active { color: #ed6900; background: #fff0e2; }
+  .kaya-nav-more { border: 0; background: transparent; font-family: inherit; cursor: pointer; }
+  .kaya-more-backdrop { position: fixed; inset: 0; z-index: 44; border: 0; background: rgba(20,16,12,.35); }
+  .kaya-more-sheet { position: fixed; right: 10px; bottom: calc(78px + env(safe-area-inset-bottom)); left: 10px; z-index: 45; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 10px; border: 1px solid #f0e4da; border-radius: 18px; background: #fff; box-shadow: 0 12px 40px rgba(30,28,25,.22); }
+  .kaya-more-sheet form { display: contents; }
+  .kaya-more-logout { width: 100%; border: 0; background: transparent; font-family: inherit; color: #b42318; cursor: pointer; }
   .kaya-nav-mobile-link span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .kaya-dashboard-header { padding: 18px; border-radius: 17px; }
   .kaya-dashboard-kpis { gap: 10px; }

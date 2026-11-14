@@ -72,11 +72,19 @@ export async function envoyerImage(
   });
   if (!reponse.url || !reponse.cle)
     throw new Error(reponse.erreur ?? "L'envoi de la photo a échoué.");
-  const envoi = await fetch(reponse.url, {
-    method: "PUT",
-    body: blob,
-    headers: { "Content-Type": MIME_IMAGE[type] },
-  });
+  let envoi: Response;
+  try {
+    envoi = await fetch(reponse.url, {
+      method: "PUT",
+      body: blob,
+      headers: { "Content-Type": MIME_IMAGE[type] },
+    });
+  } catch {
+    // « Failed to fetch » : le navigateur n'a pas pu joindre R2 (CORS du bucket, mauvais R2_ACCOUNT_ID ou réseau coupé).
+    throw new Error(
+      "La photo n'a pas pu être envoyée vers le stockage. Vérifiez votre connexion ; si le problème continue, la configuration CORS du bucket R2 est à corriger (voir docs/R2.md).",
+    );
+  }
   if (!envoi.ok)
     throw new Error(
       "L'envoi de la photo a échoué. Vérifiez votre connexion et réessayez.",
