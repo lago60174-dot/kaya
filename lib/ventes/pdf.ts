@@ -1,6 +1,11 @@
-import { PDFDocument, StandardFonts, rgb, type PDFFont } from "pdf-lib";
-import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
-import { libelleMode } from "./paiements";
+import {
+  PDFDocument,
+  StandardFonts,
+  rgb,
+  type PDFFont,
+  type PDFImage,
+} from "pdf-lib";
+import { documentDepuisVente, type DocumentRecu } from "@/lib/print/document";
 import type { RecuAffichable } from "./recu";
 
 const LARGEUR = 300;
@@ -61,14 +66,38 @@ interface Operation {
   alignement?: Alignement;
   couleur?: [number, number, number];
   trait?: boolean;
+  image?: { objet: PDFImage; largeur: number; hauteur: number };
 }
 
 const GRIS: [number, number, number] = [0.4, 0.4, 0.4];
 const ROUGE: [number, number, number] = [0.72, 0.11, 0.11];
 
-/** Reçu PDF d'une seule page, aussi haute que nécessaire : lisible sur un téléphone, partageable par WhatsApp. */
-export async function genererRecuPdf(
+/** Logo de la boutique, en PNG ou JPEG (pdf-lib ne lit pas le WebP). */
+export interface LogoPdf {
+  octets: Uint8Array;
+  format: "png" | "jpg";
+}
+
+const LOGO_MAX = { largeur: 150, hauteur: 56 };
+
+/** Reçu de vente en PDF. */
+export function genererRecuPdf(
   recu: RecuAffichable,
+  options: { logo?: LogoPdf | null } = {},
+): Promise<Uint8Array> {
+  return genererDocumentPdf(documentDepuisVente(recu), {
+    ...options,
+    date: recu.date,
+  });
+}
+
+/**
+ * Document PDF d'une seule page, aussi haute que nécessaire : lisible sur un téléphone, partageable par WhatsApp.
+ * Sert aux reçus de vente et de paiement. Un logo illisible est ignoré : il ne doit jamais empêcher le reçu.
+ */
+export async function genererDocumentPdf(
+  recu: DocumentRecu,
+  options: { logo?: LogoPdf | null; date?: string } = {},
 ): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const normal = await doc.embedFont(StandardFonts.Helvetica);
@@ -100,7 +129,7 @@ export async function genererRecuPdf(
   ) => {
     const police = o.gras ? gras : normal;
     const d = nettoyerPourPdf(droite);
-    const largeurDroite = police.widthOfTextAtSize(d, taille) + 8;
+    const largeurDroite = d ? police.widthOfTextAtSize(d, taille) + 8 : 0;
     const lignes = couper(
       nettoyerPourPdf(gauche),
       police,
@@ -110,7 +139,7 @@ export async function genererRecuPdf(
     lignes.forEach((ligne, i) => {
       y += taille * 1.3;
       ops.push({ y, texte: ligne, taille, alignement: "gauche", ...o });
-      if (i === 0)
+      if (i === 0 && d)
         ops.push({ y, texte: d, taille, alignement: "droite", ...o });
     });
   };
@@ -121,6 +150,26 @@ export async function genererRecuPdf(
   };
   const espace = (n: number) => (y += n);
 
+  if (options.logo) {
+    try {
+      const objet =
+        options.logo.format === "png"
+          ? await doc.embedPng(options.logo.octets)
+          : await doc.embedJpg(options.logo.octets);
+      const echelle = Math.min(
+        1,
+        LOGO_MAX.largeur / objet.width,
+        LOGO_MAX.hauteur / objet.height,
+      );
+      const largeur = objet.width * echelle;
+      const hauteur = objet.height * echelle;
+      y += hauteur;
+      ops.push({ y, image: { objet, largeur, hauteur } });
+      y += 4;
+    } catch {
+      // logo illisible : le reçu reste valable sans lui
+    }
+  }
   texte(recu.boutique.nom, 14, { gras: true, alignement: "centre" });
   if (recu.boutique.adresse)
     texte(recu.boutique.adresse, 8.5, { alignement: "centre", couleur: GRIS });
@@ -130,9 +179,10 @@ export async function genererRecuPdf(
       couleur: GRIS,
     });
   trait();
-  texte(`Reçu ${recu.numeroRecu}`, 10.5, { gras: true });
-  texte(formatDateHeure(recu.date), 9, { couleur: GRIS });
-  if (recu.client) texte(`Client : ${recu.client.nom}`, 9);
+  texte(recu.titre, 10.5, { gras: true });
+  texte(recu.date, 9, { couleur: GRIS });
+  if (recu.client) texte(`Client : ${recu.client}`, 9);
+  if (recu.precision) texte(recu.precision, 9);
   if (recu.annule) {
     espace(4);
     texte("ANNULÉ", 16, { gras: true, alignement: "centre", couleur: ROUGE });
@@ -140,40 +190,40 @@ export async function genererRecuPdf(
   trait();
 
   for (const l of recu.lignes) {
-    deuxColonnes(l.nom, formatFcfa(l.total), 9.5, { gras: true });
-    texte(
-      `${formatQuantite(l.quantite)} ${l.unite} × ${formatFcfa(l.prixUnitaire)}${l.remiseLigne > 0 ? ` (remise ${formatFcfa(l.remiseLigne)})` : ""}`,
-      8,
-      { couleur: GRIS },
-    );
+    deuxColonnes(l.designation, l.montant, 9.5, { gras: true });
+    if (l.detail) texte(l.detail, 8, { couleur: GRIS });
     espace(3);
   }
   trait();
-  if (recu.remise > 0)
-    deuxColonnes("Remise", `-${formatFcfa(recu.remise)}`, 9.5);
-  deuxColonnes("TOTAL", formatFcfa(recu.total), 12.5, { gras: true });
-  for (const p of recu.paiements)
-    deuxColonnes(libelleMode(p.mode), formatFcfa(p.montant), 9, {
-      couleur: GRIS,
-    });
-  if (recu.credit > 0)
-    deuxColonnes("Reste à payer", formatFcfa(recu.credit), 10.5, {
-      gras: true,
-    });
-  if (recu.boutique.mentionLegale) {
+  for (const t of recu.totaux) {
+    if (t.niveau === "majeur")
+      deuxColonnes(t.libelle, t.montant, 12.5, { gras: true });
+    else if (t.niveau === "fort")
+      deuxColonnes(t.libelle, t.montant, 10.5, { gras: true });
+    else if (t.niveau === "discret")
+      deuxColonnes(t.libelle, t.montant, 9, { couleur: GRIS });
+    else deuxColonnes(t.libelle, t.montant, 9.5);
+  }
+  if (recu.mentionLegale) {
     espace(8);
-    texte(recu.boutique.mentionLegale, 7.5, {
-      alignement: "centre",
-      couleur: GRIS,
-    });
+    texte(recu.mentionLegale, 7.5, { alignement: "centre", couleur: GRIS });
   }
   espace(6);
-  texte("Merci de votre confiance !", 9, { alignement: "centre" });
+  texte(recu.remerciement, 9, { alignement: "centre" });
 
   const hauteur = Math.max(160, y + MARGE);
   const page = doc.addPage([LARGEUR, hauteur]);
   for (const op of ops) {
     const yPdf = hauteur - op.y;
+    if (op.image) {
+      page.drawImage(op.image.objet, {
+        x: (LARGEUR - op.image.largeur) / 2,
+        y: yPdf,
+        width: op.image.largeur,
+        height: op.image.hauteur,
+      });
+      continue;
+    }
     if (op.trait) {
       page.drawLine({
         start: { x: MARGE, y: yPdf },
@@ -201,8 +251,8 @@ export async function genererRecuPdf(
       color: rgb(r, g, b),
     });
   }
-  doc.setTitle(`Reçu ${recu.numeroRecu}`);
+  doc.setTitle(recu.titre);
   doc.setProducer("Kaya");
-  doc.setCreationDate(new Date(recu.date));
+  if (options.date) doc.setCreationDate(new Date(options.date));
   return doc.save();
 }

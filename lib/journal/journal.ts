@@ -41,6 +41,11 @@ export const ACTIONS: Record<string, DefinitionAction> = {
     categorie: "caisse",
     base: false,
   },
+  depense_annulee: {
+    libelle: "Dépense annulée",
+    categorie: "caisse",
+    base: false,
+  },
   stock_bas: { libelle: "Stock bas", categorie: "stock", base: false },
   stock_negatif: { libelle: "Stock négatif", categorie: "stock", base: false },
   stock_entree: { libelle: "Entrée de stock", categorie: "stock", base: false },
@@ -162,6 +167,14 @@ export function decrire(action: string, d: Details): string {
       const mode = texte(d.mode);
       const cat = texte(d.categorie);
       return `Dépense ${cat ? libelleCategorie(cat).toLowerCase() : ""} de ${fcfa(d.montant) ?? "?"}${mode ? ` (${libelleMode(mode)})` : ""}.`.replace(
+        "  ",
+        " ",
+      );
+    }
+    case "depense_annulee": {
+      const cat = texte(d.categorie);
+      const motif = texte(d.motif);
+      return `Dépense ${cat ? libelleCategorie(cat).toLowerCase() : ""} de ${fcfa(d.montant) ?? "?"} annulée${motif ? `. Motif : ${motif}` : ""}.`.replace(
         "  ",
         " ",
       );

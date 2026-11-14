@@ -1,3 +1,4 @@
+import { ChampLogo } from "@/components/boutique/champ-logo";
 import { ActionsVendeur } from "@/components/vendeurs/actions-vendeur";
 import { FormulaireVendeur } from "@/components/vendeurs/formulaire-vendeur";
 import { FormulaireParametres } from "@/components/parametres/formulaire-parametres";
@@ -6,6 +7,7 @@ import {
   LIBELLE_STATUT_FACTURE,
 } from "@/lib/abonnement/abonnement";
 import { formatFcfa } from "@/lib/format";
+import { urlImage } from "@/server/images/cles";
 import { limite } from "@/lib/plans";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
@@ -32,6 +34,12 @@ export default async function PageParametres() {
     .select("id, nom, actif")
     .eq("role", "vendeur")
     .order("cree_le");
+  const { data: boutique } = await supabase
+    .from("boutiques")
+    .select("logo_cle")
+    .eq("id", profil.boutiqueIds[0] ?? "")
+    .maybeSingle();
+  const logoUrl = boutique?.logo_cle ? urlImage(boutique.logo_cle) : null;
   const max = profil.plan ? limite(profil.plan, "vendeurs") : 0;
   const actifs = (vendeurs ?? []).filter((v) => v.actif).length;
   const peutAjouter = max === null || actifs < max;
@@ -52,6 +60,13 @@ export default async function PageParametres() {
           Impossible de charger les paramètres de la boutique. Reconnectez-vous.
         </p>
       )}
+      <section className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold">Logo de ma boutique</h2>
+        <p className="text-muted text-sm">
+          Il s&apos;affiche sur vos reçus, vos PDF et vos factures A4.
+        </p>
+        <ChampLogo logoUrl={logoUrl} />
+      </section>
       <section className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">Mes vendeurs</h2>
         {(vendeurs ?? []).length === 0 ? (

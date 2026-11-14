@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AnnulerDepense } from "@/components/caisse/annuler-depense";
 import { FormulaireCloture } from "@/components/caisse/formulaire-cloture";
 import { FormulaireDepense } from "@/components/caisse/formulaire-depense";
 import { ValiderCloture } from "@/components/caisse/valider-cloture";
@@ -255,7 +256,15 @@ export default async function PageCaisse({
         </dl>
       </section>
 
-      {estAujourdhui && <FormulaireDepense role={profil.role} />}
+      {estAujourdhui &&
+        (caisse.cloture ? (
+          <p role="status" className="bg-brand-soft rounded-lg p-3 text-sm">
+            La caisse du jour est clôturée : une nouvelle dépense se saisit
+            demain.
+          </p>
+        ) : (
+          <FormulaireDepense role={profil.role} />
+        ))}
 
       <section aria-label="Dépenses du jour" className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold">Dépenses du jour</h2>
@@ -266,23 +275,35 @@ export default async function PageCaisse({
             {depenses.map((d) => (
               <li
                 key={d.id}
-                className="border-border flex items-baseline justify-between gap-3 rounded-lg border p-3 text-sm"
+                className="border-border flex flex-col rounded-lg border p-3 text-sm"
               >
-                <span>
-                  <span className="font-medium">
-                    {libelleCategorie(d.categorie)}
-                  </span>{" "}
-                  · {libelleMode(d.mode)}
-                  {d.note ? ` · ${d.note}` : ""}
-                  <br />
-                  <span className="text-muted">
-                    {formatDateHeure(d.date)}
-                    {d.auteur ? ` · ${d.auteur}` : ""}
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className={d.annulee ? "text-muted line-through" : ""}>
+                    <span className="font-medium">
+                      {libelleCategorie(d.categorie)}
+                    </span>{" "}
+                    · {libelleMode(d.mode)}
+                    {d.note ? ` · ${d.note}` : ""}
+                    <br />
+                    <span className="text-muted">
+                      {formatDateHeure(d.date)}
+                      {d.auteur ? ` · ${d.auteur}` : ""}
+                    </span>
                   </span>
-                </span>
-                <span className="font-semibold whitespace-nowrap">
-                  {formatFcfa(d.montant)}
-                </span>
+                  <span
+                    className={`font-semibold whitespace-nowrap ${d.annulee ? "text-muted line-through" : ""}`}
+                  >
+                    {formatFcfa(d.montant)}
+                  </span>
+                </div>
+                {d.annulee && (
+                  <p className="text-danger text-xs">
+                    Annulée : {d.motifAnnulation}
+                  </p>
+                )}
+                {proprietaire && !d.annulee && !caisse.cloture && (
+                  <AnnulerDepense depenseId={d.id} />
+                )}
               </li>
             ))}
           </ul>

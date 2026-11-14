@@ -13,6 +13,8 @@ export interface RecuAffichable {
     adresse: string | null;
     telephone: string | null;
     mentionLegale: string | null;
+    /** Clé R2 du logo (PNG), si la boutique en a un. */
+    logoCle?: string | null;
   };
   client: { nom: string; telephone: string | null } | null;
   lignes: {
@@ -48,6 +50,7 @@ const publicSchema = z.object({
     adresse: z.string().nullable(),
     telephone: z.string().nullable(),
     mention_legale: z.string().nullable(),
+    logo_cle: z.string().nullable().optional(),
   }),
   client_nom: z.string().nullable(),
   lignes: z.array(
@@ -78,6 +81,7 @@ export function recuPublicDepuisJson(json: unknown): RecuAffichable {
       adresse: r.boutique.adresse,
       telephone: r.boutique.telephone,
       mentionLegale: r.boutique.mention_legale,
+      logoCle: r.boutique.logo_cle ?? null,
     },
     client: r.client_nom ? { nom: r.client_nom, telephone: null } : null,
     lignes: r.lignes.map((l) => ({

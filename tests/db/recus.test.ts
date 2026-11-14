@@ -239,6 +239,78 @@ describe("annulation et historique", () => {
   });
 });
 
+describe("logo de la boutique", () => {
+  const LOGO = () => `${f.orgA}/${"b".repeat(64)}-l.png`;
+  const definir = (
+    utilisateur: (typeof U)[keyof typeof U],
+    cle: string | null,
+  ) =>
+    lignes(db, utilisateur, "select definir_logo_boutique($1, $2)", [
+      f.boutiqueA,
+      cle,
+    ]);
+  const logoActuel = async () =>
+    (
+      await lignes<{ logo_cle: string | null }>(
+        db,
+        U.patronA,
+        "select logo_cle from boutiques where id = $1",
+        [f.boutiqueA],
+      )
+    )[0].logo_cle;
+
+  it("le propriétaire l'enregistre, il apparaît dans le reçu public, et c'est journalisé", async () => {
+    await definir(U.patronA, LOGO());
+    const r = (await publique(ventes[2].jeton))!;
+    expect((r.boutique as { logo_cle: string }).logo_cle).toBe(LOGO());
+    const journal = await lignes<{ details: { champs: string[] } }>(
+      db,
+      U.patronA,
+      "select details from journal_activite where action = 'parametres_modifies' and details->'champs' ? 'logo'",
+    );
+    expect(journal.length).toBeGreaterThan(0);
+  });
+  it("le vendeur ne peut pas le changer", async () => {
+    await expect(definir(U.vendeurA, null)).rejects.toThrow(/propriétaire/);
+    expect(await logoActuel()).toBe(LOGO());
+  });
+  it("l'écriture directe sur boutiques n'existe plus, même pour le propriétaire", async () => {
+    await expect(
+      lignes(
+        db,
+        U.patronA,
+        "update boutiques set logo_cle = null where id = $1",
+        [f.boutiqueA],
+      ),
+    ).rejects.toThrow();
+    expect(await logoActuel()).toBe(LOGO());
+  });
+  it("refuse une clé qui n'a pas la forme d'un logo ou qui vient d'une autre organisation (pas de chemin forgé)", async () => {
+    for (const mauvaise of [
+      "../../secret.png",
+      `${f.orgA}/${"b".repeat(64)}.webp`,
+      `${f.orgB}/${"b".repeat(64)}-l.png`,
+      "x",
+    ])
+      await expect(definir(U.patronA, mauvaise)).rejects.toThrow();
+    expect(await logoActuel()).toBe(LOGO());
+  });
+  it("une clé identique ne change rien et n'écrit pas au journal", async () => {
+    const avant = await lignes<{ n: string }>(
+      db,
+      U.patronA,
+      "select count(*)::text as n from journal_activite where action = 'parametres_modifies'",
+    );
+    await definir(U.patronA, LOGO());
+    const apres = await lignes<{ n: string }>(
+      db,
+      U.patronA,
+      "select count(*)::text as n from journal_activite where action = 'parametres_modifies'",
+    );
+    expect(apres[0].n).toBe(avant[0].n);
+  });
+});
+
 describe("recu_public", () => {
   it("donne le reçu à n'importe qui avec le bon jeton, sans connexion", async () => {
     const r = (await publique(ventes[2].jeton))!;
@@ -283,7 +355,14 @@ describe("recu_public", () => {
     ]);
   });
   it("ne contient ni marge, ni prix d'achat, ni téléphone, ni identifiants internes", async () => {
-    const texte = JSON.stringify(await publique(ventes[2].jeton));
+    // La clé du logo (dossier = organisation) est le seul identifiant exposé : indispensable pour afficher le logo,
+    // et un identifiant d'organisation ne donne aucun accès (RLS). On l'écarte pour contrôler tout le reste.
+    const brut = (await publique(ventes[2].jeton))!;
+    const boutique = brut.boutique as Record<string, unknown>;
+    const texte = JSON.stringify({
+      ...brut,
+      boutique: { ...boutique, logo_cle: null },
+    });
     expect(texte).not.toMatch(
       /cout|marge|prix_achat|699111111|organisation_id|vendeur_id|jeton|client_id/,
     );

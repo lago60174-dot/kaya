@@ -10,6 +10,9 @@ export interface LigneDepense {
   note: string | null;
   date: string;
   auteur: string | null;
+  /** Annulée : visible, barrée, et exclue de la caisse. */
+  annulee: boolean;
+  motifAnnulation: string | null;
 }
 
 export interface Cloture {
@@ -105,7 +108,9 @@ export async function lireCaisse(
       .maybeSingle(),
     supabase
       .from("depenses")
-      .select("id, categorie, montant, mode, note, date, auteur_id")
+      .select(
+        "id, categorie, montant, mode, note, date, auteur_id, annulee_le, motif_annulation",
+      )
       .eq("boutique_id", boutiqueId)
       .gte("date", debut)
       .lt("date", fin)
@@ -126,6 +131,8 @@ export async function lireCaisse(
       note: d.note,
       date: d.date,
       auteur: d.auteur_id ? (noms.get(d.auteur_id) ?? null) : null,
+      annulee: d.annulee_le !== null,
+      motifAnnulation: d.motif_annulation,
     })),
   };
 }

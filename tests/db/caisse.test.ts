@@ -219,6 +219,82 @@ describe("enregistrer_depense", () => {
   });
 });
 
+describe("annuler_depense", () => {
+  const annuler = (
+    user: string,
+    id: string,
+    motif: string,
+    boutique = f.boutiqueA,
+  ) =>
+    lignes(db, user, "select annuler_depense($1, $2, $3)", [
+      boutique,
+      id,
+      motif,
+    ]);
+
+  it("est réservée au propriétaire, avec un motif ; la dépense annulée ne sort plus de la caisse mais reste visible", async () => {
+    const avant = (await caisse(U.patronA)).depenses_especes;
+    const d = await depenser(U.vendeurA, { montant: 5000 }); // « 50 000 » tapé par erreur, par exemple
+    expect((await caisse(U.patronA)).depenses_especes).toBe(avant + 5000);
+    await expect(annuler(U.vendeurA, d.id, "oups")).rejects.toThrow(
+      /Seul le propriétaire/,
+    );
+    await expect(annuler(U.patronA, d.id, "  ")).rejects.toThrow(/motif/);
+    await expect(annuler(U.patronA, d.id, "x".repeat(201))).rejects.toThrow(
+      /trop long/,
+    );
+    await annuler(U.patronA, d.id, "Erreur de saisie");
+    expect((await caisse(U.patronA)).depenses_especes).toBe(avant);
+    const ligne = await db.query<{
+      annulee_le: string | null;
+      motif_annulation: string;
+    }>("select annulee_le, motif_annulation from depenses where id = $1", [
+      d.id,
+    ]);
+    expect(ligne.rows[0].annulee_le).not.toBeNull(); // elle reste en base, barrée à l'écran
+    expect(ligne.rows[0].motif_annulation).toBe("Erreur de saisie");
+    await expect(annuler(U.patronA, d.id, "encore")).rejects.toThrow(
+      /déjà annulée/,
+    );
+  });
+
+  it("une dépense ne se modifie jamais, sauf pour être annulée avec un motif ; elle ne se supprime pas", async () => {
+    const d = await depenser(U.vendeurA, { montant: 100 });
+    await expect(
+      db.query("update depenses set montant = 1 where id = $1", [d.id]),
+    ).rejects.toThrow(/ne peut pas être modifiée/);
+    await expect(
+      db.query("update depenses set annulee_le = now() where id = $1", [d.id]),
+    ).rejects.toThrow(/ne peut pas être modifiée/); // annulation sans motif
+    await expect(
+      db.query("delete from depenses where id = $1", [d.id]),
+    ).rejects.toThrow(/Suppression interdite/);
+    await annuler(U.patronA, d.id, "Nettoyage");
+    await expect(
+      db.query("update depenses set motif_annulation = 'autre' where id = $1", [
+        d.id,
+      ]),
+    ).rejects.toThrow(/ne peut pas être modifiée/); // le motif ne se réécrit pas
+  });
+
+  it("refuse une dépense inconnue ou d'une autre organisation", async () => {
+    await expect(annuler(U.patronA, cle(), "x")).rejects.toThrow(/introuvable/);
+    await expect(annuler(U.patronB, cle(), "x")).rejects.toThrow(
+      /Boutique introuvable/,
+    );
+  });
+
+  it("est signalée dans le journal (alerte)", async () => {
+    const d = await depenser(U.vendeurA, { montant: 250 });
+    await annuler(U.patronA, d.id, "Doublon");
+    const j = await db.query(
+      "select 1 from journal_activite where action = 'depense_annulee' and entite_id = $1 and alerte and details->>'motif' = 'Doublon'",
+      [d.id],
+    );
+    expect(j.rows).toHaveLength(1);
+  });
+});
+
 describe("calculer_caisse", () => {
   it("cohérence : le total de la base égale la formule TypeScript, y compris crédit, MoMo et annulation", async () => {
     await vendre(U.vendeurA, [{ mode: "especes" }], 2);
@@ -369,6 +445,58 @@ describe("cloturer_caisse et valider_cloture", () => {
       [id],
     );
     expect(j.rows).toHaveLength(1);
+  });
+
+  it("refuse une date de plus de 30 jours, accepte exactement 30 jours", async () => {
+    const ilYa = (n: number) =>
+      new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Douala" }).format(
+        new Date(Date.now() - n * 86_400_000),
+      );
+    await expect(
+      lignes(db, U.vendeurA, "select cloturer_caisse($1, $2::date, 0)", [
+        f.boutiqueA,
+        ilYa(31),
+      ]),
+    ).rejects.toThrow(/trop ancienne/);
+    await lignes(db, U.vendeurA, "select cloturer_caisse($1, $2::date, 0)", [
+      f.boutiqueA,
+      ilYa(30),
+    ]);
+  });
+
+  it("une fois la journée clôturée : plus de nouvelle dépense, plus d'annulation de dépense ; une vente reste possible et ne change pas la clôture", async () => {
+    await expect(depenser(U.vendeurA, { montant: 100 })).rejects.toThrow(
+      /déjà clôturée/,
+    );
+    await expect(depenser(U.patronA, { montant: 100 })).rejects.toThrow(
+      /déjà clôturée/,
+    );
+    const d = await db.query<{ id: string }>(
+      "select id from depenses where boutique_id = $1 and annulee_le is null and (date at time zone 'Africa/Douala')::date = $2::date limit 1",
+      [f.boutiqueA, jour()],
+    );
+    expect(d.rows.length).toBeGreaterThan(0);
+    await expect(
+      lignes(db, U.patronA, "select annuler_depense($1, $2, 'trop tard')", [
+        f.boutiqueA,
+        d.rows[0].id,
+      ]),
+    ).rejects.toThrow(/déjà clôturée/);
+
+    const figee = await db.query<{ especes_attendues: string }>(
+      "select especes_attendues from clotures_caisse where boutique_id = $1 and date = $2::date",
+      [f.boutiqueA, jour()],
+    );
+    const avant = (await caisse(U.patronA)).especes_attendues;
+    const v = await vendre(U.vendeurA, [{ mode: "especes" }], 1);
+    expect((await caisse(U.patronA)).especes_attendues).toBe(avant + v.total);
+    const apres = await db.query<{ especes_attendues: string }>(
+      "select especes_attendues from clotures_caisse where boutique_id = $1 and date = $2::date",
+      [f.boutiqueA, jour()],
+    );
+    expect(apres.rows[0].especes_attendues).toBe(
+      figee.rows[0].especes_attendues,
+    );
   });
 
   it("un vendeur ne clôture pas une boutique qui n'est pas la sienne", async () => {

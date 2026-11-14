@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import {
+  annulationDepenseSchema,
   clotureSchema,
   depenseSchema,
   validationClotureSchema,
@@ -37,6 +38,31 @@ export async function enregistrerDepenseAction(
     p_mode: lu.data.mode,
     p_note: lu.data.note ?? null,
     p_cle: lu.data.cle,
+  });
+  if (error) return { ok: false, erreur: messageErreurBase(error) };
+  revalidatePath("/caisse");
+  return { ok: true };
+}
+
+/** Annule une dépense saisie par erreur : propriétaire seulement, motif obligatoire (la base le vérifie aussi). */
+export async function annulerDepenseAction(
+  entree: unknown,
+): Promise<ResultatCaisse> {
+  const profil = await exigerRole("proprietaire");
+  const boutiqueId = profil.boutiqueIds[0];
+  if (!boutiqueId) return { ok: false, erreur: ERREUR_COMPTE };
+  const lu = annulationDepenseSchema.safeParse(entree);
+  if (!lu.success)
+    return {
+      ok: false,
+      erreur: lu.error.issues[0]?.message ?? "Annulation invalide.",
+    };
+  const { error } = await (
+    await supabaseServeur()
+  ).rpc("annuler_depense", {
+    p_boutique: boutiqueId,
+    p_depense: lu.data.depenseId,
+    p_motif: lu.data.motif,
   });
   if (error) return { ok: false, erreur: messageErreurBase(error) };
   revalidatePath("/caisse");

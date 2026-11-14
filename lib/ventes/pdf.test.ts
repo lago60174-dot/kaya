@@ -6,7 +6,13 @@ import {
   decodePDFRawStream,
 } from "pdf-lib";
 import { describe, expect, it } from "vitest";
-import { couper, genererRecuPdf, nettoyerPourPdf } from "./pdf";
+import { documentDepuisPaiement } from "@/lib/print/document";
+import {
+  couper,
+  genererDocumentPdf,
+  genererRecuPdf,
+  nettoyerPourPdf,
+} from "./pdf";
 import type { RecuAffichable } from "./recu";
 
 const recu: RecuAffichable = {
@@ -156,5 +162,70 @@ describe("genererRecuPdf", () => {
   it("garde le vrai flux de contenu (sanity)", async () => {
     const doc = await PDFDocument.load(await genererRecuPdf(recu));
     expect(doc.getPage(0).node.get(PDFName.of("Contents"))).toBeDefined();
+  });
+});
+
+/** PNG 1 x 1 pixel valide. */
+const PNG_1X1 = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+  "base64",
+);
+
+describe("logo", () => {
+  it("place le logo en haut du reçu et agrandit la page de sa hauteur", async () => {
+    const sans = await PDFDocument.load(await genererRecuPdf(recu));
+    const avec = await PDFDocument.load(
+      await genererRecuPdf(recu, {
+        logo: { octets: new Uint8Array(PNG_1X1), format: "png" },
+      }),
+    );
+    expect(avec.getPage(0).getHeight()).toBeGreaterThan(
+      sans.getPage(0).getHeight(),
+    );
+    expect(avec.getPageCount()).toBe(1);
+  });
+  it("ignore un logo illisible au lieu de planter", async () => {
+    const octets = await genererRecuPdf(recu, {
+      logo: { octets: Uint8Array.from([1, 2, 3]), format: "png" },
+    });
+    const doc = await PDFDocument.load(octets);
+    const sans = await PDFDocument.load(await genererRecuPdf(recu));
+    expect(doc.getPage(0).getHeight()).toBe(sans.getPage(0).getHeight());
+  });
+});
+
+describe("genererDocumentPdf (reçu de paiement)", () => {
+  it("écrit le numéro de paiement, le mode, les ventes soldées et le reste dû", async () => {
+    const t = await texteDuPdf(
+      await genererDocumentPdf(
+        documentDepuisPaiement({
+          boutique: "Quincaillerie du Centre",
+          numero: "P-2026-12",
+          date: "2026-11-10T13:30:00Z",
+          client: "Jean Mbarga",
+          montant: 8000,
+          mode: "mtn_momo",
+          repartition: [
+            { numeroRecuVente: "R-2026-000100", montant: 5000, soldeApres: 0 },
+            {
+              numeroRecuVente: "R-2026-000110",
+              montant: 3000,
+              soldeApres: 2000,
+            },
+          ],
+          detteRestante: 2000,
+        }),
+      ),
+    );
+    for (const attendu of [
+      "Reçu de paiement P-2026-12",
+      "Payé par MTN MoMo",
+      "R-2026-000100",
+      "Soldé",
+      "Reste 2 000 FCFA", // détail coupé par mots : espaces normales
+      "TOTAL PAYÉ",
+      "8\u00A0000\u00A0FCFA",
+    ])
+      expect(t, attendu).toContain(attendu);
   });
 });

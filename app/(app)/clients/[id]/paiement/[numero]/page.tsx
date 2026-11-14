@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
-import { ActionsPaiement } from "@/components/clients/actions-paiement";
 import { RecuPaiement } from "@/components/clients/recu-paiement";
+import { DocumentsImprimables } from "@/components/impression/documents";
+import { ActionsRecu } from "@/components/vente/actions-recu";
 import { messagePaiement } from "@/lib/clients/messages";
 import { peutUtiliser } from "@/lib/plans";
+import { documentDepuisPaiement } from "@/lib/print/document";
+import { urlImage } from "@/server/images/cles";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { lienWhatsApp } from "@/lib/ventes/whatsapp";
 import { exigerRole } from "@/server/auth/session";
@@ -24,6 +27,11 @@ export default async function PagePaiement({
     numero,
   );
   if (!p) notFound();
+  const peutImprimer = Boolean(
+    profil.plan && peutUtiliser(profil.plan, "impression"),
+  );
+  const base = `/clients/${id}/paiement/${p.numero}`;
+  const message = messagePaiement(p);
   return (
     <div className="flex flex-col gap-4">
       <p
@@ -33,12 +41,21 @@ export default async function PagePaiement({
         Paiement enregistré.
       </p>
       <RecuPaiement p={p} />
-      <ActionsPaiement
-        lienWhatsApp={lienWhatsApp(p.clientTelephone, messagePaiement(p))}
-        clientId={id}
-        peutImprimer={Boolean(
-          profil.plan && peutUtiliser(profil.plan, "impression"),
-        )}
+      {peutImprimer && (
+        <DocumentsImprimables
+          doc={documentDepuisPaiement(p, p.mentionLegale)}
+          logoUrl={p.logoCle ? urlImage(p.logoCle) : null}
+        />
+      )}
+      <ActionsRecu
+        lienWhatsApp={lienWhatsApp(p.clientTelephone, message)}
+        message={message}
+        pdfUrl={`${base}/pdf`}
+        nomFichier={`Paiement-${p.numero}.pdf`}
+        numero={p.numero}
+        escposUrl={`${base}/escpos`}
+        peutImprimer={peutImprimer}
+        suite={{ href: `/clients/${id}`, libelle: "Retour au client" }}
       />
     </div>
   );

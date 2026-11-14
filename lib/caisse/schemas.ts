@@ -32,4 +32,13 @@ export const clotureSchema = z.object({
   ),
 });
 
+export const annulationDepenseSchema = z.object({
+  depenseId: z.uuid(),
+  motif: z
+    .string()
+    .trim()
+    .min(1, "Indiquez le motif de l'annulation.")
+    .max(200, "Ce motif est trop long (200 caractères maximum)."),
+});
+
 export const validationClotureSchema = z.object({ clotureId: z.uuid() });
