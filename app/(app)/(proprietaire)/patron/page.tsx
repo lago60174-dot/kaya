@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Banknote, Boxes, ShoppingBag, Users } from "lucide-react";
+import { Banknote, Boxes, ShoppingBag, Store, Users } from "lucide-react";
+import { CourbeVentes } from "@/components/patron/courbe-ventes";
 import { MiseAJourDirecte } from "@/components/patron/mise-a-jour-directe";
 import { jourDouala } from "@/lib/caisse/caisse";
 import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
@@ -8,6 +9,7 @@ import { peutUtiliser } from "@/lib/plans";
 import { variationVsHier } from "@/lib/patron/direct";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
+import { lireRapport } from "@/server/patron/rapports";
 import {
   lireAlertesRecentes,
   lireTableauDeBord,
@@ -16,7 +18,8 @@ import {
 
 export const metadata = { title: "Tableau de bord · Kaya" };
 
-const carte = "kaya-kpi border-border flex flex-col gap-1 rounded-lg border p-3";
+const carte =
+  "kaya-kpi flex flex-col items-center gap-1 rounded-2xl border-0 p-4 text-center";
 
 export default async function PagePatron({
   searchParams,
@@ -42,9 +45,10 @@ export default async function PagePatron({
   const complet = profil.plan
     ? peutUtiliser(profil.plan, "journal_complet")
     : false;
-  const [t, alertes] = await Promise.all([
+  const [t, alertes, rapport] = await Promise.all([
     lireTableauDeBord(supabase, boutique.id),
     lireAlertesRecentes(supabase, boutique.id, complet),
+    lireRapport(supabase, boutique.id, 7),
   ]);
   if (!t)
     return (
@@ -59,12 +63,22 @@ export default async function PagePatron({
 
   return (
     <div className="kaya-dashboard flex max-w-3xl flex-col gap-6">
-      <header className="kaya-dashboard-header flex flex-col gap-2">
-        <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">
-          Bonjour{profil.nom ? ` ${profil.nom}` : ""}
-        </h1>
-        <p className="text-muted">{boutique.nom}</p>
+      <header className="kaya-dashboard-header flex flex-col gap-3">
+        <div className="flex items-center gap-4">
+          <span className="grid size-16 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+            <Store aria-hidden="true" size={30} />
+          </span>
+          <div className="min-w-0">
+            <h1 className="truncate text-xl font-bold">{boutique.nom}</h1>
+            <p className="flex items-center gap-2 text-sm font-semibold text-emerald-700">
+              <span aria-hidden="true" className="size-2.5 rounded-full bg-emerald-500" />
+              En ligne
+            </p>
+            <p className="text-muted text-sm">
+              Bonjour{profil.nom ? ` ${profil.nom}` : ""}
+            </p>
+          </div>
+        </div>
         {multi && (
           <form method="get" className="flex items-center gap-2">
             <label htmlFor="boutique" className="text-sm font-medium">
@@ -91,8 +105,6 @@ export default async function PagePatron({
           </form>
         )}
         <MiseAJourDirecte boutiqueId={boutique.id} />
-        </div>
-        <div className="rounded-xl bg-white/80 px-4 py-3 text-sm font-semibold text-orange-700 shadow-sm">● Boutique active</div>
       </header>
 
       {t.cloturesAValider > 0 && (
@@ -107,41 +119,44 @@ export default async function PagePatron({
 
       <section
         aria-label="Chiffres du jour"
-        className="kaya-dashboard-kpis grid grid-cols-1 gap-3 sm:grid-cols-2"
+        className="kaya-dashboard-kpis grid grid-cols-2 gap-3 lg:grid-cols-4"
       >
-        <div className={carte}>
-          <span className="mb-2 grid size-10 place-items-center rounded-xl bg-orange-100 text-orange-600"><ShoppingBag size={20} /></span>
-          <p className="text-muted text-sm">
+        <div
+          className={carte}
+          style={{ background: "linear-gradient(180deg,#ff8b1a,#f26a0f)", color: "#fff" }}
+        >
+          <span className="mb-2 grid size-10 place-items-center rounded-xl bg-white/25 text-white"><ShoppingBag size={20} /></span>
+          <p className="text-white text-sm">
             Ventes du jour ({t.nbVentes} vente{t.nbVentes > 1 ? "s" : ""})
           </p>
-          <p className="text-3xl font-bold">{formatFcfa(t.ventesTotal)}</p>
-          <p className="text-muted text-sm">
+          <p className="text-xl font-extrabold break-words">{formatFcfa(t.ventesTotal)}</p>
+          <p className="text-white text-sm">
             Hier : {formatFcfa(t.ventesHier)}
             {variation !== null &&
               ` (${variation > 0 ? "+" : ""}${variation} %)`}
           </p>
         </div>
-        <Link href="/caisse" className={carte}>
+        <Link href="/caisse" className={carte} style={{ background: "#dff4e7" }}>
           <span className="mb-2 grid size-10 place-items-center rounded-xl bg-emerald-100 text-emerald-700"><Banknote size={20} /></span>
           <p className="text-muted text-sm">Espèces attendues en caisse</p>
-          <p className="text-3xl font-bold">{formatFcfa(t.especesAttendues)}</p>
+          <p className="text-xl font-extrabold break-words">{formatFcfa(t.especesAttendues)}</p>
           <p className="text-muted text-sm">
             MTN {formatFcfa(t.mtnMomo)} · Orange {formatFcfa(t.orangeMoney)}
           </p>
         </Link>
-        <Link href="/clients/dettes" className={carte}>
+        <Link href="/clients/dettes" className={carte} style={{ background: "#e4edff" }}>
           <span className="mb-2 grid size-10 place-items-center rounded-xl bg-blue-100 text-blue-700"><Users size={20} /></span>
           <p className="text-muted text-sm">Ce que les clients vous doivent</p>
-          <p className="text-3xl font-bold">{formatFcfa(t.dettes.total)}</p>
+          <p className="text-xl font-extrabold break-words">{formatFcfa(t.dettes.total)}</p>
           <p className="text-muted text-sm">
             {t.dettes.nbClients} client{t.dettes.nbClients > 1 ? "s" : ""}
           </p>
         </Link>
-        <Link href="/stock?bas=1" className={carte}>
+        <Link href="/stock?bas=1" className={carte} style={{ background: "#fde9da" }}>
           <span className="mb-2 grid size-10 place-items-center rounded-xl bg-amber-100 text-amber-700"><Boxes size={20} /></span>
           <p className="text-muted text-sm">Produits en stock bas</p>
           <p
-            className={`text-3xl font-bold ${t.stockBas.nombre > 0 ? "text-danger" : ""}`}
+            className={`text-xl font-extrabold break-words ${t.stockBas.nombre > 0 ? "text-danger" : ""}`}
           >
             {t.stockBas.nombre}
           </p>
@@ -150,6 +165,18 @@ export default async function PagePatron({
           </p>
         </Link>
       </section>
+
+      {rapport && (
+        <section aria-label="Évolution des ventes" className="kaya-dashboard-panel flex flex-col gap-2">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-bold">Évolution des ventes (7 jours)</h2>
+            <Link href="/rapports" className="text-sm font-bold text-orange-600">
+              Voir plus →
+            </Link>
+          </div>
+          <CourbeVentes points={rapport.serie} />
+        </section>
+      )}
 
       <section aria-label="Ventes par vendeur" className="kaya-dashboard-panel flex flex-col gap-2">
         <h2 className="text-lg font-semibold">Ventes par vendeur</h2>
@@ -181,7 +208,7 @@ export default async function PagePatron({
 
       <section
         aria-label="Produits les plus vendus"
-        className="flex flex-col gap-2"
+        className="kaya-dashboard-panel flex flex-col gap-2"
       >
         <h2 className="text-lg font-semibold">
           Produits les plus vendus (7 jours)

@@ -1,3 +1,4 @@
+import { Phone } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FormulairePaiement } from "@/components/clients/formulaire-paiement";
@@ -12,7 +13,7 @@ import { lireFicheClient } from "@/server/clients/lecture";
 export const metadata = { title: "Client · Kaya" };
 
 const lienBouton =
-  "flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-medium";
+  "flex min-h-11 items-center rounded-full border border-border bg-white px-4 text-sm font-semibold";
 
 export default async function PageClient({
   params,
@@ -38,24 +39,43 @@ export default async function PageClient({
 
   return (
     <div className="flex max-w-xl flex-col gap-6">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold">{client.nom}</h1>
-        {client.telephone && <p className="text-muted">{client.telephone}</p>}
-        {client.notes && <p className="text-sm">{client.notes}</p>}
+      <div className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
+        <span
+          aria-hidden="true"
+          className="grid size-20 shrink-0 place-items-center rounded-full bg-orange-100 text-3xl font-bold text-orange-700"
+        >
+          {client.nom.charAt(0).toUpperCase()}
+        </span>
+        <div className="flex min-w-0 flex-col gap-1">
+          <h1 className="truncate text-xl font-bold">{client.nom}</h1>
+          {client.telephone && (
+            <p className="text-muted flex items-center gap-2">
+              <Phone aria-hidden="true" size={16} />
+              {client.telephone}
+            </p>
+          )}
+          {client.notes && <p className="text-sm">{client.notes}</p>}
+        </div>
       </div>
 
-      <section
-        aria-label="Crédit"
-        className="border-border flex flex-col gap-1 rounded-lg border p-3"
-      >
-        <p className="text-muted text-sm">Doit actuellement</p>
-        <p className={`text-3xl font-bold ${dette > 0 ? "text-danger" : ""}`}>
-          {formatFcfa(dette)}
-        </p>
+      <section aria-label="Crédit" className="flex flex-col gap-2">
+        <div className="grid grid-cols-2 gap-3">
+          <p className="rounded-2xl p-4" style={{ background: "#fdeee3" }}>
+            <span className="block text-sm font-bold text-red-700">Crédit dû</span>
+            <b className={`block text-xl font-extrabold ${dette > 0 ? "text-red-700" : ""}`}>
+              {formatFcfa(dette)}
+            </b>
+          </p>
+          <p className="rounded-2xl p-4" style={{ background: "#e4edff" }}>
+            <span className="block text-sm font-bold text-blue-800">Encore disponible</span>
+            <b className="block text-xl font-extrabold">
+              {formatFcfa(Math.max(0, plafond - dette))}
+            </b>
+          </p>
+        </div>
         <p className="text-muted text-sm">
           Plafond de crédit : {formatFcfa(plafond)}
-          {client.plafondCredit === null && " (celui de la boutique)"} · encore
-          disponible : {formatFcfa(Math.max(0, plafond - dette))}
+          {client.plafondCredit === null && " (celui de la boutique)"}
         </p>
       </section>
 
@@ -65,7 +85,7 @@ export default async function PageClient({
             href={lienWhatsApp(client.telephone, message)}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-success flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-white"
+            className="bg-success flex min-h-11 items-center rounded-full px-4 text-sm font-semibold text-white"
           >
             Rappeler sur WhatsApp
           </a>
@@ -111,7 +131,7 @@ export default async function PageClient({
         </>
       )}
 
-      <section aria-label="Derniers paiements" className="flex flex-col gap-2">
+      <section aria-label="Derniers paiements" className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-sm">
         <h2 className="text-lg font-semibold">Derniers paiements</h2>
         {fiche.paiements.length === 0 ? (
           <p className="text-muted">Aucun paiement de crédit pour le moment.</p>
@@ -139,7 +159,7 @@ export default async function PageClient({
         )}
       </section>
 
-      <section aria-label="Historique d'achats" className="flex flex-col gap-2">
+      <section aria-label="Historique d'achats" className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-sm">
         <h2 className="text-lg font-semibold">Historique d&apos;achats</h2>
         {fiche.achats.length === 0 ? (
           <p className="text-muted">Aucun achat enregistré pour ce client.</p>

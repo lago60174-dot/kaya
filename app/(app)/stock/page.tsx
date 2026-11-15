@@ -1,3 +1,4 @@
+import { Boxes, Plus } from "lucide-react";
 import Link from "next/link";
 import { FiltresStock } from "@/components/stock/filtres-stock";
 import { formatFcfa } from "@/lib/format";
@@ -47,14 +48,23 @@ export default async function PageStock({
 
   return (
     <div className="flex max-w-2xl flex-col gap-5">
-      <div className="flex items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold">Stock</h1>
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+            <Boxes aria-hidden="true" size={26} />
+          </span>
+          <div>
+            <h1 className="text-xl font-bold">Produits &amp; Stock</h1>
+            <p className="text-muted text-sm">Gérez votre stock en toute simplicité</p>
+          </div>
+        </div>
         {proprietaire && (
           <Link
             href="/stock/nouveau"
-            className="bg-brand-strong flex min-h-11 items-center rounded-lg px-4 text-sm font-semibold text-white"
+            className="bg-brand-strong flex min-h-11 shrink-0 items-center gap-1 rounded-full px-4 text-sm font-semibold text-white"
           >
-            Ajouter un produit
+            <Plus aria-hidden="true" size={18} />
+            Nouveau produit
           </Link>
         )}
       </div>
@@ -76,7 +86,7 @@ export default async function PageStock({
             <li key={l.id}>
               <Link
                 href={`/stock/${l.id}`}
-                className="border-border hover:bg-brand-soft flex min-h-11 items-center gap-3 rounded-lg border p-3"
+                className="border-border hover:bg-brand-soft flex min-h-11 items-center gap-3 rounded-2xl border bg-white p-3 shadow-sm"
               >
                 {l.vignette_cle ? (
                   // Vignette WebP de 200 px, chargée à la demande.
@@ -84,15 +94,15 @@ export default async function PageStock({
                   <img
                     src={`/img/${l.vignette_cle}`}
                     alt=""
-                    width={48}
-                    height={48}
+                    width={64}
+                    height={64}
                     loading="lazy"
-                    className="size-12 shrink-0 rounded-md object-cover"
+                    className="size-16 shrink-0 rounded-xl object-cover"
                   />
                 ) : (
                   <span
                     aria-hidden
-                    className="bg-brand-soft text-brand-strong grid size-12 shrink-0 place-items-center rounded-md font-semibold"
+                    className="bg-brand-soft text-brand-strong grid size-16 shrink-0 place-items-center rounded-xl text-xl font-semibold"
                   >
                     {l.nom_affiche.charAt(0)}
                   </span>
@@ -109,7 +119,7 @@ export default async function PageStock({
                       })),
                     )}
                   </span>
-                  <span className="text-muted text-sm">
+                  <span className="text-sm font-bold">
                     {l.unites
                       .slice(0, 2)
                       .map(
@@ -118,11 +128,11 @@ export default async function PageStock({
                       .join(" · ")}
                   </span>
                 </span>
-                {l.stock_bas && (
-                  <span className="bg-danger shrink-0 rounded-full px-2 py-1 text-xs font-semibold text-white">
-                    Stock bas
-                  </span>
-                )}
+                <span
+                  className={`shrink-0 rounded-xl px-3 py-2 text-center text-sm font-bold ${l.stock_bas ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}
+                >
+                  {l.stock_bas ? "Stock faible" : "Stock OK"}
+                </span>
               </Link>
             </li>
           ))}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Check, Flag } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { calculerEcart, jugerEcart } from "@/lib/caisse/caisse";
@@ -11,6 +12,8 @@ interface Props {
   date: string;
   especesAttendues: number;
   tolerance: number;
+  totalVentes?: number;
+  totalDepenses?: number;
 }
 
 /** Clôture : on saisit les espèces comptées, l'écart s'affiche avant de valider, puis une confirmation est demandée. */
@@ -18,6 +21,8 @@ export function FormulaireCloture({
   date,
   especesAttendues,
   tolerance,
+  totalVentes,
+  totalDepenses,
 }: Props) {
   const router = useRouter();
   const [texte, setTexte] = useState("");
@@ -52,17 +57,40 @@ export function FormulaireCloture({
   }
 
   const couleur = {
-    juste: "bg-brand-soft",
-    tolere: "bg-brand-soft",
+    juste: "bg-emerald-100 text-emerald-800",
+    tolere: "bg-emerald-100 text-emerald-800",
     alerte: "border-danger border",
   } as const;
 
   return (
     <section
       aria-label="Clôturer la caisse"
-      className="border-border flex flex-col gap-3 rounded-lg border p-3"
+      className="flex flex-col gap-3 rounded-2xl bg-emerald-50 p-4"
     >
-      <h2 className="text-lg font-semibold">Clôturer la caisse</h2>
+      <h2 className="flex items-center gap-3 text-lg font-bold">
+        <span className="grid size-8 place-items-center rounded-full bg-emerald-600 text-white">
+          <Check aria-hidden="true" size={20} strokeWidth={3} />
+        </span>
+        Clôture de caisse
+      </h2>
+      <dl className="flex flex-col gap-1 text-sm">
+        {totalVentes !== undefined && (
+          <div className="flex justify-between gap-3">
+            <dt>Total ventes</dt>
+            <dd className="font-bold">{formatFcfa(totalVentes)}</dd>
+          </div>
+        )}
+        {totalDepenses !== undefined && (
+          <div className="flex justify-between gap-3">
+            <dt>Total dépenses</dt>
+            <dd className="font-bold">{formatFcfa(totalDepenses)}</dd>
+          </div>
+        )}
+        <div className="flex justify-between gap-3">
+          <dt>Espèces attendues</dt>
+          <dd className="font-bold">{formatFcfa(especesAttendues)}</dd>
+        </div>
+      </dl>
       <p className="text-sm">
         Comptez les espèces dans le tiroir, puis entrez le total.
       </p>
@@ -79,7 +107,7 @@ export function FormulaireCloture({
             setConfirmer(false);
           }}
           placeholder="0"
-          className="border-border min-h-11 w-44 rounded-lg border bg-white px-3 text-lg"
+          className="border-border min-h-12 w-full rounded-xl border bg-white px-3 text-lg"
         />
         {texte.trim() !== "" && compte === null && (
           <p className="text-danger text-sm">
@@ -90,7 +118,7 @@ export function FormulaireCloture({
       {jugement && (
         <p
           role="status"
-          className={`rounded-lg p-3 text-sm font-medium ${couleur[jugement.niveau]}`}
+          className={`rounded-2xl p-3 text-sm font-bold ${couleur[jugement.niveau]}`}
         >
           {jugement.message}
         </p>
@@ -105,9 +133,10 @@ export function FormulaireCloture({
           type="button"
           onClick={() => setConfirmer(true)}
           disabled={compte === null}
-          className="bg-brand-strong min-h-12 rounded-lg px-4 text-lg font-bold text-white disabled:opacity-50"
+          className="bg-brand-strong flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 text-lg font-bold text-white disabled:opacity-50"
         >
-          Clôturer la caisse
+          <Flag aria-hidden="true" size={20} />
+          Valider la clôture
         </button>
       ) : (
         <div className="flex flex-col gap-2">

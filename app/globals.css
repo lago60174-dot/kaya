@@ -224,3 +224,23 @@ body { background: #fff8f1; color: var(--kaya-navy); }
 @media (max-width: 760px) { .kaya-stock-grid { grid-template-columns: 1fr; } }
 .kaya-sidebar { background: #17233d; }
 .kaya-brand-lockup { margin: -24px -16px 0; padding: 24px 24px 25px; background: linear-gradient(112deg, #ff8c1a, #f26900); border-radius: 0 0 22px 0; }
+
+/* Téléphone : en-tête orange à bas arrondi, barre du bas à onglet actif marqué (maquettes Kaya). */
+@media (max-width: 760px) {
+  .kaya-app-shell { padding-top: 78px; padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .kaya-mobile-header { height: 78px; padding: 0 16px; border-radius: 0 0 28px 28px; background: linear-gradient(105deg, #ff8b16, #f26900 70%, #ff7a12); box-shadow: 0 6px 20px rgba(226,96,0,.25); }
+  .kaya-mobile-brand { gap: 10px; }
+  .kaya-mobile-brand img { border-radius: 12px; }
+  .kaya-mobile-brand span { display: flex; flex-direction: column; line-height: 1; }
+  .kaya-mobile-brand strong { font-size: 28px; }
+  .kaya-mobile-brand small { margin-top: 3px; font-size: 10px; font-weight: 600; opacity: .95; }
+  .kaya-mobile-actions { display: flex; align-items: center; gap: 14px; }
+  .kaya-mobile-bell { display: grid; place-items: center; color: #fff; }
+  .kaya-mobile-user { display: flex; align-items: center; gap: 4px; color: #fff; }
+  .kaya-mobile-user .kaya-user-avatar { display: grid; width: 40px; height: 40px; place-items: center; border: 2px solid #fff; border-radius: 50%; background: #fff0e2; color: #e65f00; font-weight: 800; }
+  .kaya-main { padding-top: 16px; }
+  .kaya-mobile-nav { border-radius: 24px 24px 0 0; border-top: 0; padding-top: 4px; box-shadow: 0 -8px 28px rgba(30,28,25,.1); }
+  .kaya-nav-mobile-link { position: relative; min-height: 60px; font-size: 11px; }
+  .kaya-nav-mobile-link.is-active { background: linear-gradient(#fff3e8, #fff8f1); border-radius: 16px 16px 0 0; }
+  .kaya-nav-mobile-link.is-active::before { content: ""; position: absolute; inset: 0 14% auto; height: 3px; border-radius: 0 0 3px 3px; background: #f26a0f; }
+}

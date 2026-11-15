@@ -7,8 +7,10 @@ import { useEffect, useState } from "react";
 import {
   Activity,
   Bell,
+  BarChart3,
   BookText,
   Boxes,
+  ChevronDown,
   ChevronRight,
   Ellipsis,
   ClipboardList,
@@ -26,6 +28,7 @@ import { deconnecter } from "@/server/auth/actions";
 
 const icones: Record<string, typeof LayoutDashboard> = {
   "/patron": LayoutDashboard,
+  "/rapports": BarChart3,
   "/vente": ShoppingCart,
   "/recus": ReceiptText,
   "/stock": Boxes,
@@ -92,10 +95,21 @@ export function Navigation({ menu, nom }: { menu: EntreeMenu[]; nom: string | nu
 
       <header className="kaya-mobile-header">
         <Link href={menu.some((m) => m.href === "/patron") ? "/patron" : "/vente"} className="kaya-mobile-brand">
-          <Image src="/logo-kaya-96.webp" alt="" width={36} height={36} />
-          <strong>Kaya</strong>
+          <Image src="/logo-kaya-96.webp" alt="" width={44} height={44} />
+          <span>
+            <strong>Kaya</strong>
+            <small>Gérez. Vendez. Grandissez.</small>
+          </span>
         </Link>
-        <div className="kaya-mobile-status"><span /> En ligne</div>
+        <div className="kaya-mobile-actions">
+          <span className="kaya-mobile-bell" role="img" aria-label="Notifications">
+            <Bell aria-hidden="true" size={24} />
+          </span>
+          <span className="kaya-mobile-user" role="img" aria-label={nom ? `Connecté : ${nom}` : "Mon compte"}>
+            <span className="kaya-user-avatar">{(nom?.trim().charAt(0) || "K").toUpperCase()}</span>
+            <ChevronDown aria-hidden="true" size={16} />
+          </span>
+        </div>
       </header>
       {plusOuvert && (
         <button

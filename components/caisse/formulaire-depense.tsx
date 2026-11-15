@@ -1,5 +1,6 @@
 "use client";
 
+import { Banknote, Car, Plus, Receipt, Save, Zap, type LucideIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { categoriesPour } from "@/lib/caisse/caisse";
@@ -7,6 +8,12 @@ import type { Role } from "@/lib/permissions";
 import { lireMontant } from "@/lib/stock/quantites";
 import { MODES_PAIEMENT, type ModePaiement } from "@/lib/ventes/paiements";
 import { enregistrerDepenseAction } from "@/server/caisse/actions";
+
+const ICONES: Record<string, LucideIcon> = {
+  transport: Car,
+  electricite: Zap,
+  salaire: Banknote,
+};
 
 /** Saisie rapide d'une dépense : montant, catégorie, note. Un double clic ou un nouvel essai ne l'enregistre jamais deux fois. */
 export function FormulaireDepense({ role }: { role: Role }) {
@@ -58,9 +65,14 @@ export function FormulaireDepense({ role }: { role: Role }) {
   return (
     <section
       aria-label="Ajouter une dépense"
-      className="border-border flex flex-col gap-3 rounded-lg border p-3"
+      className="border-border flex flex-col gap-4 rounded-2xl border bg-white p-4 shadow-sm"
     >
-      <h2 className="text-lg font-semibold">Ajouter une dépense</h2>
+      <h2 className="flex items-center gap-3 text-lg font-bold">
+        <span className="grid size-8 place-items-center rounded-full bg-orange-500 text-white">
+          <Plus aria-hidden="true" size={20} />
+        </span>
+        Nouvelle dépense
+      </h2>
       <div className="flex flex-col gap-1">
         <label htmlFor="montant-depense" className="text-sm font-medium">
           Montant (FCFA)
@@ -71,7 +83,7 @@ export function FormulaireDepense({ role }: { role: Role }) {
           value={texte}
           onChange={(e) => setTexte(e.target.value)}
           placeholder="0"
-          className="border-border min-h-11 w-44 rounded-lg border bg-white px-3 text-lg"
+          className="border-border min-h-12 w-full rounded-xl border bg-white px-3 text-lg"
         />
         {texte.trim() !== "" && !valide && (
           <p className="text-danger text-sm">
@@ -79,31 +91,35 @@ export function FormulaireDepense({ role }: { role: Role }) {
           </p>
         )}
       </div>
-      <fieldset className="flex flex-wrap gap-2">
+      <fieldset className="grid grid-cols-2 gap-2">
         <legend className="mb-1 text-sm font-medium">Catégorie</legend>
-        {categories.map((c) => (
-          <label
-            key={c.code}
-            className={`flex min-h-11 items-center gap-2 rounded-lg border px-3 text-sm ${categorie === c.code ? "border-brand-strong bg-brand-soft font-semibold" : "border-border"}`}
-          >
-            <input
-              type="radio"
-              name="categorie"
-              value={c.code}
-              checked={categorie === c.code}
-              onChange={() => setCategorie(c.code)}
-              className="size-4"
-            />
-            {c.libelle}
-          </label>
-        ))}
+        {categories.map((c) => {
+          const Icone = ICONES[c.code] ?? Receipt;
+          return (
+            <label
+              key={c.code}
+              className={`flex min-h-12 items-center gap-2 rounded-2xl border px-3 text-sm has-[:focus-visible]:outline-2 ${categorie === c.code ? "border-brand-strong bg-brand-soft font-bold" : "border-border bg-white"}`}
+            >
+              <input
+                type="radio"
+                name="categorie"
+                value={c.code}
+                checked={categorie === c.code}
+                onChange={() => setCategorie(c.code)}
+                className="sr-only"
+              />
+              <Icone aria-hidden="true" size={20} className="text-orange-600" />
+              {c.libelle}
+            </label>
+          );
+        })}
       </fieldset>
       <fieldset className="flex flex-wrap gap-2">
         <legend className="mb-1 text-sm font-medium">Payée en</legend>
         {MODES_PAIEMENT.map((m) => (
           <label
             key={m.code}
-            className={`flex min-h-11 items-center gap-2 rounded-lg border px-3 text-sm ${mode === m.code ? "border-brand-strong bg-brand-soft font-semibold" : "border-border"}`}
+            className={`flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm ${mode === m.code ? "border-brand-strong bg-brand-soft font-semibold" : "border-border"}`}
           >
             <input
               type="radio"
@@ -127,7 +143,7 @@ export function FormulaireDepense({ role }: { role: Role }) {
           maxLength={200}
           onChange={(e) => setNote(e.target.value)}
           placeholder="Ex. taxi pour livraison de ciment"
-          className="border-border min-h-11 rounded-lg border bg-white px-3"
+          className="border-border min-h-12 rounded-xl border bg-white px-3"
         />
       </div>
       {erreur && (
@@ -144,9 +160,10 @@ export function FormulaireDepense({ role }: { role: Role }) {
         type="button"
         onClick={enregistrer}
         disabled={!valide || enCours}
-        className="bg-brand-strong min-h-12 rounded-lg px-4 text-lg font-bold text-white disabled:opacity-50"
+        className="bg-brand-strong flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 text-lg font-bold text-white disabled:opacity-50"
       >
-        {enCours ? "Enregistrement…" : "Enregistrer la dépense"}
+        <Save aria-hidden="true" size={20} />
+        {enCours ? "Enregistrement…" : "Enregistrer"}
       </button>
     </section>
   );

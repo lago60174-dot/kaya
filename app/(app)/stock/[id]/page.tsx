@@ -44,21 +44,67 @@ export default async function PageProduit({
 
   return (
     <div className="flex max-w-xl flex-col gap-6">
-      <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold">{produit.nom_affiche}</h1>
-        <p className="text-muted">
-          {[
-            produit.categories?.nom,
-            produit.marques?.nom && `Marque ${produit.marques.nom}`,
-            !produit.actif && "Hors vente",
-          ]
-            .filter(Boolean)
-            .join(" · ")}
-        </p>
+      <div className="flex items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
+        {produit.image_cle ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`/img/${produit.image_cle}`}
+            alt=""
+            width={96}
+            height={96}
+            className="size-24 shrink-0 rounded-xl object-cover"
+          />
+        ) : (
+          <span
+            aria-hidden="true"
+            className="bg-brand-soft text-brand-strong grid size-24 shrink-0 place-items-center rounded-xl text-3xl font-bold"
+          >
+            {produit.nom_affiche.charAt(0)}
+          </span>
+        )}
+        <div className="flex min-w-0 flex-col gap-1">
+          <h1 className="text-xl font-bold">{produit.nom_affiche}</h1>
+          {produit.unites[0] && (
+            <p className="text-lg font-extrabold text-orange-600">
+              {formatFcfa(produit.unites[0].prix_vente)}
+            </p>
+          )}
+          <p
+            className={`w-fit rounded-full px-3 py-0.5 text-sm font-bold ${bas ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}
+          >
+            {bas ? "Stock bas" : "Stock OK"}
+          </p>
+          {(produit.marques?.nom || !produit.actif) && (
+            <p className="text-muted text-sm">
+              {[produit.marques?.nom && `Marque ${produit.marques.nom}`, !produit.actif && "Hors vente"]
+                .filter(Boolean)
+                .join(" · ")}
+            </p>
+          )}
+        </div>
       </div>
 
+      <section aria-label="Informations" className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-sm">
+        <h2 className="text-lg font-bold">Informations</h2>
+        <dl className="flex flex-col text-sm">
+          {[
+            ["Catégorie", produit.categories?.nom ?? "—"],
+            ["Unité de base", produit.unite_base],
+            ...(proprietaire && produit.prix_achat !== null
+              ? [["Prix d'achat", `${formatFcfa(produit.prix_achat)} par ${produit.unite_base}`]]
+              : []),
+            ["Seuil d'alerte", `${formatQuantite(produit.seuil_alerte)} ${produit.unite_base}`],
+          ].map(([terme, valeur]) => (
+            <div key={terme} className="border-border flex justify-between gap-3 border-b py-2 last:border-0">
+              <dt className="text-muted">{terme}</dt>
+              <dd className="font-medium">{valeur}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <section
-        className="border-border flex flex-col gap-1 rounded-lg border p-3"
+        className="border-border flex flex-col gap-1 rounded-2xl border bg-white p-4 shadow-sm"
         aria-label="Stock"
       >
         <p className="text-muted text-sm">Stock actuel</p>
@@ -73,8 +119,8 @@ export default async function PageProduit({
         )}
       </section>
 
-      <section aria-label="Prix de vente" className="flex flex-col gap-2">
-        <h2 className="text-lg font-semibold">Prix de vente</h2>
+      <section aria-label="Prix de vente" className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-sm">
+        <h2 className="text-lg font-bold">Unités de vente</h2>
         <ul className="flex flex-col gap-1">
           {produit.unites.map((u) => (
             <li
@@ -117,13 +163,13 @@ export default async function PageProduit({
           <div className="flex flex-wrap gap-2">
             <Link
               href={`/stock/${produit.id}/modifier`}
-              className="border-border flex min-h-11 items-center rounded-lg border px-3 text-sm font-medium"
+              className="border-border flex min-h-11 items-center rounded-full border bg-white px-4 text-sm font-semibold"
             >
               Modifier
             </Link>
             <Link
               href={`/stock/nouveau?copie=${produit.id}`}
-              className="border-border flex min-h-11 items-center rounded-lg border px-3 text-sm font-medium"
+              className="border-border flex min-h-11 items-center rounded-full border bg-white px-4 text-sm font-semibold"
             >
               Même produit, autre marque
             </Link>

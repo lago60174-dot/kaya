@@ -1,3 +1,4 @@
+import { Settings2 } from "lucide-react";
 import { ChampLogo } from "@/components/boutique/champ-logo";
 import { ActionsVendeur } from "@/components/vendeurs/actions-vendeur";
 import { FormulaireVendeur } from "@/components/vendeurs/formulaire-vendeur";
@@ -52,7 +53,12 @@ export default async function PageParametres() {
 
   return (
     <div className="flex max-w-xl flex-col gap-8">
-      <h1 className="text-2xl font-bold">Paramètres</h1>
+      <div className="flex items-center gap-3">
+        <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+          <Settings2 aria-hidden="true" size={26} />
+        </span>
+        <h1 className="text-xl font-bold">Paramètres</h1>
+      </div>
       {parametres ? (
         <FormulaireParametres valeurs={parametres} />
       ) : (
@@ -60,15 +66,15 @@ export default async function PageParametres() {
           Impossible de charger les paramètres de la boutique. Reconnectez-vous.
         </p>
       )}
-      <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Logo de ma boutique</h2>
+      <section className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm">
+        <h2 className="text-lg font-bold">Logo de ma boutique</h2>
         <p className="text-muted text-sm">
           Il s&apos;affiche sur vos reçus, vos PDF et vos factures A4.
         </p>
         <ChampLogo logoUrl={logoUrl} />
       </section>
-      <section className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Mes vendeurs</h2>
+      <section className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm">
+        <h2 className="text-lg font-bold">Mes vendeurs</h2>
         {(vendeurs ?? []).length === 0 ? (
           <p className="text-muted">
             Aucun vendeur. Créez le premier compte ci-dessous.
@@ -76,7 +82,7 @@ export default async function PageParametres() {
         ) : (
           <ul className="flex flex-col gap-4">
             {(vendeurs ?? []).map((v) => (
-              <li key={v.id} className="border-border rounded-lg border p-3">
+              <li key={v.id} className="border-border rounded-2xl border p-3">
                 <p className="font-medium">
                   {v.nom ?? "Vendeur"}{" "}
                   {!v.actif && (
@@ -100,9 +106,9 @@ export default async function PageParametres() {
         )}
       </section>
       {abonnement && etat && (
-        <section className="flex flex-col gap-4">
-          <h2 className="text-xl font-semibold">Mon abonnement</h2>
-          <div className={`${TON[etat.ton]} rounded-lg p-3`}>
+        <section className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm">
+          <h2 className="text-lg font-bold">Mon abonnement</h2>
+          <div className={`${TON[etat.ton]} rounded-2xl p-4`}>
             <p className="font-medium">
               Formule {profil.plan?.nom ?? abonnement.planCode} · {etat.libelle}
             </p>

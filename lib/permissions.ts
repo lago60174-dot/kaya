@@ -25,6 +25,7 @@ const PUBLIC_EXACT = [
 const PUBLIC_PREFIXES = ["/a/", "/r/", "/img/", "/api/webhooks/"];
 const PROPRIETAIRE_PREFIXES = [
   "/patron",
+  "/rapports",
   "/parametres",
   "/journal",
   "/devis",
@@ -118,6 +119,7 @@ interface DefinitionMenu extends EntreeMenu {
 
 const MENU: DefinitionMenu[] = [
   { href: "/patron", libelle: "Tableau de bord", roles: ["proprietaire"] },
+  { href: "/rapports", libelle: "Rapports", roles: ["proprietaire"] },
   { href: "/vente", libelle: "Vente", roles: ["proprietaire", "vendeur"] },
   { href: "/stock", libelle: "Stock", roles: ["proprietaire", "vendeur"] },
   { href: "/clients", libelle: "Clients", roles: ["proprietaire", "vendeur"] },

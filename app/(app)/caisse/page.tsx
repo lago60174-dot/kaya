@@ -1,3 +1,4 @@
+import { Wallet } from "lucide-react";
 import Link from "next/link";
 import { AnnulerDepense } from "@/components/caisse/annuler-depense";
 import { FormulaireCloture } from "@/components/caisse/formulaire-cloture";
@@ -66,7 +67,7 @@ function ResultatCloture({
   return (
     <section
       aria-label="Caisse clôturée"
-      className="border-border flex flex-col gap-3 rounded-lg border p-3"
+      className="border-border flex flex-col gap-3 rounded-2xl border bg-white p-4 shadow-sm"
     >
       <h2 className="text-lg font-semibold">Caisse clôturée</h2>
       <dl className="flex flex-col gap-1">
@@ -149,8 +150,15 @@ export default async function PageCaisse({
   return (
     <div className="kaya-cash-page flex max-w-xl flex-col gap-6">
       <header className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">Caisse du jour</h1>
-        <p className="text-muted">{jourLong(jour)}</p>
+        <div className="flex items-center gap-3">
+          <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+            <Wallet aria-hidden="true" size={26} />
+          </span>
+          <div>
+            <h1 className="text-xl font-bold">Caisse du jour</h1>
+            <p className="text-muted text-sm">{jourLong(jour)}</p>
+          </div>
+        </div>
         <nav aria-label="Choisir le jour" className="flex flex-wrap gap-2">
           <Link
             href={`/caisse?date=${decalerJour(jour, -1)}`}
@@ -179,7 +187,7 @@ export default async function PageCaisse({
       {aValider.length > 0 && (
         <section
           aria-label="Caisses à valider"
-          className="bg-brand-soft flex flex-col gap-2 rounded-lg p-3"
+          className="bg-brand-soft flex flex-col gap-2 rounded-2xl p-4"
         >
           <h2 className="text-lg font-semibold">À valider</h2>
           <ul className="flex flex-col gap-3">
@@ -199,16 +207,30 @@ export default async function PageCaisse({
         </section>
       )}
 
+      <section aria-label="Encaissements du jour" className="grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
+        <p className="rounded-2xl p-3 text-white" style={{ background: "linear-gradient(180deg,#ff8b1a,#f26a0f)" }}>
+          <span className="block text-sm">Ventes du jour</span>
+          <b className="block text-lg font-extrabold">{formatFcfa(r.ventesTotal)}</b>
+          <span className="block text-xs">{r.nbVentes} vente{r.nbVentes > 1 ? "s" : ""}</span>
+        </p>
+        <p className="rounded-2xl p-3" style={{ background: "#fdeee3" }}>
+          <span className="block text-sm">Espèces</span>
+          <b className="block text-lg font-extrabold">{formatFcfa(r.encaissementsEspeces + r.remboursementsCreditEspeces)}</b>
+        </p>
+        <p className="rounded-2xl p-3" style={{ background: "#e4edff" }}>
+          <span className="block text-sm">Mobile Money</span>
+          <b className="block text-lg font-extrabold">{formatFcfa(mtn + orange)}</b>
+        </p>
+        <p className="rounded-2xl p-3" style={{ background: "#dff4e7" }}>
+          <span className="block text-sm">Crédit</span>
+          <b className="block text-lg font-extrabold">{formatFcfa(r.creditAccorde)}</b>
+        </p>
+      </section>
+
       <section
         aria-label="Résumé du jour"
-        className="border-border flex flex-col gap-3 rounded-lg border p-3"
+        className="border-border flex flex-col gap-3 rounded-2xl border bg-white p-4 shadow-sm"
       >
-        <div>
-          <p className="text-muted text-sm">
-            Ventes du jour ({r.nbVentes} vente{r.nbVentes > 1 ? "s" : ""})
-          </p>
-          <p className="text-3xl font-bold">{formatFcfa(r.ventesTotal)}</p>
-        </div>
         <dl className="flex flex-col gap-1">
           <Ligne
             libelle="Espèces encaissées"
@@ -232,7 +254,7 @@ export default async function PageCaisse({
 
       <section
         aria-label="Espèces attendues"
-        className="bg-brand-soft flex flex-col gap-2 rounded-lg p-3"
+        className="bg-brand-soft flex flex-col gap-2 rounded-2xl p-4"
       >
         <p className="text-sm font-medium">Espèces attendues dans le tiroir</p>
         <p className="text-3xl font-bold">{formatFcfa(r.especesAttendues)}</p>
@@ -275,7 +297,7 @@ export default async function PageCaisse({
             {depenses.map((d) => (
               <li
                 key={d.id}
-                className="border-border flex flex-col rounded-lg border p-3 text-sm"
+                className="border-border flex flex-col rounded-2xl border bg-white p-3 text-sm shadow-sm"
               >
                 <div className="flex items-baseline justify-between gap-3">
                   <span className={d.annulee ? "text-muted line-through" : ""}>
@@ -320,6 +342,8 @@ export default async function PageCaisse({
       ) : (
         <FormulaireCloture
           date={jour}
+          totalVentes={r.ventesTotal}
+          totalDepenses={r.depensesTotal}
           especesAttendues={r.especesAttendues}
           tolerance={caisse.tolerance}
         />

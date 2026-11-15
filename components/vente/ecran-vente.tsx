@@ -1,5 +1,6 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useTransition } from "react";
 import { formatFcfa } from "@/lib/format";
@@ -108,7 +109,15 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
   return (
     <div className="kaya-sale grid max-w-5xl gap-6 pb-28 lg:grid-cols-2">
       <section aria-label="Produits" className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold">Vente</h1>
+        <div className="flex items-center gap-3">
+          <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+            <ShoppingCart aria-hidden="true" size={26} />
+          </span>
+          <div>
+            <h1 className="text-xl font-bold">Nouvelle vente</h1>
+            <p className="text-muted text-sm">Rapide, simple et sécurisé</p>
+          </div>
+        </div>
         <input
           type="search"
           value={q}
@@ -135,13 +144,19 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
               : "Aucun produit à vendre. Le propriétaire doit d'abord ajouter des produits."}
           </p>
         ) : (
-          <ul className="flex flex-col gap-2">
+          <ul className="grid grid-cols-2 gap-3">
             {produits.map((p) => (
               <li
                 key={p.id}
-                className="border-border flex flex-col gap-2 rounded-lg border p-3"
+                className="border-border flex flex-col gap-2 rounded-2xl border bg-white p-3 shadow-sm"
               >
-                <p className="font-medium">{p.nom}</p>
+                <span
+                  aria-hidden="true"
+                  className="bg-brand-soft text-brand-strong grid h-16 place-items-center rounded-xl text-2xl font-extrabold"
+                >
+                  {p.nom.charAt(0)}
+                </span>
+                <p className="font-bold">{p.nom}</p>
                 <p className="text-muted text-sm">
                   En stock : {formaterStock(p.stock, p.uniteBase, p.unites)}
                 </p>
@@ -153,7 +168,7 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
                       onClick={() =>
                         setLignes((l) => ajouterAuPanier(l, p, u.id, cle))
                       }
-                      className="border-brand-strong text-brand-strong hover:bg-brand-soft min-h-11 rounded-lg border px-3 text-sm font-medium"
+                      className="bg-brand-strong min-h-11 rounded-full px-3 text-sm font-bold text-white"
                     >
                       + {u.nom} · {formatFcfa(u.prixVente)}
                     </button>
@@ -166,7 +181,12 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
       </section>
 
       <section aria-label="Panier" className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold">Panier</h2>
+        <h2
+          className="rounded-xl px-4 py-3 text-lg font-bold text-white"
+          style={{ background: "linear-gradient(110deg,#ff8b1a,#f26a0f)" }}
+        >
+          Panier ({lignes.length})
+        </h2>
         {lignes.length === 0 ? (
           <p className="text-muted">Touchez un produit pour l&apos;ajouter.</p>
         ) : (
@@ -236,7 +256,7 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
         )}
       </section>
 
-      <div className="border-border bg-background fixed inset-x-0 bottom-14 z-10 border-t p-3 md:bottom-0 md:left-56">
+      <div className="border-border bg-background fixed inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom,0px))] z-10 border-t p-3 md:bottom-0 md:left-56">
         <div className="mx-auto flex max-w-5xl flex-col gap-2">
           {(erreur ?? probleme) && lignes.length > 0 && (
             <p role="alert" className="text-danger text-sm">
