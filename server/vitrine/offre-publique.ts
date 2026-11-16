@@ -2,11 +2,17 @@ import "server-only";
 import { planDepuisLigne, plansVisibles, type Plan } from "@/lib/plans";
 import { supabasePublic } from "@/lib/supabase/public";
 import { avecCache } from "@/lib/vitrine/cache";
-import { programmeDepuisJson, type ProgrammePublic } from "@/lib/vitrine/offre";
+import {
+  chiffresDepuisJson,
+  programmeDepuisJson,
+  type ChiffresPublics,
+  type ProgrammePublic,
+} from "@/lib/vitrine/offre";
 
 export interface OffrePublique {
   plans: Plan[];
   programme: ProgrammePublic | null;
+  chiffres: ChiffresPublics | null;
 }
 
 const UNE_MINUTE = 60_000;
@@ -15,7 +21,7 @@ const UNE_MINUTE = 60_000;
 async function lireOffre(): Promise<OffrePublique | null> {
   try {
     const supabase = supabasePublic();
-    const [plans, programme] = await Promise.all([
+    const [plans, programme, chiffres] = await Promise.all([
       supabase
         .from("plans")
         .select(
@@ -24,11 +30,13 @@ async function lireOffre(): Promise<OffrePublique | null> {
         .eq("visible_public", true)
         .order("ordre"),
       supabase.rpc("programme_partenaire_public"),
+      supabase.rpc("chiffres_publics"),
     ]);
     if (plans.error) return null;
     return {
       plans: plansVisibles((plans.data ?? []).map(planDepuisLigne)),
       programme: programme.error ? null : programmeDepuisJson(programme.data),
+      chiffres: chiffres.error ? null : chiffresDepuisJson(chiffres.data),
     };
   } catch {
     // Base injoignable ou ligne inattendue : la page s'affiche quand même, sans tarifs inventés.
@@ -40,5 +48,5 @@ const lireAvecCache = avecCache(UNE_MINUTE, lireOffre);
 
 /** Offre affichée aux visiteurs. Activer un plan depuis l'administration apparaît en moins d'une minute, sans redéploiement. */
 export async function chargerOffrePublique(): Promise<OffrePublique> {
-  return (await lireAvecCache()) ?? { plans: [], programme: null };
+  return (await lireAvecCache()) ?? { plans: [], programme: null, chiffres: null };
 }

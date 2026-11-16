@@ -5,7 +5,7 @@ import { normaliserCode } from "@/lib/auth/parrainage";
 
 export const metadata = { title: "Créer ma boutique · Kaya" };
 
-type Recherche = Promise<{ code?: string }>;
+type Recherche = Promise<{ code?: string; plan?: string }>;
 
 export default function PageInscription({
   searchParams,
@@ -39,9 +39,10 @@ async function InscriptionAvecCode({
 }: {
   searchParams: Recherche;
 }) {
-  const { code } = await searchParams;
+  const { code, plan } = await searchParams;
   return (
     <FormulaireInscription
+      plan={plan && /^[a-z_]{2,30}$/.test(plan) ? plan : undefined}
       codeInitial={code ? (normaliserCode(code) ?? undefined) : undefined}
     />
   );

@@ -3,11 +3,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Activity,
   Bell,
-  BarChart3,
+  ChartColumn,
   BookText,
   Boxes,
   ChevronDown,
@@ -28,13 +28,14 @@ import { deconnecter } from "@/server/auth/actions";
 
 const icones: Record<string, typeof LayoutDashboard> = {
   "/patron": LayoutDashboard,
-  "/rapports": BarChart3,
+  "/rapports": ChartColumn,
   "/vente": ShoppingCart,
   "/recus": ReceiptText,
   "/stock": Boxes,
   "/clients": Users,
   "/caisse": Wallet,
   "/journal": Activity,
+  "/notifications": Bell,
   "/devis": ClipboardList,
   "/fournisseurs": Store,
   "/parametres": Settings2,
@@ -42,11 +43,23 @@ const icones: Record<string, typeof LayoutDashboard> = {
 
 const ordreMobile = ["/patron", "/vente", "/stock", "/clients", "/caisse"];
 
-export function Navigation({ menu, nom }: { menu: EntreeMenu[]; nom: string | null }) {
+export function Navigation({
+  menu,
+  nom,
+  nonLues = 0,
+}: {
+  menu: EntreeMenu[];
+  nom: string | null;
+  nonLues?: number;
+}) {
   const chemin = usePathname();
   const [plusOuvert, setPlusOuvert] = useState(false);
-  // Referme le panneau « Plus » à chaque changement de page.
-  useEffect(() => setPlusOuvert(false), [chemin]);
+  // Referme le panneau « Plus » à chaque changement de page (ajustement pendant le rendu, sans effet).
+  const [cheminVu, setCheminVu] = useState(chemin);
+  if (cheminVu !== chemin) {
+    setCheminVu(chemin);
+    setPlusOuvert(false);
+  }
   const estActif = (href: string) => chemin === href || (href !== "/" && chemin.startsWith(`${href}/`));
   const liensMobile = ordreMobile.map((href) => menu.find((m) => m.href === href)).filter((m): m is EntreeMenu => Boolean(m));
 
@@ -85,7 +98,12 @@ export function Navigation({ menu, nom }: { menu: EntreeMenu[]; nom: string | nu
           <div className="kaya-user-card">
             <span className="kaya-user-avatar">{(nom?.trim().charAt(0) || "K").toUpperCase()}</span>
             <span className="kaya-user-meta"><strong>{nom || "Mon compte"}</strong><small>Votre boutique</small></span>
-            <Bell size={17} />
+            {menu.some((m) => m.href === "/notifications") && (
+              <Link href="/notifications" aria-label={nonLues > 0 ? `${nonLues} notifications non lues` : "Notifications"} className="kaya-bell">
+                <Bell size={17} />
+                {nonLues > 0 && <span className="kaya-bell-badge">{nonLues > 9 ? "9+" : nonLues}</span>}
+              </Link>
+            )}
           </div>
           <form action={deconnecter}>
             <button type="submit" className="kaya-logout"><LogOut size={17} /> Se déconnecter</button>
@@ -102,9 +120,16 @@ export function Navigation({ menu, nom }: { menu: EntreeMenu[]; nom: string | nu
           </span>
         </Link>
         <div className="kaya-mobile-actions">
-          <span className="kaya-mobile-bell" role="img" aria-label="Notifications">
-            <Bell aria-hidden="true" size={24} />
-          </span>
+          {menu.some((m) => m.href === "/notifications") ? (
+            <Link href="/notifications" aria-label={nonLues > 0 ? `${nonLues} notifications non lues` : "Notifications"} className="kaya-mobile-bell kaya-bell">
+              <Bell aria-hidden="true" size={24} />
+              {nonLues > 0 && <span className="kaya-bell-badge">{nonLues > 9 ? "9+" : nonLues}</span>}
+            </Link>
+          ) : (
+            <span className="kaya-mobile-bell" role="img" aria-label="Notifications">
+              <Bell aria-hidden="true" size={24} />
+            </span>
+          )}
           <span className="kaya-mobile-user" role="img" aria-label={nom ? `Connecté : ${nom}` : "Mon compte"}>
             <span className="kaya-user-avatar">{(nom?.trim().charAt(0) || "K").toUpperCase()}</span>
             <ChevronDown aria-hidden="true" size={16} />

@@ -19,12 +19,18 @@
 }
 
 @media print {
+  /* Pendant l'impression par bouton, seul le document choisi reste : tout le reste de la page disparaît. */
+  body[data-impression] > *:not(.recu-ticket):not(.recu-a4) {
+    display: none !important;
+  }
   body[data-impression="ticket"] .recu-ticket,
   body[data-impression="a4"] .recu-a4 {
     display: block;
-    position: absolute;
-    inset: 0 auto auto 0;
     width: 100%;
+  }
+  body[data-impression="ticket"] > .recu-a4,
+  body[data-impression="a4"] > .recu-ticket {
+    display: none !important;
   }
   /* Le rouleau fait 58 mm : on fixe la largeur, même si le pilote annonce un papier plus large. */
   body[data-impression="ticket"] .recu-ticket {
@@ -201,4 +207,37 @@
   text-align: center;
   font-size: 9pt;
   color: #444;
+}
+
+/* Signature et cachet du propriétaire en bas du reçu. */
+.recu-ticket .t-signature,
+.recu-a4 .a-signature {
+  margin-top: 6px;
+  text-align: center;
+}
+.recu-ticket .t-signature .s-images,
+.recu-a4 .a-signature .s-images {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 8px;
+}
+.recu-ticket .t-signature img {
+  max-width: 45%;
+  max-height: 14mm;
+  object-fit: contain;
+}
+.recu-a4 .a-signature img {
+  max-width: 45mm;
+  max-height: 25mm;
+  object-fit: contain;
+}
+.recu-ticket .t-signature .s-nom,
+.recu-a4 .a-signature .s-nom {
+  font-weight: 700;
+  font-size: 0.85em;
+}
+.recu-a4 .a-signature {
+  margin-top: 18px;
+  text-align: right;
 }

@@ -35,7 +35,7 @@ export async function verifierImageStockee(
       String.fromCharCode(...o.slice(de, a));
     valide =
       o.length === 12 &&
-      (type === "logo"
+      (type === "logo" || type === "signature" || type === "cachet"
         ? SIGNATURE_PNG.every((b, i) => o[i] === b)
         : texte(0, 4) === "RIFF" && texte(8, 12) === "WEBP");
   }

@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { planifierNotifications } from "@/server/notifications/declencher";
 import { versProduitsVente } from "@/lib/ventes/produits";
 import { clientRapideSchema, venteSchema } from "@/lib/ventes/schemas";
 import type { ProduitVente } from "@/lib/ventes/panier";
@@ -55,6 +56,7 @@ export async function validerVenteAction(
   });
   if (error || !data) return { ok: false, erreur: messageErreurBase(error) };
   revalidatePath("/stock");
+  planifierNotifications(profil.organisationId);
   return {
     ok: true,
     venteId: data.vente_id,
@@ -138,7 +140,7 @@ export async function annulerVenteAction(
   _e: EtatAnnulation,
   formData: FormData,
 ): Promise<EtatAnnulation> {
-  await exigerRole("proprietaire");
+  const profilAnnulation = await exigerRole("proprietaire");
   const venteId = String(formData.get("venteId") ?? "");
   const motif = String(formData.get("motif") ?? "").trim();
   if (!/^[0-9a-f-]{36}$/i.test(venteId))
@@ -153,6 +155,7 @@ export async function annulerVenteAction(
   revalidatePath(`/vente/recu/${venteId}`);
   revalidatePath("/recus");
   revalidatePath("/stock");
+  planifierNotifications(profilAnnulation.organisationId);
   return {
     succes: `Vente annulée. Avoir ${data?.avoir ?? ""} créé, stock remis.`,
   };

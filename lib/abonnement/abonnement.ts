@@ -1,5 +1,5 @@
 export type StatutAbonnement =
-  "essai" | "actif" | "en_retard" | "suspendu" | "annule";
+  "en_attente" | "actif" | "en_retard" | "suspendu" | "annule";
 
 export interface EtatAbonnement {
   libelle: string;
@@ -32,29 +32,18 @@ export function etatAbonnement(
   a: {
     statut: StatutAbonnement;
     prochaineEcheance: string | null;
-    finEssai: string | null;
     finGrace: string | null;
   },
   maintenant: Date,
 ): EtatAbonnement {
   switch (a.statut) {
-    case "essai": {
-      if (!a.finEssai)
-        return {
-          libelle: "Essai gratuit",
-          ton: "normal",
-          message: "Vous êtes en période d'essai.",
-        };
-      const n = joursRestants(a.finEssai, maintenant);
+    case "en_attente":
       return {
-        libelle: "Essai gratuit",
-        ton: n <= 3 ? "attention" : "normal",
+        libelle: "À régler",
+        ton: "attention",
         message:
-          n < 0
-            ? "Votre essai est terminé."
-            : `Votre essai gratuit se termine ${libelleJours(n)}.`,
+          "Votre premier paiement n'est pas encore réglé. Choisissez votre formule et payez pour continuer sans interruption.",
       };
-    }
     case "actif": {
       if (!a.prochaineEcheance)
         return {

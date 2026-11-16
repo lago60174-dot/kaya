@@ -1,42 +1,5 @@
 import { formatFcfa } from "@/lib/format";
-import { FONCTIONNALITES, peutUtiliser, limite, type Plan } from "@/lib/plans";
-
-/** Une phrase simple par fonctionnalité de plan. Les fonctions communes à tous les plans sont décrites dans la page. */
-const PHRASE_FONCTIONNALITE: Record<(typeof FONCTIONNALITES)[number], string> =
-  {
-    journal_complet: "Journal complet de toutes les actions, avec les alertes",
-    devis: "Devis, proformas et bons de livraison",
-    fournisseurs: "Fournisseurs, commandes et dettes fournisseurs",
-    impression: "Impression sur ticket ou en A4",
-    // Dit par la ligne « boutiques » (limite) : pas de doublon.
-    multi_boutiques: "",
-    resume_whatsapp: "Résumé de la journée sur WhatsApp, chaque soir",
-  };
-
-export function phraseVendeurs(max: number | null): string {
-  if (max === null) return "Autant de vendeurs que vous voulez";
-  if (max === 0) return "Vous seul vendez";
-  return max === 1
-    ? "1 vendeur, en plus de vous"
-    : `${max} vendeurs, en plus de vous`;
-}
-
-export function phraseBoutiques(max: number | null): string {
-  if (max === null) return "Plusieurs boutiques dans un seul compte";
-  return max === 1 ? "1 boutique" : `${max} boutiques`;
-}
-
-/** Lignes affichées sous le prix d'un plan : limites, puis fonctions du plan. Tout vient de la base. */
-export function lignesDuPlan(plan: Plan): string[] {
-  const fonctions = FONCTIONNALITES.filter((f) => peutUtiliser(plan, f))
-    .map((f) => PHRASE_FONCTIONNALITE[f])
-    .filter((p) => p !== "");
-  return [
-    phraseVendeurs(limite(plan, "vendeurs")),
-    phraseBoutiques(limite(plan, "boutiques")),
-    ...fonctions,
-  ];
-}
+import { peutUtiliser, type Plan } from "@/lib/plans";
 
 export function prixParMois(plan: Plan): string {
   return `${formatFcfa(plan.prixMensuel)} par mois`;
@@ -67,7 +30,37 @@ export interface ProgrammePublic {
   dureeMois: number;
   seuilVersement: number;
   retentionJours: number;
-  essaiJours: number;
+}
+
+/** Totaux réels de la base, jamais saisis à la main. */
+export interface ChiffresPublics {
+  boutiques: number;
+  ventes: number;
+  montantVentes: number;
+  produits: number;
+  creditsRecouvres: number;
+}
+
+export function chiffresDepuisJson(brut: unknown): ChiffresPublics | null {
+  if (typeof brut !== "object" || brut === null) return null;
+  const j = brut as Record<string, unknown>;
+  const n = (v: unknown) => Number(v);
+  const c = {
+    boutiques: n(j.boutiques),
+    ventes: n(j.ventes),
+    montantVentes: n(j.montant_ventes),
+    produits: n(j.produits),
+    creditsRecouvres: n(j.credits_recouvres),
+  };
+  return Object.values(c).every((v) => Number.isFinite(v) && v >= 0) ? c : null;
+}
+
+/**
+ * Faut-il montrer les chiffres ? Seulement quand ils reposent sur un vrai usage (au moins une boutique
+ * et quelques dizaines de ventes). Avant, la section reste masquée : jamais de chiffre ridicule ni inventé.
+ */
+export function chiffresAffichables(c: ChiffresPublics | null): c is ChiffresPublics {
+  return c !== null && c.boutiques >= 1 && c.ventes >= 20;
 }
 
 export function programmeDepuisJson(brut: unknown): ProgrammePublic | null {
@@ -79,7 +72,6 @@ export function programmeDepuisJson(brut: unknown): ProgrammePublic | null {
     dureeMois: nombre(j.duree_mois),
     seuilVersement: nombre(j.seuil_versement),
     retentionJours: nombre(j.retention_jours),
-    essaiJours: nombre(j.essai_jours),
   };
   return Object.values(p).every((v) => Number.isFinite(v)) ? p : null;
 }

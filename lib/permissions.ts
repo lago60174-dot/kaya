@@ -9,7 +9,10 @@ const PUBLIC_EXACT = [
   "/",
   "/connexion",
   "/inscription",
+  "/mot-de-passe-oublie",
+  "/auth/confirmer",
   "/partenaire",
+  "/tarifs",
   "/mentions-legales",
   "/confidentialite",
   "/conditions",
@@ -22,11 +25,21 @@ const PUBLIC_EXACT = [
   "/manifest.webmanifest",
   "/sw.js",
 ];
-const PUBLIC_PREFIXES = ["/a/", "/r/", "/img/", "/api/webhooks/"];
+const PUBLIC_PREFIXES = [
+  "/a/",
+  "/r/",
+  "/img/",
+  "/api/webhooks/",
+  "/api/cron/",
+  "/payer/",
+];
 const PROPRIETAIRE_PREFIXES = [
   "/patron",
+  "/notifications",
   "/rapports",
+  "/notifications",
   "/parametres",
+  "/demarrage",
   "/journal",
   "/devis",
   "/fournisseurs",
@@ -42,7 +55,12 @@ export function zonePourChemin(chemin: string): Zone {
     PUBLIC_PREFIXES.some((p) => chemin.startsWith(p))
   )
     return "public";
-  if (startsWithSegment(chemin, "/mot-de-passe")) return "connecte";
+  // Accessibles à tout compte connecté, même tenu de changer son mot de passe ou de choisir sa formule.
+  if (
+    startsWithSegment(chemin, "/mot-de-passe") ||
+    startsWithSegment(chemin, "/choisir-plan")
+  )
+    return "connecte";
   if (startsWithSegment(chemin, "/admin")) return "admin";
   if (startsWithSegment(chemin, "/affilie")) return "affilie";
   if (
@@ -75,6 +93,8 @@ export function roleAutorise(role: Role | null, zone: Zone): boolean {
 export interface EtatSession {
   role: Role | null;
   doitChangerMotDePasse: boolean;
+  /** Propriétaire dont la boutique n'a pas encore de formule choisie : il doit la choisir avant tout le reste. */
+  planAChoisir?: boolean;
 }
 export type DecisionGarde =
   { type: "ok" } | { type: "rediriger"; vers: string };
@@ -89,6 +109,8 @@ export function decisionGarde(
     return { type: "rediriger", vers: "/connexion" };
   if (session.doitChangerMotDePasse && zone !== "connecte")
     return { type: "rediriger", vers: "/mot-de-passe" };
+  if (session.planAChoisir && zone !== "connecte")
+    return { type: "rediriger", vers: "/choisir-plan" };
   if (!roleAutorise(session.role, zone))
     return { type: "rediriger", vers: accueilPour(session.role) };
   return { type: "ok" };
@@ -125,6 +147,7 @@ const MENU: DefinitionMenu[] = [
   { href: "/clients", libelle: "Clients", roles: ["proprietaire", "vendeur"] },
   { href: "/caisse", libelle: "Caisse", roles: ["proprietaire", "vendeur"] },
   { href: "/recus", libelle: "Reçus", roles: ["proprietaire", "vendeur"] },
+  { href: "/notifications", libelle: "Notifications", roles: ["proprietaire"] },
   { href: "/journal", libelle: "Journal", roles: ["proprietaire"] },
   { href: "/devis", libelle: "Devis", roles: ["proprietaire"], fonction: "devis" },
   { href: "/fournisseurs", libelle: "Fournisseurs", roles: ["proprietaire"], fonction: "fournisseurs" },

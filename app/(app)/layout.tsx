@@ -2,7 +2,12 @@ import { Suspense } from "react";
 import { InactiviteDeconnexion } from "@/components/inactivite";
 import { Navigation } from "@/components/navigation";
 import { menuPour } from "@/lib/permissions";
+import { BandeauAbonnement } from "@/components/abonnement/bandeau";
+import { BandeauConfirmation } from "@/components/auth/bandeau-confirmation";
+import { emailConfigure } from "@/server/email/resend";
+import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
+import { compterNonLues } from "@/server/notifications/lecture";
 
 export default function MiseEnPageApplication({ children }: { children: React.ReactNode }) {
   return (
@@ -15,11 +20,23 @@ export default function MiseEnPageApplication({ children }: { children: React.Re
 async function CadreProtege({ children }: { children: React.ReactNode }) {
   const profil = await exigerRole("boutique");
   const menu = profil.role && profil.plan ? menuPour(profil.role, profil.plan) : [];
+  const nonLues =
+    profil.role === "proprietaire"
+      ? await compterNonLues(await supabaseServeur())
+      : 0;
   return (
     <div className="kaya-app-shell">
-      <Navigation menu={menu} nom={profil.nom} />
+      <Navigation menu={menu} nom={profil.nom} nonLues={nonLues} />
       <main className="kaya-main">
-        <div className="kaya-main-inner">{children}</div>
+        <div className="kaya-main-inner">
+          {profil.role === "proprietaire" && !profil.emailVerifie && emailConfigure() && (
+            <BandeauConfirmation />
+          )}
+          <Suspense fallback={null}>
+            <BandeauAbonnement estProprietaire={profil.role === "proprietaire"} />
+          </Suspense>
+          {children}
+        </div>
       </main>
       <InactiviteDeconnexion />
     </div>

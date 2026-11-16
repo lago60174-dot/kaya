@@ -32,6 +32,16 @@ export interface DocumentRecu {
   titre: string;
   date: string;
   boutique: { nom: string; adresse: string | null; telephone: string | null };
+  /** Lignes d'identité sous le nom : email, RCCM, NIU. Vide si la boutique n'a rien renseigné. */
+  identite: string[];
+  /** « Servi par » : le vendeur de la vente. */
+  serviPar: string | null;
+  /** Signature et cachet du propriétaire, à poser en bas du reçu. */
+  signature: {
+    signataire: string | null;
+    signatureUrl: string | null;
+    cachetUrl: string | null;
+  } | null;
   client: string | null;
   /** Ligne d'information sous le client (ex. « Payé par Espèces »). */
   precision: string | null;
@@ -41,6 +51,14 @@ export interface DocumentRecu {
   totaux: TotalDocument[];
   mentionLegale: string | null;
   remerciement: string;
+}
+
+/** Adresse + ville, sans répéter la ville quand l'adresse la contient déjà. */
+function adresseComplete(adresse?: string | null, ville?: string | null): string | null {
+  const a = adresse?.trim() || "";
+  const v = ville?.trim() || "";
+  if (a && v && a.toLowerCase().includes(v.toLowerCase())) return a;
+  return [a, v].filter(Boolean).join(", ") || null;
 }
 
 export function documentDepuisVente(recu: RecuAffichable): DocumentRecu {
@@ -75,9 +93,29 @@ export function documentDepuisVente(recu: RecuAffichable): DocumentRecu {
     date: formatDateHeure(recu.date),
     boutique: {
       nom: recu.boutique.nom,
-      adresse: recu.boutique.adresse,
+      adresse: adresseComplete(recu.boutique.adresse, recu.boutique.ville),
       telephone: recu.boutique.telephone,
     },
+    identite: [
+      recu.boutique.email,
+      recu.boutique.rccm && `RCCM : ${recu.boutique.rccm}`,
+      recu.boutique.niu && `NIU : ${recu.boutique.niu}`,
+    ].filter((l): l is string => Boolean(l)),
+    serviPar: recu.vendeur ?? null,
+    signature:
+      recu.boutique.signatureCle ||
+      recu.boutique.cachetCle ||
+      recu.boutique.signataire
+        ? {
+            signataire: recu.boutique.signataire ?? null,
+            signatureUrl: recu.boutique.signatureCle
+              ? `/img/${recu.boutique.signatureCle}`
+              : null,
+            cachetUrl: recu.boutique.cachetCle
+              ? `/img/${recu.boutique.cachetCle}`
+              : null,
+          }
+        : null,
     client: recu.client?.nom ?? null,
     precision: null,
     annule: recu.annule,
@@ -95,13 +133,21 @@ export function documentDepuisVente(recu: RecuAffichable): DocumentRecu {
     }),
     totaux,
     mentionLegale: recu.boutique.mentionLegale,
-    remerciement: "Merci de votre confiance !",
+    // Comme à l'écran : la phrase de la boutique remplace le remerciement standard.
+    remerciement: recu.boutique.mentionLegale ? "" : "Merci de votre confiance !",
   };
 }
 
 export interface PaiementImprimable extends PaiementRecu {
   boutiqueAdresse?: string | null;
   boutiqueTelephone?: string | null;
+  boutiqueVille?: string | null;
+  boutiqueEmail?: string | null;
+  rccm?: string | null;
+  niu?: string | null;
+  signataire?: string | null;
+  signatureCle?: string | null;
+  cachetCle?: string | null;
 }
 
 export function documentDepuisPaiement(
@@ -115,9 +161,23 @@ export function documentDepuisPaiement(
     date: formatDateHeure(p.date),
     boutique: {
       nom: p.boutique,
-      adresse: p.boutiqueAdresse ?? null,
+      adresse: adresseComplete(p.boutiqueAdresse ?? null, p.boutiqueVille ?? null),
       telephone: p.boutiqueTelephone ?? null,
     },
+    identite: [
+      p.boutiqueEmail,
+      p.rccm && `RCCM : ${p.rccm}`,
+      p.niu && `NIU : ${p.niu}`,
+    ].filter((l): l is string => Boolean(l)),
+    serviPar: null,
+    signature:
+      p.signatureCle || p.cachetCle || p.signataire
+        ? {
+            signataire: p.signataire ?? null,
+            signatureUrl: p.signatureCle ? `/img/${p.signatureCle}` : null,
+            cachetUrl: p.cachetCle ? `/img/${p.cachetCle}` : null,
+          }
+        : null,
     client: p.client,
     precision: `Payé par ${libelleMode(p.mode)}`,
     annule: false,
@@ -149,6 +209,6 @@ export function documentDepuisPaiement(
           },
     ],
     mentionLegale,
-    remerciement: "Merci de votre confiance !",
+    remerciement: mentionLegale ? "" : "Merci de votre confiance !",
   };
 }

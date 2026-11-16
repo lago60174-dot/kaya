@@ -1,0 +1,2873 @@
+[
+ {
+  "ref": "L2-001",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils rigides",
+  "nom": "Fil H07V-U 1,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide unipolaire H07V-U, cuivre monobrin 1,5 mm², PVC, 450/750 V, éclairage",
+  "synonymes_locaux": [
+   "fil de 1,5",
+   "fil rigide 1,5",
+   "fil d'éclairage"
+  ],
+  "requete_image": "Fil H07V-U 1,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de fil rigide unicolore, section 1,5 mm²",
+  "nom_fichier_image": "fil-h07vu-1-5.jpg",
+  "source": "https://www.nexans.fr/en/products/Building/Residential/Rigides-Wires/H07V-U-536932466/product~10026510~.html",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-002",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils rigides",
+  "nom": "Fil H07V-U 2,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide unipolaire H07V-U, cuivre monobrin 2,5 mm², PVC, 450/750 V, prises 16 A",
+  "synonymes_locaux": [
+   "fil de 2,5",
+   "fil rigide 2,5",
+   "fil des prises"
+  ],
+  "requete_image": "Fil H07V-U 2,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de fil rigide unicolore, section 2,5 mm²",
+  "nom_fichier_image": "fil-h07vu-2-5.jpg",
+  "source": "https://www.nexans.fr/en/products/Building/Residential/Rigides-Wires/H07V-U-536932466/product~10026510~.html",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-003",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils rigides",
+  "nom": "Fil H07V-U 4 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide unipolaire H07V-U, cuivre 4 mm², PVC, 450/750 V, circuits spécialisés",
+  "synonymes_locaux": [
+   "fil de 4",
+   "fil rigide 4"
+  ],
+  "requete_image": "Fil H07V-U 4 mm² photo fond blanc",
+  "description_visuelle": "Couronne de fil rigide unicolore, section 4 mm²",
+  "nom_fichier_image": "fil-h07vu-4.jpg",
+  "source": "https://www.nexans.fr/en/products/Building/Residential/Rigides-Wires/H07V-U-536932466/product~10026510~.html",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-4"
+ },
+ {
+  "ref": "L2-004",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils rigides",
+  "nom": "Fil H07V-U 6 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide unipolaire H07V-U, cuivre 6 mm², PVC, 450/750 V, circuits spécialisés",
+  "synonymes_locaux": [
+   "fil de 6",
+   "fil rigide 6"
+  ],
+  "requete_image": "Fil H07V-U 6 mm² photo fond blanc",
+  "description_visuelle": "Couronne de fil rigide unicolore, section 6 mm²",
+  "nom_fichier_image": "fil-h07vu-6.jpg",
+  "source": "https://www.nexans.fr/en/products/Building/Residential/Rigides-Wires/H07V-U-536932466/product~10026510~.html",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon). Vendu parfois en H07V-R",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-005",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils rigides",
+  "nom": "Fil H07V-U 10 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "rouleau de 50 m",
+    "facteur": 50.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide unipolaire H07V-U, cuivre 10 mm², PVC, 450/750 V",
+  "synonymes_locaux": [
+   "fil de 10",
+   "fil rigide 10"
+  ],
+  "requete_image": "Fil H07V-U 10 mm² photo fond blanc",
+  "description_visuelle": "Couronne de gros fil rigide unicolore, section 10 mm²",
+  "nom_fichier_image": "fil-h07vu-10.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "10 mm² monobrin peu courant, souvent vendu en H07V-R (voir L2-007). Conditionnement et existence à confirmer",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-006",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles multibrins",
+  "nom": "Câble H07V-R 6 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide multibrins classe 2, H07V-R, cuivre 6 mm², PVC, 450/750 V",
+  "synonymes_locaux": [
+   "câble de 6",
+   "fil multibrin 6",
+   "fil toronné 6"
+  ],
+  "requete_image": "Câble H07V-R 6 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble unipolaire toronné, section 6 mm²",
+  "nom_fichier_image": "cable-h07vr-6.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-007",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles multibrins",
+  "nom": "Câble H07V-R 10 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide multibrins classe 2, H07V-R, cuivre 10 mm², PVC, 450/750 V, arrivées et tableaux",
+  "synonymes_locaux": [
+   "câble de 10",
+   "fil toronné 10"
+  ],
+  "requete_image": "Câble H07V-R 10 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble unipolaire toronné, section 10 mm²",
+  "nom_fichier_image": "cable-h07vr-10.jpg",
+  "source": "https://www.123elec.com/marques/nexans.html?p=5",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-008",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles multibrins",
+  "nom": "Câble H07V-R 16 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 50 m",
+    "facteur": 50.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rigide multibrins classe 2, H07V-R, cuivre 16 mm², PVC, 450/750 V, arrivées et mises à la terre",
+  "synonymes_locaux": [
+   "câble de 16",
+   "fil toronné 16"
+  ],
+  "requete_image": "Câble H07V-R 16 mm² photo fond blanc",
+  "description_visuelle": "Rouleau de gros câble unipolaire toronné, section 16 mm²",
+  "nom_fichier_image": "cable-h07vr-16.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon). Longueur du rouleau (50 ou 100 m) à confirmer",
+  "propose_par_defaut": true,
+  "image": "fil-h07vu-1-5"
+ },
+ {
+  "ref": "L2-009",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils rigides",
+  "nom": "Fil de terre H07V-U 2,5 mm² vert/jaune",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "H07V-U cuivre monobrin 2,5 mm², isolant vert/jaune, conducteur de protection",
+  "synonymes_locaux": [
+   "fil de terre",
+   "fil vert-jaune",
+   "fil de masse"
+  ],
+  "requete_image": "Fil de terre H07V-U 2,5 mm² vert/jaune photo fond blanc",
+  "description_visuelle": "Couronne de fil rigide bicolore vert et jaune, 2,5 mm²",
+  "nom_fichier_image": "fil-terre-h07vu-2-5-vert-jaune.jpg",
+  "source": "https://www.nexans.fr/en/products/Building/Residential/Rigides-Wires/H07V-U-536932466/product~10287160~.html",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "fil-terre-h07vu-2-5-vert-jaune"
+ },
+ {
+  "ref": "L2-010",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles souples",
+  "nom": "Câble souple H05VV-F 2×1,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Souple H05VV-F, 2 conducteurs cuivre 1,5 mm², gaine PVC ronde, 300/500 V",
+  "synonymes_locaux": [
+   "fil souple 2×1,5",
+   "câble souple",
+   "fil électrique rond"
+  ],
+  "requete_image": "Câble souple H05VV-F 2×1,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble rond souple à 2 conducteurs, gaine blanche ou noire",
+  "nom_fichier_image": "cable-h05vvf-2x1-5.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-2x1-5"
+ },
+ {
+  "ref": "L2-011",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles souples",
+  "nom": "Câble souple H05VV-F 2×2,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Souple H05VV-F, 2 conducteurs cuivre 2,5 mm², gaine PVC ronde, 300/500 V",
+  "synonymes_locaux": [
+   "fil souple 2×2,5",
+   "câble souple"
+  ],
+  "requete_image": "Câble souple H05VV-F 2×2,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble rond souple à 2 conducteurs, section 2,5 mm²",
+  "nom_fichier_image": "cable-h05vvf-2x2-5.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-2x1-5"
+ },
+ {
+  "ref": "L2-012",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles souples",
+  "nom": "Câble souple H05VV-F 3×1,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Souple H05VV-F, 3 conducteurs dont terre, cuivre 1,5 mm², PVC, 300/500 V",
+  "synonymes_locaux": [
+   "fil souple 3×1,5",
+   "câble 3 fils",
+   "fil de rallonge"
+  ],
+  "requete_image": "Câble souple H05VV-F 3×1,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble rond souple à 3 conducteurs, section 1,5 mm²",
+  "nom_fichier_image": "cable-h05vvf-3x1-5.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-3x1-5"
+ },
+ {
+  "ref": "L2-013",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles souples",
+  "nom": "Câble souple H05VV-F 3×2,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Souple H05VV-F, 3 conducteurs dont terre, cuivre 2,5 mm², PVC, 300/500 V",
+  "synonymes_locaux": [
+   "fil souple 3×2,5",
+   "câble 3 fils"
+  ],
+  "requete_image": "Câble souple H05VV-F 3×2,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble rond souple à 3 conducteurs, section 2,5 mm²",
+  "nom_fichier_image": "cable-h05vvf-3x2-5.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-3x1-5"
+ },
+ {
+  "ref": "L2-014",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles U1000 R2V",
+  "nom": "Câble U1000 R2V 3G1,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "U-1000 R2V, 3 conducteurs cuivre dont vert/jaune, 1,5 mm², isolant PRC, gaine PVC, 0,6/1 kV",
+  "synonymes_locaux": [
+   "R2V 3×1,5",
+   "câble R2V",
+   "câble armé léger"
+  ],
+  "requete_image": "Câble U1000 R2V 3G1,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble rond noir à 3 conducteurs, gaine épaisse",
+  "nom_fichier_image": "cable-u1000-r2v-3g1-5.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon). Vérifier si la boutique vend aussi du R2V sans conducteur de terre",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-3x1-5"
+ },
+ {
+  "ref": "L2-015",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles U1000 R2V",
+  "nom": "Câble U1000 R2V 3G2,5 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "U-1000 R2V, 3 conducteurs cuivre dont vert/jaune, 2,5 mm², isolant PRC, gaine PVC, 0,6/1 kV",
+  "synonymes_locaux": [
+   "R2V 3×2,5",
+   "câble R2V",
+   "câble enterrable"
+  ],
+  "requete_image": "Câble U1000 R2V 3G2,5 mm² photo fond blanc",
+  "description_visuelle": "Couronne de câble rond noir à 3 conducteurs, gaine épaisse",
+  "nom_fichier_image": "cable-u1000-r2v-3g2-5.jpg",
+  "source": "https://www.123elec.com/marques/nexans.html?p=5",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon)",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-3x1-5"
+ },
+ {
+  "ref": "L2-016",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles U1000 R2V",
+  "nom": "Câble U1000 R2V 3G6 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "U-1000 R2V, 3 conducteurs cuivre dont vert/jaune, 6 mm², PRC, gaine PVC, 0,6/1 kV",
+  "synonymes_locaux": [
+   "R2V 3×6",
+   "câble R2V 6"
+  ],
+  "requete_image": "Câble U1000 R2V 3G6 mm² photo fond blanc",
+  "description_visuelle": "Rouleau de câble noir à 3 conducteurs, section 6 mm²",
+  "nom_fichier_image": "cable-u1000-r2v-3g6.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon). Rouleau de 50 ou 100 m à confirmer",
+  "propose_par_defaut": true,
+  "image": "cable-h05vvf-3x1-5"
+ },
+ {
+  "ref": "L2-017",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles U1000 R2V",
+  "nom": "Câble U1000 R2V 4G10 mm²",
+  "marque": "À CONFIRMER",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "rouleau de 50 m",
+    "facteur": 50.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "U-1000 R2V, 4 conducteurs cuivre dont vert/jaune, 10 mm², PRC, gaine PVC, 0,6/1 kV",
+  "synonymes_locaux": [
+   "R2V 4×10",
+   "câble R2V 10",
+   "câble triphasé"
+  ],
+  "requete_image": "Câble U1000 R2V 4G10 mm² photo fond blanc",
+  "description_visuelle": "Rouleau de câble noir épais à 4 conducteurs, section 10 mm²",
+  "nom_fichier_image": "cable-u1000-r2v-4g10.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Marque et couleur à confirmer chez le commerçant (une couleur = même produit ici). Source française, pas de vérification locale (câblier local : Everwell Cameroon). Conditionnement à confirmer",
+  "propose_par_defaut": true,
+  "image": "cable-u1000-r2v-4g10"
+ },
+ {
+  "ref": "L2-018",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Câbles spéciaux",
+  "nom": "Câble aluminium torsadé (branchement)",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Torsade aluminium pour branchement aérien, 0,6/1 kV, section 2×16 mm² ou 4×16 mm² selon usage",
+  "synonymes_locaux": [
+   "torsade",
+   "câble torsadé",
+   "câble de branchement"
+  ],
+  "requete_image": "Câble aluminium torsadé (branchement) photo fond blanc",
+  "description_visuelle": "Câble aérien formé de conducteurs aluminium isolés torsadés",
+  "nom_fichier_image": "cable-alu-torsade-branchement.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "À CONFIRMER : section(s) vendues en boutique (2×16, 4×16 ou autre) = produits distincts. Souvent réservé au distributeur d'électricité",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-019",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Courants faibles",
+  "nom": "Câble coaxial TV 75 Ω",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Coaxial 75 Ω, type RG6 ou équivalent, gaine PVC, antenne TV et parabole",
+  "synonymes_locaux": [
+   "câble antenne",
+   "câble TV",
+   "fil de parabole"
+  ],
+  "requete_image": "Câble coaxial TV 75 Ω photo fond blanc",
+  "description_visuelle": "Rouleau de câble coaxial rond avec conducteur central et blindage",
+  "nom_fichier_image": "cable-coaxial-tv-75.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Type exact (RG6, RG59, 17VATC) à confirmer",
+  "propose_par_defaut": true,
+  "image": "cable-coaxial-tv-75"
+ },
+ {
+  "ref": "L2-020",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Courants faibles",
+  "nom": "Câble réseau Cat6",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "bobine de 305 m",
+    "facteur": 305.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Câble réseau Cat6, 4 paires torsadées 8 conducteurs, UTP, gaine PVC",
+  "synonymes_locaux": [
+   "câble RJ45",
+   "câble internet",
+   "câble Ethernet"
+  ],
+  "requete_image": "Câble réseau Cat6 photo fond blanc",
+  "description_visuelle": "Bobine de câble réseau gris à 4 paires torsadées",
+  "nom_fichier_image": "cable-reseau-cat6.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Bobine standard de 305 m, à confirmer. Cat5e à ajouter si demandé",
+  "propose_par_defaut": true,
+  "image": "cable-reseau-cat6"
+ },
+ {
+  "ref": "L2-021",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Courants faibles",
+  "nom": "Câble haut-parleur 2×0,75 mm²",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "2 conducteurs cuivre ou cuivre-aluminium 0,75 mm², gaine transparente ou rouge/noire",
+  "synonymes_locaux": [
+   "fil d'enceinte",
+   "câble sono",
+   "fil HP"
+  ],
+  "requete_image": "Câble haut-parleur 2×0,75 mm² photo fond blanc",
+  "description_visuelle": "Rouleau de fil double transparent à brins visibles",
+  "nom_fichier_image": "cable-haut-parleur-2x0-75.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Cuivre pur ou cuivre-aluminium : prix très différent, à confirmer",
+  "propose_par_defaut": true,
+  "image": "cable-haut-parleur-2x0-75"
+ },
+ {
+  "ref": "L2-022",
+  "categorie": "Câbles et fils",
+  "sous_categorie": "Fils souples",
+  "nom": "Fil jumelé 2×0,75 mm²",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "rouleau de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Fil souple parallèle 2 conducteurs 0,75 mm², gaine PVC, petit appareillage et lampes",
+  "synonymes_locaux": [
+   "fil jumelé",
+   "fil plat",
+   "fil de lampe"
+  ],
+  "requete_image": "Fil jumelé 2×0,75 mm² photo fond blanc",
+  "description_visuelle": "Rouleau de fil plat à deux conducteurs séparables",
+  "nom_fichier_image": "fil-jumele-2x0-75.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Risque de confusion avec L2-021 (haut-parleur) : usage différent, tension 300 V",
+  "propose_par_defaut": true,
+  "image": "fil-jumele-2x0-75"
+ },
+ {
+  "ref": "L2-023",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Gaines",
+  "nom": "Gaine ICTA Ø16",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "couronne de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Gaine annelée ICTA, Ø16 mm, PVC, pour encastrement, norme NF EN 61386",
+  "synonymes_locaux": [
+   "gaine 16",
+   "gaine orange",
+   "gaine d'encastrement"
+  ],
+  "requete_image": "Gaine ICTA Ø16 photo fond blanc",
+  "description_visuelle": "Couronne de tube annelé flexible, couleur orange ou grise, Ø16",
+  "nom_fichier_image": "gaine-icta-16.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Longueur de couronne à confirmer. Couleur variable selon fournisseur",
+  "propose_par_defaut": true,
+  "image": "gaine-icta-16"
+ },
+ {
+  "ref": "L2-024",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Gaines",
+  "nom": "Gaine ICTA Ø20",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "couronne de 100 m",
+    "facteur": 100.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Gaine annelée ICTA, Ø20 mm, PVC, pour encastrement, norme NF EN 61386",
+  "synonymes_locaux": [
+   "gaine 20",
+   "gaine orange"
+  ],
+  "requete_image": "Gaine ICTA Ø20 photo fond blanc",
+  "description_visuelle": "Couronne de tube annelé flexible, Ø20",
+  "nom_fichier_image": "gaine-icta-20.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Longueur de couronne à confirmer",
+  "propose_par_defaut": true,
+  "image": "gaine-icta-16"
+ },
+ {
+  "ref": "L2-025",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Gaines",
+  "nom": "Gaine ICTA Ø25",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "couronne de 50 m",
+    "facteur": 50.0
+   },
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Gaine annelée ICTA, Ø25 mm, PVC, pour encastrement, norme NF EN 61386",
+  "synonymes_locaux": [
+   "gaine 25",
+   "gros tube annelé"
+  ],
+  "requete_image": "Gaine ICTA Ø25 photo fond blanc",
+  "description_visuelle": "Couronne de tube annelé flexible, Ø25",
+  "nom_fichier_image": "gaine-icta-25.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Longueur de couronne (50 ou 100 m) à confirmer",
+  "propose_par_defaut": true,
+  "image": "gaine-icta-16"
+ },
+ {
+  "ref": "L2-026",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Goulottes",
+  "nom": "Goulotte 20×12",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Goulotte PVC blanche avec couvercle, 20×12 mm, longueur 2 m",
+  "synonymes_locaux": [
+   "moulure",
+   "goulotte de 20",
+   "baguette électrique"
+  ],
+  "requete_image": "Goulotte 20×12 photo fond blanc",
+  "description_visuelle": "Profilé PVC blanc rectangulaire clipsable, petit format",
+  "nom_fichier_image": "goulotte-20x12.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Longueur de 2 m à confirmer (d'autres longueurs existent)",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-027",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Goulottes",
+  "nom": "Goulotte 40×25",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Goulotte PVC blanche avec couvercle, 40×25 mm, longueur 2 m",
+  "synonymes_locaux": [
+   "goulotte de 40",
+   "moulure 40"
+  ],
+  "requete_image": "Goulotte 40×25 photo fond blanc",
+  "description_visuelle": "Profilé PVC blanc rectangulaire clipsable, moyen format",
+  "nom_fichier_image": "goulotte-40x25.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Longueur de 2 m à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-028",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Goulottes",
+  "nom": "Goulotte 60×40",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Goulotte PVC blanche avec couvercle, 60×40 mm, longueur 2 m",
+  "synonymes_locaux": [
+   "goulotte de 60",
+   "grosse goulotte"
+  ],
+  "requete_image": "Goulotte 60×40 photo fond blanc",
+  "description_visuelle": "Profilé PVC blanc rectangulaire clipsable, grand format",
+  "nom_fichier_image": "goulotte-60x40.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Longueur de 2 m à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-029",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Boîtes",
+  "nom": "Boîte d’encastrement 1 poste",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Boîte ronde Ø67 mm, profondeur 40 mm, PVC, pour appareillage encastré",
+  "synonymes_locaux": [
+   "boîte d'encastrement",
+   "boîtier de prise",
+   "boîtier"
+  ],
+  "requete_image": "Boîte d’encastrement 1 poste photo fond blanc",
+  "description_visuelle": "Petite boîte ronde en plastique avec deux oreilles de fixation",
+  "nom_fichier_image": "boite-encastrement-1-poste.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Conditionnement par sachet ou carton à confirmer. Profondeur 40 ou 50 mm à confirmer",
+  "propose_par_defaut": true,
+  "image": "boite-encastrement-1-poste"
+ },
+ {
+  "ref": "L2-030",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Boîtes",
+  "nom": "Boîte d’encastrement 2 postes",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Boîte pour 2 appareils, 2 × Ø67 mm, entraxe 71 mm, PVC, encastrée",
+  "synonymes_locaux": [
+   "boîte double",
+   "boîtier 2 postes"
+  ],
+  "requete_image": "Boîte d’encastrement 2 postes photo fond blanc",
+  "description_visuelle": "Boîte plastique avec deux alvéoles rondes côte à côte",
+  "nom_fichier_image": "boite-encastrement-2-postes.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Entraxe à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-031",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Boîtes",
+  "nom": "Boîte de dérivation carrée 80×80",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Boîte de dérivation carrée 80×80 mm, PVC avec couvercle, saillie ou encastrée",
+  "synonymes_locaux": [
+   "boîte de jonction",
+   "boîte carrée",
+   "boîte de dérivation"
+  ],
+  "requete_image": "Boîte de dérivation carrée 80×80 photo fond blanc",
+  "description_visuelle": "Boîte carrée plastique avec couvercle vissé",
+  "nom_fichier_image": "boite-derivation-80x80.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Saillie (IP55) ou encastrée : deux produits à séparer si les deux sont vendus",
+  "propose_par_defaut": true,
+  "image": "boite-derivation-80x80"
+ },
+ {
+  "ref": "L2-032",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Accessoires de câblage",
+  "nom": "Collier de serrage 200 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "sachet de 100",
+    "facteur": 100.0
+   },
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Collier nylon, longueur 200 mm, largeur environ 2,5 mm, noir ou blanc",
+  "synonymes_locaux": [
+   "collier plastique",
+   "serflex",
+   "rilsan"
+  ],
+  "requete_image": "Collier de serrage 200 mm photo fond blanc",
+  "description_visuelle": "Collier plastique autobloquant à dents, 200 mm",
+  "nom_fichier_image": "collier-serrage-200.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Largeur et sachet de 100 à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-033",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Accessoires de câblage",
+  "nom": "Collier de serrage 300 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "sachet de 100",
+    "facteur": 100.0
+   },
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Collier nylon, longueur 300 mm, largeur environ 3,6 mm, noir ou blanc",
+  "synonymes_locaux": [
+   "collier plastique long",
+   "serflex",
+   "rilsan"
+  ],
+  "requete_image": "Collier de serrage 300 mm photo fond blanc",
+  "description_visuelle": "Collier plastique autobloquant à dents, 300 mm",
+  "nom_fichier_image": "collier-serrage-300.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Largeur et sachet de 100 à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-034",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Accessoires de câblage",
+  "nom": "Domino (bornier)",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Barrette de connexion à 12 plots, plastique et laiton, pour fils 2,5 à 6 mm²",
+  "synonymes_locaux": [
+   "domino",
+   "barrette de connexion",
+   "bornier"
+  ],
+  "requete_image": "Domino (bornier) photo fond blanc",
+  "description_visuelle": "Barrette plastique blanche ou grise avec 12 vis de serrage",
+  "nom_fichier_image": "domino-bornier.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Section et nombre de plots (6 ou 12) à confirmer, plusieurs variantes possibles",
+  "propose_par_defaut": true,
+  "image": "domino-bornier"
+ },
+ {
+  "ref": "L2-035",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Accessoires de câblage",
+  "nom": "Ruban isolant",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ruban adhésif PVC isolant, largeur 19 mm, longueur environ 10 m, noir",
+  "synonymes_locaux": [
+   "scotch électrique",
+   "scotch noir",
+   "ruban électrique"
+  ],
+  "requete_image": "Ruban isolant photo fond blanc",
+  "description_visuelle": "Rouleau de ruban adhésif noir isolant",
+  "nom_fichier_image": "ruban-isolant.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Couleur et longueur à confirmer. Marques variables : à confirmer",
+  "propose_par_defaut": true,
+  "image": "ruban-isolant"
+ },
+ {
+  "ref": "L2-036",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Prise 2P+T 16 A encastrée",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Prise 2P+T 16 A, 250 V, encastrée, compatible fiches C/E, blanc",
+  "synonymes_locaux": [
+   "prise 16 A",
+   "prise de courant",
+   "prise murale"
+  ],
+  "requete_image": "Prise 2P+T 16 A encastrée photo fond blanc",
+  "description_visuelle": "Plaque de prise murale blanche avec terre",
+  "nom_fichier_image": "prise-2pt-16a-encastree.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "prise-2pt-16a-encastree"
+ },
+ {
+  "ref": "L2-037",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Prise double 2P+T encastrée",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Double prise 2P+T 16 A, 250 V, encastrée, 2 postes, blanc",
+  "synonymes_locaux": [
+   "prise double",
+   "prise 2 postes"
+  ],
+  "requete_image": "Prise double 2P+T encastrée photo fond blanc",
+  "description_visuelle": "Plaque murale blanche avec deux prises côte à côte",
+  "nom_fichier_image": "prise-double-2pt-encastree.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "prise-double-2pt-encastree"
+ },
+ {
+  "ref": "L2-038",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Prise 2P+T saillie",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Prise 2P+T 16 A, 250 V, montage en saillie, boîtier plastique",
+  "synonymes_locaux": [
+   "prise apparente",
+   "prise en saillie",
+   "prise extérieure"
+  ],
+  "requete_image": "Prise 2P+T saillie photo fond blanc",
+  "description_visuelle": "Prise blanche en relief posée sur le mur sans encastrement",
+  "nom_fichier_image": "prise-2pt-saillie.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). Version IP44 étanche à séparer si vendue",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-039",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Prise cuisinière 32 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Prise 2P+T 32 A, 250 V, encastrée, pour cuisinière et gros appareils",
+  "synonymes_locaux": [
+   "prise de cuisinière",
+   "prise 32 A"
+  ],
+  "requete_image": "Prise cuisinière 32 A photo fond blanc",
+  "description_visuelle": "Prise murale blanche robuste 32 A avec terre",
+  "nom_fichier_image": "prise-cuisiniere-32a.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Demande locale à confirmer (cuisinières électriques peu répandues). Possibilité de la retirer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-040",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Prise TV",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Prise coaxiale TV encastrée, blanc, mécanisme seul ou avec plaque",
+  "synonymes_locaux": [
+   "prise antenne",
+   "prise télé"
+  ],
+  "requete_image": "Prise TV photo fond blanc",
+  "description_visuelle": "Petite prise murale blanche avec connecteur coaxial",
+  "nom_fichier_image": "prise-tv.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "prise-tv"
+ },
+ {
+  "ref": "L2-041",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Prise RJ45",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Prise réseau RJ45 Cat6 encastrée, blanc",
+  "synonymes_locaux": [
+   "prise réseau",
+   "prise internet",
+   "prise informatique"
+  ],
+  "requete_image": "Prise RJ45 photo fond blanc",
+  "description_visuelle": "Prise murale blanche avec connecteur RJ45",
+  "nom_fichier_image": "prise-rj45.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). Cat5e ou Cat6 à confirmer",
+  "propose_par_defaut": true,
+  "image": "prise-rj45"
+ },
+ {
+  "ref": "L2-042",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Interrupteur simple allumage",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Interrupteur 10 A, 250 V, encastré, blanc, simple allumage",
+  "synonymes_locaux": [
+   "interrupteur",
+   "bouton de lumière"
+  ],
+  "requete_image": "Interrupteur simple allumage photo fond blanc",
+  "description_visuelle": "Plaque murale blanche avec une seule bascule",
+  "nom_fichier_image": "interrupteur-simple-allumage.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "interrupteur-simple-allumage"
+ },
+ {
+  "ref": "L2-043",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Interrupteur double allumage",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Interrupteur 10 A, 250 V, encastré, blanc, double allumage (2 bascules)",
+  "synonymes_locaux": [
+   "double interrupteur",
+   "interrupteur 2 touches"
+  ],
+  "requete_image": "Interrupteur double allumage photo fond blanc",
+  "description_visuelle": "Plaque murale blanche avec deux bascules",
+  "nom_fichier_image": "interrupteur-double-allumage.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "interrupteur-double-allumage"
+ },
+ {
+  "ref": "L2-044",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Interrupteur va-et-vient",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Interrupteur va-et-vient 10 A, 250 V, encastré, blanc",
+  "synonymes_locaux": [
+   "va-et-vient",
+   "interrupteur d'escalier"
+  ],
+  "requete_image": "Interrupteur va-et-vient photo fond blanc",
+  "description_visuelle": "Plaque murale blanche avec une bascule, 3 bornes à l'arrière",
+  "nom_fichier_image": "interrupteur-va-et-vient.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "interrupteur-simple-allumage"
+ },
+ {
+  "ref": "L2-045",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Sonnettes",
+  "nom": "Sonnette filaire",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Sonnette électrique filaire 230 V avec bouton poussoir, carillon",
+  "synonymes_locaux": [
+   "sonnette",
+   "carillon",
+   "sonnette de porte"
+  ],
+  "requete_image": "Sonnette filaire photo fond blanc",
+  "description_visuelle": "Carillon mural en plastique avec bouton poussoir de porte",
+  "nom_fichier_image": "sonnette-filaire.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "sonnette-filaire"
+ },
+ {
+  "ref": "L2-046",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prises et interrupteurs",
+  "nom": "Interrupteur étanche saillie",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Interrupteur étanche IP55, 10 A, 250 V, montage en saillie",
+  "synonymes_locaux": [
+   "interrupteur extérieur",
+   "interrupteur apparent"
+  ],
+  "requete_image": "Interrupteur étanche saillie photo fond blanc",
+  "description_visuelle": "Interrupteur gris ou blanc en relief avec capot étanche",
+  "nom_fichier_image": "interrupteur-etanche-saillie.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés)",
+  "propose_par_defaut": true,
+  "image": "interrupteur-etanche-saillie"
+ },
+ {
+  "ref": "L2-047",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prolongateurs",
+  "nom": "Fiche mâle 2P+T",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Fiche mâle 2P+T 16 A, 250 V, démontable, type E/C",
+  "synonymes_locaux": [
+   "fiche",
+   "prise mâle",
+   "fiche électrique"
+  ],
+  "requete_image": "Fiche mâle 2P+T photo fond blanc",
+  "description_visuelle": "Fiche noire ou blanche à deux broches rondes avec terre",
+  "nom_fichier_image": "fiche-male-2pt.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Type (E ou C avec ou sans terre) à confirmer",
+  "propose_par_defaut": true,
+  "image": "fiche-male-2pt"
+ },
+ {
+  "ref": "L2-048",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prolongateurs",
+  "nom": "Rallonge 5 m",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rallonge 3G1,5 mm², longueur 5 m, fiche 2P+T et prise 16 A, 250 V",
+  "synonymes_locaux": [
+   "rallonge",
+   "prolongateur"
+  ],
+  "requete_image": "Rallonge 5 m photo fond blanc",
+  "description_visuelle": "Câble noir ou blanc de 5 m avec fiche et prise",
+  "nom_fichier_image": "rallonge-5m.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Section 1,5 ou 2,5 mm² à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-049",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prolongateurs",
+  "nom": "Rallonge 10 m",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rallonge 3G1,5 mm², longueur 10 m, fiche 2P+T et prise 16 A, 250 V",
+  "synonymes_locaux": [
+   "rallonge 10",
+   "prolongateur"
+  ],
+  "requete_image": "Rallonge 10 m photo fond blanc",
+  "description_visuelle": "Câble de 10 m avec fiche et prise",
+  "nom_fichier_image": "rallonge-10m.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Section 1,5 ou 2,5 mm² à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-050",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prolongateurs",
+  "nom": "Rallonge sur enrouleur 25 m",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Rallonge 3G1,5 mm², 25 m sur enrouleur, 4 prises 2P+T, 250 V",
+  "synonymes_locaux": [
+   "enrouleur",
+   "rallonge enrouleur",
+   "touret"
+  ],
+  "requete_image": "Rallonge sur enrouleur 25 m photo fond blanc",
+  "description_visuelle": "Tambour plastique avec câble enroulé et prises",
+  "nom_fichier_image": "rallonge-enrouleur-25m.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Puissance maximale câble déroulé ou enroulé à confirmer",
+  "propose_par_defaut": true,
+  "image": "rallonge-enrouleur-25m"
+ },
+ {
+  "ref": "L2-051",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prolongateurs",
+  "nom": "Multiprise 4 prises",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Multiprise 4 prises 2P+T, 16 A, 250 V, câble 1,5 m",
+  "synonymes_locaux": [
+   "multiprise",
+   "barrette 4 prises"
+  ],
+  "requete_image": "Multiprise 4 prises photo fond blanc",
+  "description_visuelle": "Bloc plastique à 4 prises avec câble et fiche",
+  "nom_fichier_image": "multiprise-4-prises.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "multiprise-4-prises"
+ },
+ {
+  "ref": "L2-052",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Prolongateurs",
+  "nom": "Multiprise 6 prises avec interrupteur",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Multiprise 6 prises 2P+T avec interrupteur lumineux, 16 A, 250 V, câble 1,5 à 3 m",
+  "synonymes_locaux": [
+   "multiprise",
+   "barrette 6 prises"
+  ],
+  "requete_image": "Multiprise 6 prises avec interrupteur photo fond blanc",
+  "description_visuelle": "Bloc plastique à 6 prises et interrupteur lumineux",
+  "nom_fichier_image": "multiprise-6-prises-interrupteur.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "multiprise-4-prises"
+ },
+ {
+  "ref": "L2-053",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Douilles",
+  "nom": "Douille E27",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Douille à vis E27, plastique ou porcelaine, 250 V",
+  "synonymes_locaux": [
+   "douille à vis",
+   "douille normale"
+  ],
+  "requete_image": "Douille E27 photo fond blanc",
+  "description_visuelle": "Douille ronde à vis, culot large",
+  "nom_fichier_image": "douille-e27.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Version avec fil (suspension) ou nue à séparer si besoin",
+  "propose_par_defaut": true,
+  "image": "douille-e27"
+ },
+ {
+  "ref": "L2-054",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Douilles",
+  "nom": "Douille E14",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Douille à vis E14, plastique, 250 V",
+  "synonymes_locaux": [
+   "douille petite",
+   "douille de lustre"
+  ],
+  "requete_image": "Douille E14 photo fond blanc",
+  "description_visuelle": "Douille ronde à vis, culot étroit",
+  "nom_fichier_image": "douille-e14.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-055",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Douilles",
+  "nom": "Douille B22",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Douille à baïonnette B22, plastique ou bakélite, 250 V",
+  "synonymes_locaux": [
+   "douille à baïonnette",
+   "douille à clapet"
+  ],
+  "requete_image": "Douille B22 photo fond blanc",
+  "description_visuelle": "Douille ronde à baïonnette à deux ergots",
+  "nom_fichier_image": "douille-b22.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Culot B22 très présent sur certains marchés africains : à confirmer localement",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-056",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Ventilateurs",
+  "nom": "Ventilateur de table",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ventilateur de table, hélice 30 à 40 cm, 3 vitesses, oscillant, 230 V 50 Hz",
+  "synonymes_locaux": [
+   "ventilo",
+   "ventilateur",
+   "éventail"
+  ],
+  "requete_image": "Ventilateur de table photo fond blanc",
+  "description_visuelle": "Ventilateur compact sur socle posé sur table, grille ronde",
+  "nom_fichier_image": "ventilateur-table.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Marques non vérifiées au Cameroun. Diamètre (30, 40 cm) = produits distincts",
+  "propose_par_defaut": true,
+  "image": "ventilateur-table"
+ },
+ {
+  "ref": "L2-057",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Ventilateurs",
+  "nom": "Ventilateur sur pied",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ventilateur sur pied réglable en hauteur, hélice 40 à 45 cm, 3 vitesses, 230 V 50 Hz",
+  "synonymes_locaux": [
+   "ventilateur à pied",
+   "ventilo sur pied"
+  ],
+  "requete_image": "Ventilateur sur pied photo fond blanc",
+  "description_visuelle": "Ventilateur sur colonne réglable avec base ronde",
+  "nom_fichier_image": "ventilateur-sur-pied.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Marques non vérifiées. Diamètre de 40 ou 45 cm à confirmer",
+  "propose_par_defaut": true,
+  "image": "ventilateur-sur-pied"
+ },
+ {
+  "ref": "L2-058",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Ventilateurs",
+  "nom": "Ventilateur mural",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ventilateur mural oscillant, hélice 40 cm, 3 vitesses, 230 V 50 Hz, télécommande en option",
+  "synonymes_locaux": [
+   "ventilateur à fixer",
+   "ventilo mural"
+  ],
+  "requete_image": "Ventilateur mural photo fond blanc",
+  "description_visuelle": "Ventilateur à fixer au mur avec cordon de commande",
+  "nom_fichier_image": "ventilateur-mural.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Marques non vérifiées. Diamètre à confirmer",
+  "propose_par_defaut": true,
+  "image": "ventilateur-mural"
+ },
+ {
+  "ref": "L2-059",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Piles",
+  "nom": "Pile R6 (AA)",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   },
+   {
+    "nom": "paquet de 4",
+    "facteur": 4.0
+   }
+  ],
+  "caracteristiques": "Pile 1,5 V format AA (R6), zinc-carbone ou alcaline",
+  "synonymes_locaux": [
+   "pile AA",
+   "pile moyenne",
+   "pile crayon"
+  ],
+  "requete_image": "Pile R6 (AA) photo fond blanc",
+  "description_visuelle": "Pile cylindrique 1,5 V format AA",
+  "nom_fichier_image": "pile-r6-aa.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Zinc-carbone et alcaline = produits distincts (prix et durée). Marques à confirmer",
+  "propose_par_defaut": true,
+  "image": "pile-r6-aa"
+ },
+ {
+  "ref": "L2-060",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Piles",
+  "nom": "Pile R03 (AAA)",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   },
+   {
+    "nom": "paquet de 4",
+    "facteur": 4.0
+   }
+  ],
+  "caracteristiques": "Pile 1,5 V format AAA (R03), zinc-carbone ou alcaline",
+  "synonymes_locaux": [
+   "pile AAA",
+   "petite pile",
+   "pile mini"
+  ],
+  "requete_image": "Pile R03 (AAA) photo fond blanc",
+  "description_visuelle": "Pile cylindrique fine 1,5 V format AAA",
+  "nom_fichier_image": "pile-r03-aaa.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Zinc-carbone et alcaline = produits distincts. Marques à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-061",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Piles",
+  "nom": "Pile R20 (D)",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   },
+   {
+    "nom": "paquet de 2",
+    "facteur": 2.0
+   }
+  ],
+  "caracteristiques": "Pile 1,5 V format D (R20), zinc-carbone ou alcaline",
+  "synonymes_locaux": [
+   "pile D",
+   "grosse pile",
+   "pile de torche"
+  ],
+  "requete_image": "Pile R20 (D) photo fond blanc",
+  "description_visuelle": "Grosse pile cylindrique 1,5 V format D",
+  "nom_fichier_image": "pile-r20-d.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Zinc-carbone et alcaline = produits distincts",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-062",
+  "categorie": "Appareillage électrique",
+  "sous_categorie": "Piles",
+  "nom": "Pile 9 V",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Pile rectangulaire 9 V (6F22), zinc-carbone ou alcaline",
+  "synonymes_locaux": [
+   "pile 9 volts",
+   "pile carrée"
+  ],
+  "requete_image": "Pile 9 V photo fond blanc",
+  "description_visuelle": "Pile rectangulaire à deux plots sur le dessus",
+  "nom_fichier_image": "pile-9v.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-063",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules LED",
+  "nom": "Ampoule LED E27 9 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED, culot E27, 9 W, 230 V, environ 800 lm, blanc chaud ou froid",
+  "synonymes_locaux": [
+   "ampoule 9 W",
+   "ampoule LED",
+   "lampe LED à vis"
+  ],
+  "requete_image": "Ampoule LED E27 9 W photo fond blanc",
+  "description_visuelle": "Ampoule LED blanche à culot à vis, forme poire",
+  "nom_fichier_image": "ampoule-led-e27-9w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs. Teinte (chaud 3000 K, froid 6500 K) non séparée ici",
+  "propose_par_defaut": true,
+  "image": "ampoule-led-e27-9w"
+ },
+ {
+  "ref": "L2-064",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules LED",
+  "nom": "Ampoule LED E27 12 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED, culot E27, 12 W, 230 V, environ 1055 lm",
+  "synonymes_locaux": [
+   "ampoule 12 W",
+   "ampoule LED"
+  ],
+  "requete_image": "Ampoule LED E27 12 W photo fond blanc",
+  "description_visuelle": "Ampoule LED blanche à culot à vis",
+  "nom_fichier_image": "ampoule-led-e27-12w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "ampoule-led-e27-9w"
+ },
+ {
+  "ref": "L2-065",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules LED",
+  "nom": "Ampoule LED E27 18 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED, culot E27, 18 W, 230 V, environ 1600 lm",
+  "synonymes_locaux": [
+   "ampoule 18 W",
+   "grosse ampoule LED"
+  ],
+  "requete_image": "Ampoule LED E27 18 W photo fond blanc",
+  "description_visuelle": "Ampoule LED blanche à culot à vis, plus volumineuse",
+  "nom_fichier_image": "ampoule-led-e27-18w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "ampoule-led-e27-9w"
+ },
+ {
+  "ref": "L2-066",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules LED",
+  "nom": "Ampoule LED E14 5 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED, culot E14, 5 W, 230 V, environ 400 lm",
+  "synonymes_locaux": [
+   "ampoule E14",
+   "petite ampoule",
+   "ampoule bougie"
+  ],
+  "requete_image": "Ampoule LED E14 5 W photo fond blanc",
+  "description_visuelle": "Petite ampoule LED à culot étroit, forme flamme",
+  "nom_fichier_image": "ampoule-led-e14-5w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-067",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules LED",
+  "nom": "Ampoule LED B22 9 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED, culot B22 baïonnette, 9 W, 230 V, environ 800 lm",
+  "synonymes_locaux": [
+   "ampoule à baïonnette 9 W",
+   "ampoule B22"
+  ],
+  "requete_image": "Ampoule LED B22 9 W photo fond blanc",
+  "description_visuelle": "Ampoule LED blanche à culot baïonnette avec deux ergots",
+  "nom_fichier_image": "ampoule-led-b22-9w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "ampoule-led-b22-9w"
+ },
+ {
+  "ref": "L2-068",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules LED",
+  "nom": "Ampoule LED B22 12 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED, culot B22 baïonnette, 12 W, 230 V, environ 1055 lm",
+  "synonymes_locaux": [
+   "ampoule à baïonnette 12 W",
+   "ampoule B22"
+  ],
+  "requete_image": "Ampoule LED B22 12 W photo fond blanc",
+  "description_visuelle": "Ampoule LED blanche à culot baïonnette",
+  "nom_fichier_image": "ampoule-led-b22-12w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "ampoule-led-b22-9w"
+ },
+ {
+  "ref": "L2-069",
+  "categorie": "Éclairage",
+  "sous_categorie": "Ampoules économiques",
+  "nom": "Ampoule économique spirale 25 W",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule fluocompacte spirale, 25 W, culot E27 ou B22, 230 V",
+  "synonymes_locaux": [
+   "ampoule économique",
+   "ampoule spirale",
+   "lampe basse consommation"
+  ],
+  "requete_image": "Ampoule économique spirale 25 W photo fond blanc",
+  "description_visuelle": "Ampoule en tube blanc enroulé en spirale",
+  "nom_fichier_image": "ampoule-economique-spirale-25w.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Culot E27 ou B22 : deux produits. Produit en perte de vitesse face à la LED, à confirmer",
+  "propose_par_defaut": true,
+  "image": "ampoule-economique-spirale-25w"
+ },
+ {
+  "ref": "L2-070",
+  "categorie": "Éclairage",
+  "sous_categorie": "Tubes et réglettes",
+  "nom": "Tube LED T8 60 cm",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Tube LED T8 G13, 60 cm, 9 W, 230 V, blanc froid",
+  "synonymes_locaux": [
+   "néon LED 60",
+   "tube néon",
+   "tube LED"
+  ],
+  "requete_image": "Tube LED T8 60 cm photo fond blanc",
+  "description_visuelle": "Tube blanc de 60 cm avec deux embouts à broches",
+  "nom_fichier_image": "tube-led-t8-60cm.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "tube-led-t8-60cm"
+ },
+ {
+  "ref": "L2-071",
+  "categorie": "Éclairage",
+  "sous_categorie": "Tubes et réglettes",
+  "nom": "Tube LED T8 120 cm",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Tube LED T8 G13, 120 cm, 18 W, 230 V, blanc froid",
+  "synonymes_locaux": [
+   "néon LED 1m20",
+   "tube néon",
+   "néon"
+  ],
+  "requete_image": "Tube LED T8 120 cm photo fond blanc",
+  "description_visuelle": "Tube blanc de 120 cm avec deux embouts à broches",
+  "nom_fichier_image": "tube-led-t8-120cm.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées au Cameroun, une ligne par marque à créer si le commerçant en vend plusieurs",
+  "propose_par_defaut": true,
+  "image": "tube-led-t8-60cm"
+ },
+ {
+  "ref": "L2-072",
+  "categorie": "Éclairage",
+  "sous_categorie": "Tubes et réglettes",
+  "nom": "Réglette LED 60 cm",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Réglette LED complète 60 cm, 9 à 10 W, 230 V, raccordable",
+  "synonymes_locaux": [
+   "réglette 60",
+   "néon complet 60"
+  ],
+  "requete_image": "Réglette LED 60 cm photo fond blanc",
+  "description_visuelle": "Boîtier blanc allongé de 60 cm avec tube LED intégré",
+  "nom_fichier_image": "reglette-led-60cm.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Version tube séparé ou intégré à confirmer. Puissance à confirmer",
+  "propose_par_defaut": true,
+  "image": "reglette-led-60cm"
+ },
+ {
+  "ref": "L2-073",
+  "categorie": "Éclairage",
+  "sous_categorie": "Tubes et réglettes",
+  "nom": "Réglette LED 120 cm",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Réglette LED complète 120 cm, 18 à 20 W, 230 V, raccordable",
+  "synonymes_locaux": [
+   "réglette 120",
+   "néon complet 1m20"
+  ],
+  "requete_image": "Réglette LED 120 cm photo fond blanc",
+  "description_visuelle": "Boîtier blanc allongé de 120 cm avec tube LED intégré",
+  "nom_fichier_image": "reglette-led-120cm.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Version tube séparé ou intégré à confirmer. Puissance à confirmer",
+  "propose_par_defaut": true,
+  "image": "reglette-led-60cm"
+ },
+ {
+  "ref": "L2-074",
+  "categorie": "Éclairage",
+  "sous_categorie": "Projecteurs",
+  "nom": "Projecteur LED 30 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Projecteur LED 30 W, IP65, 230 V, blanc froid, câble fourni",
+  "synonymes_locaux": [
+   "projecteur 30 W",
+   "spot extérieur",
+   "phare LED"
+  ],
+  "requete_image": "Projecteur LED 30 W photo fond blanc",
+  "description_visuelle": "Projecteur plat rectangulaire noir avec étrier de fixation",
+  "nom_fichier_image": "projecteur-led-30w.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Puissance annoncée souvent supérieure à la réalité. Marques à confirmer",
+  "propose_par_defaut": true,
+  "image": "projecteur-led-30w"
+ },
+ {
+  "ref": "L2-075",
+  "categorie": "Éclairage",
+  "sous_categorie": "Projecteurs",
+  "nom": "Projecteur LED 50 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Projecteur LED 50 W, IP65, 230 V, blanc froid, câble fourni",
+  "synonymes_locaux": [
+   "projecteur 50 W",
+   "phare LED"
+  ],
+  "requete_image": "Projecteur LED 50 W photo fond blanc",
+  "description_visuelle": "Projecteur plat rectangulaire noir avec étrier",
+  "nom_fichier_image": "projecteur-led-50w.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Puissance annoncée vs réelle à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-076",
+  "categorie": "Éclairage",
+  "sous_categorie": "Projecteurs",
+  "nom": "Projecteur LED 100 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Projecteur LED 100 W, IP65, 230 V, blanc froid, câble fourni",
+  "synonymes_locaux": [
+   "projecteur 100 W",
+   "grand projecteur"
+  ],
+  "requete_image": "Projecteur LED 100 W photo fond blanc",
+  "description_visuelle": "Projecteur rectangulaire noir plus grand avec étrier",
+  "nom_fichier_image": "projecteur-led-100w.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Puissance annoncée vs réelle à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-077",
+  "categorie": "Éclairage",
+  "sous_categorie": "Projecteurs",
+  "nom": "Projecteur LED 200 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Projecteur LED 200 W, IP65, 230 V, blanc froid, câble fourni",
+  "synonymes_locaux": [
+   "projecteur 200 W",
+   "très gros projecteur"
+  ],
+  "requete_image": "Projecteur LED 200 W photo fond blanc",
+  "description_visuelle": "Très grand projecteur rectangulaire noir avec étrier",
+  "nom_fichier_image": "projecteur-led-200w.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Puissance annoncée vs réelle à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-078",
+  "categorie": "Éclairage",
+  "sous_categorie": "Luminaires",
+  "nom": "Spot LED encastrable",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Spot LED encastrable rond, environ 5 à 7 W, 230 V, découpe 70 à 90 mm",
+  "synonymes_locaux": [
+   "spot encastré",
+   "spot de plafond",
+   "spot"
+  ],
+  "requete_image": "Spot LED encastrable photo fond blanc",
+  "description_visuelle": "Petit disque blanc encastré dans un faux plafond",
+  "nom_fichier_image": "spot-led-encastrable.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Puissance et diamètre de découpe à confirmer. Produits distincts selon puissance",
+  "propose_par_defaut": true,
+  "image": "spot-led-encastrable"
+ },
+ {
+  "ref": "L2-079",
+  "categorie": "Éclairage",
+  "sous_categorie": "Luminaires",
+  "nom": "Plafonnier LED rond 24 W",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Plafonnier LED rond 24 W, environ Ø300 mm, 230 V, saillie",
+  "synonymes_locaux": [
+   "plafonnier",
+   "applique ronde",
+   "luminaire plafond"
+  ],
+  "requete_image": "Plafonnier LED rond 24 W photo fond blanc",
+  "description_visuelle": "Disque blanc plat fixé au plafond",
+  "nom_fichier_image": "plafonnier-led-rond-24w.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Diamètre à confirmer",
+  "propose_par_defaut": true,
+  "image": "plafonnier-led-rond-24w"
+ },
+ {
+  "ref": "L2-080",
+  "categorie": "Éclairage",
+  "sous_categorie": "Luminaires",
+  "nom": "Hublot extérieur",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Hublot étanche IP54, rond ou ovale, culot E27, 230 V, pour ampoule non fournie",
+  "synonymes_locaux": [
+   "hublot",
+   "applique étanche",
+   "tortue"
+  ],
+  "requete_image": "Hublot extérieur photo fond blanc",
+  "description_visuelle": "Applique ronde avec grille et verre épais",
+  "nom_fichier_image": "hublot-exterieur.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Modèle (rond/ovale, avec grille) à confirmer",
+  "propose_par_defaut": true,
+  "image": "hublot-exterieur"
+ },
+ {
+  "ref": "L2-081",
+  "categorie": "Éclairage",
+  "sous_categorie": "Éclairage solaire",
+  "nom": "Lampe solaire de rue",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Lampadaire solaire LED tout-en-un avec panneau et batterie intégrés, détecteur de nuit",
+  "synonymes_locaux": [
+   "lampadaire solaire",
+   "lampe de rue",
+   "lampe solaire"
+  ],
+  "requete_image": "Lampe solaire de rue photo fond blanc",
+  "description_visuelle": "Luminaire de rue avec panneau solaire intégré et bras de fixation",
+  "nom_fichier_image": "lampe-solaire-de-rue.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Puissance (30 à 300 W annoncée) = produits distincts. Qualité très variable. Marques à confirmer",
+  "propose_par_defaut": true,
+  "image": "lampe-solaire-de-rue"
+ },
+ {
+  "ref": "L2-082",
+  "categorie": "Éclairage",
+  "sous_categorie": "Éclairage solaire",
+  "nom": "Ampoule solaire rechargeable",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ampoule LED rechargeable avec batterie intégrée, culot E27 ou B22, panneau solaire déporté ou recharge secteur",
+  "synonymes_locaux": [
+   "ampoule rechargeable",
+   "lampe solaire",
+   "ampoule de secours"
+  ],
+  "requete_image": "Ampoule solaire rechargeable photo fond blanc",
+  "description_visuelle": "Ampoule LED avec batterie intégrée, parfois câble et panneau",
+  "nom_fichier_image": "ampoule-solaire-rechargeable.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Produit vu en vente sur Jumia Côte d'Ivoire mais non vérifié au Cameroun. Variantes nombreuses",
+  "propose_par_defaut": true,
+  "image": "ampoule-solaire-rechargeable"
+ },
+ {
+  "ref": "L2-083",
+  "categorie": "Éclairage",
+  "sous_categorie": "Lampes portatives",
+  "nom": "Lampe torche rechargeable",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Lampe torche LED rechargeable, batterie lithium intégrée, chargeur USB",
+  "synonymes_locaux": [
+   "torche",
+   "lampe de poche",
+   "torche rechargeable"
+  ],
+  "requete_image": "Lampe torche rechargeable photo fond blanc",
+  "description_visuelle": "Lampe cylindrique à poignée avec LED à l'avant",
+  "nom_fichier_image": "lampe-torche-rechargeable.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Modèle large gamme. Marques à confirmer",
+  "propose_par_defaut": true,
+  "image": "lampe-torche-rechargeable"
+ },
+ {
+  "ref": "L2-084",
+  "categorie": "Éclairage",
+  "sous_categorie": "Lampes portatives",
+  "nom": "Lampe de secours rechargeable",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Lampe de secours LED rechargeable sur secteur 230 V, allumage automatique en cas de coupure",
+  "synonymes_locaux": [
+   "lampe de secours",
+   "lampe anti-coupure",
+   "lampe de délestage"
+  ],
+  "requete_image": "Lampe de secours rechargeable photo fond blanc",
+  "description_visuelle": "Lampe rectangulaire ou ronde avec batterie intégrée et prise de recharge",
+  "nom_fichier_image": "lampe-secours-rechargeable.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Très utile en cas de délestage, à confirmer auprès du commerçant",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-085",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 10 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 10 A, courbe C, 230 V, pouvoir de coupure 3 à 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 10",
+   "coupe-circuit 10"
+  ],
+  "requete_image": "Disjoncteur 10 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-10a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer : stock distinct",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-086",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 16 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 16 A, courbe C, 230 V, pouvoir de coupure 3 à 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 16",
+   "coupe-circuit 16"
+  ],
+  "requete_image": "Disjoncteur 16 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-16a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-087",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 20 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 20 A, courbe C, 230 V, pouvoir de coupure 3 à 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 20",
+   "coupe-circuit 20"
+  ],
+  "requete_image": "Disjoncteur 20 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-20a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-088",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 25 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 25 A, courbe C, 230 V, pouvoir de coupure 3 à 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 25",
+   "coupe-circuit 25"
+  ],
+  "requete_image": "Disjoncteur 25 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-25a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-089",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 32 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 32 A, courbe C, 230 V, pouvoir de coupure 3 à 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 32",
+   "coupe-circuit 32"
+  ],
+  "requete_image": "Disjoncteur 32 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-32a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-090",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 40 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 40 A, courbe C, 230 V, pouvoir de coupure 3 à 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 40",
+   "disjoncteur de branchement"
+  ],
+  "requete_image": "Disjoncteur 40 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-40a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-091",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Disjoncteurs",
+  "nom": "Disjoncteur 63 A",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Disjoncteur modulaire bipolaire 63 A, courbe C, 230 V, pouvoir de coupure 6 kA",
+  "synonymes_locaux": [
+   "disjoncteur 63",
+   "disjoncteur général"
+  ],
+  "requete_image": "Disjoncteur 63 A photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec levier noir pour rail DIN",
+  "nom_fichier_image": "disjoncteur-63a.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). 1P+N ou 2P à confirmer. Version tétrapolaire non incluse",
+  "propose_par_defaut": true,
+  "image": "disjoncteur-10a"
+ },
+ {
+  "ref": "L2-092",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Différentiels",
+  "nom": "Interrupteur différentiel 40 A 30 mA",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Interrupteur différentiel bipolaire 40 A, sensibilité 30 mA, type AC, 230 V",
+  "synonymes_locaux": [
+   "différentiel 40",
+   "inter différentiel"
+  ],
+  "requete_image": "Interrupteur différentiel 40 A 30 mA photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec bouton test, 2 modules",
+  "nom_fichier_image": "interrupteur-differentiel-40a-30ma.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). Type AC ou A à confirmer",
+  "propose_par_defaut": true,
+  "image": "interrupteur-differentiel-40a-30ma"
+ },
+ {
+  "ref": "L2-093",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Différentiels",
+  "nom": "Interrupteur différentiel 63 A 30 mA",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Interrupteur différentiel bipolaire 63 A, sensibilité 30 mA, type AC, 230 V",
+  "synonymes_locaux": [
+   "différentiel 63",
+   "inter différentiel"
+  ],
+  "requete_image": "Interrupteur différentiel 63 A 30 mA photo fond blanc",
+  "description_visuelle": "Appareil modulaire blanc avec bouton test, 2 modules",
+  "nom_fichier_image": "interrupteur-differentiel-63a-30ma.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées sur le marché camerounais (Legrand, Schneider, Hager, Chint évoqués en général, non confirmés). Type AC ou A à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-094",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Coffrets",
+  "nom": "Coffret 4 modules",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Coffret électrique 4 modules, plastique avec porte, saillie ou encastré, rail DIN",
+  "synonymes_locaux": [
+   "coffret",
+   "tableau électrique",
+   "boîte à fusibles"
+  ],
+  "requete_image": "Coffret 4 modules photo fond blanc",
+  "description_visuelle": "Petit boîtier plastique avec porte transparente ou blanche",
+  "nom_fichier_image": "coffret-4-modules.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Saillie ou encastré = deux produits si les deux vendus. Marques à confirmer",
+  "propose_par_defaut": true,
+  "image": "coffret-4-modules"
+ },
+ {
+  "ref": "L2-095",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Coffrets",
+  "nom": "Coffret 8 modules",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Coffret électrique 8 modules, plastique avec porte, saillie ou encastré, rail DIN",
+  "synonymes_locaux": [
+   "coffret",
+   "tableau électrique"
+  ],
+  "requete_image": "Coffret 8 modules photo fond blanc",
+  "description_visuelle": "Boîtier plastique moyen avec porte",
+  "nom_fichier_image": "coffret-8-modules.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Saillie ou encastré à confirmer",
+  "propose_par_defaut": true,
+  "image": "coffret-4-modules"
+ },
+ {
+  "ref": "L2-096",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Coffrets",
+  "nom": "Coffret 12 modules",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Coffret électrique 12 modules, plastique avec porte, saillie ou encastré, rail DIN",
+  "synonymes_locaux": [
+   "grand coffret",
+   "tableau électrique"
+  ],
+  "requete_image": "Coffret 12 modules photo fond blanc",
+  "description_visuelle": "Grand boîtier plastique avec porte",
+  "nom_fichier_image": "coffret-12-modules.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Saillie ou encastré à confirmer",
+  "propose_par_defaut": true,
+  "image": "coffret-4-modules"
+ },
+ {
+  "ref": "L2-097",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Parafoudres",
+  "nom": "Parafoudre",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Parafoudre modulaire monophasé type 2, 230 V, courant de décharge 20 kA environ, avec témoin",
+  "synonymes_locaux": [
+   "parafoudre",
+   "protection foudre"
+  ],
+  "requete_image": "Parafoudre photo fond blanc",
+  "description_visuelle": "Module blanc ou gris avec voyant vert ou rouge",
+  "nom_fichier_image": "parafoudre.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Version prise parafoudre à séparer. Caractéristiques à confirmer",
+  "propose_par_defaut": true,
+  "image": "parafoudre"
+ },
+ {
+  "ref": "L2-098",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Stabilisateurs",
+  "nom": "Stabilisateur 2000 VA",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Stabilisateur de tension automatique 2000 VA, entrée 140 à 260 V, sortie 230 V, 50 Hz",
+  "synonymes_locaux": [
+   "stabilisateur 2 kVA",
+   "stab 2000"
+  ],
+  "requete_image": "Stabilisateur 2000 VA photo fond blanc",
+  "description_visuelle": "Boîtier métallique avec voltmètre et prises de sortie",
+  "nom_fichier_image": "stabilisateur-2000va.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées. Plage d'entrée à confirmer",
+  "propose_par_defaut": true,
+  "image": "stabilisateur-2000va"
+ },
+ {
+  "ref": "L2-099",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Stabilisateurs",
+  "nom": "Stabilisateur 5000 VA",
+  "marque": "À CONFIRMER",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Stabilisateur de tension automatique 5000 VA, entrée 140 à 260 V, sortie 230 V, 50 Hz",
+  "synonymes_locaux": [
+   "stabilisateur 5 kVA",
+   "stab 5000"
+  ],
+  "requete_image": "Stabilisateur 5000 VA photo fond blanc",
+  "description_visuelle": "Grand boîtier métallique avec voltmètre et bornier",
+  "nom_fichier_image": "stabilisateur-5000va.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Marques non vérifiées. Plage d'entrée à confirmer",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L2-100",
+  "categorie": "Protection électrique",
+  "sous_categorie": "Mise à la terre",
+  "nom": "Piquet de terre cuivre 1,5 m",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Piquet de terre cylindrique acier cuivré ou cuivre, longueur 1,5 m, Ø14 à 16 mm, avec collier",
+  "synonymes_locaux": [
+   "piquet de terre",
+   "prise de terre",
+   "tige de terre"
+  ],
+  "requete_image": "Piquet de terre cuivre 1,5 m photo fond blanc",
+  "description_visuelle": "Tige métallique couleur cuivre de 1,5 m avec pointe",
+  "nom_fichier_image": "piquet-terre-cuivre-1-5m.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Cuivre massif ou acier cuivré = produits distincts. Diamètre à confirmer",
+  "propose_par_defaut": true,
+  "image": "piquet-terre-cuivre-1-5m"
+ }
+]

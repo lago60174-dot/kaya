@@ -6,15 +6,18 @@ import {
   envoyerImage,
   rendreLisible,
 } from "@/lib/images/navigateur";
+import { urlImage } from "@/server/images/cles";
 import { demanderUrlEnvoiAction } from "@/server/stock/actions";
 
 interface Props {
   imageCle?: string | null;
   vignetteCle?: string | null;
+  /** Prévient le parent quand la photo change (utile hors d'un formulaire, par exemple dans l'assistant catalogue). */
+  onChange?: (imageCle: string, vignetteCle: string) => void;
 }
 
 /** Compresse la photo dans le navigateur (WebP, 800 px, moins de 100 Ko) puis l'envoie directement vers R2. */
-export function ChampPhoto({ imageCle, vignetteCle }: Props) {
+export function ChampPhoto({ imageCle, vignetteCle, onChange }: Props) {
   const [image, setImage] = useState(imageCle ?? "");
   const [vignette, setVignette] = useState(vignetteCle ?? "");
   const [etat, setEtat] = useState<"repos" | "envoi">("repos");
@@ -36,6 +39,7 @@ export function ChampPhoto({ imageCle, vignetteCle }: Props) {
       ]);
       setImage(cleImage);
       setVignette(cleVignette);
+      onChange?.(cleImage, cleVignette);
     } catch (e) {
       setErreur(
         e instanceof Error ? e.message : "La photo n'a pas pu être envoyée.",
@@ -53,7 +57,7 @@ export function ChampPhoto({ imageCle, vignetteCle }: Props) {
           // Vignette déjà optimisée en WebP (200 px, moins de 15 Ko) : pas besoin du composant Image.
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`/img/${vignette}`}
+            src={urlImage(vignette)}
             alt="Aperçu du produit"
             width={64}
             height={64}
@@ -91,6 +95,7 @@ export function ChampPhoto({ imageCle, vignetteCle }: Props) {
           onClick={() => {
             setImage("");
             setVignette("");
+            onChange?.("", "");
           }}
           className="text-muted self-start text-sm underline"
         >

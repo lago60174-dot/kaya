@@ -1,5 +1,6 @@
 "use server";
 
+import { planifierNotifications } from "@/server/notifications/declencher";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { LIMITES_IMAGE, type TypeImage } from "@/lib/images/compression";
@@ -10,7 +11,11 @@ import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
 import { messageErreurBase } from "@/server/erreurs";
 import { bucketImages } from "@/server/images/bucket";
-import { cleAppartient, construireCle } from "@/server/images/cles";
+import {
+  cleAppartient,
+  construireCle,
+  estCleCatalogue,
+} from "@/server/images/cles";
 import { signerEnvoi } from "@/server/images/signature";
 import { verifierImageStockee } from "@/server/images/verification";
 
@@ -104,6 +109,7 @@ export async function enregistrerProduitAction(
     if (!cle) continue;
     if (!cleAppartient(cle, ctx.organisationId, type))
       return { erreur: "Photo invalide. Choisissez-la à nouveau." };
+    if (estCleCatalogue(cle)) continue; // fichier statique du catalogue modèle : rien à contrôler dans R2
     const bucket = bucketImages();
     if (!bucket)
       return {
@@ -194,6 +200,7 @@ export async function mouvementAction(
   if (error) return { erreur: messageErreurBase(error) };
   revalidatePath("/stock");
   revalidatePath(`/stock/${d.produitId}`);
+  planifierNotifications(ctx.organisationId);
   return {
     succes: `Enregistré. Nouveau stock : ${formatQuantite(Number(data))} (unité de base).`,
   };

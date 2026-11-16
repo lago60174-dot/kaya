@@ -11,6 +11,7 @@ import { zonePourChemin } from "@/lib/permissions";
 const PAGES_SANS_SESSION = new Set([
   "/",
   "/partenaire",
+  "/tarifs",
   "/mentions-legales",
   "/confidentialite",
   "/conditions",
@@ -18,7 +19,22 @@ const PAGES_SANS_SESSION = new Set([
   "/hors-ligne",
 ]);
 
+/** Un cookie de session Supabase est présent (sans appel réseau). Le cookie du code PKCE n'est pas une session. */
+function aUneSession(request: NextRequest): boolean {
+  return request.cookies
+    .getAll()
+    .some((c) => c.name.includes("-auth-token") && !c.name.endsWith("code-verifier"));
+}
+
 export async function proxy(request: NextRequest) {
+  // Déjà connecté : la page d'accueil publique cède la place au tableau de bord. /connexion renvoie chaque rôle vers son
+  // espace (et affiche le formulaire si la session a expiré). Les autres pages publiques restent servies par le CDN.
+  if (request.nextUrl.pathname === "/" && aUneSession(request)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/connexion";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
   if (PAGES_SANS_SESSION.has(request.nextUrl.pathname)) return NextResponse.next();
   const env = envPublic();
   let reponse = NextResponse.next({ request });

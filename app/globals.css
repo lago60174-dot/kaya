@@ -137,7 +137,7 @@ body { background: #fff8f1; color: var(--kaya-navy); }
 .kaya-main input:not([type="checkbox"]), .kaya-main select, .kaya-main textarea { border-color: #e9e2dc; border-radius: 12px; background: #fff; box-shadow: 0 2px 7px rgba(24,35,61,.025); }
 .kaya-main input:focus, .kaya-main select:focus, .kaya-main textarea:focus { border-color: #ff9b42; outline: 3px solid rgba(255,121,0,.13); }
 .kaya-main a { text-underline-offset: 3px; }
-.kaya-main a[class*="border-border"], .kaya-main li > a[class*="border"] { border-color: #eee3da; background: #fff; box-shadow: 0 4px 14px rgba(33, 29, 24, .035); transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.kaya-main a[class*="border-border"]:not([class*="bg-"]), .kaya-main li > a[class*="border"]:not([class*="bg-"]) { border-color: #eee3da; background: #fff; box-shadow: 0 4px 14px rgba(33, 29, 24, .035); transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
 .kaya-main li > a[class*="border"]:hover { border-color: #ffc58f; box-shadow: 0 8px 20px rgba(45,35,25,.07); transform: translateY(-1px); }
 .kaya-main button[class*="bg-brand-strong"], .kaya-main a[class*="bg-brand-strong"] { border: 0; border-radius: 12px; background: linear-gradient(110deg, #ff8b1a, #f36b00); box-shadow: 0 7px 16px rgba(238,102,0,.18); }
 .kaya-main button[class*="bg-brand-strong"]:hover, .kaya-main a[class*="bg-brand-strong"]:hover { background: linear-gradient(110deg, #f77b08, #df5900); }
@@ -224,6 +224,16 @@ body { background: #fff8f1; color: var(--kaya-navy); }
 @media (max-width: 760px) { .kaya-stock-grid { grid-template-columns: 1fr; } }
 .kaya-sidebar { background: #17233d; }
 .kaya-brand-lockup { margin: -24px -16px 0; padding: 24px 24px 25px; background: linear-gradient(112deg, #ff8c1a, #f26900); border-radius: 0 0 22px 0; }
+
+/* Cloche de notifications et pastille de non lues. */
+.kaya-bell { position: relative; display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; color: inherit; }
+.kaya-bell-badge { position: absolute; top: 4px; right: 2px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px; background: #d92d20; color: #fff; font-size: 10px; font-weight: 800; line-height: 17px; text-align: center; }
+.kaya-mobile-right { display: flex; align-items: center; gap: 4px; }
+.kaya-bell-mobile { color: #fff; }
+.kaya-more-sheet a.kaya-nav-link { flex-direction: column; }
+
+.kaya-bandeau-email { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 14px; padding: 10px 12px; border: 1px solid #f3d9bf; border-radius: 12px; background: #fff4e8; font-size: 14px; }
+.kaya-bandeau-email button { min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: #c2410c; color: #fff; font-weight: 700; font-family: inherit; cursor: pointer; }
 
 /* Téléphone : en-tête orange à bas arrondi, barre du bas à onglet actif marqué (maquettes Kaya). */
 @media (max-width: 760px) {

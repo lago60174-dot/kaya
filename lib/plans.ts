@@ -85,9 +85,9 @@ export function plansVisibles(plans: Plan[]): Plan[] {
 }
 
 export type StatutAbonnement =
-  "essai" | "actif" | "en_retard" | "suspendu" | "annule";
+  "en_attente" | "actif" | "en_retard" | "suspendu" | "annule";
 
 /** Un compte suspendu ou annulé passe en lecture seule. Rien n'est supprimé. */
 export function ecritureAutorisee(statut: StatutAbonnement): boolean {
-  return statut === "essai" || statut === "actif" || statut === "en_retard";
+  return statut === "en_attente" || statut === "actif" || statut === "en_retard";
 }

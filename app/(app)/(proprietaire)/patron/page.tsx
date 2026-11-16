@@ -8,6 +8,7 @@ import { decrire, libelleAction, lienEntite } from "@/lib/journal/journal";
 import { peutUtiliser } from "@/lib/plans";
 import { variationVsHier } from "@/lib/patron/direct";
 import { supabaseServeur } from "@/lib/supabase/server";
+import { urlImage } from "@/server/images/cles";
 import { exigerRole } from "@/server/auth/session";
 import { lireRapport } from "@/server/patron/rapports";
 import {
@@ -45,6 +46,12 @@ export default async function PagePatron({
   const complet = profil.plan
     ? peutUtiliser(profil.plan, "journal_complet")
     : false;
+  const { data: ficheBoutique } = await supabase
+    .from("boutiques")
+    .select("logo_cle")
+    .eq("id", boutique.id)
+    .maybeSingle();
+  const logo = ficheBoutique?.logo_cle ? urlImage(ficheBoutique.logo_cle) : null;
   const [t, alertes, rapport] = await Promise.all([
     lireTableauDeBord(supabase, boutique.id),
     lireAlertesRecentes(supabase, boutique.id, complet),
@@ -65,9 +72,14 @@ export default async function PagePatron({
     <div className="kaya-dashboard flex max-w-3xl flex-col gap-6">
       <header className="kaya-dashboard-header flex flex-col gap-3">
         <div className="flex items-center gap-4">
-          <span className="grid size-16 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
-            <Store aria-hidden="true" size={30} />
-          </span>
+          {logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={logo} alt="" width={64} height={64} className="size-16 shrink-0 rounded-xl bg-white object-contain" />
+          ) : (
+            <span className="grid size-16 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+              <Store aria-hidden="true" size={30} />
+            </span>
+          )}
           <div className="min-w-0">
             <h1 className="truncate text-xl font-bold">{boutique.nom}</h1>
             <p className="flex items-center gap-2 text-sm font-semibold text-emerald-700">

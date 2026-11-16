@@ -1,5 +1,6 @@
 "use server";
 
+import { planifierNotifications } from "@/server/notifications/declencher";
 import { revalidatePath } from "next/cache";
 import {
   annulationDepenseSchema,
@@ -91,6 +92,7 @@ export async function cloturerCaisseAction(
   });
   if (error || !data) return { ok: false, erreur: messageErreurBase(error) };
   revalidatePath("/caisse");
+  planifierNotifications(profil.organisationId);
   return { ok: true, ecart: Number((data as { ecart: number }).ecart) };
 }
 

@@ -49,7 +49,6 @@ export interface AbonnementLu {
   planCode: string;
   planEnAttente: string | null;
   prochaineEcheance: string | null;
-  finEssai: string | null;
   finGrace: string | null;
   factures: {
     id: string;
@@ -66,7 +65,7 @@ export async function lireAbonnement(): Promise<AbonnementLu | null> {
   const { data: a } = await supabase
     .from("abonnements")
     .select(
-      "plan_code, plan_en_attente, statut, prochaine_echeance, fin_essai, fin_grace",
+      "plan_code, plan_en_attente, statut, prochaine_echeance, fin_grace",
     )
     .maybeSingle();
   if (!a) return null;
@@ -80,7 +79,6 @@ export async function lireAbonnement(): Promise<AbonnementLu | null> {
     planCode: a.plan_code,
     planEnAttente: a.plan_en_attente,
     prochaineEcheance: a.prochaine_echeance,
-    finEssai: a.fin_essai,
     finGrace: a.fin_grace,
     factures: (f ?? []).map((x) => ({
       id: x.id,

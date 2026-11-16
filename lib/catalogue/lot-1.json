@@ -1,0 +1,3092 @@
+[
+ {
+  "ref": "L1-001",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 42,5",
+  "marque": "Cimencam",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, classe 42,5 R, gamme Robust",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Robust",
+   "ciment 42,5"
+  ],
+  "requete_image": "ciment Cimencam Robust 42,5 sac 50 kg",
+  "description_visuelle": "Sac papier de 50 kg portant la marque Cimencam et le nom Robust",
+  "nom_fichier_image": "ciment-cpj-42-5-cimencam.jpg",
+  "source": "https://bativel.com/produit/ciment-robust-cimencam-42-5-50kg/",
+  "confiance": "haute",
+  "notes": "Vente au kg rare en boutique. Cimencam vend aussi Kosto (CEM I 42,5) et Hydro, non repris ici",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-42-5-cimencam"
+ },
+ {
+  "ref": "L1-002",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 42,5",
+  "marque": "Dangote",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, classe 42,5 R, gamme 3X",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Dangote",
+   "3X"
+  ],
+  "requete_image": "ciment Dangote 3X 42,5R sac 50 kg",
+  "description_visuelle": "Sac de 50 kg Dangote 3X",
+  "nom_fichier_image": "ciment-cpj-42-5-dangote.jpg",
+  "source": "https://bativel.com/produit/ciment-gris-dangote-42-5-50kg/",
+  "confiance": "haute",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-42-5-dangote"
+ },
+ {
+  "ref": "L1-003",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 42,5",
+  "marque": "CIMAF",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, CEM II/B-P 42,5 R",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Cimaf"
+  ],
+  "requete_image": "ciment Gris Cimaf 42.5 sac 50 kg",
+  "description_visuelle": "Sac de 50 kg CIMAF",
+  "nom_fichier_image": "ciment-cpj-42-5-cimaf.jpg",
+  "source": "https://bativel.com/produit/ciment-gris-cimaf-42-5-50kg/",
+  "confiance": "haute",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-42-5-cimaf"
+ },
+ {
+  "ref": "L1-004",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 42,5",
+  "marque": "Medcem",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, classe À CONFIRMER",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Medcem"
+  ],
+  "requete_image": "ciment Medcem Cameroun sac 50 kg",
+  "description_visuelle": "Sac de 50 kg Medcem",
+  "nom_fichier_image": "ciment-cpj-42-5-medcem.jpg",
+  "source": "https://ecomatin.net/cimenteries-le-boom-des-operateurs-dans-un-secteur-au-coeur-du-developpement",
+  "confiance": "faible",
+  "notes": "Marque citée dans la presse mais absente de Bativel. À CONFIRMER : gamme et grade. Retirer si absent en boutique",
+  "propose_par_defaut": false,
+  "image": "ciment-cpj-42-5-medcem"
+ },
+ {
+  "ref": "L1-005",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 42,5",
+  "marque": "Lion",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, CEM 42,5 R, fabricant Egin SA",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Lion",
+   "ciment Lion"
+  ],
+  "requete_image": "ciment Lion Egin 42,5R sac 50 kg",
+  "description_visuelle": "Sac de 50 kg avec tête de lion et 5 étoiles",
+  "nom_fichier_image": "ciment-cpj-42-5-lion.jpg",
+  "source": "https://ecomatin.net/cimenteries-le-boom-des-operateurs-dans-un-secteur-au-coeur-du-developpement",
+  "confiance": "haute",
+  "notes": "Marque locale, présence variable selon la région",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-42-5-lion"
+ },
+ {
+  "ref": "L1-006",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 32,5",
+  "marque": "Cimencam",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, classe 32,5 R, gamme Multix",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Multix",
+   "ciment 32,5"
+  ],
+  "requete_image": "ciment Cimencam Multix 32.5 sac 50 kg",
+  "description_visuelle": "Sac de 50 kg Cimencam Multix",
+  "nom_fichier_image": "ciment-cpj-32-5-cimencam.jpg",
+  "source": "https://bativel.com/produit/ciment-multix-cimencam-32-5-50kg/",
+  "confiance": "haute",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-32-5-cimencam"
+ },
+ {
+  "ref": "L1-007",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 32,5",
+  "marque": "Dangote",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, classe 32,5 R, gamme Falcon",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Dangote",
+   "Falcon"
+  ],
+  "requete_image": "ciment Dangote Falcon 32.5 sac 50 kg",
+  "description_visuelle": "Sac de 50 kg Dangote Falcon",
+  "nom_fichier_image": "ciment-cpj-32-5-dangote.jpg",
+  "source": "https://ecomatin.net/commerce-dangote-et-cimpor-cameroun-s-a-baissent-a-leur-tour-les-prix-du-ciment-au-cameroun",
+  "confiance": "haute",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-32-5-dangote"
+ },
+ {
+  "ref": "L1-008",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 32,5",
+  "marque": "CIMAF",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, classe 32,5 (CPJ 35 à l'origine)",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Cimaf"
+  ],
+  "requete_image": "ciment CIMAF 32.5 sac 50 kg",
+  "description_visuelle": "Sac de 50 kg CIMAF",
+  "nom_fichier_image": "ciment-cpj-32-5-cimaf.jpg",
+  "source": "https://www.camer.be/actualites/economie/cameroun-ciment-loffre-est-plurielle-mais-les-prix-ne-baissent-pas-cameroon.html",
+  "confiance": "moyenne",
+  "notes": "CPJ 35 et CEM II/B 32,5R existaient au lancement de CIMAF. À CONFIRMER : vente actuelle en boutique (absent de Bativel)",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-32-5-cimaf"
+ },
+ {
+  "ref": "L1-009",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment blanc",
+  "marque": "Cimencam",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 25 kg",
+    "facteur": 25.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 25 kg, CEM I 42,5 R blanc, gamme Sublim",
+  "synonymes_locaux": [
+   "ciment blanc",
+   "blanc",
+   "Sublim"
+  ],
+  "requete_image": "ciment blanc Sublim Cimencam 25kg",
+  "description_visuelle": "Sac de ciment blanc Sublim de 25 kg",
+  "nom_fichier_image": "ciment-blanc-cimencam.jpg",
+  "source": "https://bativel.com/produit/ciment-blanc-sublim-cimencam-42-5-25kg/",
+  "confiance": "haute",
+  "notes": "Autres marques de ciment blanc non trouvées",
+  "propose_par_defaut": true,
+  "image": "ciment-blanc-cimencam"
+ },
+ {
+  "ref": "L1-010",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Chaux et plâtre",
+  "nom": "Chaux hydratée",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 25 kg",
+    "facteur": 25.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "poudre blanche, sac 25 kg (usage courant)",
+  "synonymes_locaux": [
+   "chaux",
+   "chaux éteinte",
+   "chaux de maçon"
+  ],
+  "requete_image": "chaux hydratée sac 25 kg bâtiment",
+  "description_visuelle": "Sac blanc de chaux en poudre",
+  "nom_fichier_image": "chaux-hydratee.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Aucune chaux parmi les 20 références Ciment et Chaux de Bativel. À CONFIRMER : présence réelle et poids du sac. Retirer par défaut",
+  "propose_par_defaut": false,
+  "image": "chaux-hydratee"
+ },
+ {
+  "ref": "L1-011",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Chaux et plâtre",
+  "nom": "Plâtre en poudre",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 25 kg",
+    "facteur": 25.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "poudre blanche, sac 25 kg",
+  "synonymes_locaux": [
+   "plâtre",
+   "plâtre de Paris",
+   "staff"
+  ],
+  "requete_image": "plâtre en poudre sac 25 kg",
+  "description_visuelle": "Sac de plâtre blanc en poudre",
+  "nom_fichier_image": "platre-poudre.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Aucune source camerounaise trouvée. À CONFIRMER : usage et poids du sac. Retirer par défaut",
+  "propose_par_defaut": false,
+  "image": "platre-poudre"
+ },
+ {
+  "ref": "L1-012",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Mortiers",
+  "nom": "Mortier prêt à l'emploi",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 25 kg",
+    "facteur": 25.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "mélange sec ciment et sable, sac 25 kg",
+  "synonymes_locaux": [
+   "mortier",
+   "mortier sec",
+   "mortier prêt à gâcher"
+  ],
+  "requete_image": "mortier prêt à l'emploi sac 25 kg",
+  "description_visuelle": "Sac de mortier sec gris",
+  "nom_fichier_image": "mortier-pret-emploi.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "Aucun produit camerounais précis trouvé. À CONFIRMER : marque et poids. Retirer par défaut",
+  "propose_par_defaut": false,
+  "image": "mortier-pret-emploi"
+ },
+ {
+  "ref": "L1-013",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Adjuvants",
+  "nom": "Hydrofuge de masse pour mortier et béton",
+  "marque": "Sika",
+  "unite_base": "litre",
+  "conditionnements": [
+   {
+    "nom": "bidon de 5 L",
+    "facteur": 5.0
+   },
+   {
+    "nom": "bidon de 20 L",
+    "facteur": 20.0
+   },
+   {
+    "nom": "litre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "hydrofuge liquide blanc sans chlore, dosage 0,7 à 2 % du poids de ciment, EN 934-2",
+  "synonymes_locaux": [
+   "hydrofuge",
+   "produit étanche",
+   "Sika"
+  ],
+  "requete_image": "hydrofuge Sika liquide bidon 20 L",
+  "description_visuelle": "Bidon plastique de liquide hydrofuge Sika",
+  "nom_fichier_image": "hydrofuge-mortier-sika.jpg",
+  "source": "https://cmr.sika.com/dms/getdocument.get/16494316-0dba-4f5a-91fa-32abd9477106/hydrofuge_sika_liquide.pdf",
+  "confiance": "haute",
+  "notes": "Notice de Sika Cameroon à Douala. Existe aussi SikaCem Hydrofuge liquide. Vente au litre non vérifiée. Distinct du ciment Hydro Cimencam",
+  "propose_par_defaut": true,
+  "image": "hydrofuge-mortier-sika"
+ },
+ {
+  "ref": "L1-014",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Adjuvants",
+  "nom": "Plastifiant réducteur d'eau pour béton",
+  "marque": "Sika",
+  "unite_base": "litre",
+  "conditionnements": [
+   {
+    "nom": "bidon de 20 L",
+    "facteur": 20.0
+   },
+   {
+    "nom": "litre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "gamme Plastiment BV-40, plastifiant retardateur de prise",
+  "synonymes_locaux": [
+   "plastifiant",
+   "adjuvant",
+   "réducteur d'eau",
+   "Plastiment"
+  ],
+  "requete_image": "plastifiant béton Sika Plastiment BV-40 bidon",
+  "description_visuelle": "Bidon plastique de plastifiant pour béton",
+  "nom_fichier_image": "adjuvant-plastifiant-sika.jpg",
+  "source": "https://cmr.sika.com/dam/dms/cm01/b/sika_plastiment_bv-40.pdf",
+  "confiance": "moyenne",
+  "notes": "Produit présent dans la documentation Sika Cameroun. À CONFIRMER : conditionnement (20 L déduit des autres adjuvants Sika)",
+  "propose_par_defaut": true,
+  "image": "adjuvant-plastifiant-sika"
+ },
+ {
+  "ref": "L1-015",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton Ø6",
+  "marque": "Prometal",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø6 mm, 2,66 kg théorique, rond à béton laminé à chaud, certifié NC",
+  "synonymes_locaux": [
+   "fer de 6",
+   "fer de six",
+   "fer 6"
+  ],
+  "requete_image": "fer à béton 6mm barre 12m Prometal",
+  "description_visuelle": "Barre d'acier fine",
+  "nom_fichier_image": "fer-beton-6.jpg",
+  "source": "https://bativel.com/produit/fer-a-beton-de-6-o6-12m-prometal/",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : nervuré (HA) ou lisse, la fiche dit seulement « rond à béton »",
+  "propose_par_defaut": true,
+  "image": "fer-beton-6"
+ },
+ {
+  "ref": "L1-016",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton HA Ø8",
+  "marque": "Prometal",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø8 mm, nuance FE500, 4,74 kg théorique, section 0,503 cm²",
+  "synonymes_locaux": [
+   "fer de 8",
+   "fer de huit",
+   "fer 8"
+  ],
+  "requete_image": "fer à béton HA 8mm barre 12m Prometal",
+  "description_visuelle": "Barre d'acier nervurée Ø8",
+  "nom_fichier_image": "fer-beton-ha-8.jpg",
+  "source": "https://bativel.com/categorie-produit/materiaux-de-construction/armature-et-ferraillage/fer-a-beton/",
+  "confiance": "haute",
+  "notes": "Bativel affiche 9,48 kg (le double du théorique). À CONFIRMER : poids réel. Le FE400 Ø8 existe aussi, produit distinct possible",
+  "propose_par_defaut": true,
+  "image": "fer-beton-ha-8"
+ },
+ {
+  "ref": "L1-017",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton HA Ø10",
+  "marque": "Prometal",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø10 mm, nuance FE500, 7,40 kg théorique, section 0,785 cm²",
+  "synonymes_locaux": [
+   "fer de 10",
+   "fer de dix",
+   "fer 10"
+  ],
+  "requete_image": "fer à béton HA 10mm barre 12m Prometal",
+  "description_visuelle": "Barre d'acier nervurée Ø10",
+  "nom_fichier_image": "fer-beton-ha-10.jpg",
+  "source": "https://bativel.com/categorie-produit/materiaux-de-construction/armature-et-ferraillage/fer-a-beton/",
+  "confiance": "haute",
+  "notes": "Bativel affiche 14,81 kg (le double du théorique). À CONFIRMER : poids réel. FE400 Ø10 existe aussi",
+  "propose_par_defaut": true,
+  "image": "fer-beton-ha-10"
+ },
+ {
+  "ref": "L1-018",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton HA Ø12",
+  "marque": "Prometal",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø12 mm, nuance FE500, 10,66 kg théorique, section 1,13 cm²",
+  "synonymes_locaux": [
+   "fer de 12",
+   "fer de douze",
+   "fer 12"
+  ],
+  "requete_image": "fer à béton HA 12mm barre 12m Prometal",
+  "description_visuelle": "Barre d'acier nervurée Ø12",
+  "nom_fichier_image": "fer-beton-ha-12.jpg",
+  "source": "https://bativel.com/categorie-produit/materiaux-de-construction/armature-et-ferraillage/fer-a-beton/",
+  "confiance": "haute",
+  "notes": "Bativel affiche 21,28 kg (le double du théorique). À CONFIRMER : poids réel. Vendu aussi à la tonne. FE400 Ø12 existe aussi",
+  "propose_par_defaut": true,
+  "image": "fer-beton-ha-12"
+ },
+ {
+  "ref": "L1-019",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton HA Ø14",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø14 mm, 14,5 kg théorique, section 1,54 cm²",
+  "synonymes_locaux": [
+   "fer de 14",
+   "fer 14"
+  ],
+  "requete_image": "fer à béton HA 14mm barre 12m",
+  "description_visuelle": "Barre d'acier nervurée Ø14",
+  "nom_fichier_image": "fer-beton-ha-14.jpg",
+  "source": "https://infospratiques.cm/?p=76",
+  "confiance": "moyenne",
+  "notes": "Absent de la liste Bativel (Ø6, 8, 10, 12, 16). À CONFIRMER : marque (Prometal probable)",
+  "propose_par_defaut": true,
+  "image": "fer-beton-ha-14"
+ },
+ {
+  "ref": "L1-020",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton HA Ø16",
+  "marque": "Prometal",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø16 mm, nuance FE500, 18,9 kg théorique, section 2,01 cm²",
+  "synonymes_locaux": [
+   "fer de 16",
+   "fer 16"
+  ],
+  "requete_image": "fer à béton HA 16mm barre 12m Prometal",
+  "description_visuelle": "Barre d'acier nervurée Ø16",
+  "nom_fichier_image": "fer-beton-ha-16.jpg",
+  "source": "https://bativel.com/categorie-produit/materiaux-de-construction/armature-et-ferraillage/fer-a-beton/",
+  "confiance": "haute",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "fer-beton-ha-16"
+ },
+ {
+  "ref": "L1-021",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer à béton",
+  "nom": "Fer à béton HA Ø20",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø20 mm, 29,6 kg théorique, section 3,14 cm²",
+  "synonymes_locaux": [
+   "fer de 20",
+   "fer 20"
+  ],
+  "requete_image": "fer à béton HA 20mm barre 12m",
+  "description_visuelle": "Barre d'acier nervurée Ø20",
+  "nom_fichier_image": "fer-beton-ha-20.jpg",
+  "source": "https://infospratiques.cm/?p=76",
+  "confiance": "moyenne",
+  "notes": "Absent de la liste Bativel. À CONFIRMER : marque (Prometal probable)",
+  "propose_par_defaut": true,
+  "image": "fer-beton-ha-20"
+ },
+ {
+  "ref": "L1-022",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer rond lisse",
+  "nom": "Fer rond lisse Ø8",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø8 mm, surface lisse, 4,74 kg théorique",
+  "synonymes_locaux": [
+   "fer lisse 8",
+   "rond lisse",
+   "fer rond"
+  ],
+  "requete_image": "fer rond lisse 8mm barre",
+  "description_visuelle": "Barre d'acier ronde à surface lisse",
+  "nom_fichier_image": "fer-rond-lisse-8.jpg",
+  "source": "https://fr.journalducameroun.com/cameroun-rude-concurrence-entre-le-fer-a-beton-local-et-importe/",
+  "confiance": "moyenne",
+  "notes": "Fers lisses produits localement. À CONFIRMER : longueur de 12 m supposée comme le HA",
+  "propose_par_defaut": true,
+  "image": "fer-rond-lisse-8"
+ },
+ {
+  "ref": "L1-023",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fer rond lisse",
+  "nom": "Fer rond lisse Ø10",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 12 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 12 m, Ø10 mm, surface lisse, 7,40 kg théorique",
+  "synonymes_locaux": [
+   "fer lisse 10",
+   "rond lisse",
+   "fer rond"
+  ],
+  "requete_image": "fer rond lisse 10mm barre",
+  "description_visuelle": "Barre d'acier ronde à surface lisse",
+  "nom_fichier_image": "fer-rond-lisse-10.jpg",
+  "source": "https://fr.journalducameroun.com/cameroun-rude-concurrence-entre-le-fer-a-beton-local-et-importe/",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : longueur de 12 m supposée",
+  "propose_par_defaut": true,
+  "image": "fer-rond-lisse-10"
+ },
+ {
+  "ref": "L1-024",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fil et treillis",
+  "nom": "Fil de fer recuit",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "fil d'acier recuit noir pour ligature des armatures",
+  "synonymes_locaux": [
+   "fil de fer",
+   "fil de ligature",
+   "fil recuit",
+   "fil d'attache"
+  ],
+  "requete_image": "fil de fer recuit ligature rouleau",
+  "description_visuelle": "Rouleau de fil d'acier noir souple",
+  "nom_fichier_image": "fil-de-fer-recuit.jpg",
+  "source": "https://www.cameroon-tribune.cm/article.html/76600/en.html/production-les-acteurs-en-presence",
+  "confiance": "moyenne",
+  "notes": "Produit par Prometal et Aciéries du Cameroun. À CONFIRMER : diamètre courant et rouleaux éventuels",
+  "propose_par_defaut": true,
+  "image": "fil-de-fer-recuit"
+ },
+ {
+  "ref": "L1-025",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Fil et treillis",
+  "nom": "Treillis soudé ST25",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "panneau",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "panneau 6,00 x 2,40 m, maille 150 x 300 mm, fil Ø7 mm (ST25C : maille 150 x 150)",
+  "synonymes_locaux": [
+   "treillis",
+   "treillis soudé",
+   "grillage à béton"
+  ],
+  "requete_image": "treillis soudé ST25 panneau 6 m x 2,4 m",
+  "description_visuelle": "Panneau de fils d'acier soudés en quadrillage",
+  "nom_fichier_image": "treillis-soude-st25.jpg",
+  "source": "https://elearning.univ-jijel.dz/pluginfile.php/255079/mod_resource/content/1/Ch%20III.pdf",
+  "confiance": "moyenne",
+  "notes": "Dimensions normalisées vérifiées. À CONFIRMER : disponibilité locale et types vendus",
+  "propose_par_defaut": true,
+  "image": "treillis-soude-st25"
+ },
+ {
+  "ref": "L1-026",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Profilés",
+  "nom": "Cornière 30x30",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 30 x 30 mm, acier",
+  "synonymes_locaux": [
+   "cornière",
+   "fer cornière",
+   "L 30"
+  ],
+  "requete_image": "cornière acier 30x30 barre 6m",
+  "description_visuelle": "Profilé en L à ailes égales de 30 mm",
+  "nom_fichier_image": "corniere-30x30.jpg",
+  "source": "https://www.cameroon-tribune.cm/article.html/76600/en.html/production-les-acteurs-en-presence",
+  "confiance": "moyenne",
+  "notes": "Cornières produites localement (Prometal). À CONFIRMER : épaisseur (3 mm courant) et longueur de barre",
+  "propose_par_defaut": true,
+  "image": "corniere-30x30"
+ },
+ {
+  "ref": "L1-027",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Profilés",
+  "nom": "Cornière 40x40",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 40 x 40 mm, acier",
+  "synonymes_locaux": [
+   "cornière",
+   "fer cornière",
+   "L 40"
+  ],
+  "requete_image": "cornière acier 40x40 barre 6m",
+  "description_visuelle": "Profilé en L à ailes égales de 40 mm",
+  "nom_fichier_image": "corniere-40x40.jpg",
+  "source": "https://www.cameroon-tribune.cm/article.html/76600/en.html/production-les-acteurs-en-presence",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : épaisseur (4 mm courant) et longueur",
+  "propose_par_defaut": true,
+  "image": "corniere-40x40"
+ },
+ {
+  "ref": "L1-028",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Profilés",
+  "nom": "Cornière 50x50",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 50 x 50 mm, acier",
+  "synonymes_locaux": [
+   "cornière",
+   "fer cornière",
+   "L 50"
+  ],
+  "requete_image": "cornière acier 50x50 barre 6m",
+  "description_visuelle": "Profilé en L à ailes égales de 50 mm",
+  "nom_fichier_image": "corniere-50x50.jpg",
+  "source": "https://www.cameroon-tribune.cm/article.html/76600/en.html/production-les-acteurs-en-presence",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : épaisseur (5 mm courant) et longueur",
+  "propose_par_defaut": true,
+  "image": "corniere-50x50"
+ },
+ {
+  "ref": "L1-029",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Profilés",
+  "nom": "Fer plat 30x4",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 30 mm de large, 4 mm d'épaisseur",
+  "synonymes_locaux": [
+   "fer plat",
+   "plat 30",
+   "plat de 30"
+  ],
+  "requete_image": "fer plat 30x4 barre 6m",
+  "description_visuelle": "Barre plate d'acier",
+  "nom_fichier_image": "fer-plat-30x4.jpg",
+  "source": "https://www.cameroon-tribune.cm/article.html/76600/en.html/production-les-acteurs-en-presence",
+  "confiance": "moyenne",
+  "notes": "Fers plats produits localement. Longueur de barre non vérifiée",
+  "propose_par_defaut": true,
+  "image": "fer-plat-30x4"
+ },
+ {
+  "ref": "L1-030",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Profilés",
+  "nom": "Fer plat 40x4",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 40 mm de large, 4 mm d'épaisseur",
+  "synonymes_locaux": [
+   "fer plat",
+   "plat 40",
+   "plat de 40"
+  ],
+  "requete_image": "fer plat 40x4 barre 6m",
+  "description_visuelle": "Barre plate d'acier",
+  "nom_fichier_image": "fer-plat-40x4.jpg",
+  "source": "https://www.cameroon-tribune.cm/article.html/76600/en.html/production-les-acteurs-en-presence",
+  "confiance": "moyenne",
+  "notes": "Longueur de barre non vérifiée",
+  "propose_par_defaut": true,
+  "image": "fer-plat-40x4"
+ },
+ {
+  "ref": "L1-031",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Tubes",
+  "nom": "Tube carré 30x30",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 30 x 30 mm, acier",
+  "synonymes_locaux": [
+   "tube carré",
+   "carré 30",
+   "tube 30"
+  ],
+  "requete_image": "tube carré acier 30x30 barre 6m",
+  "description_visuelle": "Tube creux à section carrée",
+  "nom_fichier_image": "tube-carre-30x30.jpg",
+  "source": "https://cameroon-tribune.cm/article.html/76600/fr.html/details_2",
+  "confiance": "moyenne",
+  "notes": "Tubes produits par Prometal, Metafrique Steel et Aciéries du Cameroun. À CONFIRMER : épaisseur de paroi (1,5 à 2 mm)",
+  "propose_par_defaut": true,
+  "image": "tube-carre-30x30"
+ },
+ {
+  "ref": "L1-032",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Tubes",
+  "nom": "Tube carré 40x40",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 40 x 40 mm, acier",
+  "synonymes_locaux": [
+   "tube carré",
+   "carré 40",
+   "tube 40"
+  ],
+  "requete_image": "tube carré acier 40x40 barre 6m",
+  "description_visuelle": "Tube creux à section carrée",
+  "nom_fichier_image": "tube-carre-40x40.jpg",
+  "source": "https://cameroon-tribune.cm/article.html/76600/fr.html/details_2",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : épaisseur de paroi",
+  "propose_par_defaut": true,
+  "image": "tube-carre-40x40"
+ },
+ {
+  "ref": "L1-033",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Tubes",
+  "nom": "Tube rectangulaire 40x20",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, 40 x 20 mm, acier",
+  "synonymes_locaux": [
+   "tube rectangle",
+   "rectangulaire 40",
+   "tube 40x20"
+  ],
+  "requete_image": "tube rectangulaire acier 40x20 barre 6m",
+  "description_visuelle": "Tube creux à section rectangulaire",
+  "nom_fichier_image": "tube-rectangulaire-40x20.jpg",
+  "source": "https://cameroon-tribune.cm/article.html/76600/fr.html/details_2",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : épaisseur de paroi",
+  "propose_par_defaut": true,
+  "image": "tube-rectangulaire-40x20"
+ },
+ {
+  "ref": "L1-034",
+  "categorie": "Fer et acier",
+  "sous_categorie": "Tubes",
+  "nom": "Tube rond Ø32",
+  "marque": "Sans marque",
+  "unite_base": "barre",
+  "conditionnements": [
+   {
+    "nom": "barre de 6 m",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "barre 6 m, Ø32 mm, acier",
+  "synonymes_locaux": [
+   "tube rond",
+   "tube de 32",
+   "rond 32"
+  ],
+  "requete_image": "tube rond acier 32mm barre 6m",
+  "description_visuelle": "Tube creux rond",
+  "nom_fichier_image": "tube-rond-32.jpg",
+  "source": "https://cameroon-tribune.cm/article.html/76600/fr.html/details_2",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : épaisseur de paroi",
+  "propose_par_defaut": true,
+  "image": "tube-rond-32"
+ },
+ {
+  "ref": "L1-035",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 40 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 40 mm",
+  "synonymes_locaux": [
+   "pointe de 4",
+   "clou de 40",
+   "clou 4 cm"
+  ],
+  "requete_image": "pointe clou 40mm tête plate",
+  "description_visuelle": "Clous droits à tête plate, 4 cm",
+  "nom_fichier_image": "pointe-40.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "Clous produits localement à partir de fil machine. À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-40"
+ },
+ {
+  "ref": "L1-036",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 50 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 50 mm",
+  "synonymes_locaux": [
+   "pointe de 5",
+   "clou de 50",
+   "clou 5 cm"
+  ],
+  "requete_image": "pointe clou 50mm tête plate",
+  "description_visuelle": "Clous droits à tête plate, 5 cm",
+  "nom_fichier_image": "pointe-50.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-40"
+ },
+ {
+  "ref": "L1-037",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 60 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 60 mm",
+  "synonymes_locaux": [
+   "pointe de 6",
+   "clou de 60",
+   "clou 6 cm"
+  ],
+  "requete_image": "pointe clou 60mm tête plate",
+  "description_visuelle": "Clous droits à tête plate, 6 cm",
+  "nom_fichier_image": "pointe-60.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-60"
+ },
+ {
+  "ref": "L1-038",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 70 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 70 mm",
+  "synonymes_locaux": [
+   "pointe de 7",
+   "clou de 70",
+   "clou 7 cm"
+  ],
+  "requete_image": "pointe clou 70mm tête plate",
+  "description_visuelle": "Clous droits à tête plate, 7 cm",
+  "nom_fichier_image": "pointe-70.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-60"
+ },
+ {
+  "ref": "L1-039",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 80 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 80 mm",
+  "synonymes_locaux": [
+   "pointe de 8",
+   "clou de 80",
+   "clou 8 cm"
+  ],
+  "requete_image": "pointe clou 80mm tête plate",
+  "description_visuelle": "Clous droits à tête plate, 8 cm",
+  "nom_fichier_image": "pointe-80.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-80"
+ },
+ {
+  "ref": "L1-040",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 100 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 100 mm",
+  "synonymes_locaux": [
+   "pointe de 10",
+   "clou de 100",
+   "clou 10 cm"
+  ],
+  "requete_image": "pointe clou 100mm tête plate",
+  "description_visuelle": "Clous droits à tête plate, 10 cm",
+  "nom_fichier_image": "pointe-100.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-80"
+ },
+ {
+  "ref": "L1-041",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Pointes",
+  "nom": "Pointe 120 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête plate, acier brut, longueur 120 mm",
+  "synonymes_locaux": [
+   "pointe de 12",
+   "clou de 120",
+   "clou 12 cm"
+  ],
+  "requete_image": "pointe clou 120mm charpente",
+  "description_visuelle": "Gros clous droits à tête plate, 12 cm",
+  "nom_fichier_image": "pointe-120.jpg",
+  "source": "https://www.manomano.fr/p/pointe-tpo-25x-60-a-25kg-par-5-32379356",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement (paquet ou carton)",
+  "propose_par_defaut": true,
+  "image": "pointe-80"
+ },
+ {
+  "ref": "L1-042",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Clous spéciaux",
+  "nom": "Clou à tôle 70 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête large bombée, tige torsadée, 70 mm, galvanisé",
+  "synonymes_locaux": [
+   "clou à tôle",
+   "clou de toiture",
+   "clou à tête large"
+  ],
+  "requete_image": "clou à tôle ondulée 70mm tête large",
+  "description_visuelle": "Clou à large tête ronde et tige torsadée",
+  "nom_fichier_image": "clou-a-tole-70.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement et présence de rondelle",
+  "propose_par_defaut": true,
+  "image": "clou-a-tole-70"
+ },
+ {
+  "ref": "L1-043",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Clous spéciaux",
+  "nom": "Clou à tôle 100 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête large bombée, tige torsadée, 100 mm, galvanisé",
+  "synonymes_locaux": [
+   "clou à tôle",
+   "clou de toiture",
+   "clou à tête large"
+  ],
+  "requete_image": "clou à tôle ondulée 100mm tête large",
+  "description_visuelle": "Clou à large tête ronde et tige torsadée",
+  "nom_fichier_image": "clou-a-tole-100.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement et présence de rondelle",
+  "propose_par_defaut": true,
+  "image": "clou-a-tole-100"
+ },
+ {
+  "ref": "L1-044",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Clous spéciaux",
+  "nom": "Clou de maçon 40 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "acier trempé, 40 mm",
+  "synonymes_locaux": [
+   "clou de maçon",
+   "clou acier",
+   "clou à béton"
+  ],
+  "requete_image": "clou acier trempé maçon 40mm",
+  "description_visuelle": "Clou court en acier gris foncé, tige striée",
+  "nom_fichier_image": "clou-de-macon-40.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement",
+  "propose_par_defaut": true,
+  "image": "clou-de-macon-40"
+ },
+ {
+  "ref": "L1-045",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Clous spéciaux",
+  "nom": "Clou de maçon 60 mm",
+  "marque": "Sans marque",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "acier trempé, 60 mm",
+  "synonymes_locaux": [
+   "clou de maçon",
+   "clou acier",
+   "clou à béton"
+  ],
+  "requete_image": "clou acier trempé maçon 60mm",
+  "description_visuelle": "Clou en acier gris foncé, tige striée",
+  "nom_fichier_image": "clou-de-macon-60.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : conditionnement",
+  "propose_par_defaut": true,
+  "image": "clou-de-macon-40"
+ },
+ {
+  "ref": "L1-046",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Vis",
+  "nom": "Vis à bois 4x40",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø4 mm, longueur 40 mm, tête fraisée cruciforme, acier zingué",
+  "synonymes_locaux": [
+   "vis à bois",
+   "vis de 40",
+   "vis 4x40"
+  ],
+  "requete_image": "vis à bois 4x40 tête fraisée zinguée",
+  "description_visuelle": "Vis à bois à tête fraisée cruciforme",
+  "nom_fichier_image": "vis-bois-4x40.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : boîte vendue localement",
+  "propose_par_defaut": true,
+  "image": "vis-bois-4x40"
+ },
+ {
+  "ref": "L1-047",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Vis",
+  "nom": "Vis à bois 4x50",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø4 mm, longueur 50 mm, tête fraisée cruciforme, acier zingué",
+  "synonymes_locaux": [
+   "vis à bois",
+   "vis de 50",
+   "vis 4x50"
+  ],
+  "requete_image": "vis à bois 4x50 tête fraisée zinguée",
+  "description_visuelle": "Vis à bois à tête fraisée cruciforme",
+  "nom_fichier_image": "vis-bois-4x50.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : boîte vendue localement",
+  "propose_par_defaut": true,
+  "image": "vis-bois-4x40"
+ },
+ {
+  "ref": "L1-048",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Vis",
+  "nom": "Vis à bois 5x60",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø5 mm, longueur 60 mm, tête fraisée cruciforme, acier zingué",
+  "synonymes_locaux": [
+   "vis à bois",
+   "vis de 60",
+   "vis 5x60"
+  ],
+  "requete_image": "vis à bois 5x60 tête fraisée zinguée",
+  "description_visuelle": "Vis à bois à tête fraisée cruciforme",
+  "nom_fichier_image": "vis-bois-5x60.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : boîte vendue localement",
+  "propose_par_defaut": true,
+  "image": "vis-bois-4x40"
+ },
+ {
+  "ref": "L1-049",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Vis",
+  "nom": "Vis autoforeuse 4,8x32",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø4,8 mm, longueur 32 mm, pointe foreuse, acier zingué",
+  "synonymes_locaux": [
+   "vis autoforeuse",
+   "vis à métal",
+   "vis pointe foret"
+  ],
+  "requete_image": "vis autoforeuse 4.8x32 tête hexagonale",
+  "description_visuelle": "Vis à pointe de foret et tête hexagonale",
+  "nom_fichier_image": "vis-autoforeuse-4-8x32.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Doublon possible avec L3-062 (vis autoperceuse pour tôle). À CONFIRMER : boîte vendue localement",
+  "propose_par_defaut": true,
+  "image": "vis-autoforeuse-4-8x32"
+ },
+ {
+  "ref": "L1-050",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Boulon tête hexagonale M8x60",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "M8, longueur 60 mm, tête hexagonale, acier zingué",
+  "synonymes_locaux": [
+   "boulon",
+   "boulon de 8",
+   "boulon 8x60"
+  ],
+  "requete_image": "boulon tête hexagonale M8x60 zingué",
+  "description_visuelle": "Boulon à tête hexagonale avec écrou",
+  "nom_fichier_image": "boulon-m8x60.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Vendu avec ou sans écrou : à préciser avec le commerçant",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L1-051",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Boulon tête hexagonale M10x80",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "M10, longueur 80 mm, tête hexagonale, acier zingué",
+  "synonymes_locaux": [
+   "boulon",
+   "boulon de 10",
+   "boulon 10x80"
+  ],
+  "requete_image": "boulon tête hexagonale M10x80 zingué",
+  "description_visuelle": "Boulon à tête hexagonale avec écrou",
+  "nom_fichier_image": "boulon-m10x80.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L1-052",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Boulon tête hexagonale M12x100",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "M12, longueur 100 mm, tête hexagonale, acier zingué",
+  "synonymes_locaux": [
+   "boulon",
+   "boulon de 12",
+   "boulon 12x100"
+  ],
+  "requete_image": "boulon tête hexagonale M12x100 zingué",
+  "description_visuelle": "Boulon à tête hexagonale avec écrou",
+  "nom_fichier_image": "boulon-m12x100.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L1-053",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Tige filetée M10",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "M10, acier zingué, à couper à la demande",
+  "synonymes_locaux": [
+   "tige filetée",
+   "tige de 10",
+   "filetage"
+  ],
+  "requete_image": "tige filetée M10 zinguée 1 m",
+  "description_visuelle": "Longue tige métallique entièrement filetée",
+  "nom_fichier_image": "tige-filetee-m10.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : longueur vendue (1 m ou 2 m) et vente au mètre",
+  "propose_par_defaut": true,
+  "image": "tige-filetee-m10"
+ },
+ {
+  "ref": "L1-054",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Écrou M8",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "hexagonal, M8, clé de 13 mm, acier zingué",
+  "synonymes_locaux": [
+   "écrou",
+   "écrou de 8"
+  ],
+  "requete_image": "écrou hexagonal M8 zingué",
+  "description_visuelle": "Petit écrou hexagonal métallique",
+  "nom_fichier_image": "ecrou-m8.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "ecrou-m8"
+ },
+ {
+  "ref": "L1-055",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Écrou M10",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "hexagonal, M10, clé de 17 mm, acier zingué",
+  "synonymes_locaux": [
+   "écrou",
+   "écrou de 10"
+  ],
+  "requete_image": "écrou hexagonal M10 zingué",
+  "description_visuelle": "Écrou hexagonal métallique",
+  "nom_fichier_image": "ecrou-m10.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "ecrou-m8"
+ },
+ {
+  "ref": "L1-056",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Écrou M12",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "hexagonal, M12, clé de 19 mm, acier zingué",
+  "synonymes_locaux": [
+   "écrou",
+   "écrou de 12"
+  ],
+  "requete_image": "écrou hexagonal M12 zingué",
+  "description_visuelle": "Gros écrou hexagonal métallique",
+  "nom_fichier_image": "ecrou-m12.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "ecrou-m8"
+ },
+ {
+  "ref": "L1-057",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Rondelle plate M8",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø intérieur 8,4 mm, Ø extérieur 16 mm, zinguée",
+  "synonymes_locaux": [
+   "rondelle",
+   "grower",
+   "rondelle de 8"
+  ],
+  "requete_image": "rondelle plate M8 zinguée",
+  "description_visuelle": "Petite rondelle métallique plate",
+  "nom_fichier_image": "rondelle-m8.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "rondelle-m8"
+ },
+ {
+  "ref": "L1-058",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Rondelle plate M10",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø intérieur 10,5 mm, Ø extérieur 20 mm, zinguée",
+  "synonymes_locaux": [
+   "rondelle",
+   "rondelle de 10"
+  ],
+  "requete_image": "rondelle plate M10 zinguée",
+  "description_visuelle": "Rondelle métallique plate",
+  "nom_fichier_image": "rondelle-m10.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "rondelle-m8"
+ },
+ {
+  "ref": "L1-059",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Boulonnerie",
+  "nom": "Rondelle plate M12",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø intérieur 13 mm, Ø extérieur 24 mm, zinguée",
+  "synonymes_locaux": [
+   "rondelle",
+   "rondelle de 12"
+  ],
+  "requete_image": "rondelle plate M12 zinguée",
+  "description_visuelle": "Grande rondelle métallique plate",
+  "nom_fichier_image": "rondelle-m12.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "rondelle-m8"
+ },
+ {
+  "ref": "L1-060",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Chevilles",
+  "nom": "Cheville plastique Ø6",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø6 mm, longueur environ 30 mm, nylon",
+  "synonymes_locaux": [
+   "cheville",
+   "cheville de 6",
+   "fischer"
+  ],
+  "requete_image": "cheville plastique 6mm nylon",
+  "description_visuelle": "Petite cheville plastique à collerette",
+  "nom_fichier_image": "cheville-plastique-6.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement. « Fischer » est une marque devenue nom commun",
+  "propose_par_defaut": true,
+  "image": "cheville-plastique-6"
+ },
+ {
+  "ref": "L1-061",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Chevilles",
+  "nom": "Cheville plastique Ø8",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø8 mm, longueur environ 40 mm, nylon",
+  "synonymes_locaux": [
+   "cheville",
+   "cheville de 8",
+   "fischer"
+  ],
+  "requete_image": "cheville plastique 8mm nylon",
+  "description_visuelle": "Cheville plastique à collerette",
+  "nom_fichier_image": "cheville-plastique-8.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "cheville-plastique-6"
+ },
+ {
+  "ref": "L1-062",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Chevilles",
+  "nom": "Cheville plastique Ø10",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø10 mm, longueur environ 50 mm, nylon",
+  "synonymes_locaux": [
+   "cheville",
+   "cheville de 10",
+   "fischer"
+  ],
+  "requete_image": "cheville plastique 10mm nylon",
+  "description_visuelle": "Grande cheville plastique à collerette",
+  "nom_fichier_image": "cheville-plastique-10.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : sachet vendu localement",
+  "propose_par_defaut": true,
+  "image": "cheville-plastique-6"
+ },
+ {
+  "ref": "L1-063",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Chevilles",
+  "nom": "Cheville à expansion métallique M10",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "M10, acier zingué, avec boulon",
+  "synonymes_locaux": [
+   "cheville métallique",
+   "ancrage",
+   "goujon d'ancrage"
+  ],
+  "requete_image": "cheville expansion métallique M10 béton",
+  "description_visuelle": "Cheville métallique à manchon avec boulon",
+  "nom_fichier_image": "cheville-expansion-m10.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "À CONFIRMER : longueur et type (goujon ou à coquille)",
+  "propose_par_defaut": true,
+  "image": "cheville-expansion-m10"
+ },
+ {
+  "ref": "L1-064",
+  "categorie": "Clous, vis et fixations",
+  "sous_categorie": "Rivets",
+  "nom": "Rivet pop Ø4",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø4 mm, longueur 10 mm, aluminium",
+  "synonymes_locaux": [
+   "rivet",
+   "rivet pop",
+   "pop"
+  ],
+  "requete_image": "rivet pop aluminium 4mm",
+  "description_visuelle": "Petit rivet aveugle en aluminium",
+  "nom_fichier_image": "rivet-pop-4.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : boîte vendue localement. Nécessite une pince à riveter, à ajouter ?",
+  "propose_par_defaut": true,
+  "image": "rivet-pop-4"
+ },
+ {
+  "ref": "L1-065",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Frappe",
+  "nom": "Marteau de charpentier 500 g",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête 500 g, panne fendue, manche bois ou fibre",
+  "synonymes_locaux": [
+   "marteau",
+   "marteau de menuisier",
+   "marteau à griffe"
+  ],
+  "requete_image": "marteau charpentier 500g manche bois",
+  "description_visuelle": "Marteau à panne fendue pour arracher les clous",
+  "nom_fichier_image": "marteau-charpentier-500g.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/martellerie/",
+  "confiance": "moyenne",
+  "notes": "Marques présentes au Cameroun : Total et Ingco (Bativel)",
+  "propose_par_defaut": true,
+  "image": "marteau-charpentier-500g"
+ },
+ {
+  "ref": "L1-066",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Frappe",
+  "nom": "Massette 1 kg",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête 1 kg, manche court",
+  "synonymes_locaux": [
+   "massette",
+   "marteau de maçon",
+   "petite masse"
+  ],
+  "requete_image": "massette 1kg manche court",
+  "description_visuelle": "Petite masse à tête carrée",
+  "nom_fichier_image": "massette-1kg.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "massette-1kg"
+ },
+ {
+  "ref": "L1-067",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Frappe",
+  "nom": "Masse 4 kg",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête 4 kg, manche long",
+  "synonymes_locaux": [
+   "masse",
+   "grosse masse",
+   "casse-pierre"
+  ],
+  "requete_image": "masse 4kg manche long",
+  "description_visuelle": "Grosse masse à manche long",
+  "nom_fichier_image": "masse-4kg.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "masse-4kg"
+ },
+ {
+  "ref": "L1-068",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Maçonnerie",
+  "nom": "Truelle",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "lame acier, manche bois ou plastique",
+  "synonymes_locaux": [
+   "truelle",
+   "truelle de maçon",
+   "cuillère"
+  ],
+  "requete_image": "truelle de maçon lame acier",
+  "description_visuelle": "Truelle triangulaire à manche",
+  "nom_fichier_image": "truelle.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/outillage-macon/",
+  "confiance": "moyenne",
+  "notes": "Formes (carrée, ronde) à séparer si le stock est distinct",
+  "propose_par_defaut": true,
+  "image": "truelle"
+ },
+ {
+  "ref": "L1-069",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Maçonnerie",
+  "nom": "Taloche",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "plateau lisse, poignée, plastique ou bois",
+  "synonymes_locaux": [
+   "taloche",
+   "taloche de maçon",
+   "platoir"
+  ],
+  "requete_image": "taloche maçon plastique poignée",
+  "description_visuelle": "Plateau rectangulaire avec poignée",
+  "nom_fichier_image": "taloche.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/outillage-macon/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "taloche"
+ },
+ {
+  "ref": "L1-070",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Mesure",
+  "nom": "Niveau à bulle 60 cm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "60 cm, aluminium, fioles",
+  "synonymes_locaux": [
+   "niveau",
+   "niveau à bulle",
+   "niveau de maçon"
+  ],
+  "requete_image": "niveau à bulle aluminium 60cm",
+  "description_visuelle": "Règle aluminium avec fioles transparentes",
+  "nom_fichier_image": "niveau-bulle-60.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "niveau-bulle-60"
+ },
+ {
+  "ref": "L1-071",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Mesure",
+  "nom": "Niveau à bulle 120 cm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "120 cm, aluminium, fioles",
+  "synonymes_locaux": [
+   "niveau",
+   "niveau à bulle",
+   "grand niveau"
+  ],
+  "requete_image": "niveau à bulle aluminium 120cm",
+  "description_visuelle": "Longue règle aluminium avec fioles",
+  "nom_fichier_image": "niveau-bulle-120.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "niveau-bulle-60"
+ },
+ {
+  "ref": "L1-072",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Coupe",
+  "nom": "Scie à métaux (arc)",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "monture acier, lame 300 mm",
+  "synonymes_locaux": [
+   "scie à métaux",
+   "scie à fer",
+   "arc de scie"
+  ],
+  "requete_image": "scie à métaux monture arc lame 300mm",
+  "description_visuelle": "Monture en arc avec poignée et lame fine",
+  "nom_fichier_image": "scie-a-metaux.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/scie-et-serre-joint/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "scie-a-metaux"
+ },
+ {
+  "ref": "L1-073",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Coupe",
+  "nom": "Lame de scie à métaux",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "300 mm, 24 dents par pouce",
+  "synonymes_locaux": [
+   "lame de scie",
+   "lame à fer",
+   "lame bimétal"
+  ],
+  "requete_image": "lame scie à métaux 300mm",
+  "description_visuelle": "Lame d'acier fine et dentée de 30 cm",
+  "nom_fichier_image": "lame-scie-metaux.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "lame-scie-metaux"
+ },
+ {
+  "ref": "L1-074",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Coupe",
+  "nom": "Scie égoïne",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "lame 450 mm, denture bois, manche plastique",
+  "synonymes_locaux": [
+   "scie à bois",
+   "égoïne",
+   "scie de menuisier"
+  ],
+  "requete_image": "scie égoïne 450mm denture bois",
+  "description_visuelle": "Grande lame trapézoïdale à poignée",
+  "nom_fichier_image": "scie-egoine.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/scie-et-serre-joint/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "scie-egoine"
+ },
+ {
+  "ref": "L1-075",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Pinces",
+  "nom": "Pince universelle",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "200 mm (8 pouces), acier, manches isolés ou nus",
+  "synonymes_locaux": [
+   "pince",
+   "pince universelle",
+   "pince combinée"
+  ],
+  "requete_image": "pince universelle 200mm 8 pouces",
+  "description_visuelle": "Pince plate avec zone de coupe",
+  "nom_fichier_image": "pince-universelle.jpg",
+  "source": "https://bativel.com/produit/pince-universelle-8-total-tht110806p-200-mm/",
+  "confiance": "haute",
+  "notes": "Modèle Total THT110806P de 200 mm vendu au Cameroun",
+  "propose_par_defaut": true,
+  "image": "pince-universelle"
+ },
+ {
+  "ref": "L1-076",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Pinces",
+  "nom": "Pince coupante",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "160 mm, coupe diagonale",
+  "synonymes_locaux": [
+   "pince coupante",
+   "coupe fil",
+   "pince diagonale"
+  ],
+  "requete_image": "pince coupante diagonale 160mm",
+  "description_visuelle": "Pince à mâchoires de coupe en biais",
+  "nom_fichier_image": "pince-coupante.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/pinces-cisaille-et-coupe-boulon/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "pince-coupante"
+ },
+ {
+  "ref": "L1-077",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Pinces",
+  "nom": "Pince à bec",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "160 mm, bec long demi-rond",
+  "synonymes_locaux": [
+   "pince à bec",
+   "bec long",
+   "pince bec rond"
+  ],
+  "requete_image": "pince bec long 160mm",
+  "description_visuelle": "Pince à mâchoires longues et fines",
+  "nom_fichier_image": "pince-a-bec.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/pinces-cisaille-et-coupe-boulon/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "pince-a-bec"
+ },
+ {
+  "ref": "L1-078",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Tournevis",
+  "nom": "Tournevis plat",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "lame plate 6 mm, longueur 100 mm, manche plastique",
+  "synonymes_locaux": [
+   "tournevis",
+   "tournevis plat",
+   "tourne-vis"
+  ],
+  "requete_image": "tournevis plat 6mm manche plastique",
+  "description_visuelle": "Tournevis à bout plat",
+  "nom_fichier_image": "tournevis-plat.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/tournevis/",
+  "confiance": "moyenne",
+  "notes": "Tailles multiples non détaillées : séparer en produits si le stock diffère",
+  "propose_par_defaut": true,
+  "image": "tournevis-plat"
+ },
+ {
+  "ref": "L1-079",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Tournevis",
+  "nom": "Tournevis cruciforme",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "pointe PH2, longueur 100 mm, manche plastique",
+  "synonymes_locaux": [
+   "tournevis étoile",
+   "tournevis cruciforme",
+   "tournevis croix"
+  ],
+  "requete_image": "tournevis cruciforme PH2",
+  "description_visuelle": "Tournevis à bout en croix",
+  "nom_fichier_image": "tournevis-cruciforme.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/tournevis/",
+  "confiance": "moyenne",
+  "notes": "Tailles multiples non détaillées",
+  "propose_par_defaut": true,
+  "image": "tournevis-cruciforme"
+ },
+ {
+  "ref": "L1-080",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Clés",
+  "nom": "Clé à molette 250 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "250 mm, ouverture environ 30 mm, acier",
+  "synonymes_locaux": [
+   "clé à molette",
+   "clé anglaise",
+   "molette de 10"
+  ],
+  "requete_image": "clé à molette 250mm 10 pouces",
+  "description_visuelle": "Clé réglable avec molette de serrage",
+  "nom_fichier_image": "cle-a-molette-250.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/cles-douilles-et-cliquets/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "cle-a-molette-250"
+ },
+ {
+  "ref": "L1-081",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Clés",
+  "nom": "Clé à molette 300 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "300 mm, ouverture environ 35 mm, acier",
+  "synonymes_locaux": [
+   "clé à molette",
+   "clé anglaise",
+   "molette de 12"
+  ],
+  "requete_image": "clé à molette 300mm 12 pouces",
+  "description_visuelle": "Grande clé réglable avec molette",
+  "nom_fichier_image": "cle-a-molette-300.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/cles-douilles-et-cliquets/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "cle-a-molette-250"
+ },
+ {
+  "ref": "L1-082",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Clés",
+  "nom": "Jeu de clés mixtes",
+  "marque": "Sans marque",
+  "unite_base": "jeu",
+  "conditionnements": [
+   {
+    "nom": "jeu",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "jeu de 12 clés de 6 à 22 mm, acier chromé",
+  "synonymes_locaux": [
+   "jeu de clés",
+   "clés mixtes",
+   "clés plates"
+  ],
+  "requete_image": "jeu de clés mixtes 12 pièces",
+  "description_visuelle": "Série de clés à fourche et œil sur support",
+  "nom_fichier_image": "jeu-cles-mixtes.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/cles-douilles-et-cliquets/",
+  "confiance": "faible",
+  "notes": "À CONFIRMER : composition des jeux vendus localement. Unité « jeu » à signaler",
+  "propose_par_defaut": true,
+  "image": "jeu-cles-mixtes"
+ },
+ {
+  "ref": "L1-083",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Mesure",
+  "nom": "Mètre ruban 5 m",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "5 m, ruban acier, boîtier plastique",
+  "synonymes_locaux": [
+   "mètre",
+   "mètre ruban",
+   "décamètre"
+  ],
+  "requete_image": "mètre ruban 5m acier",
+  "description_visuelle": "Boîtier plastique avec ruban jaune gradué",
+  "nom_fichier_image": "metre-ruban-5m.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "metre-ruban-5m"
+ },
+ {
+  "ref": "L1-084",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Mesure",
+  "nom": "Mètre ruban 8 m",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "8 m, ruban acier, boîtier plastique",
+  "synonymes_locaux": [
+   "mètre",
+   "mètre ruban",
+   "décamètre"
+  ],
+  "requete_image": "mètre ruban 8m acier",
+  "description_visuelle": "Boîtier plastique avec ruban gradué",
+  "nom_fichier_image": "metre-ruban-8m.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "metre-ruban-8m"
+ },
+ {
+  "ref": "L1-085",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Frappe",
+  "nom": "Burin",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "acier, longueur 250 mm, tête plate",
+  "synonymes_locaux": [
+   "burin",
+   "burin de maçon",
+   "ciseau à froid"
+  ],
+  "requete_image": "burin plat 250mm acier",
+  "description_visuelle": "Barre d'acier à bout plat biseauté",
+  "nom_fichier_image": "burin.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "burin"
+ },
+ {
+  "ref": "L1-086",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Terrassement",
+  "nom": "Pelle",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "fer ronde ou carrée, avec manche bois",
+  "synonymes_locaux": [
+   "pelle",
+   "pelle de maçon",
+   "pelle ronde"
+  ],
+  "requete_image": "pelle ronde manche bois",
+  "description_visuelle": "Pelle à lame métallique et manche en bois",
+  "nom_fichier_image": "pelle.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "pelle"
+ },
+ {
+  "ref": "L1-087",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Terrassement",
+  "nom": "Pioche",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "tête acier environ 2,5 kg, avec manche bois",
+  "synonymes_locaux": [
+   "pioche",
+   "pic",
+   "pioche de terrassier"
+  ],
+  "requete_image": "pioche tête acier manche bois",
+  "description_visuelle": "Tête de pioche à deux pointes sur manche bois",
+  "nom_fichier_image": "pioche.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "pioche"
+ },
+ {
+  "ref": "L1-088",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Mesure",
+  "nom": "Fil à plomb",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "masse métallique, environ 300 g, avec cordon",
+  "synonymes_locaux": [
+   "fil à plomb",
+   "plomb de maçon",
+   "niveau à plomb"
+  ],
+  "requete_image": "fil à plomb maçon laiton 300g",
+  "description_visuelle": "Masse conique en métal au bout d'un fil",
+  "nom_fichier_image": "fil-a-plomb.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/outillage-macon/",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "fil-a-plomb"
+ },
+ {
+  "ref": "L1-089",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Mesure",
+  "nom": "Cordeau de maçon",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "rouleau",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "cordeau nylon, longueur environ 50 m",
+  "synonymes_locaux": [
+   "cordeau",
+   "ficelle de maçon",
+   "corde à tracer"
+  ],
+  "requete_image": "cordeau maçon nylon rouleau",
+  "description_visuelle": "Pelote de cordeau fluo",
+  "nom_fichier_image": "cordeau-macon.jpg",
+  "source": "https://bativel.com/categorie-produit/outillage/outillage-macon/",
+  "confiance": "faible",
+  "notes": "À CONFIRMER : longueur du rouleau, peut se vendre au mètre",
+  "propose_par_defaut": true,
+  "image": "cordeau-macon"
+ },
+ {
+  "ref": "L1-090",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Finition",
+  "nom": "Lime plate",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "200 mm, taille bâtarde",
+  "synonymes_locaux": [
+   "lime",
+   "lime à métaux",
+   "lime plate bâtarde"
+  ],
+  "requete_image": "lime plate 200mm bâtarde",
+  "description_visuelle": "Lime métallique plate à manche",
+  "nom_fichier_image": "lime-plate.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "lime-plate"
+ },
+ {
+  "ref": "L1-091",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Consommables",
+  "nom": "Disque à tronçonner Ø115",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø115 mm, épaisseur 1 mm, pour métal",
+  "synonymes_locaux": [
+   "disque à tronçonner",
+   "disque de coupe",
+   "disque à fer"
+  ],
+  "requete_image": "disque tronçonner métal 115mm 1mm",
+  "description_visuelle": "Disque fin abrasif pour meuleuse",
+  "nom_fichier_image": "disque-tronconner-115.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "disque-tronconner-115"
+ },
+ {
+  "ref": "L1-092",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Consommables",
+  "nom": "Disque à meuler Ø115",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø115 mm, épaisseur 6 mm, pour métal",
+  "synonymes_locaux": [
+   "disque à meuler",
+   "meule",
+   "disque épais"
+  ],
+  "requete_image": "disque à meuler métal 115mm 6mm",
+  "description_visuelle": "Disque abrasif épais pour meuleuse",
+  "nom_fichier_image": "disque-meuler-115.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": null
+ },
+ {
+  "ref": "L1-093",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Consommables",
+  "nom": "Foret à béton Ø8",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø8 mm, longueur 120 mm, pointe carbure",
+  "synonymes_locaux": [
+   "foret à béton",
+   "mèche à béton",
+   "foret maçonnerie"
+  ],
+  "requete_image": "foret béton 8mm pointe carbure",
+  "description_visuelle": "Foret spiralé avec bout carbure",
+  "nom_fichier_image": "foret-beton-8.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : queue cylindrique ou SDS",
+  "propose_par_defaut": true,
+  "image": "foret-beton-8"
+ },
+ {
+  "ref": "L1-094",
+  "categorie": "Outillage à main",
+  "sous_categorie": "Consommables",
+  "nom": "Foret à béton Ø10",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "Ø10 mm, longueur 120 mm, pointe carbure",
+  "synonymes_locaux": [
+   "foret à béton",
+   "mèche à béton",
+   "foret maçonnerie"
+  ],
+  "requete_image": "foret béton 10mm pointe carbure",
+  "description_visuelle": "Foret spiralé avec bout carbure",
+  "nom_fichier_image": "foret-beton-10.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : queue cylindrique ou SDS",
+  "propose_par_defaut": true,
+  "image": "foret-beton-8"
+ },
+ {
+  "ref": "L1-095",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Cadenas",
+  "nom": "Cadenas 40 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "corps 40 mm, anse acier, 2 clés",
+  "synonymes_locaux": [
+   "cadenas",
+   "cadenas de 40"
+  ],
+  "requete_image": "cadenas laiton 40mm anse acier",
+  "description_visuelle": "Cadenas à corps de laiton et anse métallique",
+  "nom_fichier_image": "cadenas-40.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "Aucune source camerounaise trouvée pour les marques",
+  "propose_par_defaut": true,
+  "image": "cadenas-40"
+ },
+ {
+  "ref": "L1-096",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Cadenas",
+  "nom": "Cadenas 50 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "corps 50 mm, anse acier, 2 clés",
+  "synonymes_locaux": [
+   "cadenas",
+   "cadenas de 50"
+  ],
+  "requete_image": "cadenas laiton 50mm anse acier",
+  "description_visuelle": "Cadenas à corps de laiton et anse métallique",
+  "nom_fichier_image": "cadenas-50.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "cadenas-40"
+ },
+ {
+  "ref": "L1-097",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Cadenas",
+  "nom": "Cadenas 60 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "corps 60 mm, anse acier, 3 clés",
+  "synonymes_locaux": [
+   "cadenas",
+   "cadenas de 60"
+  ],
+  "requete_image": "cadenas laiton 60mm anse acier",
+  "description_visuelle": "Gros cadenas à corps de laiton",
+  "nom_fichier_image": "cadenas-60.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "cadenas-40"
+ },
+ {
+  "ref": "L1-098",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Serrures",
+  "nom": "Serrure de porte à encastrer",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "boîtier acier, pêne dormant, avec clés",
+  "synonymes_locaux": [
+   "serrure",
+   "serrure de porte",
+   "serrure à encastrer"
+  ],
+  "requete_image": "serrure à encastrer porte boîtier acier",
+  "description_visuelle": "Boîtier métallique plat avec pêne",
+  "nom_fichier_image": "serrure-encastrer.jpg",
+  "source": "https://www.jumia.ci/chasse-serrures/",
+  "confiance": "faible",
+  "notes": "Source de Côte d'Ivoire : vendue en kit poignée + serrure + canon. À CONFIRMER : modèles et entraxes au Cameroun",
+  "propose_par_defaut": true,
+  "image": "serrure-encastrer"
+ },
+ {
+  "ref": "L1-099",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Serrures",
+  "nom": "Cylindre de serrure (barillet)",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "cylindre européen 60 mm, avec 3 clés",
+  "synonymes_locaux": [
+   "barillet",
+   "cylindre",
+   "canon de serrure"
+  ],
+  "requete_image": "cylindre barillet 60mm 3 clés",
+  "description_visuelle": "Cylindre métallique avec clés",
+  "nom_fichier_image": "cylindre-barillet.jpg",
+  "source": "https://www.jumia.ci/chasse-serrures/",
+  "confiance": "faible",
+  "notes": "À CONFIRMER : longueur courante (60 mm ?) et compatibilité locale",
+  "propose_par_defaut": true,
+  "image": "cylindre-barillet"
+ },
+ {
+  "ref": "L1-100",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Verrous",
+  "nom": "Verrou 100 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "longueur 100 mm, acier",
+  "synonymes_locaux": [
+   "verrou",
+   "targette",
+   "verrou de porte"
+  ],
+  "requete_image": "verrou porte 100mm acier",
+  "description_visuelle": "Verrou à glissière avec platine",
+  "nom_fichier_image": "verrou-100.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "verrou-100"
+ },
+ {
+  "ref": "L1-101",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Verrous",
+  "nom": "Verrou 150 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "longueur 150 mm, acier",
+  "synonymes_locaux": [
+   "verrou",
+   "targette",
+   "verrou de porte"
+  ],
+  "requete_image": "verrou porte 150mm acier",
+  "description_visuelle": "Verrou à glissière avec platine",
+  "nom_fichier_image": "verrou-150.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "verrou-100"
+ },
+ {
+  "ref": "L1-102",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Quincaillerie de porte",
+  "nom": "Paumelle 100 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "hauteur 100 mm, acier",
+  "synonymes_locaux": [
+   "paumelle",
+   "charnière",
+   "penture"
+  ],
+  "requete_image": "paumelle porte 100mm acier",
+  "description_visuelle": "Charnière en acier à deux ailes",
+  "nom_fichier_image": "paumelle-100.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : vendue à la pièce ou à la paire",
+  "propose_par_defaut": true,
+  "image": "paumelle-100"
+ },
+ {
+  "ref": "L1-103",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Quincaillerie de porte",
+  "nom": "Paumelle 140 mm",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "hauteur 140 mm, acier",
+  "synonymes_locaux": [
+   "paumelle",
+   "charnière",
+   "penture"
+  ],
+  "requete_image": "paumelle porte 140mm acier",
+  "description_visuelle": "Charnière en acier à deux ailes",
+  "nom_fichier_image": "paumelle-140.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "À CONFIRMER : vendue à la pièce ou à la paire",
+  "propose_par_defaut": true,
+  "image": "paumelle-100"
+ },
+ {
+  "ref": "L1-104",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Quincaillerie de porte",
+  "nom": "Poignée de porte",
+  "marque": "Sans marque",
+  "unite_base": "jeu",
+  "conditionnements": [
+   {
+    "nom": "jeu",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "jeu de deux béquilles sur plaque, métal",
+  "synonymes_locaux": [
+   "poignée",
+   "béquille",
+   "poignée de porte"
+  ],
+  "requete_image": "poignée de porte béquille plaque métal",
+  "description_visuelle": "Poignée à plaque fixée sur porte",
+  "nom_fichier_image": "poignee-de-porte.jpg",
+  "source": "https://www.jumia.ci/chasse-serrures/",
+  "confiance": "faible",
+  "notes": "Source de Côte d'Ivoire. À CONFIRMER : modèles courants. Unité « jeu » à signaler",
+  "propose_par_defaut": true,
+  "image": "poignee-de-porte"
+ },
+ {
+  "ref": "L1-105",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Chaînes",
+  "nom": "Chaîne acier",
+  "marque": "Sans marque",
+  "unite_base": "mètre",
+  "conditionnements": [
+   {
+    "nom": "mètre",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "maillons soudés, Ø6 mm courant",
+  "synonymes_locaux": [
+   "chaîne",
+   "chaîne de sécurité",
+   "chaîne de cadenas"
+  ],
+  "requete_image": "chaîne acier maillons soudés 6mm",
+  "description_visuelle": "Chaîne métallique à maillons ovales",
+  "nom_fichier_image": "chaine-acier.jpg",
+  "source": "connaissance générale",
+  "confiance": "faible",
+  "notes": "À CONFIRMER : diamètres vendus, à séparer en produits si stock distinct",
+  "propose_par_defaut": true,
+  "image": "chaine-acier"
+ },
+ {
+  "ref": "L1-106",
+  "categorie": "Serrurerie et sécurité",
+  "sous_categorie": "Quincaillerie de porte",
+  "nom": "Moraillon",
+  "marque": "Sans marque",
+  "unite_base": "pièce",
+  "conditionnements": [
+   {
+    "nom": "pièce",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "longueur 100 à 150 mm, acier galvanisé",
+  "synonymes_locaux": [
+   "moraillon",
+   "fermeture",
+   "crochet de cadenas"
+  ],
+  "requete_image": "moraillon acier galvanisé cadenas",
+  "description_visuelle": "Fermoir métallique à deux plaques",
+  "nom_fichier_image": "moraillon.jpg",
+  "source": "connaissance générale",
+  "confiance": "moyenne",
+  "notes": "",
+  "propose_par_defaut": true,
+  "image": "moraillon"
+ },
+ {
+  "ref": "L1-107",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 42,5",
+  "marque": "Mira-Co",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, CEM II/B-P 42,5 R",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Mira",
+   "Mira-Co"
+  ],
+  "requete_image": "ciment Mira-Co CEM II/B-P 42.5 sac 50 kg",
+  "description_visuelle": "Sac de 50 kg Mira-Co",
+  "nom_fichier_image": "ciment-cpj-42-5-mira-co.jpg",
+  "source": "https://bativel.com/produit/ciment-mira-co-cem-ii-b-p-42-5-50kg/",
+  "confiance": "haute",
+  "notes": "Ajouté après recherche, présent sur Bativel à Douala",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-42-5-mira-co"
+ },
+ {
+  "ref": "L1-108",
+  "categorie": "Ciment et liants",
+  "sous_categorie": "Ciment",
+  "nom": "Ciment CPJ 32,5",
+  "marque": "Mira-Co",
+  "unite_base": "kg",
+  "conditionnements": [
+   {
+    "nom": "sac de 50 kg",
+    "facteur": 50.0
+   },
+   {
+    "nom": "kg",
+    "facteur": 1.0
+   }
+  ],
+  "caracteristiques": "sac 50 kg, CEM II/B-P 32,5 R",
+  "synonymes_locaux": [
+   "ciment",
+   "sac de ciment",
+   "Mira",
+   "Mira-Co"
+  ],
+  "requete_image": "ciment Mira-Co CEM II/B-P 32.5R sac 50 kg",
+  "description_visuelle": "Sac de 50 kg Mira-Co",
+  "nom_fichier_image": "ciment-cpj-32-5-mira-co.jpg",
+  "source": "https://bativel.com/produit/ciment-mira-co-cem-ii-b-p-32-5r-50kg/",
+  "confiance": "haute",
+  "notes": "Ajouté après recherche, présent sur Bativel à Douala",
+  "propose_par_defaut": true,
+  "image": "ciment-cpj-32-5-mira-co"
+ }
+]

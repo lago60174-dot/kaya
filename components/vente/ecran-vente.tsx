@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react";
+import { Plus, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState, useTransition } from "react";
 import { formatFcfa } from "@/lib/format";
@@ -36,6 +36,11 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
   const router = useRouter();
   const [q, setQ] = useState("");
   const [produits, setProduits] = useState(produitsInitiaux);
+  const [categorie, setCategorie] = useState<string | null>(null);
+  const categories = [
+    ...new Set(produitsInitiaux.map((p) => p.categorie).filter((c): c is string => !!c)),
+  ];
+  const visibles = categorie ? produits.filter((p) => p.categorie === categorie) : produits;
   const [, demarrer] = useTransition();
   const [lignes, setLignes] = useState<LignePanier[]>([]);
   const [remiseTexte, setRemiseTexte] = useState("");
@@ -144,39 +149,72 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
               : "Aucun produit à vendre. Le propriétaire doit d'abord ajouter des produits."}
           </p>
         ) : (
+          <>
+          {categories.length > 0 && (
+            <div role="group" aria-label="Catégorie" className="-mx-1 mb-3 flex gap-2 overflow-x-auto px-1 pb-1">
+              {[null, ...categories].map((c) => (
+                <button
+                  key={c ?? "tout"}
+                  type="button"
+                  aria-pressed={categorie === c}
+                  onClick={() => setCategorie(c)}
+                  className={`min-h-11 shrink-0 rounded-full px-4 text-sm font-bold ${categorie === c ? "bg-orange-500 text-white" : "border-border border bg-white"}`}
+                >
+                  {c ?? "Tout"}
+                </button>
+              ))}
+            </div>
+          )}
           <ul className="grid grid-cols-2 gap-3">
-            {produits.map((p) => (
+            {visibles.map((p) => (
               <li
                 key={p.id}
                 className="border-border flex flex-col gap-2 rounded-2xl border bg-white p-3 shadow-sm"
               >
-                <span
-                  aria-hidden="true"
-                  className="bg-brand-soft text-brand-strong grid h-16 place-items-center rounded-xl text-2xl font-extrabold"
-                >
-                  {p.nom.charAt(0)}
-                </span>
+                {p.vignette ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={`/img/${p.vignette}`}
+                    alt=""
+                    width={160}
+                    height={112}
+                    loading="lazy"
+                    className="h-28 w-full rounded-xl bg-[#faf5f0] object-contain"
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="bg-brand-soft text-brand-strong grid h-28 place-items-center rounded-xl text-3xl font-extrabold"
+                  >
+                    {p.nom.charAt(0)}
+                  </span>
+                )}
                 <p className="font-bold">{p.nom}</p>
                 <p className="text-muted text-sm">
                   En stock : {formaterStock(p.stock, p.uniteBase, p.unites)}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <ul className="flex flex-col gap-2">
                   {p.unites.map((u) => (
-                    <button
-                      key={u.id}
-                      type="button"
-                      onClick={() =>
-                        setLignes((l) => ajouterAuPanier(l, p, u.id, cle))
-                      }
-                      className="bg-brand-strong min-h-11 rounded-full px-3 text-sm font-bold text-white"
-                    >
-                      + {u.nom} · {formatFcfa(u.prixVente)}
-                    </button>
+                    <li key={u.id} className="flex items-center justify-between gap-2">
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm">{u.nom}</span>
+                        <b className="block">{formatFcfa(u.prixVente)}</b>
+                      </span>
+                      <button
+                        type="button"
+                        aria-label={`Ajouter ${u.nom} au panier`}
+                        onClick={() => setLignes((l) => ajouterAuPanier(l, p, u.id, cle))}
+                        className="bg-brand-strong grid size-11 shrink-0 place-items-center rounded-full text-white"
+                      >
+                        <Plus aria-hidden="true" size={22} />
+                      </button>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </li>
             ))}
           </ul>
+          </>
         )}
       </section>
 

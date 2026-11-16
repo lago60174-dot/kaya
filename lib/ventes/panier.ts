@@ -11,6 +11,9 @@ export interface ProduitVente {
   uniteBase: string;
   stock: number;
   unites: UniteVente[];
+  /** Clé de la vignette et nom de la catégorie, pour l'affichage seulement. */
+  vignette?: string | null;
+  categorie?: string | null;
 }
 
 export interface LignePanier {

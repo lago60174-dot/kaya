@@ -7,13 +7,16 @@ import { Champ } from "./champ";
 
 export function FormulaireInscription({
   codeInitial,
+  plan,
 }: {
   codeInitial?: string;
+  plan?: string;
 }) {
   const [etat, action] = useActionState<EtatFormulaire, FormData>(inscrire, {});
   const c = etat.champs;
   return (
     <form action={action} className="flex flex-col gap-4">
+      {plan && <input type="hidden" name="plan" value={plan} />}
       <Champ
         nom="nomBoutique"
         libelle="Nom de votre boutique"

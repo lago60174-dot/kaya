@@ -3,7 +3,7 @@ import { Signe } from "./logo";
 
 const LIENS = [
   { href: "/#fonctionnalites", libelle: "Fonctionnalités" },
-  { href: "/#tarifs", libelle: "Tarifs" },
+  { href: "/tarifs", libelle: "Tarifs" },
   { href: "/#faq", libelle: "FAQ" },
   { href: "/partenaire", libelle: "Devenir partenaire" },
   { href: "/mentions-legales", libelle: "Mentions légales" },

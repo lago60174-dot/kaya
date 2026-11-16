@@ -16,7 +16,7 @@ export async function lireRecu(
   const { data: v } = await supabase
     .from("ventes")
     .select(
-      "id, numero_recu, jeton_public, date, statut, sous_total, remise, total, clients(nom, telephone), boutiques(nom, adresse, telephone, mention_legale, logo_cle)",
+      "id, numero_recu, jeton_public, vendeur_id, date, statut, sous_total, remise, total, clients(nom, telephone), boutiques(nom, adresse, telephone, mention_legale, logo_cle, ville, email, rccm, niu, signataire, signature_cle, cachet_cle)",
     )
     .eq("id", venteId)
     .maybeSingle();
@@ -54,7 +54,19 @@ export async function lireRecu(
     telephone: string | null;
     mention_legale: string | null;
     logo_cle: string | null;
+    ville: string | null;
+    email: string | null;
+    rccm: string | null;
+    niu: string | null;
+    signataire: string | null;
+    signature_cle: string | null;
+    cachet_cle: string | null;
   };
+  const { data: vendeurLigne } = await supabase
+    .from("membres")
+    .select("nom")
+    .eq("utilisateur_id", v.vendeur_id)
+    .maybeSingle();
   const c = v.clients as unknown as {
     nom: string;
     telephone: string | null;
@@ -74,7 +86,15 @@ export async function lireRecu(
       telephone: b.telephone,
       mentionLegale: b.mention_legale,
       logoCle: b.logo_cle,
+      ville: b.ville,
+      email: b.email,
+      rccm: b.rccm,
+      niu: b.niu,
+      signataire: b.signataire,
+      signatureCle: b.signature_cle,
+      cachetCle: b.cachet_cle,
     },
+    vendeur: vendeurLigne?.nom ?? null,
     client: c,
     lignes: (lignes.data ?? []).map((l) => ({
       nom: l.nom_produit,

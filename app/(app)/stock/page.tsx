@@ -5,6 +5,7 @@ import { formatFcfa } from "@/lib/format";
 import { formaterStock } from "@/lib/stock/quantites";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
+import { urlImage } from "@/server/images/cles";
 import { listerProduits } from "@/server/stock/lecture";
 
 export const metadata = { title: "Stock · Kaya" };
@@ -59,13 +60,21 @@ export default async function PageStock({
           </div>
         </div>
         {proprietaire && (
-          <Link
-            href="/stock/nouveau"
-            className="bg-brand-strong flex min-h-11 shrink-0 items-center gap-1 rounded-full px-4 text-sm font-semibold text-white"
-          >
-            <Plus aria-hidden="true" size={18} />
-            Nouveau produit
-          </Link>
+          <div className="flex shrink-0 flex-wrap items-center gap-2">
+            <Link
+              href="/demarrage"
+              className="border-border flex min-h-11 items-center rounded-full border bg-white px-4 text-sm font-semibold"
+            >
+              Catalogue modèle
+            </Link>
+            <Link
+              href="/stock/nouveau"
+              className="bg-brand-strong flex min-h-11 shrink-0 items-center gap-1 rounded-full px-4 text-sm font-semibold text-white"
+            >
+              <Plus aria-hidden="true" size={18} />
+              Nouveau produit
+            </Link>
+          </div>
         )}
       </div>
       <FiltresStock
@@ -77,7 +86,7 @@ export default async function PageStock({
           {filtre
             ? "Aucun produit ne correspond à votre recherche."
             : proprietaire
-              ? "Aucun produit. Ajoutez votre premier article."
+              ? "Aucun produit. Ajoutez votre premier article ou importez le catalogue modèle."
               : "Aucun produit pour le moment."}
         </p>
       ) : (
@@ -92,7 +101,7 @@ export default async function PageStock({
                   // Vignette WebP de 200 px, chargée à la demande.
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={`/img/${l.vignette_cle}`}
+                    src={urlImage(l.vignette_cle)}
                     alt=""
                     width={64}
                     height={64}
@@ -110,14 +119,7 @@ export default async function PageStock({
                 <span className="flex min-w-0 flex-1 flex-col">
                   <span className="truncate font-medium">{l.nom_affiche}</span>
                   <span className="text-muted text-sm">
-                    {formaterStock(
-                      Number(l.stock),
-                      l.unite_base,
-                      l.unites.map((u) => ({
-                        nom: u.nom,
-                        facteur: Number(u.facteur),
-                      })),
-                    )}
+                    {l.categorie_nom ?? l.unite_base}
                   </span>
                   <span className="text-sm font-bold">
                     {l.unites
@@ -132,6 +134,16 @@ export default async function PageStock({
                   className={`shrink-0 rounded-xl px-3 py-2 text-center text-sm font-bold ${l.stock_bas ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}
                 >
                   {l.stock_bas ? "Stock faible" : "Stock OK"}
+                  <span className="block text-xs font-semibold">
+                    {formaterStock(
+                      Number(l.stock),
+                      l.unite_base,
+                      l.unites.map((u) => ({
+                        nom: u.nom,
+                        facteur: Number(u.facteur),
+                      })),
+                    )}
+                  </span>
                 </span>
               </Link>
             </li>

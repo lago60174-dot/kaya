@@ -86,3 +86,38 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
+// Notifications push : alertes envoyées par le serveur (stock bas, écart de caisse...). Le texte vient du serveur.
+self.addEventListener("push", (event) => {
+  let d = {};
+  try {
+    d = event.data ? event.data.json() : {};
+  } catch {
+    d = {};
+  }
+  event.waitUntil(
+    self.registration.showNotification(d.titre || "Kaya", {
+      body: d.corps || "",
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-192.png",
+      tag: d.tag,
+      data: { lien: d.lien || "/notifications" },
+    }),
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const lien = (event.notification.data && event.notification.data.lien) || "/notifications";
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((fenetres) => {
+      for (const f of fenetres) {
+        if ("focus" in f) {
+          if ("navigate" in f) f.navigate(lien);
+          return f.focus();
+        }
+      }
+      return self.clients.openWindow(lien);
+    }),
+  );
+});

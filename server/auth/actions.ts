@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import type { z } from "zod";
 import { COOKIE_PARRAINAGE, normaliserCode } from "@/lib/auth/parrainage";
 import {
@@ -12,6 +13,10 @@ import {
 import { accueilPour } from "@/lib/permissions";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { supabaseServeur } from "@/lib/supabase/server";
+import { emailBienvenue } from "@/server/email/modeles";
+import { emailConfigure, envoyerEmail } from "@/server/email/resend";
+import { origine } from "@/server/origine";
+import { fabriquerLienEmail } from "@/server/email/liens";
 import { chargerProfil } from "./profil";
 import { exigerRole } from "./session";
 
@@ -82,7 +87,31 @@ export async function inscrire(
           : ERREUR_GENERIQUE,
     };
   }
-  redirect("/patron");
+  // Formule choisie sur la page des tarifs : choix explicite, elle s'active au premier paiement. Sans choix (ou si la
+  // formule n'existe plus), la boutique reste verrouillée sur /choisir-plan : aucune formule n'est donnée par défaut.
+  let formuleChoisie = false;
+  if (d.plan) {
+    const { error } = await supabase.rpc("choisir_plan", { p_plan: d.plan });
+    formuleChoisie = !error;
+  }
+  // Bienvenue + lien de confirmation : envoyés après la réponse, un échec d'email ne gêne jamais l'inscription.
+  if (emailConfigure()) {
+    const lienApp = `${await origine()}/patron`;
+    const email = d.email;
+    const nomBoutique = d.nomBoutique;
+    after(async () => {
+      const lienConfirmation = await fabriquerLienEmail(
+        email,
+        "magiclink",
+        "/patron",
+      ).catch(() => null);
+      await envoyerEmail(
+        emailBienvenue({ a: email, nomBoutique, lienApp, lienConfirmation }),
+      );
+    });
+  }
+  // Onboarding : 1) choisir sa formule (payer plus tard est possible), 2) remplir le stock depuis le catalogue modèle.
+  redirect(formuleChoisie ? "/demarrage" : "/choisir-plan");
 }
 
 export async function connecter(

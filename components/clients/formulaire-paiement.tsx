@@ -1,5 +1,6 @@
 "use client";
 
+import { Banknote, Check, RefreshCw, Smartphone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { repartirFifo, type CreanceOuverte } from "@/lib/clients/credit";
@@ -57,10 +58,13 @@ export function FormulairePaiement({ clientId, creances, dette }: Props) {
   return (
     <section
       id="paiement"
-      aria-label="Encaisser un paiement"
-      className="border-border flex max-w-md flex-col gap-3 rounded-lg border p-3"
+      aria-label="Enregistrer un remboursement"
+      className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm"
     >
-      <h2 className="text-lg font-semibold">Encaisser un paiement</h2>
+      <h2 className="flex items-center gap-2 text-lg font-bold">
+        <RefreshCw aria-hidden="true" size={22} className="text-blue-600" />
+        Enregistrer un remboursement
+      </h2>
       <div className="flex flex-col gap-1">
         <label htmlFor="montant-paiement" className="text-sm font-medium">
           Montant payé (FCFA)
@@ -72,7 +76,7 @@ export function FormulairePaiement({ clientId, creances, dette }: Props) {
             value={texte}
             onChange={(e) => setTexte(e.target.value)}
             placeholder="0"
-            className="border-border min-h-11 w-40 rounded-lg border bg-white px-3 text-lg"
+            className="border-border min-h-12 w-full max-w-xs rounded-xl border bg-white px-3 text-lg"
           />
           <button
             type="button"
@@ -83,24 +87,32 @@ export function FormulairePaiement({ clientId, creances, dette }: Props) {
           </button>
         </div>
       </div>
-      <fieldset className="flex flex-wrap gap-2">
-        <legend className="mb-1 text-sm font-medium">Payé par</legend>
-        {MODES_PAIEMENT.map((m) => (
-          <label
-            key={m.code}
-            className={`flex min-h-11 items-center gap-2 rounded-lg border px-3 text-sm ${mode === m.code ? "border-brand-strong bg-brand-soft font-semibold" : "border-border"}`}
-          >
-            <input
-              type="radio"
-              name="mode"
-              value={m.code}
-              checked={mode === m.code}
-              onChange={() => setMode(m.code)}
-              className="size-4"
-            />
-            {m.libelle}
-          </label>
-        ))}
+      <fieldset className="flex flex-col gap-2">
+        <legend className="mb-1 text-sm font-medium">Mode de paiement</legend>
+        <div className="flex gap-2">
+          {MODES_PAIEMENT.map((m) => {
+            const actif = mode === m.code;
+            const fond = m.code === "mtn_momo" ? "#ffcc00" : m.code === "orange_money" ? "#ff7900" : "#fff0e2";
+            return (
+              <button
+                key={m.code}
+                type="button"
+                aria-pressed={actif}
+                onClick={() => setMode(m.code)}
+                className={`flex min-h-16 w-24 flex-col items-center justify-center gap-1 rounded-xl border-2 text-xs font-bold ${actif ? "border-orange-500 bg-orange-50" : "border-border bg-white"}`}
+              >
+                <span
+                  aria-hidden="true"
+                  className="grid size-8 place-items-center rounded-lg"
+                  style={{ background: fond, color: m.code === "orange_money" ? "#fff" : "#7a3b00" }}
+                >
+                  {m.code === "especes" ? <Banknote size={20} /> : <Smartphone size={20} />}
+                </span>
+                {m.libelle}
+              </button>
+            );
+          })}
+        </div>
       </fieldset>
 
       {montant !== null && apercu?.ok && (
@@ -140,8 +152,9 @@ export function FormulairePaiement({ clientId, creances, dette }: Props) {
         type="button"
         onClick={valider}
         disabled={enCours || !apercu?.ok}
-        className="bg-brand-strong min-h-12 rounded-lg px-4 text-lg font-bold text-white disabled:opacity-50"
+        className="bg-brand-strong flex min-h-12 items-center justify-center gap-2 rounded-xl px-4 text-lg font-bold text-white disabled:opacity-50"
       >
+        <Check aria-hidden="true" size={22} />
         {enCours ? "Enregistrement…" : "Enregistrer le paiement"}
       </button>
     </section>

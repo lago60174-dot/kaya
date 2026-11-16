@@ -1,5 +1,6 @@
 "use client";
 
+import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { formatFcfa, formatQuantite } from "@/lib/format";
 import { lireQuantite } from "@/lib/stock/quantites";
@@ -10,7 +11,7 @@ import {
 } from "@/lib/ventes/panier";
 
 const rond =
-  "grid size-11 place-items-center rounded-lg border border-border text-xl";
+  "grid size-11 place-items-center rounded-full border border-orange-200 bg-orange-50 text-xl font-bold text-orange-700";
 
 interface Props {
   ligne: LignePanier;
@@ -30,16 +31,32 @@ export function LigneDuPanier({
   const unite = uniteDeLigne(ligne);
   const invalide = saisie !== null && lireQuantite(saisie) === null;
   return (
-    <li className="border-border flex flex-col gap-2 rounded-lg border p-3">
+    <li className="border-border flex flex-col gap-2 rounded-2xl border bg-white p-3 shadow-sm">
       <div className="flex items-start justify-between gap-2">
-        <p className="font-medium">{ligne.produit.nom}</p>
+        <div className="flex min-w-0 items-center gap-3">
+          {ligne.produit.vignette ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={`/img/${ligne.produit.vignette}`}
+              alt=""
+              width={56}
+              height={56}
+              className="size-14 shrink-0 rounded-xl bg-[#faf5f0] object-contain"
+            />
+          ) : (
+            <span aria-hidden="true" className="bg-brand-soft text-brand-strong grid size-14 shrink-0 place-items-center rounded-xl text-xl font-extrabold">
+              {ligne.produit.nom.charAt(0)}
+            </span>
+          )}
+          <p className="font-bold">{ligne.produit.nom}</p>
+        </div>
         <button
           type="button"
           onClick={onRetirer}
           aria-label={`Retirer ${ligne.produit.nom}`}
           className={rond}
         >
-          ✕
+          <Trash2 aria-hidden="true" size={20} />
         </button>
       </div>
       <div className="flex flex-wrap items-center gap-2">
@@ -95,7 +112,7 @@ export function LigneDuPanier({
         >
           +
         </button>
-        <span className="ml-auto font-semibold">
+        <span className="ml-auto text-lg font-extrabold">
           {formatFcfa(totalLigne(ligne))}
         </span>
       </div>

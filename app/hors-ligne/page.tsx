@@ -13,6 +13,8 @@ export default function HorsLigne() {
         Kaya a besoin d&apos;internet pour afficher votre boutique. Vérifiez
         votre réseau puis réessayez : vos données sont en sécurité.
       </p>
+      {/* Rechargement complet voulu : un <Link> ne referait pas la requête réseau. */}
+      {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
       <a
         href="/"
         className="bg-brand-strong flex min-h-11 items-center rounded-xl px-6 font-bold text-white"

@@ -7,6 +7,8 @@ export interface LigneProduitListe {
   unite_base: string;
   stock: number | string;
   actif: boolean;
+  vignette_cle?: string | null;
+  categorie_nom?: string | null;
   unites: {
     id: string;
     nom: string;
@@ -24,6 +26,8 @@ export function versProduitsVente(lignes: LigneProduitListe[]): ProduitVente[] {
       nom: l.nom_affiche,
       uniteBase: l.unite_base,
       stock: Number(l.stock),
+      vignette: l.vignette_cle ?? null,
+      categorie: l.categorie_nom ?? null,
       unites: l.unites.map((u) => ({
         id: u.id,
         nom: u.nom,

@@ -1,5 +1,6 @@
-import { BarChart3 } from "lucide-react";
+import { ChartColumn } from "lucide-react";
 import Link from "next/link";
+import { Beigne } from "@/components/caisse/beigne";
 import { CourbeVentes } from "@/components/patron/courbe-ventes";
 import { formatFcfa, formatQuantite } from "@/lib/format";
 import { supabaseServeur } from "@/lib/supabase/server";
@@ -35,7 +36,7 @@ export default async function PageRapports({ searchParams }: { searchParams: Pro
     <div className="flex max-w-3xl flex-col gap-5">
       <div className="flex items-center gap-3">
         <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
-          <BarChart3 aria-hidden="true" size={26} />
+          <ChartColumn aria-hidden="true" size={26} />
         </span>
         <h1 className="text-xl font-bold">Rapports &amp; Statistiques</h1>
       </div>
@@ -53,7 +54,7 @@ export default async function PageRapports({ searchParams }: { searchParams: Pro
         ))}
       </nav>
 
-      <section aria-label="Chiffres de la période" className="grid grid-cols-3 gap-3 text-center">
+      <section aria-label="Chiffres de la période" className="grid grid-cols-2 gap-3 text-center lg:grid-cols-4">
         <p className="rounded-2xl p-3 text-white" style={{ background: "linear-gradient(180deg,#ff8b1a,#f26a0f)" }}>
           <span className="block text-xs">Ventes totales</span>
           <b className="block text-base font-extrabold break-words">{formatFcfa(r.total)}</b>
@@ -62,6 +63,12 @@ export default async function PageRapports({ searchParams }: { searchParams: Pro
           <span className="block text-xs">Nombre de ventes</span>
           <b className="block text-base font-extrabold">{r.nbVentes}</b>
         </p>
+        {r.benefice !== null && (
+          <p className="rounded-2xl p-3" style={{ background: "#fdeee3" }}>
+            <span className="block text-xs">Bénéfice estimé</span>
+            <b className="block text-base font-extrabold break-words">{formatFcfa(r.benefice)}</b>
+          </p>
+        )}
         <p className="rounded-2xl p-3" style={{ background: "#dff4e7" }}>
           <span className="block text-xs">Panier moyen</span>
           <b className="block text-base font-extrabold break-words">{formatFcfa(panier)}</b>
@@ -72,6 +79,19 @@ export default async function PageRapports({ searchParams }: { searchParams: Pro
         <h2 className="text-lg font-bold">Évolution des ventes</h2>
         <CourbeVentes points={r.serie} />
       </section>
+
+      {r.modes.length > 0 && (
+        <section aria-label="Ventes par mode de paiement" className={carte}>
+          <h2 className="text-lg font-bold">Ventes par mode de paiement</h2>
+          <Beigne
+            parts={r.modes.map((m) => ({
+              libelle: m.mode === "mtn_momo" ? "MTN MoMo" : m.mode === "orange_money" ? "Orange Money" : "Espèces",
+              montant: m.montant,
+              couleur: m.mode === "mtn_momo" ? "#3b82f6" : m.mode === "orange_money" ? "#f5a000" : "#f26a0f",
+            }))}
+          />
+        </section>
+      )}
 
       <section aria-label="Produits les plus vendus" className={carte}>
         <h2 className="text-lg font-bold">Produits les plus vendus</h2>

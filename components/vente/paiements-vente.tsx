@@ -1,14 +1,13 @@
 "use client";
 
+import { Banknote, Smartphone } from "lucide-react";
 import { formatFcfa } from "@/lib/format";
 import { lireMontant } from "@/lib/stock/quantites";
 import {
   MODES_PAIEMENT,
   type LignePaiement,
-  type ModePaiement,
 } from "@/lib/ventes/paiements";
 
-const select = "min-h-11 rounded-lg border border-border bg-white px-2";
 const bouton =
   "min-h-11 rounded-lg border border-border px-3 text-sm font-medium";
 
@@ -47,18 +46,30 @@ export function PaiementsVente({
         const dernierSansCredit = !credit && i === lignes.length - 1;
         return (
           <div key={i} className="flex flex-wrap items-center gap-2">
-            <select
-              aria-label="Mode de paiement"
-              value={l.mode}
-              onChange={(e) => maj(i, { mode: e.target.value as ModePaiement })}
-              className={select}
-            >
-              {MODES_PAIEMENT.map((m) => (
-                <option key={m.code} value={m.code}>
-                  {m.libelle}
-                </option>
-              ))}
-            </select>
+            <div role="group" aria-label="Mode de paiement" className="flex gap-2">
+              {MODES_PAIEMENT.map((m) => {
+                const actif = l.mode === m.code;
+                const fond = m.code === "mtn_momo" ? "#ffcc00" : m.code === "orange_money" ? "#ff7900" : "#fff0e2";
+                return (
+                  <button
+                    key={m.code}
+                    type="button"
+                    aria-pressed={actif}
+                    onClick={() => maj(i, { mode: m.code })}
+                    className={`flex min-h-14 w-[4.5rem] flex-col items-center justify-center gap-1 rounded-xl border-2 text-xs font-bold ${actif ? "border-orange-500 bg-orange-50" : "border-border bg-white"}`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="grid size-7 place-items-center rounded-lg"
+                      style={{ background: fond, color: m.code === "orange_money" ? "#fff" : "#7a3b00" }}
+                    >
+                      {m.code === "especes" ? <Banknote size={18} /> : <Smartphone size={18} />}
+                    </span>
+                    {m.code === "mtn_momo" ? "MTN MoMo" : m.code === "orange_money" ? "Orange Money" : "Espèces"}
+                  </button>
+                );
+              })}
+            </div>
             {dernierSansCredit ? (
               <span className="font-medium">
                 {lignes.length > 1

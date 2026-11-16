@@ -139,14 +139,50 @@ export async function envoyerImage(
   return reponse.cle;
 }
 
+export type TypePng = "logo" | "signature" | "cachet";
+
 /**
- * Logo : réduit à 300 px de large et encodé en PNG (le PDF ne lit pas le WebP), en gardant la transparence.
+ * Rend transparent le fond clair d'une photo de signature ou de cachet prise sur une feuille blanche.
+ * Le « blanc » est estimé sur la photo elle-même (éclairage inégal des téléphones) : seul l'encre reste.
+ */
+export function retirerFondClair(donnees: ImageData): void {
+  const px = donnees.data;
+  const histo = new Uint32Array(256);
+  for (let i = 0; i < px.length; i += 4) {
+    histo[Math.round(0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2])]++;
+  }
+  const total = px.length / 4;
+  let cumul = 0;
+  let fond = 255;
+  for (let l = 0; l < 256; l++) {
+    cumul += histo[l];
+    if (cumul >= total * 0.9) {
+      fond = l;
+      break;
+    }
+  }
+  fond = Math.max(fond, 120); // une photo très sombre ne doit pas tout effacer
+  const haut = fond * 0.93; // au-dessus : papier, transparent
+  const bas = fond * 0.62; // en dessous : encre pleine
+  for (let i = 0; i < px.length; i += 4) {
+    const lum = 0.299 * px[i] + 0.587 * px[i + 1] + 0.114 * px[i + 2];
+    px[i + 3] =
+      lum >= haut ? 0 : lum <= bas ? 255 : Math.round((255 * (haut - lum)) / (haut - bas));
+  }
+}
+
+/**
+ * Logo, signature ou cachet : réduit en PNG sur le téléphone (le PDF ne lit pas le WebP), transparence conservée.
+ * Pour une signature ou un cachet, le fond de la feuille est retiré : on peut simplement les photographier.
  * Le PNG n'a pas de réglage de qualité : on réduit la taille par paliers jusqu'à passer sous la limite.
  */
-export async function compresserLogo(fichier: File): Promise<Blob> {
+export async function compresserPng(
+  fichier: File,
+  type: TypePng,
+): Promise<Blob> {
   const verification = verifierFichierImage(fichier);
   if (!verification.ok) throw new Error(verification.message);
-  const { largeur: maxLargeur, octets } = LIMITES_IMAGE.logo;
+  const { largeur: maxLargeur, octets } = LIMITES_IMAGE[type];
   const bitmap = await ouvrirImage(fichier);
   try {
     for (const echelle of [1, 0.75, 0.55, 0.4, 0.28]) {
@@ -158,7 +194,13 @@ export async function compresserLogo(fichier: File): Promise<Blob> {
       const canvas = document.createElement("canvas");
       canvas.width = largeur;
       canvas.height = hauteur;
-      canvas.getContext("2d")?.drawImage(bitmap, 0, 0, largeur, hauteur);
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx?.drawImage(bitmap, 0, 0, largeur, hauteur);
+      if (ctx && type !== "logo") {
+        const donnees = ctx.getImageData(0, 0, largeur, hauteur);
+        retirerFondClair(donnees);
+        ctx.putImageData(donnees, 0, 0);
+      }
       const blob = await new Promise<Blob | null>((ok) =>
         canvas.toBlob(ok, "image/png"),
       );
@@ -168,6 +210,11 @@ export async function compresserLogo(fichier: File): Promise<Blob> {
     bitmap.close();
   }
   throw new Error(
-    "Ce logo est trop détaillé pour être allégé. Essayez une image plus simple.",
+    type === "logo"
+      ? "Ce logo est trop détaillé pour être allégé. Essayez une image plus simple."
+      : "Cette image est trop chargée. Photographiez-la bien à plat, sur une feuille blanche, avec une bonne lumière.",
   );
 }
+
+/** Logo : voir compresserPng. */
+export const compresserLogo = (fichier: File) => compresserPng(fichier, "logo");

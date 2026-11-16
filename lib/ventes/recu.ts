@@ -15,7 +15,17 @@ export interface RecuAffichable {
     mentionLegale: string | null;
     /** Clé R2 du logo (PNG), si la boutique en a un. */
     logoCle?: string | null;
+    /** Identité légale imprimée sur le reçu (crédibilité, litiges). */
+    ville?: string | null;
+    email?: string | null;
+    rccm?: string | null;
+    niu?: string | null;
+    signataire?: string | null;
+    signatureCle?: string | null;
+    cachetCle?: string | null;
   };
+  /** Nom du vendeur qui a servi le client. */
+  vendeur?: string | null;
   client: { nom: string; telephone: string | null } | null;
   lignes: {
     nom: string;
@@ -51,7 +61,15 @@ const publicSchema = z.object({
     telephone: z.string().nullable(),
     mention_legale: z.string().nullable(),
     logo_cle: z.string().nullable().optional(),
+    ville: z.string().nullable().optional(),
+    email: z.string().nullable().optional(),
+    rccm: z.string().nullable().optional(),
+    niu: z.string().nullable().optional(),
+    signataire: z.string().nullable().optional(),
+    signature_cle: z.string().nullable().optional(),
+    cachet_cle: z.string().nullable().optional(),
   }),
+  vendeur: z.string().nullable().optional(),
   client_nom: z.string().nullable(),
   lignes: z.array(
     z.object({
@@ -82,7 +100,15 @@ export function recuPublicDepuisJson(json: unknown): RecuAffichable {
       telephone: r.boutique.telephone,
       mentionLegale: r.boutique.mention_legale,
       logoCle: r.boutique.logo_cle ?? null,
+      ville: r.boutique.ville ?? null,
+      email: r.boutique.email ?? null,
+      rccm: r.boutique.rccm ?? null,
+      niu: r.boutique.niu ?? null,
+      signataire: r.boutique.signataire ?? null,
+      signatureCle: r.boutique.signature_cle ?? null,
+      cachetCle: r.boutique.cachet_cle ?? null,
     },
+    vendeur: r.vendeur ?? null,
     client: r.client_nom ? { nom: r.client_nom, telephone: null } : null,
     lignes: r.lignes.map((l) => ({
       nom: l.nom,

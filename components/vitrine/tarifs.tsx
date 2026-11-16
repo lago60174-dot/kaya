@@ -1,12 +1,69 @@
 import Link from "next/link";
 import { formatFcfa } from "@/lib/format";
 import type { Plan } from "@/lib/plans";
-import { lignesDuPlan } from "@/lib/vitrine/offre";
-import { boutonOrange } from "./boutons";
+import { lignesPlan } from "@/lib/vitrine/comparatif";
+import { boutonContour, boutonOrange } from "./boutons";
 
 const conteneur = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 
-/** Affiche uniquement les plans visibles reçus de la base. Aucun prix n'est écrit dans ce fichier. */
+/** Mention des fonctions annoncées mais pas encore livrées. */
+export function Bientot() {
+  return (
+    <span className="ml-2 inline-block rounded-full bg-[#fff0e2] px-2.5 py-0.5 align-middle text-xs font-bold text-[var(--kaya)]">
+      Bientôt disponible
+    </span>
+  );
+}
+
+/** Les plans reçus de la base, côte à côte. Aucun prix n'est écrit dans ce fichier. */
+export function CartesPlans({ plans }: { plans: Plan[] }) {
+  return (
+    <div
+      className={`grid gap-8 ${
+        plans.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "mx-auto max-w-lg"
+      }`}
+    >
+      {plans.map((plan, i) => (
+        <article
+          key={plan.code}
+          className={`flex flex-col gap-5 rounded-2xl border bg-white p-6 shadow-[0_12px_34px_rgba(42,34,25,0.08)] sm:p-8 ${
+            i === 1 && plans.length === 3 ? "border-[var(--kaya)] border-2" : "border-[#f3dcc3]"
+          }`}
+        >
+          <h3 className="text-2xl font-bold">{plan.nom}</h3>
+          <p>
+            <span className="text-5xl font-bold text-[var(--kaya)]">
+              {formatFcfa(plan.prixMensuel)}
+            </span>{" "}
+            <span className="text-lg font-bold">par mois</span>
+          </p>
+          <p className="text-terre">
+            Paiement par MTN Mobile Money ou Orange Money. Pas de prélèvement
+            automatique, pas d&apos;engagement.
+          </p>
+          <ul className="flex flex-col gap-2 border-t border-[#f3dcc3] pt-4">
+            <li>Stock, ventes, crédits clients et caisse</li>
+            <li>Reçus numérotés à partager sur WhatsApp</li>
+            <li>Tableau de bord et rapports depuis votre téléphone</li>
+            {lignesPlan(plan).map((l) => (
+              <li key={l.texte}>
+                {l.texte}
+                {l.bientot && <Bientot />}
+              </li>
+            ))}
+          </ul>
+          <Link
+            href={`/inscription?plan=${plan.code}`}
+            className={`${i === 1 && plans.length === 3 ? boutonOrange : boutonContour} mt-auto`}
+          >
+            Choisir {plan.nom}
+          </Link>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 export function Tarifs({
   plans,
   lienWhatsApp,
@@ -38,43 +95,19 @@ export function Tarifs({
             )}
           </p>
         ) : (
-          <div
-            className={`mt-10 grid gap-8 ${
-              plans.length > 1 ? "md:grid-cols-2 lg:grid-cols-3" : "mx-auto max-w-lg"
-            }`}
-          >
-            {plans.map((plan) => (
-              <article
-                key={plan.code}
-                className="flex flex-col gap-5 rounded-2xl border border-[#f3dcc3] bg-white p-6 shadow-[0_12px_34px_rgba(42,34,25,0.08)] sm:p-8"
+          <>
+            <div className="mt-10">
+              <CartesPlans plans={plans} />
+            </div>
+            <p className="mt-8 text-center">
+              <Link
+                href="/tarifs"
+                className="text-brand-strong font-bold underline underline-offset-4"
               >
-                <h3 className="text-2xl font-bold">
-                  {plan.nom}
-                </h3>
-                <p>
-                  <span className="text-5xl font-bold text-[var(--kaya)]">
-                    {formatFcfa(plan.prixMensuel)}
-                  </span>{" "}
-                  <span className="text-lg font-bold">par mois</span>
-                </p>
-                <p className="text-terre">
-                  Paiement par MTN Mobile Money ou Orange Money. Pas de
-                  prélèvement automatique, pas d&apos;engagement.
-                </p>
-                <ul className="flex flex-col gap-2 border-t border-[#f3dcc3] pt-4">
-                  <li>Stock, ventes, crédits clients et caisse</li>
-                  <li>Reçus numérotés à partager sur WhatsApp</li>
-                  <li>Suivi en direct depuis votre téléphone</li>
-                  {lignesDuPlan(plan).map((ligne) => (
-                    <li key={ligne}>{ligne}</li>
-                  ))}
-                </ul>
-                <Link href="/inscription" className={`${boutonOrange} mt-2`}>
-                  Créer ma boutique
-                </Link>
-              </article>
-            ))}
-          </div>
+                Voir le détail des tarifs et comparer les formules
+              </Link>
+            </p>
+          </>
         )}
       </div>
     </section>

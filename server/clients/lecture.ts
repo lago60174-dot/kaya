@@ -205,6 +205,13 @@ export interface PaiementCreditDetail extends PaiementRecu {
   boutiqueTelephone: string | null;
   mentionLegale: string | null;
   logoCle: string | null;
+  boutiqueVille: string | null;
+  boutiqueEmail: string | null;
+  rccm: string | null;
+  niu: string | null;
+  signataire: string | null;
+  signatureCle: string | null;
+  cachetCle: string | null;
 }
 
 /** Reçu d'un paiement de crédit : un numéro, éventuellement plusieurs ventes soldées ou entamées. */
@@ -230,7 +237,9 @@ export async function lirePaiementCredit(
       .maybeSingle(),
     supabase
       .from("boutiques")
-      .select("nom, adresse, telephone, mention_legale, logo_cle")
+      .select(
+        "nom, adresse, telephone, mention_legale, logo_cle, ville, email, rccm, niu, signataire, signature_cle, cachet_cle",
+      )
       .eq("id", boutiqueId)
       .maybeSingle(),
     supabase
@@ -253,6 +262,13 @@ export async function lirePaiementCredit(
     boutiqueTelephone: boutique.data?.telephone ?? null,
     mentionLegale: boutique.data?.mention_legale ?? null,
     logoCle: boutique.data?.logo_cle ?? null,
+    boutiqueVille: boutique.data?.ville ?? null,
+    boutiqueEmail: boutique.data?.email ?? null,
+    rccm: boutique.data?.rccm ?? null,
+    niu: boutique.data?.niu ?? null,
+    signataire: boutique.data?.signataire ?? null,
+    signatureCle: boutique.data?.signature_cle ?? null,
+    cachetCle: boutique.data?.cachet_cle ?? null,
     numero,
     date: lignes[0].date,
     client: client.data?.nom ?? "",

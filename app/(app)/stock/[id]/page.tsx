@@ -1,3 +1,4 @@
+import { ClipboardList, PackagePlus, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArchiverProduit } from "@/components/stock/archiver";
@@ -72,7 +73,8 @@ export default async function PageProduit({
           <p
             className={`w-fit rounded-full px-3 py-0.5 text-sm font-bold ${bas ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}
           >
-            {bas ? "Stock bas" : "Stock OK"}
+            {bas ? "Stock bas : " : "Stock : "}
+            {formaterStock(produit.stock, produit.unite_base, produit.unites)}
           </p>
           {(produit.marques?.nom || !produit.actif) && (
             <p className="text-muted text-sm">
@@ -103,21 +105,11 @@ export default async function PageProduit({
         </dl>
       </section>
 
-      <section
-        className="border-border flex flex-col gap-1 rounded-2xl border bg-white p-4 shadow-sm"
-        aria-label="Stock"
-      >
-        <p className="text-muted text-sm">Stock actuel</p>
-        <p className="text-xl font-semibold">
-          {formaterStock(produit.stock, produit.unite_base, produit.unites)}
+      {bas && (
+        <p className="text-danger rounded-2xl bg-orange-50 p-3 text-sm font-semibold">
+          Stock bas : alerte sous {formatQuantite(produit.seuil_alerte)} {produit.unite_base}.
         </p>
-        {bas && (
-          <p className="text-danger text-sm font-semibold">
-            Stock bas (alerte sous {formatQuantite(produit.seuil_alerte)}{" "}
-            {produit.unite_base})
-          </p>
-        )}
-      </section>
+      )}
 
       <section aria-label="Prix de vente" className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-sm">
         <h2 className="text-lg font-bold">Unités de vente</h2>
@@ -174,19 +166,30 @@ export default async function PageProduit({
               Même produit, autre marque
             </Link>
           </div>
-          <section
-            aria-label="Mouvements de stock"
-            className="flex flex-col gap-3"
-          >
-            <h2 className="text-lg font-semibold">Mouvements de stock</h2>
-            {(["entree", "perte", "inventaire"] as const).map((t) => (
-              <FormulaireMouvement
-                key={t}
-                type={t}
-                produitId={produit.id}
-                uniteBase={produit.unite_base}
-                unites={produit.unites.map((u) => ({ id: u.id, nom: u.nom }))}
-              />
+          <section aria-label="Mouvements de stock" className="flex flex-col gap-3">
+            {(
+              [
+                ["entree", "Entrée de stock", PackagePlus, "bg-gradient-to-r from-[#ff8a2a] to-[#f26a0f] text-white shadow-[0_10px_24px_rgba(242,106,15,0.3)]"],
+                ["perte", "Déclarer une perte", TriangleAlert, "border-2 border-red-400 bg-white text-red-600"],
+                ["inventaire", "Inventaire (comptage)", ClipboardList, "border-border border bg-white"],
+              ] as const
+            ).map(([t, libelle, Icone, classe]) => (
+              <details key={t} className="group">
+                <summary
+                  className={`flex min-h-14 cursor-pointer list-none items-center justify-center gap-3 rounded-xl px-4 text-lg font-bold [&::-webkit-details-marker]:hidden ${classe}`}
+                >
+                  <Icone aria-hidden="true" size={24} />
+                  {libelle}
+                </summary>
+                <div className="mt-3">
+                  <FormulaireMouvement
+                    type={t}
+                    produitId={produit.id}
+                    uniteBase={produit.unite_base}
+                    unites={produit.unites.map((u) => ({ id: u.id, nom: u.nom }))}
+                  />
+                </div>
+              </details>
             ))}
           </section>
         </>

@@ -47,6 +47,11 @@ export const inscriptionSchema = z.object({
   telephone,
   email,
   motDePasse,
+  plan: z
+    .string()
+    .regex(/^[a-z_]{2,30}$/)
+    .optional()
+    .catch(undefined),
   codeParrainage: z
     .string()
     .optional()

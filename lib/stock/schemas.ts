@@ -17,7 +17,8 @@ const montant = (message: string) =>
     .refine((v) => lireMontant(v) !== null, message)
     .transform((v) => lireMontant(v) as number);
 
-const CLE_IMAGE = /^[0-9a-f-]{36}\/[0-9a-f]{64}(-v)?\.webp$/;
+const CLE_IMAGE =
+  /^([0-9a-f-]{36}\/[0-9a-f]{64}|catalogue\/[a-z0-9-]+?)(-v)?\.webp$/;
 
 const uniteSchema = z.object({
   id: z.preprocess(vide, uuid.optional()),

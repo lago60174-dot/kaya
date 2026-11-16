@@ -3,6 +3,7 @@ import { urlSite } from "@/lib/vitrine/site";
 
 const PAGES = [
   { chemin: "/", priorite: 1 },
+  { chemin: "/tarifs", priorite: 0.9 },
   { chemin: "/inscription", priorite: 0.8 },
   { chemin: "/partenaire", priorite: 0.6 },
   { chemin: "/mentions-legales", priorite: 0.2 },

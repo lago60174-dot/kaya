@@ -12,6 +12,11 @@ export default function PageConnexion() {
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-6 px-6 py-12">
       <h1 className="text-brand-strong text-3xl font-bold">Connexion</h1>
       <FormulaireConnexion />
+      <p className="text-sm">
+        <Link href="/mot-de-passe-oublie" className="text-brand-strong font-semibold underline">
+          Mot de passe oublié ?
+        </Link>
+      </p>
       <p className="text-muted text-sm">
         Pas encore de compte ?{" "}
         <Link

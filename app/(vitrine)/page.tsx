@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Chiffres } from "@/components/vitrine/chiffres";
 import { Faq } from "@/components/vitrine/faq";
 import {
   AppelFinal,
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Accueil() {
-  const { plans } = await chargerOffrePublique();
+  const { plans, chiffres } = await chargerOffrePublique();
   const lienWhatsApp = lienContact();
   return (
     <main id="contenu">
@@ -64,6 +65,7 @@ export default async function Accueil() {
       <Pourquoi />
       <Application />
       <Temoignages />
+      <Chiffres chiffres={chiffres} />
       <Tarifs plans={plans} lienWhatsApp={lienWhatsApp} />
       <Faq plans={plans} lienWhatsApp={lienWhatsApp} />
       <AppelFinal />

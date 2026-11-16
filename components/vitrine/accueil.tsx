@@ -69,7 +69,7 @@ export function Hero({ plan }: { plan: Plan | undefined }) {
           </p>
           {plan && (
             <p className="mt-2 text-sm text-[var(--nuit)]">
-              {prixParMois(plan)}, à payer par MTN Mobile Money ou Orange Money.
+              À partir de {prixParMois(plan)}, à payer par MTN Mobile Money ou Orange Money.
             </p>
           )}
         </div>

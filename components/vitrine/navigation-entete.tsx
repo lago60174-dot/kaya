@@ -8,7 +8,7 @@ import { boutonContour, boutonOrange } from "./boutons";
 const LIENS = [
   ["/", "Accueil"],
   ["/#fonctionnalites", "Fonctionnalités"],
-  ["/#tarifs", "Tarifs"],
+  ["/tarifs", "Tarifs"],
   ["/#faq", "FAQ"],
 ];
 

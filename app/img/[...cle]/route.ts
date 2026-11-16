@@ -1,5 +1,5 @@
 import { MIME_IMAGE } from "@/lib/images/compression";
-import { typeDeCle } from "@/server/images/cles";
+import { estCleCatalogue, typeDeCle } from "@/server/images/cles";
 import { bucketImages } from "@/server/images/bucket";
 
 /** Sert une photo de produit ou un logo depuis R2, avec un cache long (le nom du fichier change si l'image change). */
@@ -17,7 +17,10 @@ export async function GET(
   return new Response(objet.body, {
     headers: {
       "Content-Type": MIME_IMAGE[type],
-      "Cache-Control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      // Photo de boutique : le nom change avec le contenu, cache d'un an. Photo du catalogue : le nom est fixe, une semaine.
+      "Cache-Control": estCleCatalogue(cle)
+        ? "public, max-age=604800, s-maxage=604800"
+        : "public, max-age=31536000, s-maxage=31536000, immutable",
       ETag: objet.httpEtag,
       "X-Content-Type-Options": "nosniff",
     },

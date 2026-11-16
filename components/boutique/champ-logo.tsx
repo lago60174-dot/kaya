@@ -1,15 +1,56 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { compresserLogo, envoyerImage } from "@/lib/images/navigateur";
+import {
+  compresserPng,
+  envoyerImage,
+  type TypePng,
+} from "@/lib/images/navigateur";
 import { demanderUrlEnvoiAction } from "@/server/stock/actions";
-import { definirLogoAction } from "@/server/boutique/actions";
+import { definirImageBoutiqueAction } from "@/server/boutique/actions";
 
 const bouton =
   "flex min-h-11 items-center justify-center rounded-lg border border-border px-4 text-base font-semibold";
 
-/** Choix du logo : réduit à 300 px en PNG sur le téléphone avant l'envoi (jamais de grosse image). */
-export function ChampLogo({ logoUrl }: { logoUrl: string | null }) {
+const TEXTES: Record<
+  TypePng,
+  { vide: string; ajouter: string; changer: string; retirer: string; alt: string }
+> = {
+  logo: {
+    vide: "Aucun logo. Le reçu affiche le nom de la boutique.",
+    ajouter: "Ajouter un logo",
+    changer: "Changer le logo",
+    retirer: "Retirer le logo",
+    alt: "Logo actuel",
+  },
+  signature: {
+    vide: "Aucune signature. Photographiez votre signature sur une feuille blanche.",
+    ajouter: "Photographier ma signature",
+    changer: "Changer la signature",
+    retirer: "Retirer la signature",
+    alt: "Signature actuelle",
+  },
+  cachet: {
+    vide: "Aucun cachet. Photographiez l'empreinte de votre cachet sur une feuille blanche.",
+    ajouter: "Photographier mon cachet",
+    changer: "Changer le cachet",
+    retirer: "Retirer le cachet",
+    alt: "Cachet actuel",
+  },
+};
+
+/**
+ * Logo, signature ou cachet : réduit en PNG sur le téléphone avant l'envoi (jamais de grosse image).
+ * Pour la signature et le cachet, le fond de la feuille est retiré : une simple photo suffit.
+ */
+export function ChampLogo({
+  type = "logo",
+  logoUrl,
+}: {
+  type?: TypePng;
+  logoUrl: string | null;
+}) {
+  const t = TEXTES[type];
   const [erreur, setErreur] = useState<string | null>(null);
   const [enCours, demarrer] = useTransition();
   const champ = useRef<HTMLInputElement>(null);
@@ -19,12 +60,12 @@ export function ChampLogo({ logoUrl }: { logoUrl: string | null }) {
     setErreur(null);
     demarrer(async () => {
       try {
-        const blob = await compresserLogo(fichier);
-        const cle = await envoyerImage(blob, "logo", demanderUrlEnvoiAction);
-        const r = await definirLogoAction(cle);
+        const blob = await compresserPng(fichier, type);
+        const cle = await envoyerImage(blob, type, demanderUrlEnvoiAction);
+        const r = await definirImageBoutiqueAction(type, cle);
         if (r.erreur) setErreur(r.erreur);
       } catch (e) {
-        setErreur(e instanceof Error ? e.message : "L'envoi du logo a échoué.");
+        setErreur(e instanceof Error ? e.message : "L'envoi de l'image a échoué.");
       } finally {
         if (champ.current) champ.current.value = "";
       }
@@ -34,7 +75,7 @@ export function ChampLogo({ logoUrl }: { logoUrl: string | null }) {
   function retirer() {
     setErreur(null);
     demarrer(async () => {
-      const r = await definirLogoAction(null);
+      const r = await definirImageBoutiqueAction(type, null);
       if (r.erreur) setErreur(r.erreur);
     });
   }
@@ -45,20 +86,14 @@ export function ChampLogo({ logoUrl }: { logoUrl: string | null }) {
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={logoUrl}
-          alt="Logo actuel"
-          className="max-h-20 max-w-48 object-contain"
+          alt={t.alt}
+          className="max-h-24 max-w-52 rounded border border-dashed border-border bg-white object-contain p-1"
         />
       ) : (
-        <p className="text-muted">
-          Aucun logo. Le reçu affiche le nom de la boutique.
-        </p>
+        <p className="text-muted">{t.vide}</p>
       )}
       <label className={`${bouton} cursor-pointer`}>
-        {enCours
-          ? "Envoi en cours…"
-          : logoUrl
-            ? "Changer le logo"
-            : "Ajouter un logo"}
+        {enCours ? "Envoi en cours…" : logoUrl ? t.changer : t.ajouter}
         <input
           ref={champ}
           type="file"
@@ -69,13 +104,8 @@ export function ChampLogo({ logoUrl }: { logoUrl: string | null }) {
         />
       </label>
       {logoUrl && (
-        <button
-          type="button"
-          disabled={enCours}
-          onClick={retirer}
-          className={bouton}
-        >
-          Retirer le logo
+        <button type="button" disabled={enCours} onClick={retirer} className={bouton}>
+          {t.retirer}
         </button>
       )}
       {erreur && (

@@ -74,10 +74,12 @@ export function construireTicket(
     texte(doc.boutique.adresse, { alignement: "centre" });
   if (doc.boutique.telephone)
     texte(`Tel. ${doc.boutique.telephone}`, { alignement: "centre" });
+  for (const ligne of doc.identite) texte(ligne, { alignement: "centre" });
   separateur();
   texte(doc.titre, { gras: true });
   texte(doc.date);
   if (doc.client) texte(`Client : ${doc.client}`);
+  if (doc.serviPar) texte(`Servi par : ${doc.serviPar}`);
   if (doc.precision) texte(doc.precision);
   if (doc.annule) {
     vide();
@@ -97,12 +99,18 @@ export function construireTicket(
       grand: t.niveau === "majeur",
     });
   }
+  if (doc.signature?.signataire) {
+    vide();
+    texte(`Signataire : ${doc.signature.signataire}`, { alignement: "centre" });
+  }
   if (doc.mentionLegale) {
     vide();
     texte(doc.mentionLegale, { alignement: "centre" });
   }
-  vide();
-  texte(doc.remerciement, { alignement: "centre" });
+  if (doc.remerciement) {
+    vide();
+    texte(doc.remerciement, { alignement: "centre" });
+  }
   return lignes;
 }
 

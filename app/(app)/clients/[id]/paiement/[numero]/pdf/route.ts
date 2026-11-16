@@ -2,7 +2,7 @@ import { decisionGarde } from "@/lib/permissions";
 import { documentDepuisPaiement } from "@/lib/print/document";
 import { genererDocumentPdf } from "@/lib/ventes/pdf";
 import { supabaseServeur } from "@/lib/supabase/server";
-import { lireLogoPdf } from "@/server/images/logo";
+import { lireImagesRecuPdf } from "@/server/images/logo";
 import { lireSession } from "@/server/auth/session";
 import { lirePaiementCredit } from "@/server/clients/lecture";
 
@@ -24,7 +24,7 @@ export async function GET(
   if (!p) return new Response("Introuvable", { status: 404 });
   const pdf = await genererDocumentPdf(
     documentDepuisPaiement(p, p.mentionLegale),
-    { date: p.date, logo: await lireLogoPdf(p.logoCle) },
+    { date: p.date, ...(await lireImagesRecuPdf(p)) },
   );
   return new Response(
     new Blob([pdf as BlobPart], { type: "application/pdf" }),

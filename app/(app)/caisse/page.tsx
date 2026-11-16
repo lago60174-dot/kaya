@@ -1,11 +1,12 @@
-import { Wallet } from "lucide-react";
+import { Banknote, Car, ChartColumn, Flag, Plus, Receipt, Wallet, Zap, type LucideIcon } from "lucide-react";
 import Link from "next/link";
+import { Beigne } from "@/components/caisse/beigne";
+import { SelecteurJour } from "@/components/caisse/selecteur-jour";
 import { AnnulerDepense } from "@/components/caisse/annuler-depense";
 import { FormulaireCloture } from "@/components/caisse/formulaire-cloture";
 import { FormulaireDepense } from "@/components/caisse/formulaire-depense";
 import { ValiderCloture } from "@/components/caisse/valider-cloture";
 import {
-  decalerJour,
   jourDemande,
   jourDouala,
   jugerEcart,
@@ -24,14 +25,9 @@ import {
 
 export const metadata = { title: "Caisse · Kaya" };
 
-const jourLong = (jour: string) =>
-  new Intl.DateTimeFormat("fr-FR", {
-    dateStyle: "full",
-    timeZone: "UTC",
-  }).format(new Date(`${jour}T12:00:00Z`));
-
-const lienJour =
-  "flex min-h-11 items-center rounded-lg border px-4 text-sm font-semibold";
+const ICONES: Record<string, LucideIcon> = { transport: Car, electricite: Zap, salaire: Banknote };
+const heure = (d: string) =>
+  new Intl.DateTimeFormat("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Douala" }).format(new Date(d));
 
 function Ligne({
   libelle,
@@ -149,39 +145,17 @@ export default async function PageCaisse({
 
   return (
     <div className="kaya-cash-page flex max-w-xl flex-col gap-6">
-      <header className="flex flex-col gap-2">
+      <header className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
             <Wallet aria-hidden="true" size={26} />
           </span>
           <div>
             <h1 className="text-xl font-bold">Caisse du jour</h1>
-            <p className="text-muted text-sm">{jourLong(jour)}</p>
+            <p className="text-muted text-sm">Suivez votre encaissement en temps réel</p>
           </div>
         </div>
-        <nav aria-label="Choisir le jour" className="flex flex-wrap gap-2">
-          <Link
-            href={`/caisse?date=${decalerJour(jour, -1)}`}
-            className={`${lienJour} border-border`}
-          >
-            ← {libelleJour(decalerJour(jour, -1), aujourdhui)}
-          </Link>
-          {!estAujourdhui && (
-            <>
-              <Link href="/caisse" className={`${lienJour} border-border`}>
-                Aujourd&apos;hui
-              </Link>
-              {decalerJour(jour, 1) !== aujourdhui && (
-                <Link
-                  href={`/caisse?date=${decalerJour(jour, 1)}`}
-                  className={`${lienJour} border-border`}
-                >
-                  {libelleJour(decalerJour(jour, 1), aujourdhui)} →
-                </Link>
-              )}
-            </>
-          )}
-        </nav>
+        <SelecteurJour jour={jour} max={aujourdhui} />
       </header>
 
       {aValider.length > 0 && (
@@ -207,7 +181,7 @@ export default async function PageCaisse({
         </section>
       )}
 
-      <section aria-label="Encaissements du jour" className="grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
+      <div role="group" aria-label="Encaissements du jour" className="grid grid-cols-2 gap-3 text-center sm:grid-cols-4">
         <p className="rounded-2xl p-3 text-white" style={{ background: "linear-gradient(180deg,#ff8b1a,#f26a0f)" }}>
           <span className="block text-sm">Ventes du jour</span>
           <b className="block text-lg font-extrabold">{formatFcfa(r.ventesTotal)}</b>
@@ -225,68 +199,68 @@ export default async function PageCaisse({
           <span className="block text-sm">Crédit</span>
           <b className="block text-lg font-extrabold">{formatFcfa(r.creditAccorde)}</b>
         </p>
-      </section>
+      </div>
 
-      <section
-        aria-label="Résumé du jour"
-        className="border-border flex flex-col gap-3 rounded-2xl border bg-white p-4 shadow-sm"
-      >
-        <dl className="flex flex-col gap-1">
-          <Ligne
-            libelle="Espèces encaissées"
-            valeur={formatFcfa(
-              r.encaissementsEspeces + r.remboursementsCreditEspeces,
-            )}
+      <div className="grid items-start gap-4 lg:grid-cols-[1.6fr_1fr]">
+        <section
+          aria-label="Résumé du jour"
+          className="flex flex-col gap-4 rounded-2xl border border-[#eee3da] bg-white p-4 shadow-sm"
+        >
+          <h2 className="flex items-center gap-2 text-lg font-bold">
+            <ChartColumn aria-hidden="true" size={22} className="text-orange-600" />
+            Détail des encaissements
+          </h2>
+          <Beigne
+            parts={[
+              { libelle: "Espèces", montant: r.encaissementsEspeces + r.remboursementsCreditEspeces, couleur: "#f26a0f" },
+              { libelle: "MTN MoMo", montant: mtn, couleur: "#3b82f6" },
+              { libelle: "Orange Money", montant: orange, couleur: "#f5a000" },
+              { libelle: "Crédit", montant: r.creditAccorde, couleur: "#22c55e" },
+            ]}
           />
-          <Ligne libelle="MTN MoMo" valeur={formatFcfa(mtn)} />
-          <Ligne libelle="Orange Money" valeur={formatFcfa(orange)} />
-          <Ligne
-            libelle="Vendu à crédit"
-            valeur={formatFcfa(r.creditAccorde)}
-          />
-          <Ligne libelle="Dépenses" valeur={formatFcfa(r.depensesTotal)} />
-        </dl>
-        <p className="text-muted text-xs">
-          Le Mobile Money et le crédit ne sont pas dans le tiroir-caisse : ils
-          sont suivis à part.
-        </p>
-      </section>
-
-      <section
-        aria-label="Espèces attendues"
-        className="bg-brand-soft flex flex-col gap-2 rounded-2xl p-4"
-      >
-        <p className="text-sm font-medium">Espèces attendues dans le tiroir</p>
-        <p className="text-3xl font-bold">{formatFcfa(r.especesAttendues)}</p>
-        <dl className="flex flex-col gap-1">
-          <Ligne
-            libelle="+ Ventes en espèces"
-            valeur={formatFcfa(r.encaissementsEspeces)}
-          />
-          <Ligne
-            libelle="+ Crédits remboursés en espèces"
-            valeur={formatFcfa(r.remboursementsCreditEspeces)}
-          />
-          <Ligne
-            libelle="− Dépenses payées en espèces"
-            valeur={formatFcfa(r.depensesEspeces)}
-          />
-          <Ligne
-            libelle="− Ventes annulées remboursées"
-            valeur={formatFcfa(r.avoirsEspeces)}
-          />
-        </dl>
-      </section>
-
-      {estAujourdhui &&
-        (caisse.cloture ? (
-          <p role="status" className="bg-brand-soft rounded-lg p-3 text-sm">
-            La caisse du jour est clôturée : une nouvelle dépense se saisit
-            demain.
+          <p className="text-sm">
+            Dépenses du jour : <b>{formatFcfa(r.depensesTotal)}</b>
           </p>
-        ) : (
-          <FormulaireDepense role={profil.role} />
-        ))}
+          <p className="text-muted text-xs">
+            Le Mobile Money et le crédit ne sont pas dans le tiroir-caisse : ils sont suivis à part.
+          </p>
+        </section>
+        <section
+          aria-label="Espèces attendues"
+          className="flex flex-col gap-2 rounded-2xl border border-[#ffd9b7] bg-[#fff1e4] p-4"
+        >
+          <p className="text-sm font-medium">Espèces attendues dans le tiroir</p>
+          <p className="text-3xl font-bold">{formatFcfa(r.especesAttendues)}</p>
+          <dl className="flex flex-col gap-1">
+            <Ligne
+              libelle="+ Ventes en espèces"
+              valeur={formatFcfa(r.encaissementsEspeces)}
+            />
+            <Ligne
+              libelle="+ Crédits remboursés en espèces"
+              valeur={formatFcfa(r.remboursementsCreditEspeces)}
+            />
+            <Ligne
+              libelle="− Dépenses payées en espèces"
+              valeur={formatFcfa(r.depensesEspeces)}
+            />
+            <Ligne
+              libelle="− Ventes annulées remboursées"
+              valeur={formatFcfa(r.avoirsEspeces)}
+            />
+          </dl>
+          {caisse.cloture && (
+            <p
+              className={`mt-1 rounded-xl p-3 text-sm font-bold ${jugerEcart(caisse.cloture.ecart, caisse.tolerance, formatFcfa).niveau === "alerte" ? "bg-red-100 text-red-700" : "bg-emerald-100 text-emerald-800"}`}
+            >
+              Écart : {formatFcfa(caisse.cloture.ecart)}
+              <span className="block font-medium">
+                {jugerEcart(caisse.cloture.ecart, caisse.tolerance, formatFcfa).niveau === "alerte" ? "À vérifier" : "Écart OK"}
+              </span>
+            </p>
+          )}
+        </section>
+      </div>
 
       <section aria-label="Dépenses du jour" className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold">Dépenses du jour</h2>
@@ -299,8 +273,16 @@ export default async function PageCaisse({
                 key={d.id}
                 className="border-border flex flex-col rounded-2xl border bg-white p-3 text-sm shadow-sm"
               >
-                <div className="flex items-baseline justify-between gap-3">
-                  <span className={d.annulee ? "text-muted line-through" : ""}>
+                <div className="flex items-center gap-3">
+                  {(() => {
+                    const Icone = ICONES[d.categorie] ?? Receipt;
+                    return (
+                      <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-xl bg-orange-100 text-orange-600">
+                        <Icone size={20} />
+                      </span>
+                    );
+                  })()}
+                  <span className={`flex-1 ${d.annulee ? "text-muted line-through" : ""}`}>
                     <span className="font-medium">
                       {libelleCategorie(d.categorie)}
                     </span>{" "}
@@ -308,7 +290,7 @@ export default async function PageCaisse({
                     {d.note ? ` · ${d.note}` : ""}
                     <br />
                     <span className="text-muted">
-                      {formatDateHeure(d.date)}
+                      {estAujourdhui ? heure(d.date) : formatDateHeure(d.date)}
                       {d.auteur ? ` · ${d.auteur}` : ""}
                     </span>
                   </span>
@@ -332,6 +314,40 @@ export default async function PageCaisse({
         )}
       </section>
 
+      {estAujourdhui && !caisse.cloture && (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <a
+            href="#depense"
+            className="flex min-h-14 items-center justify-center gap-2 rounded-xl border-2 border-orange-400 bg-white px-4 text-base font-bold text-orange-600"
+          >
+            <Plus aria-hidden="true" size={22} />
+            Ajouter une dépense
+          </a>
+          <a
+            href="#cloture"
+            className="flex min-h-14 items-center justify-center gap-2 rounded-xl px-4 text-base font-bold text-white shadow-[0_10px_24px_rgba(242,106,15,0.3)]"
+            style={{ background: "linear-gradient(110deg,#ff8b1a,#f26a0f)" }}
+          >
+            <Flag aria-hidden="true" size={22} />
+            Clôturer la caisse
+          </a>
+        </div>
+      )}
+
+      {estAujourdhui && (
+        <div id="depense">
+        {caisse.cloture ? (
+          <p role="status" className="bg-brand-soft rounded-lg p-3 text-sm">
+            La caisse du jour est clôturée : une nouvelle dépense se saisit
+            demain.
+          </p>
+        ) : (
+          <FormulaireDepense role={profil.role} />
+        )}
+        </div>
+      )}
+
+      <div id="cloture">
       {caisse.cloture ? (
         <ResultatCloture
           cloture={caisse.cloture}
@@ -348,6 +364,7 @@ export default async function PageCaisse({
           tolerance={caisse.tolerance}
         />
       )}
+      </div>
 
       {clotures.length > 0 && (
         <section

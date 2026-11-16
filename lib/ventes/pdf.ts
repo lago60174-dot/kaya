@@ -66,24 +66,32 @@ interface Operation {
   alignement?: Alignement;
   couleur?: [number, number, number];
   trait?: boolean;
-  image?: { objet: PDFImage; largeur: number; hauteur: number };
+  image?: { objet: PDFImage; largeur: number; hauteur: number; x?: number };
 }
 
 const GRIS: [number, number, number] = [0.4, 0.4, 0.4];
 const ROUGE: [number, number, number] = [0.72, 0.11, 0.11];
 
-/** Logo de la boutique, en PNG ou JPEG (pdf-lib ne lit pas le WebP). */
+/** Image PNG ou JPEG de la boutique (logo, signature, cachet) (pdf-lib ne lit pas le WebP). */
 export interface LogoPdf {
   octets: Uint8Array;
   format: "png" | "jpg";
 }
 
 const LOGO_MAX = { largeur: 150, hauteur: 56 };
+const MARQUE_MAX = { largeur: 118, hauteur: 52 };
+
+/** Images à poser sur le reçu. Une image illisible est ignorée : elle ne doit jamais empêcher le reçu. */
+export interface ImagesPdf {
+  logo?: LogoPdf | null;
+  signature?: LogoPdf | null;
+  cachet?: LogoPdf | null;
+}
 
 /** Reçu de vente en PDF. */
 export function genererRecuPdf(
   recu: RecuAffichable,
-  options: { logo?: LogoPdf | null } = {},
+  options: ImagesPdf = {},
 ): Promise<Uint8Array> {
   return genererDocumentPdf(documentDepuisVente(recu), {
     ...options,
@@ -97,7 +105,7 @@ export function genererRecuPdf(
  */
 export async function genererDocumentPdf(
   recu: DocumentRecu,
-  options: { logo?: LogoPdf | null; date?: string } = {},
+  options: ImagesPdf & { date?: string } = {},
 ): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   const normal = await doc.embedFont(StandardFonts.Helvetica);
@@ -178,10 +186,13 @@ export async function genererDocumentPdf(
       alignement: "centre",
       couleur: GRIS,
     });
+  for (const ligne of recu.identite)
+    texte(ligne, 8, { alignement: "centre", couleur: GRIS });
   trait();
   texte(recu.titre, 10.5, { gras: true });
   texte(recu.date, 9, { couleur: GRIS });
   if (recu.client) texte(`Client : ${recu.client}`, 9);
+  if (recu.serviPar) texte(`Servi par : ${recu.serviPar}`, 9, { couleur: GRIS });
   if (recu.precision) texte(recu.precision, 9);
   if (recu.annule) {
     espace(4);
@@ -190,7 +201,7 @@ export async function genererDocumentPdf(
   trait();
 
   for (const l of recu.lignes) {
-    deuxColonnes(l.designation, l.montant, 9.5, { gras: true });
+    deuxColonnes(l.designation, l.montant, 9.5);
     if (l.detail) texte(l.detail, 8, { couleur: GRIS });
     espace(3);
   }
@@ -204,12 +215,60 @@ export async function genererDocumentPdf(
       deuxColonnes(t.libelle, t.montant, 9, { couleur: GRIS });
     else deuxColonnes(t.libelle, t.montant, 9.5);
   }
+  if (recu.signature) {
+    const integrer = async (img: LogoPdf | null | undefined) => {
+      if (!img) return null;
+      try {
+        const objet =
+          img.format === "png"
+            ? await doc.embedPng(img.octets)
+            : await doc.embedJpg(img.octets);
+        const echelle = Math.min(
+          1,
+          MARQUE_MAX.largeur / objet.width,
+          MARQUE_MAX.hauteur / objet.height,
+        );
+        return { objet, largeur: objet.width * echelle, hauteur: objet.height * echelle };
+      } catch {
+        return null;
+      }
+    };
+    const [sig, cachet] = await Promise.all([
+      integrer(options.signature),
+      integrer(options.cachet),
+    ]);
+    if (sig || cachet || recu.signature.signataire) {
+      espace(10);
+      texte("Signature et cachet", 7.5, { couleur: GRIS });
+      const haut = Math.max(sig?.hauteur ?? 0, cachet?.hauteur ?? 0);
+      if (haut > 0) {
+        espace(2);
+        y += haut;
+        const colonne = UTILE / 2;
+        if (sig)
+          ops.push({
+            y,
+            image: { ...sig, x: MARGE + (colonne - sig.largeur) / 2 },
+          });
+        if (cachet)
+          ops.push({
+            y,
+            image: { ...cachet, x: MARGE + colonne + (colonne - cachet.largeur) / 2 },
+          });
+        y += 2;
+      }
+      if (recu.signature.signataire)
+        texte(recu.signature.signataire, 8.5, { gras: true, alignement: "centre" });
+    }
+  }
   if (recu.mentionLegale) {
     espace(8);
     texte(recu.mentionLegale, 7.5, { alignement: "centre", couleur: GRIS });
   }
-  espace(6);
-  texte(recu.remerciement, 9, { alignement: "centre" });
+  if (recu.remerciement) {
+    espace(6);
+    texte(recu.remerciement, 9, { alignement: "centre" });
+  }
 
   const hauteur = Math.max(160, y + MARGE);
   const page = doc.addPage([LARGEUR, hauteur]);
@@ -217,7 +276,7 @@ export async function genererDocumentPdf(
     const yPdf = hauteur - op.y;
     if (op.image) {
       page.drawImage(op.image.objet, {
-        x: (LARGEUR - op.image.largeur) / 2,
+        x: op.image.x ?? (LARGEUR - op.image.largeur) / 2,
         y: yPdf,
         width: op.image.largeur,
         height: op.image.hauteur,

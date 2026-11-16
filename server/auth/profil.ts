@@ -11,7 +11,11 @@ export interface Profil {
   organisationId: string | null;
   boutiqueIds: string[];
   doitChangerMotDePasse: boolean;
+  /** Adresse email confirmée par un clic sur le lien reçu. */
+  emailVerifie: boolean;
   plan: Plan | null;
+  /** Propriétaire sans formule choisie : bloqué sur /choisir-plan jusqu'au choix (le paiement peut venir plus tard). */
+  planAChoisir: boolean;
 }
 
 /** Charge le rôle, l'organisation et le plan. Tout passe par la RLS : un compte désactivé ne voit rien. */
@@ -28,7 +32,9 @@ export async function chargerProfil(
     boutiqueIds: [],
     doitChangerMotDePasse:
       user.app_metadata?.doit_changer_mot_de_passe === true,
+    emailVerifie: user.app_metadata?.email_verifie === true,
     plan: null,
+    planAChoisir: false,
   };
 
   const { data: membre } = await supabase
@@ -39,7 +45,7 @@ export async function chargerProfil(
   if (membre?.actif) {
     const { data: org } = await supabase
       .from("organisations")
-      .select("plan_code")
+      .select("plan_code, plan_choisi_le")
       .eq("id", membre.organisation_id)
       .maybeSingle();
     const { data: ligne } = org
@@ -56,6 +62,7 @@ export async function chargerProfil(
       organisationId: membre.organisation_id,
       boutiqueIds: membre.boutiques_autorisees ?? [],
       plan: ligne ? planDepuisLigne(ligne) : null,
+      planAChoisir: membre.role === "proprietaire" && org?.plan_choisi_le == null,
     };
   }
 

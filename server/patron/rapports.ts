@@ -6,6 +6,9 @@ export interface Rapport {
   nbVentes: number;
   serie: { jour: string; total: number; nb: number }[];
   produits: { produitId: string; nom: string; quantiteBase: number; uniteBase: string; montant: number }[];
+  /** Bénéfice estimé et encaissements par mode ; null / vide si la fonction SQL n'est pas encore installée. */
+  benefice: number | null;
+  modes: { mode: string; montant: number }[];
   vendeurs: { vendeurId: string; nom: string; nbVentes: number; total: number }[];
 }
 
@@ -23,6 +26,8 @@ export async function lireRapport(
   });
   if (error || !data) return null;
   const b = data as Brut;
+  const { data: comp } = await supabase.rpc("rapport_complement", { p_boutique: boutiqueId, p_jours: jours });
+  const c = (comp ?? null) as Brut | null;
   return {
     jours: Number(b.jours),
     total: Number(b.total),
@@ -35,6 +40,8 @@ export async function lireRapport(
       uniteBase: p.unite_base,
       montant: Number(p.montant),
     })),
+    benefice: c ? Number(c.benefice) : null,
+    modes: c ? (c.modes as Brut[]).map((m) => ({ mode: m.mode, montant: Number(m.montant) })) : [],
     vendeurs: (b.vendeurs as Brut[]).map((v) => ({
       vendeurId: v.vendeur_id,
       nom: v.nom,

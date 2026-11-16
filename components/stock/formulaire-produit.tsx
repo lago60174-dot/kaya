@@ -156,9 +156,10 @@ export function FormulaireProduit({
           Façons de vendre (conditionnements)
         </legend>
         <p className="text-muted text-sm">
-          Ex. : sac de 50 kg (facteur 50), sac de 25 kg (facteur 25), kg
-          (facteur 1). Le facteur est le nombre d&apos;unités de base dans
-          l&apos;unité vendue.
+          Le facteur dit combien d&apos;unités de base contient l&apos;unité que
+          vous vendez. Ex. : stock compté en kg. Le « sac de 50 kg » a pour
+          facteur 50, le « sac de 25 kg » 25, et le « kg » 1. Ainsi, quand vous
+          vendez 1 sac de 50 kg, le stock baisse de 50 kg.
         </p>
         {unites.map((u, i) => (
           <div
@@ -194,6 +195,11 @@ export function FormulaireProduit({
             >
               ✕
             </button>
+            {u.nom && Number(u.facteur.replace(",", ".")) > 0 && (
+              <p className="text-muted col-span-full -mt-1 text-xs">
+                1 {u.nom} = {u.facteur.replace(".", ",")} {uniteBase || "unité de base"}
+              </p>
+            )}
           </div>
         ))}
         <div className="flex flex-wrap gap-2">

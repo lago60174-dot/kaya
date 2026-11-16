@@ -1,4 +1,4 @@
-import { ChevronRight, Plus, Users } from "lucide-react";
+import { Check, ChevronRight, Phone, Plus, Users, Wallet } from "lucide-react";
 import Link from "next/link";
 import { RechercheSimple } from "@/components/recherche-simple";
 import { formatFcfa } from "@/lib/format";
@@ -29,6 +29,13 @@ export default async function PageClients({
       ? { apresNom: p.apres_nom.slice(0, 100), apresId: p.apres_id }
       : {}),
   });
+  const credit = p.credit === "avec" || p.credit === "sans" ? p.credit : null;
+  const tri = p.tri === "dette" ? "dette" : "nom";
+  const visibles = page.clients
+    .filter((c) => (credit === "avec" ? c.dette > 0 : credit === "sans" ? c.dette <= 0 : true))
+    .sort((a, b) => (tri === "dette" ? b.dette - a.dette : 0));
+  const lien = (extra: Record<string, string>) =>
+    `/clients?${new URLSearchParams({ ...(recherche ? { q: recherche } : {}), ...(credit ? { credit } : {}), ...(tri === "dette" ? { tri } : {}), ...extra })}`;
   const suite = page.suivant
     ? new URLSearchParams({
         ...(recherche ? { q: recherche } : {}),
@@ -57,12 +64,24 @@ export default async function PageClients({
           Nouveau client
         </Link>
       </div>
-      <Link
-        href="/clients/dettes"
-        className="border-brand-strong text-brand-strong hover:bg-brand-soft flex min-h-11 items-center justify-between rounded-lg border px-4 font-semibold"
-      >
-        Qui me doit de l&apos;argent ? <span aria-hidden>→</span>
-      </Link>
+      <nav aria-label="Filtrer les clients" className="flex flex-wrap gap-2">
+        {([[null, "Tous"], ["avec", "Avec crédit"], ["sans", "Sans crédit"]] as const).map(([code, libelle]) => (
+          <Link
+            key={libelle}
+            href={`/clients?${new URLSearchParams({ ...(recherche ? { q: recherche } : {}), ...(code ? { credit: code } : {}), ...(tri === "dette" ? { tri } : {}) })}`}
+            aria-current={credit === code ? "page" : undefined}
+            className={`flex min-h-11 items-center rounded-full px-5 text-sm font-bold ${credit === code ? "bg-orange-500 text-white" : "border-border border bg-white"}`}
+          >
+            {libelle}
+          </Link>
+        ))}
+        <Link
+          href={tri === "dette" ? lien({ tri: "nom" }).replace("&tri=nom", "").replace("?tri=nom", "") : lien({ tri: "dette" })}
+          className="border-border flex min-h-11 items-center rounded-full border bg-white px-5 text-sm font-bold"
+        >
+          {tri === "dette" ? "Tri : plus gros crédit d'abord" : "Trier par crédit"}
+        </Link>
+      </nav>
       <RechercheSimple
         chemin="/clients"
         placeholder="Chercher un client (nom ou téléphone)"
@@ -75,11 +94,12 @@ export default async function PageClients({
         </p>
       ) : (
         <ul className="flex flex-col gap-2">
-          {page.clients.map((c) => (
+          {visibles.map((c) => (
             <li key={c.id}>
               <Link
                 href={`/clients/${c.id}`}
-                className={`flex min-h-11 items-center gap-3 rounded-2xl border p-3 shadow-sm ${c.dette > 0 ? "border-orange-200 bg-orange-50" : "border-border bg-white"}`}
+                className="border-border flex min-h-11 items-center gap-3 rounded-2xl border p-3 shadow-sm"
+                style={{ background: c.dette > 0 ? "#fdeee3" : "#fff" }}
               >
                 <span
                   aria-hidden="true"
@@ -90,7 +110,10 @@ export default async function PageClients({
                 <span className="flex min-w-0 flex-1 flex-col">
                   <span className="truncate text-lg font-bold">{c.nom}</span>
                   {c.telephone && (
-                    <span className="text-muted text-sm">{c.telephone}</span>
+                    <span className="text-muted flex items-center gap-1 text-sm">
+                      <Phone aria-hidden="true" size={14} />
+                      {c.telephone}
+                    </span>
                   )}
                 </span>
                 <span className="flex shrink-0 flex-col items-end gap-1 text-sm font-bold">
@@ -99,7 +122,7 @@ export default async function PageClients({
                   >
                     {c.dette > 0 ? "Crédit dû" : "Solde nul"}
                   </span>
-                  <span className={c.dette > 0 ? "text-red-700" : ""}>
+                  <span className={c.dette > 0 ? "rounded-full bg-red-100 px-3 py-1 text-base text-red-700" : ""}>
                     {formatFcfa(c.dette)}
                   </span>
                 </span>
@@ -110,18 +133,25 @@ export default async function PageClients({
         </ul>
       )}
       {!suite && !recherche && page.clients.length > 0 && (
-        <div className="grid grid-cols-3 gap-2 text-center text-sm font-semibold">
-          <p className="rounded-2xl bg-orange-50 p-3">
-            <b className="block text-xl">{page.clients.length}</b>Clients
-          </p>
-          <p className="rounded-2xl bg-red-50 p-3 text-red-700">
-            <b className="block text-xl">{page.clients.filter((c) => c.dette > 0).length}</b>
-            Avec crédit
-          </p>
-          <p className="rounded-2xl bg-emerald-50 p-3 text-emerald-700">
-            <b className="block text-xl">{page.clients.filter((c) => c.dette <= 0).length}</b>
-            Sans crédit
-          </p>
+        <div className="grid grid-cols-3 gap-2 text-sm font-semibold">
+          {[
+            [Users, page.clients.length, "Clients", "#fdeee3", "#c2410c"],
+            [Wallet, page.clients.filter((c) => c.dette > 0).length, "Avec crédit", "#fde4e4", "#b91c1c"],
+            [Check, page.clients.filter((c) => c.dette <= 0).length, "Sans crédit", "#dff4e7", "#15803d"],
+          ].map(([Icone, n, libelle, fond, couleur]) => {
+            const I = Icone as typeof Users;
+            return (
+              <p key={String(libelle)} className="flex items-center gap-3 rounded-2xl p-3" style={{ background: String(fond) }}>
+                <span aria-hidden="true" className="grid size-10 shrink-0 place-items-center rounded-full bg-white" style={{ color: String(couleur) }}>
+                  <I size={20} />
+                </span>
+                <span>
+                  <b className="block text-xl">{String(n)}</b>
+                  {String(libelle)}
+                </span>
+              </p>
+            );
+          })}
         </div>
       )}
       {suite && (
