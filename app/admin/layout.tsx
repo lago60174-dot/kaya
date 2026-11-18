@@ -37,6 +37,11 @@ async function CadreAdmin({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </nav>
+          {profil.role === "proprietaire" && (
+            <Link href="/patron" className="flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold hover:bg-white/10">
+              Ma boutique
+            </Link>
+          )}
           <span className="hidden text-sm opacity-70 sm:inline">{profil.email}</span>
           <form action={deconnecter}>
             <button type="submit" className="min-h-11 rounded-lg px-3 text-sm font-semibold hover:bg-white/10">

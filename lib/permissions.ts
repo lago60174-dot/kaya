@@ -90,6 +90,8 @@ export function roleAutorise(role: Role | null, zone: Zone): boolean {
 export interface EtatSession {
   role: Role | null;
   doitChangerMotDePasse: boolean;
+  /** Administrateur de la plateforme, même s'il gère aussi une boutique : il accède à /admin. */
+  estAdmin?: boolean;
 }
 export type DecisionGarde =
   { type: "ok" } | { type: "rediriger"; vers: string };
@@ -104,6 +106,7 @@ export function decisionGarde(
     return { type: "rediriger", vers: "/connexion" };
   if (session.doitChangerMotDePasse && zone !== "connecte")
     return { type: "rediriger", vers: "/mot-de-passe" };
+  if (zone === "admin" && session.estAdmin) return { type: "ok" };
   if (!roleAutorise(session.role, zone))
     return { type: "rediriger", vers: accueilPour(session.role) };
   return { type: "ok" };

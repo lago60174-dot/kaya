@@ -99,3 +99,12 @@ Sans ces variables rien ne casse : emails et push sont simplement désactivés.
 
 ## Images du catalogue retirées du projet
 Les photos (`catalogue/images/`) sont déjà dans Cloudflare R2 sous `catalogue/` : elles ne sont plus dans le zip. Le script `televerser_r2.mjs` n'est utile que pour ajouter de nouvelles images (recréer le dossier `catalogue/images/` à ce moment-là).
+
+## Vérification PWA
+Contrôlée en navigateur sur la version de production : manifeste, icônes (192, 512, maskable), icône iOS, service worker (enregistré, actif, en cache : page hors ligne, écran de vente hors ligne et 18 fichiers de code), bascule vers l'écran de vente hors ligne quand le réseau est coupé, aucune erreur console. Orientation du manifeste passée de « portrait » à « any » (ordinateur de comptoir ou tablette en paysage).
+
+## Site : fonctions désormais livrées
+Le résumé WhatsApp du soir et « plusieurs boutiques » ne portent plus la mention « Bientôt disponible » sur la page des tarifs. Restent à venir : devis et fournisseurs.
+
+## Administrateur qui a aussi une boutique
+Un compte inscrit dans `administrateurs_plateforme` accède à `/admin` même s'il gère une boutique : un lien « Administration » apparaît dans son menu, et « Ma boutique » dans l'espace admin. Un compte admin sans boutique arrive directement sur `/admin`.

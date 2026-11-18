@@ -8,7 +8,6 @@ import { limite, peutUtiliser, type Fonctionnalite, type Plan } from "@/lib/plan
 export const FONCTIONS_BIENTOT: ReadonlySet<Fonctionnalite> = new Set([
   "devis",
   "fournisseurs",
-  "resume_whatsapp",
 ]);
 
 export interface LignePlan {
@@ -50,10 +49,9 @@ export function phraseBoutiques(max: number | null): string {
 export function lignesPlan(plan: Plan): LignePlan[] {
   const lignes: LignePlan[] = [
     { texte: phraseVendeurs(limite(plan, "vendeurs")), bientot: false },
-    // Plusieurs boutiques n'est pas encore livré : une limite au-dessus de 1 est annoncée comme à venir.
     {
       texte: phraseBoutiques(limite(plan, "boutiques")),
-      bientot: (limite(plan, "boutiques") ?? Infinity) > 1,
+      bientot: false,
     },
   ];
   for (const f of ORDRE) {
@@ -99,7 +97,7 @@ export function comparatif(plans: Plan[]): LigneComparatif[] {
       libelle: "Boutiques",
       valeurs: par((p) => {
         const max = limite(p, "boutiques");
-        return { texte: phraseBoutiques(max), bientot: (max ?? Infinity) > 1 };
+        return { texte: phraseBoutiques(max), bientot: false };
       }),
     },
     fonction("Journal complet et alertes", "journal_complet"),

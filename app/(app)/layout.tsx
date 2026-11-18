@@ -22,6 +22,7 @@ export default function MiseEnPageApplication({ children }: { children: React.Re
 async function CadreProtege({ children }: { children: React.ReactNode }) {
   const profil = await exigerRole("boutique");
   const menu = profil.role && profil.plan ? menuPour(profil.role, profil.plan) : [];
+  if (profil.estAdmin) menu.push({ href: "/admin", libelle: "Administration" });
   const nonLues =
     profil.role === "proprietaire"
       ? await compterNonLues(await supabaseServeur())

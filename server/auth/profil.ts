@@ -23,6 +23,8 @@ export interface Profil {
   /** Adresse email confirmée par un clic sur le lien reçu. */
   emailVerifie: boolean;
   plan: Plan | null;
+  /** Inscrit comme administrateur de la plateforme (en plus de son rôle de boutique éventuel). */
+  estAdmin: boolean;
 }
 
 /** Charge le rôle, l'organisation et le plan. Tout passe par la RLS : un compte désactivé ne voit rien. */
@@ -44,7 +46,15 @@ export async function chargerProfil(
       user.app_metadata?.doit_changer_mot_de_passe === true,
     emailVerifie: user.app_metadata?.email_verifie === true,
     plan: null,
+    estAdmin: false,
   };
+
+  const { data: ligneAdmin } = await supabase
+    .from("administrateurs_plateforme")
+    .select("utilisateur_id")
+    .eq("utilisateur_id", user.id)
+    .maybeSingle();
+  base.estAdmin = !!ligneAdmin;
 
   const { data: membre } = await supabase
     .from("membres")
@@ -80,12 +90,7 @@ export async function chargerProfil(
     };
   }
 
-  const { data: admin } = await supabase
-    .from("administrateurs_plateforme")
-    .select("utilisateur_id")
-    .eq("utilisateur_id", user.id)
-    .maybeSingle();
-  if (admin) return { ...base, role: "administrateur_plateforme" };
+  if (base.estAdmin) return { ...base, role: "administrateur_plateforme" };
 
   const { data: affilie } = await supabase
     .from("affilies")
