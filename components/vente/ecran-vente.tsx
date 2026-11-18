@@ -2,7 +2,9 @@
 
 import { Plus, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { ajouterEnAttente, lireCatalogue, sauverCatalogue } from "@/lib/hors-ligne/stockage";
+import { retirerDuStock, texteRecuProvisoire } from "@/lib/hors-ligne/stock-local";
 import { formatFcfa } from "@/lib/format";
 import { formaterStock, lireMontant } from "@/lib/stock/quantites";
 import {
@@ -30,9 +32,11 @@ interface Props {
   role: "proprietaire" | "vendeur";
   seuilRemise: number;
   produitsInitiaux: ProduitVente[];
+  /** Boutique de cette vente : gardée avec la vente faite sans réseau. */
+  boutiqueId?: string;
 }
 
-export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
+export function EcranVente({ role, seuilRemise, produitsInitiaux, boutiqueId }: Props) {
   const router = useRouter();
   const [q, setQ] = useState("");
   const [produits, setProduits] = useState(produitsInitiaux);
@@ -52,6 +56,15 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
   const [forcer, setForcer] = useState(false);
   const [enCours, setEnCours] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
+  const [recuProvisoire, setRecuProvisoire] = useState<string | null>(null);
+  // Avec du réseau, on garde les produits sur l'appareil pour pouvoir vendre pendant une coupure.
+  useEffect(() => {
+    if (navigator.onLine)
+      sauverCatalogue({ role, seuilRemise, produits: produitsInitiaux, boutiqueId, enregistreLe: Date.now() }).catch(() => {});
+  }, [role, seuilRemise, produitsInitiaux, boutiqueId]);
+  const filtrerLocal = (v: string) =>
+    produitsInitiaux.filter((p) => p.nom.toLowerCase().includes(v.trim().toLowerCase()));
   const minuteur = useRef<ReturnType<typeof setTimeout>>(undefined);
   // Même contenu = même clé (un nouvel essai après coupure ne crée jamais de doublon). Contenu modifié = nouvelle clé.
   const tentative = useRef<{ empreinte: string; cle: string } | null>(null);
@@ -76,7 +89,9 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
     if (!peutValider || !preparation.ok) return;
     setEnCours(true);
     setErreur(null);
+    setInfo(null);
     const corps = {
+      boutiqueId,
       lignes: lignes.map((l) => ({
         produitId: l.produit.id,
         uniteId: l.uniteId,
@@ -91,6 +106,42 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
     const empreinte = JSON.stringify(corps);
     if (tentative.current?.empreinte !== empreinte)
       tentative.current = { empreinte, cle: crypto.randomUUID() };
+    // Sans réseau : la vente est gardée sur l'appareil, avec la même clé unique, puis envoyée toute seule au retour du réseau.
+    const garder = async () => {
+      try {
+        await ajouterEnAttente({
+          cle: tentative.current!.cle,
+          corps,
+          total: totaux.total,
+          nbLignes: lignes.length,
+          creeLe: Date.now(),
+          statut: "attente",
+        });
+      } catch {
+        setErreur("Impossible de garder la vente sur cet appareil (espace insuffisant ?). Réessayez avec du réseau.");
+        return;
+      }
+      if (preparation.ok)
+        setRecuProvisoire(texteRecuProvisoire(lignes, totaux.total, totaux.remise, preparation.paiements));
+      // Le stock affiché baisse tout de suite, y compris dans la mémoire de l'appareil.
+      setProduits((p) => retirerDuStock(p, lignes));
+      lireCatalogue()
+        .then((c) => c && sauverCatalogue({ ...c, produits: retirerDuStock(c.produits, lignes) }))
+        .catch(() => {});
+      setLignes([]);
+      setRemiseTexte("");
+      setClient(null);
+      setCredit(false);
+      setPaiements([{ mode: "especes", montant: "" }]);
+      setForcer(false);
+      tentative.current = null;
+      setInfo("Vente gardée sur cet appareil. Elle sera envoyée toute seule dès que le réseau revient, et le reçu sera créé à ce moment.");
+    };
+    if (!navigator.onLine) {
+      await garder();
+      setEnCours(false);
+      return;
+    }
     try {
       const r = await validerVenteAction({
         ...corps,
@@ -102,9 +153,7 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
       }
       setErreur(r.erreur);
     } catch {
-      setErreur(
-        "Pas de connexion. Votre vente n'est pas perdue : réessayez dans un instant.",
-      );
+      await garder();
     }
     setEnCours(false);
   }
@@ -136,12 +185,41 @@ export function EcranVente({ role, seuilRemise, produitsInitiaux }: Props) {
             minuteur.current = setTimeout(
               () =>
                 demarrer(async () =>
-                  setProduits(await chercherProduitsVenteAction(valeur)),
+                  setProduits(
+                    await chercherProduitsVenteAction(valeur).catch(() => filtrerLocal(valeur)),
+                  ),
                 ),
               250,
             );
           }}
         />
+        {info && (
+          <p role="status" className="rounded-xl bg-emerald-100 p-3 text-sm font-semibold text-emerald-900">
+            {info}
+          </p>
+        )}
+        {recuProvisoire && (
+          <div role="dialog" aria-label="Reçu provisoire" className="flex flex-col gap-2 rounded-2xl border-2 border-dashed border-orange-300 bg-white p-4">
+            <h2 className="text-lg font-bold">Reçu provisoire</h2>
+            <pre className="font-sans text-sm whitespace-pre-wrap">{recuProvisoire}</pre>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                className="bg-success min-h-11 rounded-full px-4 text-sm font-bold text-white"
+                onClick={() =>
+                  navigator.share
+                    ? void navigator.share({ text: recuProvisoire }).catch(() => {})
+                    : window.open(`https://wa.me/?text=${encodeURIComponent(recuProvisoire)}`, "_blank", "noopener")
+                }
+              >
+                Partager (WhatsApp)
+              </button>
+              <button type="button" className="border-border min-h-11 rounded-full border px-4 text-sm font-bold" onClick={() => setRecuProvisoire(null)}>
+                Fermer
+              </button>
+            </div>
+          </div>
+        )}
         {produits.length === 0 ? (
           <p className="bg-brand-soft rounded-lg p-3">
             {q

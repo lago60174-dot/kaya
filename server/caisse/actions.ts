@@ -8,6 +8,7 @@ import {
   depenseSchema,
   validationClotureSchema,
 } from "@/lib/caisse/schemas";
+import { boutiqueDeLOperation } from "@/lib/boutiques/active";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
 import { messageErreurBase } from "@/server/erreurs";
@@ -22,14 +23,14 @@ export async function enregistrerDepenseAction(
   entree: unknown,
 ): Promise<ResultatCaisse> {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
-  if (!boutiqueId) return { ok: false, erreur: ERREUR_COMPTE };
   const lu = depenseSchema.safeParse(entree);
   if (!lu.success)
     return {
       ok: false,
       erreur: lu.error.issues[0]?.message ?? "Dépense invalide.",
     };
+  const boutiqueId = boutiqueDeLOperation(lu.data.boutiqueId, profil.boutiqueIds, profil.boutiqueActiveId);
+  if (!boutiqueId) return { ok: false, erreur: ERREUR_COMPTE };
   const { error } = await (
     await supabaseServeur()
   ).rpc("enregistrer_depense", {
@@ -50,7 +51,7 @@ export async function annulerDepenseAction(
   entree: unknown,
 ): Promise<ResultatCaisse> {
   const profil = await exigerRole("proprietaire");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId) return { ok: false, erreur: ERREUR_COMPTE };
   const lu = annulationDepenseSchema.safeParse(entree);
   if (!lu.success)
@@ -75,7 +76,7 @@ export async function cloturerCaisseAction(
   entree: unknown,
 ): Promise<ResultatCaisse> {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId) return { ok: false, erreur: ERREUR_COMPTE };
   const lu = clotureSchema.safeParse(entree);
   if (!lu.success)

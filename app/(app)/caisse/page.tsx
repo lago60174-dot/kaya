@@ -116,7 +116,7 @@ export default async function PageCaisse({
   searchParams: Promise<{ date?: string }>;
 }) {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId || !profil.role)
     return <p>Aucune boutique n&apos;est associée à votre compte.</p>;
 
@@ -342,7 +342,7 @@ export default async function PageCaisse({
             demain.
           </p>
         ) : (
-          <FormulaireDepense role={profil.role} />
+          <FormulaireDepense role={profil.role} boutiqueId={profil.boutiqueActiveId} />
         )}
         </div>
       )}

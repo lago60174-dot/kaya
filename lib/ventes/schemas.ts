@@ -5,6 +5,8 @@ const uuid = z.uuid();
 
 export const venteSchema = z.object({
   cle: uuid,
+  /** Boutique de la vente (gardée avec la vente faite sans réseau). */
+  boutiqueId: uuid.optional(),
   lignes: z
     .array(
       z.object({

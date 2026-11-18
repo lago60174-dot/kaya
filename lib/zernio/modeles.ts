@@ -48,3 +48,32 @@ export function telephoneInternational(brut: string): string | null {
   if (/^[26]\d{8}$/.test(chiffres)) return `+237${chiffres}`;
   return null;
 }
+
+/** Résumé quotidien : un seul modèle (texte dans docs/WHATSAPP_TEMPLATES.md). */
+export const MODELE_RESUME = "kaya_resume_quotidien";
+
+export interface DonneesResume {
+  boutique: string;
+  jour: Date;
+  ventesTotal: number;
+  nbVentes: number;
+  produitPhare: string | null;
+  stockBas: number;
+  credits: number;
+}
+
+/** Variables {{1}} à {{6}} : boutique, date, ventes, nombre de ventes, produit phare, points à surveiller. */
+export function variablesResume(d: DonneesResume): Record<string, string> {
+  const alertes = [
+    d.stockBas > 0 ? `${d.stockBas} produit${d.stockBas > 1 ? "s" : ""} en stock bas` : null,
+    d.credits > 0 ? `${formatFcfa(d.credits).replace(/ /g, " ")} de crédits clients` : null,
+  ].filter(Boolean);
+  return {
+    "1": d.boutique.replace(/\s+/g, " ").trim().slice(0, 60) || "votre boutique",
+    "2": dateCourte(d.jour),
+    "3": formatFcfa(d.ventesTotal).replace(/ /g, " "),
+    "4": `${d.nbVentes} vente${d.nbVentes > 1 ? "s" : ""}`,
+    "5": (d.produitPhare ?? "aucun").replace(/\s+/g, " ").trim().slice(0, 60),
+    "6": alertes.length ? alertes.join(" · ") : "rien à signaler",
+  };
+}

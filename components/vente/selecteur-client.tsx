@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
+import { chercherClientsLocal, memoriserClients } from "@/lib/hors-ligne/stockage";
 import {
   chercherClientsAction,
   creerClientRapideAction,
@@ -74,7 +75,14 @@ export function SelecteurClient({ client, onChoisir, obligatoire }: Props) {
           minuteur.current = setTimeout(
             () =>
               demarrer(async () =>
-                setResultats(await chercherClientsAction(valeur)),
+                setResultats(
+                    await chercherClientsAction(valeur)
+                      .then((r) => {
+                        void memoriserClients(r);
+                        return r;
+                      })
+                      .catch(() => chercherClientsLocal(valeur)),
+                  ),
               ),
             250,
           );

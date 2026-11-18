@@ -17,7 +17,7 @@ export default async function PageModifierClient({
   const fiche = await lireFicheClient(
     await supabaseServeur(),
     id,
-    profil.boutiqueIds[0] ?? "",
+    profil.boutiqueActiveId ?? "",
   );
   if (!fiche) notFound();
   return (

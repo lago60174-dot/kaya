@@ -96,7 +96,7 @@ export async function enregistrerPaiementAction(
   entree: unknown,
 ): Promise<ResultatPaiement> {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId) return { ok: false, erreur: ERREUR_COMPTE };
   const lu = paiementCreditSchema.safeParse(entree);
   if (!lu.success)

@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { supabaseServeur } from "@/lib/supabase/server";
-import { accueilPour } from "@/lib/permissions";
 import { exigerRole } from "@/server/auth/session";
 import { lienPourFacture } from "./coeur";
 import { servicesAbonnement } from "./services";
@@ -59,25 +58,17 @@ export async function payerMaintenantAction(): Promise<void> {
   redirect(typeof data === "string" ? `/payer/${data}` : "/parametres");
 }
 
-/**
- * Première formule de la boutique, choisie avant toute autre étape de la création. Le paiement peut venir plus tard :
- * la formule s'active au premier paiement. Accessible tant que la formule n'est pas choisie (zone « connecte »).
- */
-export async function choisirPlanInitialAction(
-  _etat: EtatAbonnementAction,
-  formData: FormData,
-): Promise<EtatAbonnementAction> {
-  const profil = await exigerRole("connecte");
-  if (profil.role !== "proprietaire") redirect(accueilPour(profil.role ?? "vendeur"));
-  const plan = z
-    .string()
-    .regex(/^[a-z_]{2,30}$/)
-    .safeParse(formData.get("plan"));
-  if (!plan.success) return { erreur: "Choisissez une formule pour continuer." };
-  const { error } = await (
-    await supabaseServeur()
-  ).rpc("choisir_plan", { p_plan: plan.data });
-  if (error)
-    return { erreur: "Cette formule n'est pas disponible. Choisissez-en une autre." };
-  redirect("/demarrage");
+export interface EtatResume {
+  erreur?: string;
+  ok?: string;
+}
+
+/** Le propriétaire active ou coupe le résumé WhatsApp quotidien (la base vérifie le plan et le numéro). */
+export async function reglerResumeAction(_etat: EtatResume, formData: FormData): Promise<EtatResume> {
+  await exigerRole("proprietaire");
+  const actif = formData.get("actif") === "1";
+  const { error } = await (await supabaseServeur()).rpc("regler_resume_whatsapp", { p_actif: actif });
+  if (error) return { erreur: error.code === "P0001" ? error.message : "Impossible de modifier ce réglage. Réessayez." };
+  revalidatePath("/parametres");
+  return { ok: actif ? "Résumé quotidien activé." : "Résumé quotidien désactivé." };
 }

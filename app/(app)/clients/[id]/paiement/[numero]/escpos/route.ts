@@ -16,7 +16,7 @@ export async function GET(
   const p = await lirePaiementCredit(
     await supabaseServeur(),
     id,
-    profil?.boutiqueIds[0] ?? "",
+    profil?.boutiqueActiveId ?? "",
     numero,
   );
   if (!p) return new Response("Introuvable", { status: 404 });

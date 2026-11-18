@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { categoriesPour } from "@/lib/caisse/caisse";
 import type { Role } from "@/lib/permissions";
+import { ajouterEnAttente } from "@/lib/hors-ligne/stockage";
 import { lireMontant } from "@/lib/stock/quantites";
 import { MODES_PAIEMENT, type ModePaiement } from "@/lib/ventes/paiements";
 import { enregistrerDepenseAction } from "@/server/caisse/actions";
@@ -16,7 +17,7 @@ const ICONES: Record<string, LucideIcon> = {
 };
 
 /** Saisie rapide d'une dépense : montant, catégorie, note. Un double clic ou un nouvel essai ne l'enregistre jamais deux fois. */
-export function FormulaireDepense({ role }: { role: Role }) {
+export function FormulaireDepense({ role, boutiqueId }: { role: Role; boutiqueId?: string }) {
   const router = useRouter();
   const categories = categoriesPour(role);
   const [texte, setTexte] = useState("");
@@ -39,9 +40,36 @@ export function FormulaireDepense({ role }: { role: Role }) {
     const empreinte = `${montant}|${categorie}|${mode}|${note.trim()}`;
     if (tentative.current?.empreinte !== empreinte)
       tentative.current = { empreinte, cle: crypto.randomUUID() };
+    // Sans réseau : la dépense est gardée sur l'appareil avec sa clé unique, puis envoyée toute seule.
+    const garder = async () => {
+      try {
+        await ajouterEnAttente({
+          type: "depense",
+          cle: tentative.current!.cle,
+          corps: { boutiqueId, categorie, montant, mode, note: note.trim() || undefined },
+          total: montant ?? 0,
+          nbLignes: 0,
+          creeLe: Date.now(),
+          statut: "attente",
+        });
+      } catch {
+        setErreur("Impossible de garder la dépense sur cet appareil. Réessayez avec du réseau.");
+        return;
+      }
+      tentative.current = null;
+      setTexte("");
+      setNote("");
+      setConfirmation("Dépense gardée sur cet appareil : elle sera envoyée toute seule dès que le réseau revient.");
+    };
+    if (!navigator.onLine) {
+      await garder();
+      setEnCours(false);
+      return;
+    }
     try {
       const r = await enregistrerDepenseAction({
         cle: tentative.current.cle,
+        boutiqueId,
         categorie,
         montant,
         mode,
@@ -55,9 +83,7 @@ export function FormulaireDepense({ role }: { role: Role }) {
         router.refresh();
       } else setErreur(r.erreur);
     } catch {
-      setErreur(
-        "Pas de connexion. Rien n'est perdu : réessayez dans un instant.",
-      );
+      await garder();
     }
     setEnCours(false);
   }

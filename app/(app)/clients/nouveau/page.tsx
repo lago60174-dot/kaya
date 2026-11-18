@@ -11,7 +11,7 @@ export default async function PageNouveauClient() {
   )
     .from("parametres_boutique")
     .select("plafond_credit_defaut")
-    .eq("boutique_id", profil.boutiqueIds[0] ?? "")
+    .eq("boutique_id", profil.boutiqueActiveId ?? "")
     .maybeSingle();
   return (
     <>

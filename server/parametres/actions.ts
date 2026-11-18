@@ -18,7 +18,7 @@ export async function enregistrerParametresAction(
   formData: FormData,
 ): Promise<EtatParametres> {
   const profil = await exigerRole("proprietaire");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId)
     return {
       erreur: "Impossible de charger votre boutique. Reconnectez-vous.",

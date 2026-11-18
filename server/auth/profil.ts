@@ -1,5 +1,10 @@
 import "server-only";
 import type { SupabaseClient, User } from "@supabase/supabase-js";
+import {
+  choisirBoutiqueActive,
+  lireBoutiquesAccessibles,
+  type BoutiqueAccessible,
+} from "@/lib/boutiques/active";
 import type { Role } from "@/lib/permissions";
 import { planDepuisLigne, type Plan } from "@/lib/plans";
 
@@ -9,19 +14,22 @@ export interface Profil {
   role: Role | null; // null : compte désactivé ou affilié pas encore validé
   nom: string | null;
   organisationId: string | null;
+  /** Boutiques accessibles : toutes celles de l'organisation pour un propriétaire, celles attribuées pour un vendeur. */
+  boutiques: BoutiqueAccessible[];
   boutiqueIds: string[];
+  /** Boutique dans laquelle il travaille en ce moment (son choix, sinon la plus ancienne). */
+  boutiqueActiveId: string | undefined;
   doitChangerMotDePasse: boolean;
   /** Adresse email confirmée par un clic sur le lien reçu. */
   emailVerifie: boolean;
   plan: Plan | null;
-  /** Propriétaire sans formule choisie : bloqué sur /choisir-plan jusqu'au choix (le paiement peut venir plus tard). */
-  planAChoisir: boolean;
 }
 
 /** Charge le rôle, l'organisation et le plan. Tout passe par la RLS : un compte désactivé ne voit rien. */
 export async function chargerProfil(
   supabase: SupabaseClient,
   user: User,
+  boutiqueDemandee?: string | null,
 ): Promise<Profil> {
   const base: Profil = {
     userId: user.id,
@@ -29,12 +37,13 @@ export async function chargerProfil(
     role: null,
     nom: null,
     organisationId: null,
+    boutiques: [],
     boutiqueIds: [],
+    boutiqueActiveId: undefined,
     doitChangerMotDePasse:
       user.app_metadata?.doit_changer_mot_de_passe === true,
     emailVerifie: user.app_metadata?.email_verifie === true,
     plan: null,
-    planAChoisir: false,
   };
 
   const { data: membre } = await supabase
@@ -45,7 +54,7 @@ export async function chargerProfil(
   if (membre?.actif) {
     const { data: org } = await supabase
       .from("organisations")
-      .select("plan_code, plan_choisi_le")
+      .select("plan_code")
       .eq("id", membre.organisation_id)
       .maybeSingle();
     const { data: ligne } = org
@@ -55,14 +64,19 @@ export async function chargerProfil(
           .eq("code", org.plan_code)
           .maybeSingle()
       : { data: null };
+    // La base filtre déjà selon le rôle (RLS) : un vendeur ne reçoit que ses boutiques.
+    const { data: brutes } = await supabase.rpc("lister_boutiques");
+    const boutiques = lireBoutiquesAccessibles(brutes);
+    const boutiqueIds = boutiques.map((b) => b.id);
     return {
       ...base,
       role: membre.role as Role,
       nom: membre.nom,
       organisationId: membre.organisation_id,
-      boutiqueIds: membre.boutiques_autorisees ?? [],
+      boutiques,
+      boutiqueIds,
+      boutiqueActiveId: choisirBoutiqueActive(boutiqueDemandee, boutiqueIds),
       plan: ligne ? planDepuisLigne(ligne) : null,
-      planAChoisir: membre.role === "proprietaire" && org?.plan_choisi_le == null,
     };
   }
 

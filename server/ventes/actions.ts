@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { planifierNotifications } from "@/server/notifications/declencher";
 import { versProduitsVente } from "@/lib/ventes/produits";
+import { boutiqueDeLOperation } from "@/lib/boutiques/active";
 import { clientRapideSchema, venteSchema } from "@/lib/ventes/schemas";
 import type { ProduitVente } from "@/lib/ventes/panier";
 import { supabaseServeur } from "@/lib/supabase/server";
@@ -25,12 +26,6 @@ export async function validerVenteAction(
   entree: unknown,
 ): Promise<ResultatVente> {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
-  if (!boutiqueId)
-    return {
-      ok: false,
-      erreur: "Aucune boutique n'est associée à votre compte.",
-    };
   const lu = venteSchema.safeParse(entree);
   if (!lu.success)
     return {
@@ -38,6 +33,14 @@ export async function validerVenteAction(
       erreur: lu.error.issues[0]?.message ?? "Vente invalide.",
     };
   const d = lu.data;
+  const boutiqueId = boutiqueDeLOperation(d.boutiqueId, profil.boutiqueIds, profil.boutiqueActiveId);
+  if (!boutiqueId)
+    return {
+      ok: false,
+      erreur: d.boutiqueId
+        ? "Cette boutique n'est plus accessible avec votre compte."
+        : "Aucune boutique n'est associée à votre compte.",
+    };
 
   const supabase = await supabaseServeur();
   const { data, error } = await supabase.rpc("creer_vente", {
@@ -69,7 +72,7 @@ export async function chercherProduitsVenteAction(
   recherche: string,
 ): Promise<ProduitVente[]> {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId) return [];
   const page = await listerProduits(await supabaseServeur(), boutiqueId, {
     recherche: recherche.slice(0, 60),

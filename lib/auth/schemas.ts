@@ -48,10 +48,8 @@ export const inscriptionSchema = z.object({
   email,
   motDePasse,
   plan: z
-    .string()
-    .regex(/^[a-z_]{2,30}$/)
-    .optional()
-    .catch(undefined),
+    .string({ error: "Choisissez votre plan pour continuer." })
+    .regex(/^[a-z_]{2,30}$/, "Choisissez votre plan pour continuer."),
   codeParrainage: z
     .string()
     .optional()

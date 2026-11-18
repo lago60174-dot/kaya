@@ -26,6 +26,10 @@ Caisse : depenses, clotures_caisse. Numérotation : compteurs_recus. Traçabilit
 | `tableau_de_bord`                                         | proprio               | tout l'écran d'accueil en un appel (ventes, caisse, dettes, stock bas, vendeurs, top produits)                 |
 | `lister_journal`                                          | proprio (RLS du plan) | journal paginé par curseur, filtres typés                                                                      |
 | `enregistrer_depense`                                     | proprio, vendeur      | dépense idempotente (salaire : proprio seul), journal                                                          |
+| `creer_boutique`                                          | proprio               | ajoute une boutique (plan multi-boutiques, limite sous verrou), réglages par défaut, journal                  |
+| `definir_boutiques_vendeur`                               | proprio               | boutiques où un vendeur travaille (au moins une, de l'organisation), journal                                   |
+| `lister_boutiques`                                        | proprio, vendeur      | boutiques accessibles (filtrées par la RLS) et indicateur « en écriture »                                      |
+| `tableau_de_bord_consolide`                               | proprio               | une ligne par boutique, en un appel                                                                            |
 | `annuler_depense`                                         | proprio               | annule une dépense (motif obligatoire, impossible si la journée est clôturée), journal en alerte               |
 | `definir_logo_boutique`                                   | proprio               | enregistre ou retire le logo de la boutique (clé de son organisation), journal                                 |
 | `calculer_caisse` / `cloturer_caisse` / `valider_cloture` | tous / tous / proprio | espèces attendues, écart, alerte, validation                                                                   |
@@ -69,3 +73,8 @@ RLS activée sur toutes les tables ; fonctions fermées à `anon` et ouvertes au
 ## Tableau de bord et journal
 
 `/patron` : `tableau_de_bord` + alertes récentes (`lister_journal`). `MiseAJourDirecte` (client) s'abonne à Realtime et appelle `router.refresh()` (regroupé, 800 ms) ; repli toutes les 30 s ; coupé quand l'onglet est caché. `/journal` : `lister_journal` (curseur validé), libellés dans `lib/journal`.
+
+## Plusieurs boutiques
+
+Données communes à l'organisation : produits, catégories, unités, prix d'achat, clients. Données par boutique : stock, ventes, crédits, dépenses, caisse, clôtures, compteurs de reçus, journal. Boutique active : cookie `kaya_boutique` revérifié par `chargerProfil` (`lib/boutiques/active.ts`), jamais une autorisation. Lecture seule hors plan : `boutique_en_ecriture` + déclencheur `trg_boutique_en_ecriture` sur `ventes`, `mouvements_stock`, `depenses`, `paiements`, `clotures_caisse`, `avoirs`. Vue d'ensemble : `/patron` → `tableau_de_bord_consolide` ; logique de somme dans `lib/patron/consolide.ts`.
+`/patron` : `tableau_de_bord` + alertes récentes (`lister_journal`). `MiseAJourDirecte` (client) s'abonne à Realtime et appelle `router.refresh()` (regroupé, 800 ms) ; actualisation toutes les 60 s dans tous les cas (couvre dettes, stock bas, alertes) ; coupé quand l'onglet est caché ou hors connexion, rattrapage immédiat au retour. `/journal` : `lister_journal` (curseur validé), libellés dans `lib/journal`.

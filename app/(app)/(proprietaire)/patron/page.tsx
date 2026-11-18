@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Banknote, Boxes, ShoppingBag, Store, Users } from "lucide-react";
 import { CourbeVentes } from "@/components/patron/courbe-ventes";
+import { SelecteurVue } from "@/components/patron/selecteur-vue";
+import { VueConsolidee } from "@/components/patron/vue-consolidee";
 import { MiseAJourDirecte } from "@/components/patron/mise-a-jour-directe";
 import { jourDouala } from "@/lib/caisse/caisse";
 import { formatDateHeure, formatFcfa, formatQuantite } from "@/lib/format";
@@ -13,8 +15,8 @@ import { exigerRole } from "@/server/auth/session";
 import { lireRapport } from "@/server/patron/rapports";
 import {
   lireAlertesRecentes,
+  lireTableauConsolide,
   lireTableauDeBord,
-  listerBoutiques,
 } from "@/server/patron/lecture";
 
 export const metadata = { title: "Tableau de bord · Kaya" };
@@ -29,16 +31,35 @@ export default async function PagePatron({
 }) {
   const profil = await exigerRole("proprietaire");
   const supabase = await supabaseServeur();
-  const boutiques = await listerBoutiques(supabase);
+  const boutiques = profil.boutiques;
   // Le sélecteur n'existe que pour un plan qui permet plusieurs boutiques (Business) et seulement s'il y en a plusieurs.
   const multi =
     profil.plan !== null &&
     peutUtiliser(profil.plan, "multi_boutiques") &&
     boutiques.length > 1;
   const demandee = (await searchParams).boutique;
+  const choisie = multi ? boutiques.find((b) => b.id === demandee) : undefined;
+  // Avec plusieurs boutiques, on arrive sur la vue d'ensemble ; on descend dans une boutique à la demande.
+  if (multi && !choisie && profil.organisationId) {
+    const lignes = await lireTableauConsolide(supabase);
+    if (!lignes)
+      return (
+        <p role="alert" className="text-danger">
+          Impossible de charger le tableau de bord. Vérifiez votre connexion et
+          rechargez la page.
+        </p>
+      );
+    return (
+      <VueConsolidee
+        lignes={lignes}
+        organisationId={profil.organisationId}
+        nom={profil.nom}
+      />
+    );
+  }
   const boutique =
-    (multi ? boutiques.find((b) => b.id === demandee) : undefined) ??
-    boutiques.find((b) => b.id === profil.boutiqueIds[0]) ??
+    choisie ??
+    boutiques.find((b) => b.id === profil.boutiqueActiveId) ??
     boutiques[0];
   if (!boutique)
     return <p>Aucune boutique n&apos;est associée à votre compte.</p>;
@@ -91,31 +112,7 @@ export default async function PagePatron({
             </p>
           </div>
         </div>
-        {multi && (
-          <form method="get" className="flex items-center gap-2">
-            <label htmlFor="boutique" className="text-sm font-medium">
-              Boutique
-            </label>
-            <select
-              id="boutique"
-              name="boutique"
-              defaultValue={boutique.id}
-              className="border-border min-h-11 rounded-lg border bg-white px-3"
-            >
-              {boutiques.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.nom}
-                </option>
-              ))}
-            </select>
-            <button
-              type="submit"
-              className="border-border min-h-11 rounded-lg border px-4 text-sm font-medium"
-            >
-              Afficher
-            </button>
-          </form>
-        )}
+        {multi && <SelecteurVue boutiques={boutiques} valeur={boutique.id} />}
         <MiseAJourDirecte boutiqueId={boutique.id} />
       </header>
 

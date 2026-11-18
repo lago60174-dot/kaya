@@ -29,7 +29,7 @@ export default async function PageClient({
   const fiche = await lireFicheClient(
     await supabaseServeur(),
     id,
-    profil.boutiqueIds[0] ?? "",
+    profil.boutiqueActiveId ?? "",
   );
   if (!fiche) notFound();
   const { client, dette } = fiche;

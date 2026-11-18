@@ -7,9 +7,17 @@ import {
   creerVendeurAction,
   type EtatVendeur,
 } from "@/server/vendeurs/actions";
+import type { BoutiqueAccessible } from "@/lib/boutiques/active";
+import { CasesBoutiques } from "./cases-boutiques";
 import { IdentifiantsProvisoires } from "./identifiants";
 
-export function FormulaireVendeur() {
+export function FormulaireVendeur({
+  boutiques = [],
+  boutiqueActiveId,
+}: {
+  boutiques?: BoutiqueAccessible[];
+  boutiqueActiveId?: string;
+}) {
   const [etat, action] = useActionState<EtatVendeur, FormData>(
     creerVendeurAction,
     {},
@@ -29,6 +37,13 @@ export function FormulaireVendeur() {
         required
         erreur={etat.champs?.email}
       />
+      {boutiques.length > 1 && (
+        <CasesBoutiques
+          boutiques={boutiques}
+          cochees={boutiqueActiveId ? [boutiqueActiveId] : []}
+          idPrefixe="nouveau-vendeur"
+        />
+      )}
       {etat.erreur && (
         <p role="alert" className="text-danger text-sm">
           {etat.erreur}

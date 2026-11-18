@@ -27,7 +27,7 @@ export default async function PageProduit({
 }) {
   const profil = await exigerRole("boutique");
   const { id } = await params;
-  const boutiqueId = profil.boutiqueIds[0] ?? "";
+  const boutiqueId = profil.boutiqueActiveId ?? "";
   const supabase = await supabaseServeur();
   const [produit, mouvements] = await Promise.all([
     lireProduit(supabase, id, boutiqueId),
@@ -163,7 +163,7 @@ export default async function PageProduit({
               href={`/stock/nouveau?copie=${produit.id}`}
               className="border-border flex min-h-11 items-center rounded-full border bg-white px-4 text-sm font-semibold"
             >
-              Même produit, autre marque
+              Dupliquer
             </Link>
           </div>
           <section aria-label="Mouvements de stock" className="flex flex-col gap-3">

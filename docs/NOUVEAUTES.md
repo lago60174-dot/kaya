@@ -1,5 +1,12 @@
 # Nouveautés (novembre 2026)
 
+## Plusieurs boutiques par compte
+
+- Migration à appliquer après la 22 : `supabase/migrations/20260101000023_plusieurs_boutiques.sql`.
+- Réservé aux plans qui portent `multi_boutiques` (Business). Page **Boutiques** pour en ajouter ; sélecteur de boutique en haut de l'écran ; vue d'ensemble sur le tableau de bord ; choix des boutiques de chaque vendeur dans Paramètres → Vendeurs.
+- Après une descente de plan, les boutiques en trop passent en lecture seule (rien n'est supprimé).
+- Détails et limites : `docs/DECISIONS.md`, section « Étape 16 ».
+
 ## 0. Fusion v12
 
 Refonte de la vitrine, page Rapports, tableau de bord, conversion HEIC fusionnés. Migrations à appliquer dans l'ordre : 14, 15, puis `…016_rapports.sql` (ex-14 de la v12, renumérotée).
@@ -59,3 +66,36 @@ Sans ces variables rien ne casse : emails et push sont simplement désactivés.
 - Catalogue modèle : écran `/demarrage` (1re étape après l'inscription) et bouton « Catalogue modèle » dans Stock. Images à envoyer une fois dans R2 : `node catalogue/outils/televerser_r2.mjs` (voir `catalogue/README.md`).
 - v22 : compléments rapports/caisse/paramètres (onglets Boutique, Vendeurs, Abonnement) repris.
 - Notifications : conservé le système existant (table `notifications`, push, préférences, état lu). Le mécanisme `notifications_vues` de la v22 a été écarté (doublon).
+
+## Plan obligatoire à l'inscription
+- Le formulaire d'inscription affiche les plans publics ; en choisir un est obligatoire (paiement possible plus tard). Vérifié aussi côté serveur (plan inexistant ou non public refusé avant toute création de compte), puis enregistré via `choisir_plan`.
+
+## Catalogue, duplication, classement hebdomadaire
+- Catalogue modèle : la barre « Ajouter à ma boutique » était masquée par la navigation (mobile) et le menu latéral ; elle est maintenant au-dessus (classe `.kaya-barre-validation`).
+- Stock : bouton « Dupliquer » sur la fiche produit. Copie catégorie, marque, photo, unités et prix (pas le stock ni le code-barres) ; on modifie puis on enregistre. Même nom + même marque reste interdit.
+- Rapports : « Meilleurs vendeurs de la semaine » (lundi → dimanche, navigation semaine précédente/suivante) : classement des vendeurs et produits les plus vendus. Migration `20260101000020_classement_semaine.sql` (à appliquer après la 19).
+
+## Panneau d'administration (/admin)
+- Migration `20260101000021_administration.sql` (après la 20). Toutes les fonctions `admin_*` refusent un compte qui n'est pas administrateur de la plateforme.
+- Créer l'administrateur (une fois, après avoir créé son compte normalement) :
+  `insert into administrateurs_plateforme (utilisateur_id) select id from auth.users where email = 'TON_EMAIL';`
+  À la connexion il arrive sur `/admin`. Un compte administrateur ne doit pas être aussi membre d'une boutique.
+- Pages : Vue d'ensemble (boutiques, revenu mensuel estimé, encaissé 30 j, à encaisser, boutiques actives, à traiter), Boutiques (recherche, filtres statut/plan), Fiche boutique (infos, activité, parrain, factures, paiement manuel, changement de plan, suspendre / réactiver avec jours offerts / annuler, historique), Paiements (factures récentes, paiements Fapshi à revoir), Plans (prix et visibilité), Partenaires (accepter / refuser les demandes), Journal.
+- Toute action est écrite dans `journal_audit`. Rien n'est supprimé.
+- Pas encore fait : création automatique du compte partenaire à l'acceptation, versement des commissions, envoi manuel d'une relance WhatsApp.
+
+## Résumé WhatsApp quotidien
+- Migration `20260101000022_resume_whatsapp.sql` (après la 21).
+- Le propriétaire l'active dans Paramètres > Boutique (désactivé par défaut ; plans Pro et Business ; numéro WhatsApp d'inscription).
+- Contenu : ventes du jour, nombre de ventes, produit le plus vendu, produits en stock bas, crédits clients. Jamais de marge ni de prix d'achat.
+- Un seul envoi par boutique et par jour (heure de Douala) ; échec retenté jusqu'à 3 fois aux exécutions suivantes.
+- Nouveau job cron-job.org : GET `https://TON-URL/api/cron/resume`, chaque soir à 20:00 (Africa/Douala), en-tête `Authorization: Bearer <CRON_SECRET>`.
+- Faire approuver le modèle `kaya_resume_quotidien` (texte dans `docs/WHATSAPP_TEMPLATES.md`) ; sans lui Zernio refusera l'envoi (noté « échec » dans `envois_whatsapp`).
+
+## Fusion hors-ligne (v15) + plusieurs boutiques (v13)
+- Migrations : aucune nouvelle ; ordre complet 14 → 23 (la 23 est `plusieurs_boutiques`). Le mode hors ligne n'a pas de migration.
+- Correction à la fusion : une vente ou une dépense faite sans réseau porte maintenant sa boutique (`boutiqueId`). À l'envoi, le serveur l'enregistre dans cette boutique-là, même si l'utilisateur a changé de boutique entre-temps ; une boutique devenue inaccessible est refusée. Le catalogue gardé sur l'appareil retient aussi sa boutique. Les anciennes opérations sans boutique vont dans la boutique active.
+- Tableau de bord : actualisation chaque minute (v15) conservée avec la vue consolidée et le choix de boutique (v13). La v16 avait le même code que la v15 (seules les images du catalogue manquaient) : rien à fusionner.
+
+## Images du catalogue retirées du projet
+Les photos (`catalogue/images/`) sont déjà dans Cloudflare R2 sous `catalogue/` : elles ne sont plus dans le zip. Le script `televerser_r2.mjs` n'est utile que pour ajouter de nouvelles images (recréer le dossier `catalogue/images/` à ce moment-là).

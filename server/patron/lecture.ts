@@ -1,6 +1,7 @@
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { actionsVisibles } from "@/lib/journal/journal";
+import { lireLignesConsolidees, type LigneConsolidee } from "@/lib/patron/consolide";
 
 export interface TableauDeBord {
   jour: string;
@@ -132,4 +133,13 @@ export async function listerBoutiques(supabase: SupabaseClient) {
     .select("id, nom")
     .order("nom");
   return (data ?? []) as { id: string; nom: string }[];
+}
+
+/** Vue d'ensemble : une ligne par boutique, calculée en un seul appel. Réservée au propriétaire (la base le vérifie). */
+export async function lireTableauConsolide(
+  supabase: SupabaseClient,
+): Promise<LigneConsolidee[] | null> {
+  const { data, error } = await supabase.rpc("tableau_de_bord_consolide");
+  if (error || !data) return null;
+  return lireLignesConsolidees((data as { boutiques?: unknown }).boutiques);
 }

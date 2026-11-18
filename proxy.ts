@@ -17,6 +17,7 @@ const PAGES_SANS_SESSION = new Set([
   "/conditions",
   "/conditions-partenaires",
   "/hors-ligne",
+  "/hors-ligne/vente",
 ]);
 
 /** Un cookie de session Supabase est présent (sans appel réseau). Le cookie du code PKCE n'est pas une session. */

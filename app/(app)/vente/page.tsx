@@ -8,7 +8,7 @@ export const metadata = { title: "Vente · Kaya" };
 
 export default async function PageVente() {
   const profil = await exigerRole("boutique");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (
     !boutiqueId ||
     (profil.role !== "proprietaire" && profil.role !== "vendeur")
@@ -27,6 +27,7 @@ export default async function PageVente() {
   return (
     <EcranVente
       role={profil.role}
+      boutiqueId={boutiqueId}
       seuilRemise={Number(parametres.data?.seuil_remise_vendeur ?? 5)}
       produitsInitiaux={versProduitsVente(page.produits)}
     />

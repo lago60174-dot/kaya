@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { FormulaireInscription } from "@/components/auth/formulaire-inscription";
 import { normaliserCode } from "@/lib/auth/parrainage";
+import { formatFcfa } from "@/lib/format";
+import { chargerOffrePublique } from "@/server/vitrine/offre-publique";
 
 export const metadata = { title: "Créer ma boutique · Kaya" };
 
@@ -40,8 +42,14 @@ async function InscriptionAvecCode({
   searchParams: Recherche;
 }) {
   const { code, plan } = await searchParams;
+  const { plans } = await chargerOffrePublique();
   return (
     <FormulaireInscription
+      plans={plans.map((p) => ({
+        code: p.code,
+        nom: p.nom,
+        prix: formatFcfa(p.prixMensuel),
+      }))}
       plan={plan && /^[a-z_]{2,30}$/.test(plan) ? plan : undefined}
       codeInitial={code ? (normaliserCode(code) ?? undefined) : undefined}
     />

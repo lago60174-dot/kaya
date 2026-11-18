@@ -217,7 +217,7 @@ export function AssistantCatalogue({
   if (resultat) return <Termine resultat={resultat} />;
 
   return (
-    <div className="flex max-w-2xl flex-col gap-4 pb-28">
+    <div className="flex max-w-2xl flex-col gap-4 pb-40">
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">
           {premiereFois ? "Remplissez votre stock en quelques minutes" : "Catalogue modèle"}
@@ -313,7 +313,7 @@ export function AssistantCatalogue({
         </ul>
       )}
 
-      <div className="bg-background border-border fixed inset-x-0 bottom-0 z-20 border-t p-3">
+      <div className="kaya-barre-validation">
         <div className="mx-auto flex max-w-2xl flex-col gap-2">
           {erreur && (
             <p role="alert" className="text-danger text-sm">

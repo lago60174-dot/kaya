@@ -19,16 +19,19 @@ export default async function PageNouveauProduit({
   const [categories, marques, modele] = await Promise.all([
     supabase.from("categories").select("id, nom").order("nom"),
     supabase.from("marques").select("id, nom").order("nom"),
-    copie && profil.boutiqueIds[0]
-      ? lireProduit(supabase, copie, profil.boutiqueIds[0])
+    copie && profil.boutiqueActiveId
+      ? lireProduit(supabase, copie, profil.boutiqueActiveId)
       : null,
   ]);
 
-  // « Copier » : même produit dans une autre marque, sans refaire les conditionnements. Photo, stock et marque ne sont pas copiés.
+  // « Dupliquer » : tout est copié (catégorie, marque, photo, unités, prix) sauf le stock et le code-barres. Le propriétaire modifie ce qu'il veut avant d'enregistrer.
   const initial: ProduitInitial = modele
     ? {
         nom: modele.nom,
         categorieId: modele.categorie_id,
+        marqueId: modele.marque_id,
+        imageCle: modele.image_cle,
+        vignetteCle: modele.vignette_cle,
         uniteBase: modele.unite_base,
         seuilAlerte: String(modele.seuil_alerte),
         prixAchat: String(modele.prix_achat ?? 0),
@@ -43,12 +46,13 @@ export default async function PageNouveauProduit({
   return (
     <>
       <h1 className="mb-4 text-2xl font-bold">
-        {modele ? `Même produit, autre marque` : "Nouveau produit"}
+        {modele ? `Dupliquer « ${modele.nom_affiche} »` : "Nouveau produit"}
       </h1>
       {modele && (
         <p className="text-muted mb-4">
-          Copié depuis « {modele.nom_affiche} ». Choisissez la nouvelle marque
-          et ajustez les prix.
+          Tout est repris du produit d&apos;origine (le stock repart à 0). Changez le
+          nom, la marque, les prix ou la photo : deux produits ne peuvent pas
+          avoir exactement le même nom et la même marque.
         </p>
       )}
       <FormulaireProduit

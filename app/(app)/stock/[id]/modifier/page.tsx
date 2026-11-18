@@ -15,7 +15,7 @@ export default async function PageModifierProduit({
   const { id } = await params;
   const supabase = await supabaseServeur();
   const [produit, categories, marques] = await Promise.all([
-    lireProduit(supabase, id, profil.boutiqueIds[0] ?? ""),
+    lireProduit(supabase, id, profil.boutiqueActiveId ?? ""),
     supabase.from("categories").select("id, nom").order("nom"),
     supabase.from("marques").select("id, nom").order("nom"),
   ]);

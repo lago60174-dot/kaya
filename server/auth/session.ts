@@ -1,6 +1,8 @@
 import "server-only";
 import { cache } from "react";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { COOKIE_BOUTIQUE } from "@/lib/boutiques/active";
 import { decisionGarde, type Zone } from "@/lib/permissions";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { chargerProfil, type Profil } from "./profil";
@@ -9,7 +11,9 @@ import { chargerProfil, type Profil } from "./profil";
 export const lireSession = cache(async (): Promise<Profil | null> => {
   const supabase = await supabaseServeur();
   const { data } = await supabase.auth.getUser();
-  return data.user ? chargerProfil(supabase, data.user) : null;
+  if (!data.user) return null;
+  const demandee = (await cookies()).get(COOKIE_BOUTIQUE)?.value;
+  return chargerProfil(supabase, data.user, demandee);
 });
 
 /** À appeler en tête de chaque page protégée et de chaque action serveur. */

@@ -5,7 +5,7 @@ puis bouton « Catalogue modèle » dans Stock). Le commerçant coche ce qu'il v
 
 ## Fonctionnement
 - Données : `lib/catalogue/lot-N.json` (générées depuis `catalogue/source/lot-N.csv`), assemblées dans `lib/catalogue/index.ts`.
-- Photos : `catalogue/images/<nom>.webp` (800 px) et `<nom>-v.webp` (vignette 200 px), envoyées **une seule fois dans R2** sous `catalogue/`
+- Photos (déjà dans R2, retirées du projet pour l'alléger ; `catalogue/images/` n'existe plus) : `<nom>.webp` (800 px) et `<nom>-v.webp` (vignette 200 px), envoyées **une seule fois dans R2** sous `catalogue/`
   (`node catalogue/outils/televerser_r2.mjs`) et partagées par toutes les boutiques : aucune copie par boutique, rien dans Supabase
   (la base ne garde que la clé `catalogue/<nom>.webp`, acceptée par la migration 16). Servies par `/img/catalogue/…`, cache d'une semaine.
 - Import : action `server/catalogue/actions.ts` -> fonction SQL `importer_catalogue` (une transaction, tout ou rien, jamais de doublon).

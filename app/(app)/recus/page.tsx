@@ -16,7 +16,7 @@ export default async function PageRecus({
 }) {
   const profil = await exigerRole("boutique");
   const p = await searchParams;
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId)
     return <p>Aucune boutique n&apos;est associée à votre compte.</p>;
 

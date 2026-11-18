@@ -29,7 +29,7 @@ const ERREUR_COMPTE = "Impossible de charger votre boutique. Reconnectez-vous.";
 
 async function contexteProprietaire() {
   const profil = await exigerRole("proprietaire");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   return profil.organisationId && boutiqueId
     ? { organisationId: profil.organisationId, boutiqueId }
     : null;

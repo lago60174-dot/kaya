@@ -22,6 +22,7 @@ const PUBLIC_EXACT = [
   "/opengraph-image",
   "/icon.svg",
   "/hors-ligne",
+  "/hors-ligne/vente",
   "/manifest.webmanifest",
   "/sw.js",
 ];
@@ -41,6 +42,7 @@ const PROPRIETAIRE_PREFIXES = [
   "/parametres",
   "/demarrage",
   "/journal",
+  "/boutiques",
   "/devis",
   "/fournisseurs",
 ];
@@ -55,12 +57,7 @@ export function zonePourChemin(chemin: string): Zone {
     PUBLIC_PREFIXES.some((p) => chemin.startsWith(p))
   )
     return "public";
-  // Accessibles à tout compte connecté, même tenu de changer son mot de passe ou de choisir sa formule.
-  if (
-    startsWithSegment(chemin, "/mot-de-passe") ||
-    startsWithSegment(chemin, "/choisir-plan")
-  )
-    return "connecte";
+  if (startsWithSegment(chemin, "/mot-de-passe")) return "connecte";
   if (startsWithSegment(chemin, "/admin")) return "admin";
   if (startsWithSegment(chemin, "/affilie")) return "affilie";
   if (
@@ -93,8 +90,6 @@ export function roleAutorise(role: Role | null, zone: Zone): boolean {
 export interface EtatSession {
   role: Role | null;
   doitChangerMotDePasse: boolean;
-  /** Propriétaire dont la boutique n'a pas encore de formule choisie : il doit la choisir avant tout le reste. */
-  planAChoisir?: boolean;
 }
 export type DecisionGarde =
   { type: "ok" } | { type: "rediriger"; vers: string };
@@ -109,8 +104,6 @@ export function decisionGarde(
     return { type: "rediriger", vers: "/connexion" };
   if (session.doitChangerMotDePasse && zone !== "connecte")
     return { type: "rediriger", vers: "/mot-de-passe" };
-  if (session.planAChoisir && zone !== "connecte")
-    return { type: "rediriger", vers: "/choisir-plan" };
   if (!roleAutorise(session.role, zone))
     return { type: "rediriger", vers: accueilPour(session.role) };
   return { type: "ok" };
@@ -148,6 +141,7 @@ const MENU: DefinitionMenu[] = [
   { href: "/caisse", libelle: "Caisse", roles: ["proprietaire", "vendeur"] },
   { href: "/recus", libelle: "Reçus", roles: ["proprietaire", "vendeur"] },
   { href: "/notifications", libelle: "Notifications", roles: ["proprietaire"] },
+  { href: "/boutiques", libelle: "Boutiques", roles: ["proprietaire"], fonction: "multi_boutiques" },
   { href: "/journal", libelle: "Journal", roles: ["proprietaire"] },
   { href: "/devis", libelle: "Devis", roles: ["proprietaire"], fonction: "devis" },
   { href: "/fournisseurs", libelle: "Fournisseurs", roles: ["proprietaire"], fonction: "fournisseurs" },

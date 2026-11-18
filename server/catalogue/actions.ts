@@ -48,7 +48,7 @@ export async function importerCatalogueAction(
   entrees: unknown,
 ): Promise<ResultatImport> {
   const profil = await exigerRole("proprietaire");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!profil.organisationId || !boutiqueId)
     return { erreur: "Impossible de charger votre boutique. Reconnectez-vous." };
   const lu = importSchema.safeParse(entrees);

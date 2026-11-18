@@ -254,3 +254,8 @@ body { background: #fff8f1; color: var(--kaya-navy); }
   .kaya-nav-mobile-link.is-active { background: linear-gradient(#fff3e8, #fff8f1); border-radius: 16px 16px 0 0; }
   .kaya-nav-mobile-link.is-active::before { content: ""; position: absolute; inset: 0 14% auto; height: 3px; border-radius: 0 0 3px 3px; background: #f26a0f; }
 }
+
+/* Barre de validation fixe (catalogue modèle) : au-dessus de la navigation mobile, à droite du menu latéral. */
+.kaya-barre-validation { position: fixed; right: 0; bottom: 0; left: 258px; z-index: 35; padding: 12px; border-top: 1px solid #eee3da; background: #fff8f1; box-shadow: 0 -6px 20px rgba(30,28,25,.06); }
+@media (max-width: 1050px) { .kaya-barre-validation { left: 226px; } }
+@media (max-width: 760px) { .kaya-barre-validation { left: 0; bottom: calc(70px + env(safe-area-inset-bottom)); } }

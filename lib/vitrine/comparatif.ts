@@ -8,7 +8,6 @@ import { limite, peutUtiliser, type Fonctionnalite, type Plan } from "@/lib/plan
 export const FONCTIONS_BIENTOT: ReadonlySet<Fonctionnalite> = new Set([
   "devis",
   "fournisseurs",
-  "multi_boutiques",
   "resume_whatsapp",
 ]);
 

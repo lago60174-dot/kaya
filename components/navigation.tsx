@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { listerEnAttente, toutEffacer } from "@/lib/hors-ligne/stockage";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -42,6 +43,28 @@ const icones: Record<string, typeof LayoutDashboard> = {
 };
 
 const ordreMobile = ["/patron", "/vente", "/stock", "/clients", "/caisse"];
+
+/** Avant de se déconnecter : prévient si des ventes faites sans réseau ne sont pas encore envoyées, puis vide la mémoire de l'appareil. */
+function surDeconnexion(e: React.FormEvent<HTMLFormElement>) {
+  const formulaire = e.currentTarget;
+  if (formulaire.dataset.pret) return;
+  e.preventDefault();
+  void (async () => {
+    try {
+      const attente = await listerEnAttente();
+      if (
+        attente.length > 0 &&
+        !confirm(`${attente.length} vente${attente.length > 1 ? "s ne sont" : " n'est"} pas encore envoyée${attente.length > 1 ? "s" : ""}. Se déconnecter les supprimera de cet appareil. Continuer ?`)
+      )
+        return;
+      await toutEffacer();
+    } catch {
+      /* mémoire de l'appareil indisponible : on se déconnecte normalement */
+    }
+    formulaire.dataset.pret = "1";
+    formulaire.requestSubmit();
+  })();
+}
 
 export function Navigation({
   menu,
@@ -105,7 +128,7 @@ export function Navigation({
               </Link>
             )}
           </div>
-          <form action={deconnecter}>
+          <form action={deconnecter} onSubmit={surDeconnexion}>
             <button type="submit" className="kaya-logout"><LogOut size={17} /> Se déconnecter</button>
           </form>
         </div>
@@ -147,7 +170,7 @@ export function Navigation({
       {plusOuvert && (
         <div id="menu-plus" role="dialog" aria-label="Autres pages" className="kaya-more-sheet">
           {autresLiens.map((m) => lien(m, true))}
-          <form action={deconnecter}>
+          <form action={deconnecter} onSubmit={surDeconnexion}>
             <button type="submit" className="kaya-nav-mobile-link kaya-more-logout">
               <LogOut aria-hidden="true" size={19} /><span>Se déconnecter</span>
             </button>

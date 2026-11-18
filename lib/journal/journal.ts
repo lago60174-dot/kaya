@@ -98,6 +98,16 @@ export const ACTIONS: Record<string, DefinitionAction> = {
     categorie: "compte",
     base: false,
   },
+  boutique_creee: {
+    libelle: "Boutique ajoutée",
+    categorie: "compte",
+    base: false,
+  },
+  vendeur_boutiques_modifiees: {
+    libelle: "Boutiques d'un vendeur modifiées",
+    categorie: "compte",
+    base: false,
+  },
 };
 
 export const libelleAction = (action: string) =>
@@ -206,6 +216,10 @@ export function decrire(action: string, d: Details): string {
       return `${libelleAction(action)}.`;
     case "organisation_creee":
       return "Boutique créée.";
+    case "boutique_creee":
+      return `Boutique ajoutée : ${texte(d.nom) ?? "nouvelle boutique"}.`;
+    case "vendeur_boutiques_modifiees":
+      return `${texte(d.vendeur) ?? "Un vendeur"} travaille maintenant dans : ${texte(d.boutiques) ?? "aucune boutique"}.`;
     case "auto_parrainage_refuse":
       return "Parrainage refusé : un compte ne peut pas se parrainer lui-même.";
     default:

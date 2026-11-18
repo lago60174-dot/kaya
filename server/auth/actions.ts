@@ -17,6 +17,7 @@ import { emailBienvenue } from "@/server/email/modeles";
 import { emailConfigure, envoyerEmail } from "@/server/email/resend";
 import { origine } from "@/server/origine";
 import { fabriquerLienEmail } from "@/server/email/liens";
+import { COOKIE_BOUTIQUE } from "@/lib/boutiques/active";
 import { chargerProfil } from "./profil";
 import { exigerRole } from "./session";
 
@@ -47,6 +48,18 @@ export async function inscrire(
     d.codeParrainage ?? (cookieCode ? normaliserCode(cookieCode) : null);
 
   const admin = supabaseAdmin();
+  // Le plan est obligatoire (même si le paiement vient plus tard) : il doit exister et être public.
+  const { data: planValide } = await admin
+    .from("plans")
+    .select("code")
+    .eq("code", d.plan)
+    .eq("visible_public", true)
+    .maybeSingle();
+  if (!planValide)
+    return {
+      erreur: "Vérifiez les champs en rouge.",
+      champs: { plan: "Choisissez votre plan pour continuer." },
+    };
   const { data: cree, error: erreurCreation } =
     await admin.auth.admin.createUser({
       email: d.email,
@@ -87,13 +100,8 @@ export async function inscrire(
           : ERREUR_GENERIQUE,
     };
   }
-  // Formule choisie sur la page des tarifs : choix explicite, elle s'active au premier paiement. Sans choix (ou si la
-  // formule n'existe plus), la boutique reste verrouillée sur /choisir-plan : aucune formule n'est donnée par défaut.
-  let formuleChoisie = false;
-  if (d.plan) {
-    const { error } = await supabase.rpc("choisir_plan", { p_plan: d.plan });
-    formuleChoisie = !error;
-  }
+  // Plan choisi à l'inscription : il s'applique au premier paiement (le paiement peut venir plus tard).
+  await supabase.rpc("choisir_plan", { p_plan: d.plan });
   // Bienvenue + lien de confirmation : envoyés après la réponse, un échec d'email ne gêne jamais l'inscription.
   if (emailConfigure()) {
     const lienApp = `${await origine()}/patron`;
@@ -110,8 +118,8 @@ export async function inscrire(
       );
     });
   }
-  // Onboarding : 1) choisir sa formule (payer plus tard est possible), 2) remplir le stock depuis le catalogue modèle.
-  redirect(formuleChoisie ? "/demarrage" : "/choisir-plan");
+  // Première étape de l'onboarding : remplir le stock depuis le catalogue modèle.
+  redirect("/demarrage");
 }
 
 export async function connecter(
@@ -146,6 +154,7 @@ export async function connecter(
 export async function deconnecter(): Promise<void> {
   const supabase = await supabaseServeur();
   await supabase.auth.signOut();
+  (await cookies()).delete(COOKIE_BOUTIQUE); // la boutique choisie ne suit pas un autre utilisateur du même appareil
   redirect("/connexion");
 }
 

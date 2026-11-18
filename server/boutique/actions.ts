@@ -8,6 +8,7 @@ import { messageErreurBase } from "@/server/erreurs";
 import { bucketImages } from "@/server/images/bucket";
 import { cleAppartient } from "@/server/images/cles";
 import { verifierImageStockee } from "@/server/images/verification";
+import { poserBoutiqueChoisie } from "./cookie";
 
 export interface EtatLogo {
   erreur?: string;
@@ -26,7 +27,7 @@ export async function definirImageBoutiqueAction(
   if (!["logo", "signature", "cachet"].includes(type))
     return { erreur: "Image invalide." };
   const profil = await exigerRole("proprietaire");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!profil.organisationId || !boutiqueId)
     return {
       erreur: "Impossible de charger votre boutique. Reconnectez-vous.",
@@ -86,7 +87,7 @@ export async function enregistrerIdentiteAction(
   formData: FormData,
 ): Promise<EtatIdentite> {
   const profil = await exigerRole("proprietaire");
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   if (!boutiqueId)
     return { erreur: "Impossible de charger votre boutique. Reconnectez-vous." };
   const lu = identiteSchema.safeParse(
@@ -119,4 +120,47 @@ export async function enregistrerIdentiteAction(
       ? "Informations enregistrées."
       : "Rien à changer : tout est déjà à jour.",
   };
+}
+
+export interface EtatBoutique {
+  erreur?: string;
+  champs?: Record<string, string>;
+  succes?: string;
+}
+
+const boutiqueSchema = z.object({
+  nom: z
+    .string()
+    .trim()
+    .min(1, "Indiquez le nom de la boutique.")
+    .max(80, "Ce nom est trop long (80 caractères maximum)."),
+  adresse: z.string().trim().max(200, "Cette adresse est trop longue.").optional(),
+  telephone: z.string().trim().max(30, "Ce numéro est trop long.").optional(),
+});
+
+/** Ajoute une boutique à l'organisation (plan multi-boutiques). La base contrôle le rôle, le plan et la limite. */
+export async function creerBoutiqueAction(
+  _etat: EtatBoutique,
+  formData: FormData,
+): Promise<EtatBoutique> {
+  await exigerRole("proprietaire");
+  const lu = boutiqueSchema.safeParse(Object.fromEntries(formData));
+  if (!lu.success) {
+    const champs: Record<string, string> = {};
+    for (const i of lu.error.issues) champs[String(i.path[0])] ??= i.message;
+    return { erreur: "Vérifiez les champs en rouge.", champs };
+  }
+  const { data, error } = await (
+    await supabaseServeur()
+  ).rpc("creer_boutique", {
+    p_nom: lu.data.nom,
+    p_adresse: lu.data.adresse ?? null,
+    p_telephone: lu.data.telephone ?? null,
+  });
+  if (error) return { erreur: messageErreurBase(error) };
+  const cree = data as { id?: string; nom?: string } | null;
+  // On travaille tout de suite dans la nouvelle boutique : c'est presque toujours pour y entrer du stock.
+  if (cree?.id) await poserBoutiqueChoisie(cree.id);
+  revalidatePath("/", "layout");
+  return { succes: `La boutique « ${cree?.nom ?? lu.data.nom} » est créée. Vous y travaillez maintenant.` };
 }

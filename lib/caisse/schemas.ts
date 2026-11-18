@@ -8,6 +8,7 @@ const montant = z
 
 export const depenseSchema = z.object({
   cle: z.uuid(),
+  boutiqueId: z.uuid().optional(),
   categorie: z.enum(
     ["transport", "electricite", "salaire", "autre"],
     "Choisissez une catégorie.",

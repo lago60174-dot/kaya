@@ -4,12 +4,14 @@ import { SectionAbonnement } from "@/components/abonnement/section-abonnement";
 import { ChampLogo } from "@/components/boutique/champ-logo";
 import { FormulaireIdentite } from "@/components/boutique/formulaire-identite";
 import { ActionsVendeur } from "@/components/vendeurs/actions-vendeur";
+import { BoutiquesVendeur } from "@/components/vendeurs/boutiques-vendeur";
 import { FormulaireVendeur } from "@/components/vendeurs/formulaire-vendeur";
 import { FormulaireParametres } from "@/components/parametres/formulaire-parametres";
 import { LIBELLE_STATUT_FACTURE } from "@/lib/abonnement/abonnement";
 import { formatFcfa } from "@/lib/format";
 import { urlImage } from "@/server/images/cles";
-import { limite } from "@/lib/plans";
+import { limite, peutUtiliser } from "@/lib/plans";
+import { ResumeWhatsapp } from "@/components/abonnement/resume-whatsapp";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { exigerRole } from "@/server/auth/session";
 import { lireAbonnement, lireParametres } from "@/server/parametres/lecture";
@@ -39,21 +41,26 @@ export default async function PageParametres({
   const supabase = await supabaseServeur();
   const { data: vendeurs } = await supabase
     .from("membres")
-    .select("id, nom, actif")
+    .select("id, nom, actif, boutiques_autorisees")
     .eq("role", "vendeur")
     .order("cree_le");
   const { data: boutique } = await supabase
     .from("boutiques")
     .select("logo_cle, signature_cle, cachet_cle, ville, email, rccm, niu, signataire")
-    .eq("id", profil.boutiqueIds[0] ?? "")
+    .eq("id", profil.boutiqueActiveId ?? "")
     .maybeSingle();
   const logoUrl = boutique?.logo_cle ? urlImage(boutique.logo_cle) : null;
   const signatureUrl = boutique?.signature_cle ? urlImage(boutique.signature_cle) : null;
   const cachetUrl = boutique?.cachet_cle ? urlImage(boutique.cachet_cle) : null;
+  const { data: reglageResume } = await supabase
+    .from("resume_whatsapp_reglages")
+    .select("actif")
+    .maybeSingle();
+  const resumeActif = reglageResume?.actif === true;
   const max = profil.plan ? limite(profil.plan, "vendeurs") : 0;
   const actifs = (vendeurs ?? []).filter((v) => v.actif).length;
   const peutAjouter = max === null || actifs < max;
-  const boutiqueId = profil.boutiqueIds[0];
+  const boutiqueId = profil.boutiqueActiveId;
   const [parametres, abonnement] = await Promise.all([
     boutiqueId ? lireParametres(boutiqueId) : null,
     lireAbonnement(),
@@ -128,6 +135,9 @@ export default async function PageParametres({
           </section>
         </>
       )}
+      {onglet === "boutique" && profil.plan && (
+        <ResumeWhatsapp actif={resumeActif} inclus={peutUtiliser(profil.plan, "resume_whatsapp")} />
+      )}
       {onglet === "boutique" && parametres && (
         <FormulaireParametres valeurs={parametres} />
       )}
@@ -151,13 +161,23 @@ export default async function PageParametres({
                     <span className="text-muted text-sm">(désactivé)</span>
                   )}
                 </p>
+                {profil.boutiques.length > 1 && (
+                  <BoutiquesVendeur
+                    membreId={v.id}
+                    boutiques={profil.boutiques}
+                    attribuees={v.boutiques_autorisees ?? []}
+                  />
+                )}
                 <ActionsVendeur membreId={v.id} actif={v.actif} />
               </li>
             ))}
           </ul>
         )}
         {peutAjouter ? (
-          <FormulaireVendeur />
+          <FormulaireVendeur
+            boutiques={profil.boutiques}
+            boutiqueActiveId={profil.boutiqueActiveId}
+          />
         ) : (
           <p className="bg-brand-soft rounded-lg p-3 text-sm">
             Votre abonnement permet {max} vendeur

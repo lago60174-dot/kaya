@@ -23,7 +23,7 @@ export default async function PagePaiement({
   const p = await lirePaiementCredit(
     await supabaseServeur(),
     id,
-    profil.boutiqueIds[0] ?? "",
+    profil.boutiqueActiveId ?? "",
     numero,
   );
   if (!p) notFound();

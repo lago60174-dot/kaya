@@ -50,3 +50,38 @@ export async function lireRapport(
     })),
   };
 }
+
+export interface ClassementSemaine {
+  debut: string;
+  fin: string;
+  vendeurs: { vendeurId: string; nom: string; nbVentes: number; total: number }[];
+  produits: { produitId: string; nom: string; quantiteBase: number; uniteBase: string; montant: number }[];
+}
+
+/** Classement d'une semaine (lundi → dimanche) : 0 = cette semaine, 1 = la précédente… Null si la fonction SQL est absente. */
+export async function lireClassementSemaine(
+  supabase: SupabaseClient,
+  boutiqueId: string,
+  decalage: number,
+): Promise<ClassementSemaine | null> {
+  const { data, error } = await supabase.rpc("classement_semaine", { p_boutique: boutiqueId, p_decalage: decalage });
+  if (error || !data) return null;
+  const b = data as Brut;
+  return {
+    debut: String(b.debut),
+    fin: String(b.fin),
+    vendeurs: (b.vendeurs as Brut[]).map((v) => ({
+      vendeurId: v.vendeur_id,
+      nom: v.nom,
+      nbVentes: Number(v.nb_ventes),
+      total: Number(v.total),
+    })),
+    produits: (b.produits as Brut[]).map((p) => ({
+      produitId: p.produit_id,
+      nom: p.nom,
+      quantiteBase: Number(p.quantite_base),
+      uniteBase: p.unite_base,
+      montant: Number(p.montant),
+    })),
+  };
+}
