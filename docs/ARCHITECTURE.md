@@ -28,6 +28,7 @@ Caisse : depenses, clotures_caisse. Numérotation : compteurs_recus. Traçabilit
 | `enregistrer_depense`                                     | proprio, vendeur      | dépense idempotente (salaire : proprio seul), journal                                                          |
 | `creer_boutique`                                          | proprio               | ajoute une boutique (plan multi-boutiques, limite sous verrou), réglages par défaut, journal                  |
 | `definir_boutiques_vendeur`                               | proprio               | boutiques où un vendeur travaille (au moins une, de l'organisation), journal                                   |
+| `transferer_stock`                                        | proprio               | déplace du stock entre deux boutiques (sortie + entrée atomiques, jamais de stock négatif, idempotent), journal |
 | `lister_boutiques`                                        | proprio, vendeur      | boutiques accessibles (filtrées par la RLS) et indicateur « en écriture »                                      |
 | `tableau_de_bord_consolide`                               | proprio               | une ligne par boutique, en un appel                                                                            |
 | `annuler_depense`                                         | proprio               | annule une dépense (motif obligatoire, impossible si la journée est clôturée), journal en alerte               |

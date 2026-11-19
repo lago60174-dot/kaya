@@ -25,7 +25,7 @@ export interface TotalDocument {
 }
 
 export interface DocumentRecu {
-  type: "vente" | "paiement";
+  type: "vente" | "paiement" | "devis" | "bon_livraison";
   /** Numéro seul, pour nommer le fichier : R-2026-000123 ou P-2026-12. */
   numero: string;
   /** « Reçu R-2026-000123 » ou « Reçu de paiement P-2026-12 ». */
@@ -49,12 +49,14 @@ export interface DocumentRecu {
   colonnes: { designation: string; quantite: boolean };
   lignes: LigneDocument[];
   totaux: TotalDocument[];
+  /** Lignes de texte sous les totaux (conditions d'un devis, adresse de livraison, « bon pour accord »). */
+  notes?: string[];
   mentionLegale: string | null;
   remerciement: string;
 }
 
 /** Adresse + ville, sans répéter la ville quand l'adresse la contient déjà. */
-function adresseComplete(adresse?: string | null, ville?: string | null): string | null {
+export function adresseComplete(adresse?: string | null, ville?: string | null): string | null {
   const a = adresse?.trim() || "";
   const v = ville?.trim() || "";
   if (a && v && a.toLowerCase().includes(v.toLowerCase())) return a;

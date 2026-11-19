@@ -5,6 +5,7 @@
 - Migration à appliquer après la 22 : `supabase/migrations/20260101000023_plusieurs_boutiques.sql`.
 - Réservé aux plans qui portent `multi_boutiques` (Business). Page **Boutiques** pour en ajouter ; sélecteur de boutique en haut de l'écran ; vue d'ensemble sur le tableau de bord ; choix des boutiques de chaque vendeur dans Paramètres → Vendeurs.
 - Après une descente de plan, les boutiques en trop passent en lecture seule (rien n'est supprimé).
+- **Transfert de stock** entre boutiques (page Stock → « Transférer du stock ») : migration `…025_transferts_stock.sql`. Propriétaire seulement, jamais de stock négatif, historique conservé.
 - Détails et limites : `docs/DECISIONS.md`, section « Étape 16 ».
 
 ## 0. Fusion v12
@@ -108,3 +109,20 @@ Le résumé WhatsApp du soir et « plusieurs boutiques » ne portent plus la men
 
 ## Administrateur qui a aussi une boutique
 Un compte inscrit dans `administrateurs_plateforme` accède à `/admin` même s'il gère une boutique : un lien « Administration » apparaît dans son menu, et « Ma boutique » dans l'espace admin. Un compte admin sans boutique arrive directement sur `/admin`.
+
+## v18 — Choix du plan obligatoire (page /choisir-plan)
+- `choisirPlanInitialAction` ajoutée dans `server/abonnement/actions.ts` (corrige l'échec de build Vercel).
+- Migration 24 (idempotente) : colonne `plan_choisi_le` ; `choisir_plan` la renseigne. Tu peux supprimer `20_plan_obligatoire.sql` de ton dépôt (remplacée par la 24).
+- Garde centrale : un propriétaire sans plan choisi est renvoyé vers `/choisir-plan` (`profil.planAChoisir`).
+## Devis, proformas et bons de livraison (étape 14)
+
+- Migration à appliquer : `supabase/migrations/20260101000026_devis.sql`.
+- Plans Pro et Business : menu **Devis** (`/devis`), nouveau devis ou proforma, envoi, acceptation, conversion en vente, bons de livraison (`/devis/livraisons`) depuis un devis accepté ou un reçu.
+
+## Fournisseurs et commandes (étape 15)
+
+- Migration à appliquer : `supabase/migrations/20260101000027_fournisseurs.sql` (après la 21).
+- Plans Pro et Business : menu **Fournisseurs** (`/fournisseurs`) : fiches, commandes, réception qui alimente le stock, dettes avec paiements partiels, historique des prix d'achat.
+
+## v19 — Fusion fournisseurs/devis + transferts de stock
+- Migrations à appliquer dans l'ordre : 24 (plan obligatoire), 25 (transferts de stock), 26 (devis), 27 (fournisseurs). Supprimer de ton dépôt les anciens fichiers `…020_plan_obligatoire.sql`, `…021_devis.sql`, `…022_fournisseurs.sql`, `…024_transferts_stock.sql` s'ils existent.

@@ -57,11 +57,15 @@ export function zonePourChemin(chemin: string): Zone {
     PUBLIC_PREFIXES.some((p) => chemin.startsWith(p))
   )
     return "public";
-  if (startsWithSegment(chemin, "/mot-de-passe")) return "connecte";
+  if (
+    startsWithSegment(chemin, "/mot-de-passe") ||
+    startsWithSegment(chemin, "/choisir-plan")
+  )
+    return "connecte";
   if (startsWithSegment(chemin, "/admin")) return "admin";
   if (startsWithSegment(chemin, "/affilie")) return "affilie";
   if (
-    /^\/stock\/(nouveau|[^/]+\/modifier)$/.test(chemin) ||
+    /^\/stock\/(nouveau|transfert|[^/]+\/modifier)$/.test(chemin) ||
     /^\/clients\/[^/]+\/modifier$/.test(chemin)
   )
     return "proprietaire";
@@ -92,6 +96,8 @@ export interface EtatSession {
   doitChangerMotDePasse: boolean;
   /** Administrateur de la plateforme, même s'il gère aussi une boutique : il accède à /admin. */
   estAdmin?: boolean;
+  /** Propriétaire qui n'a pas encore choisi sa formule : tout est fermé jusque-là sauf /choisir-plan. */
+  planAChoisir?: boolean;
 }
 export type DecisionGarde =
   { type: "ok" } | { type: "rediriger"; vers: string };
@@ -107,6 +113,8 @@ export function decisionGarde(
   if (session.doitChangerMotDePasse && zone !== "connecte")
     return { type: "rediriger", vers: "/mot-de-passe" };
   if (zone === "admin" && session.estAdmin) return { type: "ok" };
+  if (session.planAChoisir && session.role === "proprietaire" && zone !== "connecte")
+    return { type: "rediriger", vers: "/choisir-plan" };
   if (!roleAutorise(session.role, zone))
     return { type: "rediriger", vers: accueilPour(session.role) };
   return { type: "ok" };

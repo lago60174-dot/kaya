@@ -3,7 +3,7 @@ import { libelleCategorie } from "@/lib/caisse/caisse";
 import { libelleMode } from "@/lib/ventes/paiements";
 
 export type CategorieJournal =
-  "ventes" | "caisse" | "stock" | "credits" | "compte";
+  "ventes" | "caisse" | "stock" | "credits" | "documents" | "fournisseurs" | "compte";
 
 export const CATEGORIES_JOURNAL: { code: CategorieJournal; libelle: string }[] =
   [
@@ -11,6 +11,8 @@ export const CATEGORIES_JOURNAL: { code: CategorieJournal; libelle: string }[] =
     { code: "caisse", libelle: "Caisse" },
     { code: "stock", libelle: "Stock" },
     { code: "credits", libelle: "Crédits" },
+    { code: "documents", libelle: "Devis et livraisons" },
+    { code: "fournisseurs", libelle: "Fournisseurs" },
     { code: "compte", libelle: "Compte" },
   ];
 
@@ -83,6 +85,23 @@ export const ACTIONS: Record<string, DefinitionAction> = {
     categorie: "credits",
     base: false,
   },
+  devis_envoye: { libelle: "Devis envoyé", categorie: "documents", base: false },
+  devis_accepte: { libelle: "Devis accepté", categorie: "documents", base: false },
+  devis_refuse: { libelle: "Devis refusé", categorie: "documents", base: false },
+  devis_converti: {
+    libelle: "Devis converti en vente",
+    categorie: "documents",
+    base: false,
+  },
+  bon_livraison_cree: {
+    libelle: "Bon de livraison",
+    categorie: "documents",
+    base: false,
+  },
+  commande_creee: { libelle: "Commande passée", categorie: "fournisseurs", base: false },
+  commande_recue: { libelle: "Marchandise reçue", categorie: "fournisseurs", base: false },
+  commande_annulee: { libelle: "Commande annulée", categorie: "fournisseurs", base: false },
+  paiement_fournisseur: { libelle: "Fournisseur payé", categorie: "fournisseurs", base: false },
   parametres_modifies: {
     libelle: "Paramètres modifiés",
     categorie: "compte",
@@ -96,6 +115,11 @@ export const ACTIONS: Record<string, DefinitionAction> = {
   auto_parrainage_refuse: {
     libelle: "Parrainage refusé",
     categorie: "compte",
+    base: false,
+  },
+  stock_transfere: {
+    libelle: "Stock transféré",
+    categorie: "stock",
     base: false,
   },
   boutique_creee: {
@@ -214,8 +238,52 @@ export function decrire(action: string, d: Details): string {
     case "produit_archive":
     case "produit_restaure":
       return `${libelleAction(action)}.`;
+    case "devis_envoye":
+      return `${d.type === "proforma" ? "Proforma" : "Devis"} ${texte(d.numero) ?? ""} de ${fcfa(d.total) ?? "?"} envoyé.`.replace(
+        "  ",
+        " ",
+      );
+    case "devis_accepte":
+      return `Devis ${texte(d.numero) ?? ""} de ${fcfa(d.total) ?? "?"} accepté par le client.`.replace(
+        "  ",
+        " ",
+      );
+    case "devis_refuse":
+      return `Devis ${texte(d.numero) ?? ""} de ${fcfa(d.total) ?? "?"} refusé par le client.`.replace(
+        "  ",
+        " ",
+      );
+    case "devis_converti": {
+      const avant = nombre(d.total_devis);
+      const apres = nombre(d.total_vente);
+      const change = avant !== null && apres !== null && avant !== apres;
+      return `Devis ${texte(d.numero) ?? ""} converti en vente ${texte(d.numero_recu) ?? "?"} de ${fcfa(d.total_vente) ?? "?"}${change ? ` (le devis était de ${fcfa(d.total_devis) ?? "?"} : prix modifiés depuis)` : ""}.`.replace(
+        "  ",
+        " ",
+      );
+    }
+    case "bon_livraison_cree":
+      return `Bon de livraison ${texte(d.numero) ?? ""} créé pour ${texte(d.source) ?? "?"}.`.replace(
+        "  ",
+        " ",
+      );
+    case "commande_creee":
+      return `Commande ${texte(d.numero) ?? ""} de ${fcfa(d.total) ?? "?"} passée à ${texte(d.fournisseur) ?? "un fournisseur"}.`.replace("  ", " ");
+    case "commande_recue": {
+      const prix = nombre(d.prix_modifies);
+      return `Réception de ${fcfa(d.montant) ?? "?"} pour la commande ${texte(d.numero) ?? ""}${prix ? ` (${prix} prix d'achat modifié${prix > 1 ? "s" : ""})` : ""}, dont ${fcfa(d.paye) ?? "0 FCFA"} payé.`.replace("  ", " ");
+    }
+    case "commande_annulee":
+      return `Commande ${texte(d.numero) ?? ""} annulée : ${texte(d.motif) ?? "sans motif"}.`.replace("  ", " ");
+    case "paiement_fournisseur":
+      return `${fcfa(d.montant) ?? "?"} payé à ${texte(d.fournisseur) ?? "un fournisseur"} (reste ${fcfa(d.solde) ?? "?"}).`;
     case "organisation_creee":
       return "Boutique créée.";
+    case "stock_transfere": {
+      const nb = Number(d.nb_produits);
+      const ap = texte(d.apercu);
+      return `${Number.isFinite(nb) && nb > 0 ? `${nb} produit${nb > 1 ? "s" : ""}` : "Du stock"} transféré${nb > 1 ? "s" : ""} de ${texte(d.de) ?? "une boutique"} vers ${texte(d.vers) ?? "une autre"}${ap ? ` : ${ap}` : ""}.`;
+    }
     case "boutique_creee":
       return `Boutique ajoutée : ${texte(d.nom) ?? "nouvelle boutique"}.`;
     case "vendeur_boutiques_modifiees":
@@ -241,6 +309,14 @@ export function lienEntite(
       return `/clients/${entiteId}`;
     case "produit":
       return `/stock/${entiteId}`;
+    case "commande":
+      return `/fournisseurs/commandes/${entiteId}`;
+    case "fournisseur":
+      return `/fournisseurs/${entiteId}`;
+    case "devis":
+      return `/devis/${entiteId}`;
+    case "bon_livraison":
+      return `/devis/livraisons/${entiteId}`;
     case "cloture": {
       const jour = texte(d.date);
       return jour ? `/caisse?date=${jour}` : "/caisse";

@@ -6,8 +6,6 @@ import { limite, peutUtiliser, type Fonctionnalite, type Plan } from "@/lib/plan
  * mais portent la mention « Bientôt disponible ». Retirer une clé d'ici suffit quand la fonction est prête.
  */
 export const FONCTIONS_BIENTOT: ReadonlySet<Fonctionnalite> = new Set([
-  "devis",
-  "fournisseurs",
 ]);
 
 export interface LignePlan {
@@ -29,7 +27,6 @@ const ORDRE: Fonctionnalite[] = [
   "journal_complet",
   "impression",
   "devis",
-  "fournisseurs",
   "resume_whatsapp",
   "multi_boutiques",
 ];

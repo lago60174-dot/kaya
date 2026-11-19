@@ -117,3 +117,38 @@ export async function listerProduits(
   if (error || !data) return { produits: [], suivant: null };
   return data as PageListe;
 }
+
+export interface TransfertHistorique {
+  id: string;
+  date: string;
+  boutiqueSource: string;
+  boutiqueDestination: string;
+  note: string | null;
+  lignes: { nom: string; quantite: number; unite: string }[];
+}
+
+/** Derniers transferts de l'organisation (propriétaire seulement : la RLS ne renvoie rien aux autres). */
+export async function listerTransferts(
+  supabase: SupabaseClient,
+  limite = 20,
+): Promise<TransfertHistorique[]> {
+  const { data } = await supabase
+    .from("transferts_stock")
+    .select("id, cree_le, boutique_source, boutique_destination, note, lignes")
+    .order("cree_le", { ascending: false })
+    .limit(limite);
+  return (data ?? []).map((t) => ({
+    id: t.id as string,
+    date: t.cree_le as string,
+    boutiqueSource: t.boutique_source as string,
+    boutiqueDestination: t.boutique_destination as string,
+    note: (t.note as string | null) ?? null,
+    lignes: Array.isArray(t.lignes)
+      ? (t.lignes as Record<string, unknown>[]).map((l) => ({
+          nom: String(l.nom ?? ""),
+          quantite: Number(l.quantite ?? 0),
+          unite: String(l.unite ?? ""),
+        }))
+      : [],
+  }));
+}

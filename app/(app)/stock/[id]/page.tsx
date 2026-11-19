@@ -18,6 +18,8 @@ const TYPES: Record<string, string> = {
   perte: "Perte",
   inventaire: "Inventaire",
   correction: "Correction",
+  transfert_sortie: "Transfert envoyé",
+  transfert_entree: "Transfert reçu",
 };
 
 export default async function PageProduit({

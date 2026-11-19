@@ -25,6 +25,8 @@ export interface Profil {
   plan: Plan | null;
   /** Inscrit comme administrateur de la plateforme (en plus de son rôle de boutique éventuel). */
   estAdmin: boolean;
+  /** Propriétaire dont la formule n'a pas encore été choisie (étape obligatoire de la création de la boutique). */
+  planAChoisir: boolean;
 }
 
 /** Charge le rôle, l'organisation et le plan. Tout passe par la RLS : un compte désactivé ne voit rien. */
@@ -47,6 +49,7 @@ export async function chargerProfil(
     emailVerifie: user.app_metadata?.email_verifie === true,
     plan: null,
     estAdmin: false,
+    planAChoisir: false,
   };
 
   const { data: ligneAdmin } = await supabase
@@ -64,7 +67,7 @@ export async function chargerProfil(
   if (membre?.actif) {
     const { data: org } = await supabase
       .from("organisations")
-      .select("plan_code")
+      .select("plan_code, plan_choisi_le")
       .eq("id", membre.organisation_id)
       .maybeSingle();
     const { data: ligne } = org
@@ -87,6 +90,7 @@ export async function chargerProfil(
       boutiqueIds,
       boutiqueActiveId: choisirBoutiqueActive(boutiqueDemandee, boutiqueIds),
       plan: ligne ? planDepuisLigne(ligne) : null,
+      planAChoisir: membre.role === "proprietaire" && !!org && !org.plan_choisi_le,
     };
   }
 

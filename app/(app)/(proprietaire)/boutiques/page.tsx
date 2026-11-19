@@ -1,4 +1,5 @@
 import { Store } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { BoutonChoisirBoutique } from "@/components/boutiques/bouton-choisir";
 import { FormulaireBoutique } from "@/components/boutiques/formulaire-boutique";
@@ -53,6 +54,12 @@ export default async function PageBoutiques() {
           </li>
         ))}
       </ul>
+
+      {nb > 1 && (
+        <Link href="/stock/transfert" className="border-border flex min-h-11 items-center justify-center rounded-xl border bg-white px-4 text-sm font-bold">
+          Transférer du stock entre boutiques
+        </Link>
+      )}
 
       <section className="flex flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm">
         <h2 className="text-lg font-bold">Ajouter une boutique</h2>

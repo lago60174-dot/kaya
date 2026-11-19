@@ -215,6 +215,10 @@ export async function genererDocumentPdf(
       deuxColonnes(t.libelle, t.montant, 9, { couleur: GRIS });
     else deuxColonnes(t.libelle, t.montant, 9.5);
   }
+  for (const n of recu.notes ?? []) {
+    espace(5);
+    texte(n, 8.5);
+  }
   if (recu.signature) {
     const integrer = async (img: LogoPdf | null | undefined) => {
       if (!img) return null;

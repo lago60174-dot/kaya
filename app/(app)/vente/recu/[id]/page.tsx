@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FormulaireBon } from "@/components/devis/formulaire-bon";
 import { DocumentsImprimables } from "@/components/impression/documents";
 import { ActionsRecu } from "@/components/vente/actions-recu";
 import { AnnulerVente } from "@/components/vente/annuler-vente";
@@ -9,6 +11,7 @@ import { urlImage } from "@/server/images/cles";
 import { supabaseServeur } from "@/lib/supabase/server";
 import { lienWhatsApp, messageRecu } from "@/lib/ventes/whatsapp";
 import { exigerRole } from "@/server/auth/session";
+import { bonDeLaVente } from "@/server/devis/lecture";
 import { origine } from "@/server/origine";
 import { lireRecu } from "@/server/ventes/lecture";
 
@@ -48,6 +51,13 @@ export default async function PageRecu({
     profil.plan && peutUtiliser(profil.plan, "impression"),
   );
 
+  // Bon de livraison : propriétaire d'un plan avec devis, vente non annulée.
+  const peutLivrer =
+    profil.role === "proprietaire" &&
+    !recu.annule &&
+    Boolean(profil.plan && peutUtiliser(profil.plan, "devis"));
+  const bon = peutLivrer ? await bonDeLaVente(await supabaseServeur(), recu.id) : null;
+
   return (
     <div className="flex flex-col gap-4">
       {succes === "1" && (
@@ -77,6 +87,17 @@ export default async function PageRecu({
         peutImprimer={peutImprimer}
         suite={{ href: "/vente", libelle: "Nouvelle vente" }}
       />
+      {peutLivrer &&
+        (bon ? (
+          <Link
+            href={`/devis/livraisons/${bon.id}`}
+            className="border-border flex min-h-11 max-w-md items-center justify-center rounded-lg border px-4 font-semibold"
+          >
+            Voir le bon de livraison {bon.numero}
+          </Link>
+        ) : (
+          <FormulaireBon source={{ venteId: recu.id }} />
+        ))}
       {profil.role === "proprietaire" && !recu.annule && (
         <AnnulerVente venteId={recu.id} numero={recu.numeroRecu} />
       )}

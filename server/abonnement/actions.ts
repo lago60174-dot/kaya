@@ -48,25 +48,19 @@ export async function choisirPlanAction(
   return {};
 }
 
-/**
- * Premier choix de plan (page /choisir-plan), pour un propriétaire dont le plan n'a pas encore été choisi.
- * Même règle que `choisirPlanAction` (la base vérifie rôle et plan public), puis il poursuit l'onboarding.
- */
+/** Étape obligatoire de la création de la boutique : le choix lève la porte, le paiement peut venir plus tard. */
 export async function choisirPlanInitialAction(
   _etat: EtatAbonnementAction,
   formData: FormData,
 ): Promise<EtatAbonnementAction> {
-  await exigerRole("proprietaire");
+  const profil = await exigerRole("connecte");
+  if (profil.role !== "proprietaire") redirect("/");
   const plan = z.string().min(1).max(20).safeParse(formData.get("plan"));
-  if (!plan.success) return { erreur: "Choisissez un plan." };
-  const { error } = await (
-    await supabaseServeur()
-  ).rpc("choisir_plan", {
-    p_plan: plan.data,
-  });
-  if (error) return { erreur: "Ce plan n'est pas disponible." };
-  revalidatePath("/parametres");
-  redirect("/demarrage");
+  if (!plan.success) return { erreur: "Choisissez une formule pour continuer." };
+  const { error } = await (await supabaseServeur()).rpc("choisir_plan", { p_plan: plan.data });
+  if (error) return { erreur: "Cette formule n'est pas disponible." };
+  revalidatePath("/", "layout");
+  redirect("/patron");
 }
 
 /** « Payer maintenant » : facture de l'échéance en cours (une seule par échéance) puis page de paiement. */

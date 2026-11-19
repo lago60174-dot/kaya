@@ -1,5 +1,6 @@
 import { Boxes, Plus } from "lucide-react";
 import Link from "next/link";
+import { peutUtiliser } from "@/lib/plans";
 import { FiltresStock } from "@/components/stock/filtres-stock";
 import { formatFcfa } from "@/lib/format";
 import { formaterStock } from "@/lib/stock/quantites";
@@ -67,6 +68,16 @@ export default async function PageStock({
             >
               Catalogue modèle
             </Link>
+            {profil.plan &&
+              peutUtiliser(profil.plan, "multi_boutiques") &&
+              profil.boutiques.length > 1 && (
+                <Link
+                  href="/stock/transfert"
+                  className="border-border flex min-h-11 items-center rounded-full border bg-white px-4 text-sm font-semibold"
+                >
+                  Transférer du stock
+                </Link>
+              )}
             <Link
               href="/stock/nouveau"
               className="bg-brand-strong flex min-h-11 shrink-0 items-center gap-1 rounded-full px-4 text-sm font-semibold text-white"
